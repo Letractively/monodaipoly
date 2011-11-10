@@ -1,0 +1,18 @@
+body {
+    font-family: Verdana, Helvetica, sans-serif;
+    background-image:url(fondoperfil.jpg);
+    background-repeat:no-repeat;
+    color:white;
+}
+h1{
+	color:;
+}
+h3{
+	color:"white";
+}
+A:link {text-decoration: none}
+A:visited {text-decoration: none}
+A:active {text-decoration: none}
+A:hover {font-size:24; font-weight:bold; color: red;}
+A.button {text-decoration: none}
+A.button:hover {font-size:24; font-weight:bold; color: red;}
