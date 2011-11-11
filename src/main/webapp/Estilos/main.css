@@ -1,5 +1,22 @@
 body {
-    font-family: Verdana, Helvetica, sans-serif;
-   	background-image:url(Logofianl2.jpg);
-    background-repeat:no-repeat;
+   margin: 0;
+    
 }
+#casilla0 { 
+    width:175px;
+    background-image:url('casillasalida.jpg');
+
+}
+#contenedor{
+    display: table
+}
+#contenidofila{
+    display: table-row
+}
+#contenidocolumna{
+    display: table-column
+}
+.casilla{
+    display: table-cell
+}
+
