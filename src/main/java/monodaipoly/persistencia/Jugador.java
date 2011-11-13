@@ -1,5 +1,6 @@
 package monodaipoly.persistencia;
 
+import java.util.List;
 import javax.persistence.*;
 
 import com.google.appengine.api.datastore.Key;
@@ -12,10 +13,16 @@ public class Jugador {
 	
 	@Basic
 	private String nick;
+        
 	@Basic
 	private int posicion;
+     
 	@ManyToOne(fetch =FetchType.LAZY)
 	private Usuario usuario;
+        
+        
+        @OneToMany(mappedBy="dueño")
+        private List<Casilla> casillas;
 	
 	
 	//calles..... 
