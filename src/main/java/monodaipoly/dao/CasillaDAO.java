@@ -7,5 +7,5 @@ import monodaipoly.persistencia.Jugador;
 
 public interface CasillaDAO extends GenericDAO <Casilla, Key>{
     
-    public Jugador buscarDueño(Key idCasilla);
+    public Jugador buscarDueno(Key idCasilla);
 }
