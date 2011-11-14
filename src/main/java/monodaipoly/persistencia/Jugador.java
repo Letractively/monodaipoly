@@ -21,7 +21,7 @@ public class Jugador {
 	private Usuario usuario;
         
         
-        @OneToMany(mappedBy="dueño")
+        @OneToMany(mappedBy="dueno")
         private List<Casilla> casillas;
 	
 	

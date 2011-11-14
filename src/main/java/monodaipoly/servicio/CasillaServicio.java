@@ -10,6 +10,6 @@ public interface CasillaServicio {
     public void crear(Casilla casilla);
     public void buscar(Key idCasilla );
     public void borrar(Casilla casilla);
-    public Jugador buscarDueño(Key idCasilla);
+    public Jugador buscarDueno(Key idCasilla);
     
 }
