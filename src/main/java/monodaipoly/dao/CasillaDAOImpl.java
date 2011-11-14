@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public class CasillaDAOImpl extends GenericDAOImpl <Casilla,Key> implements CasillaDAO{
         
     @Override
-    public Jugador buscarDueño(Key idCasilla){
-        return em.find(Casilla.class,idCasilla).getDueño();
+    public Jugador buscarDueno(Key idCasilla){
+        return em.find(Casilla.class,idCasilla).getDueno();
     }
 }
