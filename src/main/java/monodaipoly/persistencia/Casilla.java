@@ -37,7 +37,7 @@ public class Casilla implements Serializable {
     
     @Basic
     @ManyToOne
-    private Jugador dueño;
+    private Jugador dueno;
     @Basic
     private int precioCompra;
 
@@ -73,8 +73,8 @@ public class Casilla implements Serializable {
         return nombre;
     }
 
-    public Jugador getDueño() {
-        return dueño;
+    public Jugador getDueno() {
+        return dueno;
     }
     
 

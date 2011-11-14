@@ -35,8 +35,8 @@ public class CasillaServicioImpl implements CasillaServicio{
         casillaDAO.remove(casilla);
     }
     @Override
-    public Jugador buscarDueño(Key idCasilla){
-        return casillaDAO.buscarDueño(idCasilla);
+    public Jugador buscarDueno(Key idCasilla){
+        return casillaDAO.buscarDueno(idCasilla);
     }
     
 }

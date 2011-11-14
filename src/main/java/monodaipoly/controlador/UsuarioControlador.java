@@ -30,11 +30,6 @@ public class UsuarioControlador {
         this.usuarioServicio=usuarioServicio;
     }
 
-    @RequestMapping(value = "/tablero", method = RequestMethod.GET)
-    public String doShowTablero() {
-        return "/tablero";
-    }
-
     @RequestMapping(value = "/monodaipoly", method = RequestMethod.GET)
     public String doShowPagInicio() {
         return "/monodaipoly";
