@@ -33,16 +33,19 @@
                     var divCasillas = $("#casillas");
                     var c;
                     <c:forEach var="casilla" items="${casillas}">
-                            divCasillas.append("<div id='${casilla.numeroCasilla}'></div>")
+                            divCasillas.append("<div id='${casilla.numeroCasilla}'>${casilla.numeroCasilla}</div>")
                     </c:forEach>
 
+                        var izq= 57.225;
+                        var der= 0;
+                        var tam=8.175;
+                     for(c=1;c<=8;c++){
 
-                    for(c=1;c<=8;c++)
-                        {
-                            var identificacion=-+
-                                  addClass("abajo")
-                        }
-
+                            $("#abajo").append($("#casilla"+c)).addClass("casillasabajo").css({"left":izq,"rigth":der});
+                            izq=izq-tam;
+                            der=der+tam;
+                      }
+                        
                 }
 
             );
@@ -56,7 +59,12 @@
     </head>
     <body>
       
-        <div id="casillas"/>
+        <div id="casillas">
+            <div id="abajo">abajoooooooo!! me se a ido abajo</div>
+            <div id="arriba"/>
+            <div id="lateralizq"/>
+            <div id="lateralderch"/>
+        </div>
                 
  
     </body>
