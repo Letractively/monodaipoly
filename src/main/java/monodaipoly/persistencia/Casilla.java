@@ -30,7 +30,7 @@ public class Casilla implements Serializable {
     private String imagen;
     
     @Basic
-    private String numeroCasilla;
+    private int numeroCasilla;
 
     @Basic
     private String nombre;
@@ -78,7 +78,7 @@ public class Casilla implements Serializable {
     }
     
 
-    public String getNumeroCasilla() {
+    public int getNumeroCasilla() {
         return numeroCasilla;
     }
 
@@ -114,7 +114,7 @@ public class Casilla implements Serializable {
         this.nombre = nombre;
     }
 
-    public void setNumeroCasilla(String numeroCasilla) {
+    public void setNumeroCasilla(int numeroCasilla) {
         this.numeroCasilla = numeroCasilla;
     }
 

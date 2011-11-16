@@ -2,7 +2,7 @@ body {
    margin: 0;
     
 }
-#casilla0 {
+#casilla0{
     position: absolute;
     top:150%;
     left:82.6%;
@@ -38,7 +38,6 @@ body {
 
 .casillasabajo{
     position: absolute;
-    top:150%;
     width: 8.175%;
     height: 26.5%;
     background-color:  #82cb2f;
