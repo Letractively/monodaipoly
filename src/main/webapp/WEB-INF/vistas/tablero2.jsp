@@ -30,14 +30,16 @@
         <script type="text/javascript">
             $(document).ready(
                 function () {
-                    var divCasillas = $("#casillas");
+                    var divTablero = $("#tablero");
                     <c:forEach var="casilla" items="${casillas}">
-                            divCasillas.append("<div id=casilla${casilla.numeroCasilla}>${casilla.numeroCasilla}</div>")
+                            divTablero.append("<div id=casilla${casilla.numeroCasilla}>${casilla.numeroCasilla}</div>")
                     </c:forEach>
+                        $("#casilla9").html("<img src='Estilos/carcel.jpg' width='150%' height='100%'/>");
+                        $("#casilla0").html("<img src='Estilos/CasillaSalida.jpg' width='150%' height='100%'/>");
 
                     var c;
-                    var resta=8.175;
-                    var left=100;
+                    var resta=12.5;
+                    var left=87.5;
                     var right=0;
                     var parametroizq=left;
                     var parametrodech=right;
@@ -48,11 +50,13 @@
                          var identificacion="#casilla"+c;
                          $("#abajo").append($(identificacion));
                          $(identificacion).addClass("casillasabajo").css({
-                                "left":parametroizq,
-                                "right":parametrodech
+                                "left":parametroizq+"%",
+                                "right":parametrodech+"%"
                          });
-                         parametroizq=(left-resta)+"%";
-                         parametrodech=(right+resta)+"%";
+                         parametroizq=(parametroizq-resta);
+                         parametrodech=(parametrodech+resta);
+
+                         
                      }
                    
                         
@@ -69,8 +73,8 @@
     </head>
     <body>
       
-        <div id="casillas">
-            <div id="abajo">abajoooooooo!!</div>
+        <div id="tablero">
+            <div id="abajo"></div>
             <div id="arriba"/>
             <div id="lateralizq"/>
             <div id="lateralderch"/>
