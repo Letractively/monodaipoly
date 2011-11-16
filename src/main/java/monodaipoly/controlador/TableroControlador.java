@@ -32,5 +32,10 @@ public class TableroControlador {
         model.addAttribute("casillas",casillas);
         return "/tablero2";
     }
+        @RequestMapping(value = "/tablero", method = RequestMethod.GET)
+    public String doShowTablero1(Model model) {
+
+        return "/tablero";
+    }
 
 }
