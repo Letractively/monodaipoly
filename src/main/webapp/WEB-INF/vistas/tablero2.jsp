@@ -31,20 +31,30 @@
             $(document).ready(
                 function () {
                     var divCasillas = $("#casillas");
-                    var c;
                     <c:forEach var="casilla" items="${casillas}">
-                            divCasillas.append("<div id='${casilla.numeroCasilla}'>${casilla.numeroCasilla}</div>")
+                            divCasillas.append("<div id=casilla${casilla.numeroCasilla}>${casilla.numeroCasilla}</div>")
                     </c:forEach>
 
-                        var izq= 57.225;
-                        var der= 0;
-                        var tam=8.175;
-                     for(c=1;c<=8;c++){
-
-                            $("#abajo").append($("#casilla"+c)).addClass("casillasabajo").css({"left":izq,"rigth":der});
-                            izq=izq-tam;
-                            der=der+tam;
-                      }
+                    var c;
+                    var resta=8.175;
+                    var left=100;
+                    var right=0;
+                    var parametroizq=left;
+                    var parametrodech=right;
+                    
+                    for(c=1;c<=8;c++){
+                        
+                        
+                         var identificacion="#casilla"+c;
+                         $("#abajo").append($(identificacion));
+                         $(identificacion).addClass("casillasabajo").css({
+                                "left":parametroizq,
+                                "right":parametrodech
+                         });
+                         parametroizq=(left-resta)+"%";
+                         parametrodech=(right+resta)+"%";
+                     }
+                   
                         
                 }
 
@@ -60,7 +70,7 @@
     <body>
       
         <div id="casillas">
-            <div id="abajo">abajoooooooo!! me se a ido abajo</div>
+            <div id="abajo">abajoooooooo!!</div>
             <div id="arriba"/>
             <div id="lateralizq"/>
             <div id="lateralderch"/>
