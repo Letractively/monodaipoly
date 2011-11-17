@@ -2,12 +2,10 @@ body {
    margin: 0;
    background-color: aquamarine;
 }
-#tablero{
- 
-}
+
 #casilla0{
     position: absolute;
-    top:150%;
+    top:130%;
     left:82.6%;
     right: 0%;
     width: 17.3%;
@@ -18,25 +16,31 @@ body {
 }
 #casilla9{
     position: absolute;
-    top:150%;
+    top:130%;
     left:0%;
     right: 82.6%;
     width: 15.3%;
     height: 26.5%;
 }
-
-#abajo {
+#casilla18{
     position: absolute;
-    width: 65.4%;
-    height: 25.45%;
-    left: 16%;
-    right:88%;
-    top:150%;
- 
-    border-right-width:  1px;
-   
-    background-color: #b5d3ff;
+    top:1%;
+    left:0%;
+    right: 82.6%;
+    width: 15.3%;
+    height: 26.5%;
 }
+#casilla27{
+    position: absolute;
+    top:1%;
+    left:82.6%;
+    right: 0%;
+    width: 15.3%;
+    height: 26.5%;
+}
+
+
+
 
 .casillasabajo{
     position: absolute;
@@ -44,12 +48,146 @@ body {
     height: 100%;
     border-style: solid;
     border-color:  #333;
-    background-color:  #82cb2f;
+    background-color: #f7fafd;
+
+}
+
+#abajopeke{
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    border-bottom-style: solid;    
+
+}
+
+.casillasizq{
+    position: absolute;
+    width:100%;
+    height:12%;
+    border-style: solid;
+    border-color:  #333;
+    background-color: #f7fafd;
+
+}
+#izquierdapeke{
+    position: absolute;
+    width: 40%;
+    height: 100% ;
+    right: 0%;
+    border-left-style:solid;
+ 
+}
+.casillasarriba{
+    position: absolute;
+    width: 12%;
+    height: 100%;
+    border-style: solid;
+    border-color:  #333;
+    background-color: #f7fafd;
+
+}
+#arribapeke{
+    position: absolute;
+    width: 100%;
+    height: 40%;
+    border-bottom-style: solid;
+}
+.casillasdech{
+    position: absolute;
+    width:100%;
+    height:12%;
+    border-style: solid;
+    border-color:  #333;
+    background-color: #f7fafd;
+}
+#derechapeke{
+    position: absolute;
+    width: 40%;
+    height: 100% ;
+    right: 58.3%;
+    border-right-style:solid;
+
+}
+
+
+#tablero {
+    position: static;
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    top:0%;
+}
+
+
+#lateralizq{
+    position: absolute;
+    width:  15.45%;
+    height: 100%;
+    left:0%;
+    top: 28.5%;
+    background-color: #444;
+}
+#abajo {
+    position: absolute;
+    width: 65.4%;
+    height: 25.45%;
+    left: 16%;
+
+    top:130%;
+
+    border-right-width:  1px;
+
+    background-color: #b5d3ff;
+}
+#arriba{
+    position: absolute;
+    width: 65.4%;
+    height: 25.45%;
+    left: 16%;
+    top:1%;
+
+    border-right-width:  1px;
+
+    background-color: #b5d3ff;
+}
+#lateralderecha{
+    position: absolute;
+    width:  15.45%;
+    height: 100%;
+    left:82.5%;
+    top: 28.5%;
+    background-color: #444;
 
 }
 
 
 
 
+
+
+.colorgris{
+    background-color:  #c0c0c0
+}
+.colorazul{
+    background-color: #b5d3ff;
+}
+.colornaranja{
+    background-color:  darkorange;
+}
+.colorrojo{
+    background-color: #e10c0c;
+}
+.colorrosa{
+    background-color:  #ffbfbf;
+}
+.coloramarillo{
+    background-color: #fdd425;
+}
+.colorverde{
+    background-color: #A2EF95;
+}
+.colorazuloscuro{
+    background-color: darkblue;
+}
 
 
