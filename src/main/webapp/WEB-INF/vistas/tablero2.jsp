@@ -216,11 +216,12 @@ function tirarDado() {
                 <img src='Estilos/Logo.jpg' width='100%' height='100%'/>
                 
             </div>
-            <div id="centro">
+            <div  id="centro">
+                <img src='Estilos/tux/batman.png' width='10%' height='10%'/>
                 <button onClick="tirarDado()" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado</button>
             </div>
          
-            
+           
             
             
         </div>
