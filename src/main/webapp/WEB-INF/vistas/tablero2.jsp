@@ -29,7 +29,9 @@
         <script language="javascript" type="text/javascript"></script>
         <script type="text/javascript">
             $(document).ready(
-                function () {
+             
+               function () {
+                 
                     var divTablero = $("#tablero");
                     <c:forEach var="casilla" items="${casillas}">
                             divTablero.append("<div id=casilla${casilla.numeroCasilla}></div>")
@@ -189,7 +191,10 @@
                     }
 
                 }*/
-
+function tirarDado() {
+    var dado=Math.ceil(Math.random()*6);
+    alert(dado);
+}
        
         </script>
 
@@ -207,10 +212,13 @@
             
             <div id="lateralderecha"></div>
             
-            <div id="centro">
+            <div id="centroFondo">
                 <img src='Estilos/Logo.jpg' width='100%' height='100%'/>
+                
             </div>
-                        
+            <div id="centro">
+                <button onClick="tirarDado()" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado</button>
+            </div>
          
             
             
