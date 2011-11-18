@@ -34,10 +34,10 @@
                     <c:forEach var="casilla" items="${casillas}">
                             divTablero.append("<div id=casilla${casilla.numeroCasilla}></div>")
                     </c:forEach>
-                        $("#casilla9").html("<img src='Estilos/carcel.jpg' width='150%' height='100%'/>");
-                        $("#casilla0").html("<img src='Estilos/CasillaSalida.jpg' width='150%' height='100%'/>");
-                        $("#casilla18").html("<img src='Estilos/free.jpg' width='150%' height='100%'/>");
-                        $("#casilla27").html("<img src='Estilos/carcel.jpg' width='150%' height='100%'/>");
+                        $("#casilla9").html("<img src='Estilos/carcel.jpg' width='100%' height='100%'/>");
+                        $("#casilla0").html("<img src='Estilos/CasillaSalida.jpg' width='100%' height='100%'/>");
+                        $("#casilla18").html("<img src='Estilos/free.jpg' width='100%' height='100%'/>");
+                        $("#casilla27").html("<img src='Estilos/carcel.jpg' width='100%' height='100%'/>");
                     var c;//contador de las casillas
                     var resta=12.5;//tamaño de cada casilla
                     var left=87.5;
@@ -176,7 +176,6 @@
 
     </head>
     <body>
-      
         <div id="tablero">
             <div id="arriba"></div>
             
@@ -185,6 +184,13 @@
             <div id="abajo"></div>
             
             <div id="lateralderecha"></div>
+            
+            <div id="centro">
+                <img src='Estilos/Logo.jpg' width='100%' height='100%'/>
+            </div>
+                        
+         
+            
             
             
         </div>
