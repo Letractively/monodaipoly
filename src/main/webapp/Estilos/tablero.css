@@ -152,16 +152,24 @@ body {
     top: 27.4%;
     background-color: #444;
 }
-#centro{
+#centroFondo{
     position: absolute;
     width: 65.3%;
     height: 102.8%;
     left:17.2%;
     top: 27.2%;
+    z-index: 1;
     
 }
 
-
+#centro{
+    position: absolute;
+    width: 65.3%;
+    height: 102.8%;
+    left:25.2%;
+    top: 50.2%;
+    z-index: 2;
+}
 
 
 
