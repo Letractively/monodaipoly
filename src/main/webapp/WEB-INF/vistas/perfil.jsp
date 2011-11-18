@@ -91,6 +91,9 @@
                 </form>
                 </td>
             </tr>
+                <tr>
+                    <button onclickonclick="window.location.href='tablero2'" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'" ></button>
+                </tr>
     	
     </div>
     <p></p>

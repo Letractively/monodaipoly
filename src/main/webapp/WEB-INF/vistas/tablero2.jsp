@@ -11,7 +11,7 @@
 
 <html>
     <head>
-        <link type="text/css" rel="stylesheet" href="/Estilos/main.css" />
+        <link type="text/css" rel="stylesheet" href="/Estilos/tablero.css" />
         <!-- Librerías de JQuery -->
         <script type="text/javascript" src="jQuery/js/jquery.min.js"></script>
         <script type="text/javascript" src="jQuery/js/jquery-ui.custom.min.js"></script>
