@@ -135,7 +135,8 @@
                               $("#lateralderecha").append($(identificacion));
                               $(identificacion).addClass("casillasdech").css("top",top+"%");
                               top=top+resta;
-
+                              //Estructura1(c,"derechapeke","28","colorverde","colorazuloscuro",identificacion);
+                              
                               if(c==28||c==29||c==31){
                                   $(identificacion).append("<div id='derechapeke' class='colorverde'> Calle Verde</div>");
                               }
@@ -153,7 +154,7 @@
                               if(c==34){
                                   $(identificacion).append("<div  class='suerte'>¡¡PAGA!!</div>");
                               }
-                             
+                            
 
 
                          }
@@ -167,6 +168,27 @@
                 }
 
             );
+                
+               /* //Mierdaaaa
+                function Estructura1(c,valorid,numero,color1,color2,identificacion){
+                    alert(identificacion,c,valorid,numero,color1,color2)
+                        if(c==numero||c==numero+1||c==numero+3){
+                            $(identificacion).append("<div id="+valorid+" class="+color1+"> Calle Verde</div>");
+                        }
+                        else if(c==numero+2){
+                            $(identificacion).append("<div class='hidroelectrica'>Hidroelectrica</div>");
+                        }
+                        if(c==numero+4){
+                            $(identificacion).append("<div class='estacion'>Estacion</div>");
+                        }
+                              if(c==numero+5||c==numero+8){
+                                  $(identificacion).append("<div id="+valorid+" class="+color2+">Calle Azul oscuro</div>");
+                              }
+                              if(c==numero+6){
+                                  $(identificacion).append("<div  class='suerte'>¡¡PAGA!!</div>");
+                    }
+
+                }*/
 
        
         </script>
