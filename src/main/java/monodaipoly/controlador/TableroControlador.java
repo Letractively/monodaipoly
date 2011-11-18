@@ -17,11 +17,6 @@ public class TableroControlador {
      @RequestMapping(value = "/tablero2", method = RequestMethod.GET)
     public String doShowTablero(Model model) {
 
-         /*Casilla[] casillas=new Casilla[4];
-         Casilla casilla1=new Casilla();
-         casilla1.setColor("rojo");
-         casillas[0]=casilla1;
-         */
         int c;
          ArrayList casillas=new ArrayList();
          for(c=0;c<=37;c++){
