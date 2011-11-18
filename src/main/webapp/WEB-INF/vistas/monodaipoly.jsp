@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -9,6 +10,10 @@
 		<script language="javascript" type="text/javascript">
                     $(document).ready(
                     function(){
+                        <%if(request.getParameter("registrado")!=null){%>
+                        $("#usuarioRegistrado").html("<b>Usuario Registrado Correctamente</b>").fadeIn(1000).fadeOut(3000);
+			<%}%>
+
                     $("#botonEntrar").click(
                             function (){
                                 var n=document.getElementsByName("nick");
@@ -32,10 +37,10 @@
 );
     </script>
     <title>Monodaipoly</title>
-    <link type="text/css" rel="stylesheet" href="/Estilos/main.css" />
+    <link type="text/css" rel="stylesheet" href="/Estilos/monodaipoly.css" />
 </head>
   <body>
-
+      <div id="fondo">
 	<table align="center">
             <form action="/entrar" id="campos" method="post">
 		<tr>
@@ -45,7 +50,7 @@
 			
 			
                         <%if(request.getParameter("registrado")!=null){%>
-			<td style="color:green">Usuario Registrado Correctamente</td>
+                        <script>$("#usuarioRegistrado").html("<b>Usuario Registrado Correctamente</b>").fadeIn(1000).fadeOut(3000);</script>
 			<%}%>
 		</tr>
 		<tr>
@@ -65,9 +70,10 @@
                     <tr>
                         <td>
                             <p style="color:red" id="error"> </p>
+                            <p style="color: yellow" id="usuarioRegistrado"> </p>
                         </td>
                     </tr>
                 </table>
-                
+             </div>
   </body>
 </html>
