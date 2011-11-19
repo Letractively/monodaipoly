@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.google.appengine.api.users.User" %>
 <%@ page import="com.google.appengine.api.users.UserService" %>
@@ -18,7 +19,7 @@
                             function (){
                                 var n=document.getElementsByName("nick");
                                 var c=document.getElementsByName("contrasena");
-                        
+
                         if(n[0].value==0){
                             $("#error").html("<b>No has introducido usuario</b>").fadeIn(1000).fadeOut(3000);
 
@@ -29,7 +30,7 @@
                         }else{
                             $("#campos").submit(window.location.href='entrar');
                         }
-                        
+
 
                     }
                     );
@@ -46,9 +47,9 @@
 		<tr>
 			<td><Strong>Usuario</Strong></td>
 			<td>  <input type="text" name="nick" value="" /></td>
-			
-			
-			
+
+
+
                         <%if(request.getParameter("registrado")!=null){%>
                         <script>$("#usuarioRegistrado").html("<b>Usuario Registrado Correctamente</b>").fadeIn(1000).fadeOut(3000);</script>
 			<%}%>
@@ -57,11 +58,11 @@
 			<td><strong>Contrasena</strong></td>
 			<td>  <input type="password" name="contrasena" value="" /></td>
 		</tr>
-                
-             
+
+
 		<tr>
 		<td><input id="botonEntrar"type="button" value="Entrar" onmouseover="this.style.color='green'" onmouseout="this.style.color='black'"/></td>
-                
+
 		</form>
                     <td><input class="mkbutton" type=button onclick="window.location.href='registro'" name="registrarse" value="Registrarse"onmouseover="this.style.color='green'" onmouseout="this.style.color='black'"/></td>
                 </tr>
