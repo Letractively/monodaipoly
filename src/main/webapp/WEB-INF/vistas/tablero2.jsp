@@ -170,7 +170,8 @@
                 }
 
             );
-                
+
+               
                /* //Mierdaaaa
                 function Estructura1(c,valorid,numero,color1,color2,identificacion){
                     alert(identificacion,c,valorid,numero,color1,color2)
@@ -191,15 +192,29 @@
                     }
 
                 }*/
+
+
+
+/*La posicion del tux en la casilla 0 viene dada desde la hoja de estilo, cuando metamos controlador
+ *habria que cambiarlo y tambien un par de cosas mas*/
+var posicion=0;
 function tirarDado() {
     var dado=Math.ceil(Math.random()*6);
     alert(dado);
+    posicion=posicion+dado;
+    posicionReal = $("#casilla"+posicion).offset();
+    var izq=posicionReal.left;
+    var arriba=posicionReal.top;
+    /*alert('top:'+arriba);
+    alert('left:'+izq);*/
+    $("#jugador1").css({
+              "left":izq,
+              "top":arriba
+                         });
 }
-       
         </script>
 
-
-
+        <title>Partida-MonoDaiPoly</title>
 
     </head>
     <body>
@@ -217,11 +232,10 @@ function tirarDado() {
                 
             </div>
             <div  id="centro">
-                <img src='Estilos/tux/batman.png' width='10%' height='10%'/>
                 <button onClick="tirarDado()" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado</button>
             </div>
-         
-           
+            <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>
+            <div id='jugador2'><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></div>
             
             
         </div>
