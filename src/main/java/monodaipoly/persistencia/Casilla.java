@@ -35,31 +35,33 @@ public class Casilla implements Serializable {
     @Basic
     private String nombre;
     
+
     @Basic
     @ManyToOne
     private Jugador dueno;
     @Basic
     private int precioCompra;
 
-    @Basic
-    private int precioCasa;
-
-    @Basic
-    private int precioHotel;
-
-    @Basic
-    private String color;
-
-    @Basic
-    private HashMap<Integer,Integer> cobros;
-
-    public HashMap<Integer, Integer> getCobros() {
-        return cobros;
+    public int getidCasilla(){
+        return this.idCasilla;
+    }
+    public void setidCasilla(int idCasilla){
+        this.idCasilla=idCasilla;
+    }
+    public String getnombre(){
+        return this.nombre;
+    }
+    public void setnombre(String nombre){
+        this.nombre=nombre;
+    }
+    public String getimagen(){
+        return this.imagen;
+    }
+    public void setimagen(String imagen){
+        this.imagen=imagen;
     }
 
-    public String getColor() {
-        return color;
-    }
+
 
     public int getIdCasilla() {
         return idCasilla;
@@ -81,27 +83,9 @@ public class Casilla implements Serializable {
     public int getNumeroCasilla() {
         return numeroCasilla;
     }
-
-    public int getPrecioCasa() {
-        return precioCasa;
-    }
-
     public int getPrecioCompra() {
         return precioCompra;
     }
-
-    public int getPrecioHotel() {
-        return precioHotel;
-    }
-
-    public void setCobros(HashMap<Integer, Integer> cobros) {
-        this.cobros = cobros;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
     public void setIdCasilla(int idCasilla) {
         this.idCasilla = idCasilla;
     }
@@ -118,19 +102,6 @@ public class Casilla implements Serializable {
         this.numeroCasilla = numeroCasilla;
     }
 
-    public void setPrecioCasa(int precioCasa) {
-        this.precioCasa = precioCasa;
-    }
-
-    public void setPrecioCompra(int precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public void setPrecioHotel(int precioHotel) {
-        this.precioHotel = precioHotel;
-    }
-
-    
 }
 
 

@@ -49,7 +49,7 @@
     <table align="center" border="3">
         <tr>
             <td><div class="casilla" id="casilla19">
-                    <img src='Estilos/Avenida Linux.jpg' />
+                    <img src='Estilos/free.jpg' />
                 </div>
             </td>
             <td><div class="casilla" id="casilla20">
@@ -135,7 +135,7 @@
         </tr>
         <tr>
             <td><div class="casilla" id="casilla9">
-                    <img src='Estilos/Avenida Linux.jpg' />
+                    <img src='Estilos/carcel.jpg' />
                 </div>
             </td>
             <td><div class="casilla" id="casilla8">
@@ -163,7 +163,7 @@
                     <img src='Estilos/Avenida Linux.jpg' />
                 </div>
             </td><td><div class="casilla" id="casilla0">
-                    <img src='Estilos/Avenida Linux.jpg' />
+                    <img src='Estilos/casillasalida.jpg' />
                 </div>
             </td>
         </tr>
