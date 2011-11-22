@@ -1,12 +1,13 @@
 package monodaipoly.persistencia;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
 import com.google.appengine.api.datastore.Key;
 
 @Entity
-public class Jugador {
+public class Jugador implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Key claveJugador;
@@ -26,9 +27,7 @@ public class Jugador {
 	
 	
 	//calles..... 
-	public Jugador(){
-		
-	}
+	public Jugador(){}
 	public Jugador(Usuario usuario){
 		this.nick=usuario.getNick();
 		this.posicion=0;
