@@ -1,0 +1,52 @@
+body {
+   margin: 0;
+    
+}
+#casilla0 {
+    position: absolute;
+    top:150%;
+    left:82.6%;
+    right: 0%;
+    width: 17.3%;
+    height: 26.5%;
+    background-image:url('casillasalida.jpg');
+
+}
+#casilla9{
+    position: absolute;
+    top:150%;
+    left:0%;
+    right: 82.6%;
+    width: 17.3%;
+    height: 26.5%;
+    background-image:url('carcel.jpg');
+
+}
+
+#abajo {
+    position: absolute;
+    width: 65.4%;
+    height: 25.45%;
+    left: 17%;
+    right:90%;
+    top:150%;
+    border-style: solid;
+    border-right-width:  1px;
+    border-color:  #333;
+    background-color: #b5d3ff;
+}
+
+.casillasabajo{
+    position: absolute;
+    top:150%;
+    width: 8.175%;
+    height: 26.5%;
+    background-color:  #82cb2f;
+
+}
+
+
+
+
+
+

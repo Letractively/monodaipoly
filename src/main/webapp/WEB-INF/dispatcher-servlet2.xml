@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <context:component-scan base-package="monodaipoly.dao" />
+    <context:component-scan base-package="monodaipoly.controlador" />
+    <context:component-scan base-package="monodaipoly.servicio" />
+
+
+
+   <!-- post-processors for all standard config annotations -->
+    <context:annotation-config/>
+
+
+
+    <tx:annotation-driven/>
+
+
+
+
+
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+      id="viewResolver"
+      p:prefix="/WEB-INF/vistas"
+      p:suffix=".jsp">
+        <property name="viewClass"
+                  value="org.springframework.web.servlet.view.JstlView"/>
+    </bean>
+
+
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean" lazy-init="true">
+        <property name="persistenceUnitName" value="transactions-optional"/>
+    </bean>
+
+    <bean name="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="openEntityManagerInViewInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="openEntityManagerInViewInterceptor"
+          class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jsonConverter" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes" value="application/json" />
+    </bean>
+</beans>
