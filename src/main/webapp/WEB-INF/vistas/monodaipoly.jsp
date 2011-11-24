@@ -28,8 +28,12 @@
                             $("#error").html("<b>No has introducido contrasena</b>").fadeIn(1000).fadeOut(3000);
 
                         }else{
-                            $("#campos").submit(window.location.href='entrar');
+
+                            $("#campos").submit();
+                            
+                            
                         }
+
 
 
                     }
@@ -46,7 +50,7 @@
             <form action="/entrar" id="campos" method="post">
 		<tr>
 			<td><Strong>Usuario</Strong></td>
-			<td>  <input type="text" name="nick" value="" /></td>
+			<td>  <input id="nick" type="text" name="nick" value="" /></td>
 
 
 
@@ -56,7 +60,7 @@
 		</tr>
 		<tr>
 			<td><strong>Contrasena</strong></td>
-			<td>  <input type="password" name="contrasena" value="" /></td>
+			<td>  <input id="contrasena" type="password" name="contrasena" value="" /></td>
 		</tr>
 
 
