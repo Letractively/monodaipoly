@@ -21,7 +21,7 @@
 				<legend>Datos Personales</legend>
 				Contraseña:
   				<div>
-  				<input type="password" name="contraseñaNueva" value="" />
+  				<input type="password" name="contrasenaNueva" value="" />
   				</div>
   				<br>
                                 Nombre:
@@ -57,8 +57,6 @@
  				 de
  				 <input type="text" size="5" maxlength="4" name="fechaAño" />
 
-                                 <input type="hidden" name="nick" value="${usuario.nick}" />
-
  			 <br/><br/>
   				</div>
 			</fieldset>
@@ -72,9 +70,7 @@
 			<div>
                             <form action="/entrar" method="post">
                                 <input type="submit" value="Volver a Perfil sin guardar cambios" />                          
-                                <input type="hidden" name="nick" value="${usuario.nick}" />
-                                <input type="hidden" name="contraseña" value="${usuario.contraseña}" />
-
+                                
                             </form>
                         </div>
 		

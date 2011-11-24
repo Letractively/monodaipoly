@@ -1,6 +1,7 @@
 package monodaipoly.persistencia;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import monodaipoly.dao.JugadorDAOImpl;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.users.User;
 import java.io.Serializable;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 public class Usuario implements Serializable {
@@ -179,4 +181,6 @@ public class Usuario implements Serializable {
         this.jugadores.add(jugador);
         return jugador;
     }
+
+
 }
