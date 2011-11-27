@@ -5,6 +5,8 @@
 
 package monodaipoly.controlador;
 
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
 import javax.servlet.http.HttpSession;
 import monodaipoly.persistencia.Usuario;
 import monodaipoly.servicio.UsuarioServicio;
@@ -154,6 +156,41 @@ public class UsuarioControlador {
         //Otra forma: sesion.invalidate();
 
         return "redirect:index.html";
+    }
+
+    @RequestMapping(method=RequestMethod.POST, value="/mod")
+    public @ResponseBody String modi(@RequestParam("nombre") String nombre,
+            @RequestParam("nombreAntiguo") String nombreAntiguo,
+            @RequestParam("apellidoAntoguo") String apellidoAntiguo,
+            @RequestParam("apellido") String apellido,
+            @ModelAttribute("usuario") Usuario usuario){
+        System.out.println(usuario.toString());
+        if(nombre.compareTo("")>0 && apellido.compareTo("")==0){
+            System.out.println("nombre");            
+            usuario.setApellido(apellidoAntiguo);
+            this.usuarioServicio.actualizar(usuario);
+        }if(apellido.compareTo("")>0 && nombre.compareTo("")==0){
+            System.out.println("apellido");
+            usuario.setNombre(nombreAntiguo);
+         this.usuarioServicio.actualizar(usuario);
+        }else{
+            this.usuarioServicio.actualizar(usuario);
+        }
+         
+        return this.pasarJson(nombre,apellido).toString();
+    }
+
+    
+
+    private JSONObject pasarJson(String nombre,String apellido){
+        JSONObject json=new JSONObject();
+        try{
+            json.put("nombre", nombre);
+            json.put("apellido", apellido);
+        }catch (JSONException ex){
+
+        }
+        return json;
     }
 
 

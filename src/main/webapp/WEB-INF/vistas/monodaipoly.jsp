@@ -15,6 +15,10 @@
                         $("#usuarioRegistrado").html("<b>Usuario Registrado Correctamente</b>").fadeIn(1000).fadeOut(3000);
 			<%}%>
 
+                        <%if(request.getParameter("error")!=null){%>
+                        $("#error").html("<b>Error al introducir los datos</b>").fadeIn(1000).fadeOut(3000);
+			<%}%>
+
                     $("#botonEntrar").click(
                             function (){
                                 var n=document.getElementsByName("nick");
