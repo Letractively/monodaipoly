@@ -149,7 +149,7 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         String s;
-        s = "Nick: " + this.nick + " Partidas Ganadas: " + this.partidasGanadas + " Partidas Jugadas: " + this.partidasJugadas;
+        s = "Nombre: " + this.nombre + " Apellido: " + this.apellido;
         return s;
     }
 
