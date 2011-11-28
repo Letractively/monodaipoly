@@ -8,6 +8,7 @@ package monodaipoly.controlador;
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
 import javax.servlet.http.HttpSession;
+import monodaipoly.persistencia.Rol;
 import monodaipoly.persistencia.Usuario;
 import monodaipoly.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,10 +75,15 @@ public class UsuarioControlador {
             if(nick.length()==0 || contrasena.length()==0){
                 return "/registro";
             }
+            Rol rol=new Rol();
+            rol.setNombre("ROLE_USER");
+            System.out.println(rol.getId());
             if(this.usuarioServicio.buscar(nick)==null){
                 Usuario usuario= new Usuario(nick,contrasena,nombre,apellido,fechaDia,fechaMes,fechaMes);
+                usuarioServicio.anadirRol(usuario, rol);
                 this.usuarioServicio.crear(usuario);
                 return "redirect:monodaipoly?registrado";
+
             }
             return "/registro";
     }
@@ -85,17 +91,17 @@ public class UsuarioControlador {
     @RequestMapping(value="/entrar", method =RequestMethod.POST)
     public String doEntrar(@RequestParam("nick") String nick, @RequestParam("contrasena")String contrasena,Model model){
         try {
-                System.out.println("AQUI 1 UserController login ");
+                //System.out.println("AQUI 1 UserController login ");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                System.out.println("AQUI 2 UserController login ");
+                //System.out.println("AQUI 2 UserController login ");
 		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(nick,contrasena);
-                System.out.println("AQUI 3 UserController login ");
+                //System.out.println("AQUI 3 UserController login ");
 		authToken.setDetails(authentication.getDetails());
-                System.out.println("AQUI 4 UserController login authenticationManager="+authenticationManager);
+                //System.out.println("AQUI 4 UserController login authenticationManager="+authenticationManager);
 		Authentication newAuth = authenticationManager.authenticate(authToken);
-                System.out.println("AQUI 5 UserController login ");
+                //System.out.println("AQUI 5 UserController login ");
 		SecurityContextHolder.getContext().setAuthentication(newAuth);
-                System.out.println("AQUI 6 UserController login ");
+                //System.out.println("AQUI 6 UserController login ");
                 if (newAuth.isAuthenticated()) {
                     model.addAttribute("usuario", usuarioServicio.getCurrentUser());
                     //rdo = "Estás conectado como" + username;
@@ -159,25 +165,22 @@ public class UsuarioControlador {
     }
 
     @RequestMapping(method=RequestMethod.POST, value="/mod")
-    public @ResponseBody String modi(@RequestParam("nombre") String nombre,
-            @RequestParam("nombreAntiguo") String nombreAntiguo,
-            @RequestParam("apellidoAntoguo") String apellidoAntiguo,
-            @RequestParam("apellido") String apellido,
-            @ModelAttribute("usuario") Usuario usuario){
-        System.out.println(usuario.toString());
-        if(nombre.compareTo("")>0 && apellido.compareTo("")==0){
-            System.out.println("nombre");            
-            usuario.setApellido(apellidoAntiguo);
-            this.usuarioServicio.actualizar(usuario);
-        }if(apellido.compareTo("")>0 && nombre.compareTo("")==0){
-            System.out.println("apellido");
-            usuario.setNombre(nombreAntiguo);
-         this.usuarioServicio.actualizar(usuario);
-        }else{
-            this.usuarioServicio.actualizar(usuario);
+    public @ResponseBody String modi(HttpSession sesion,@RequestParam("nombre") String nombre,
+            @RequestParam("apellido") String apellido){
+        Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+        //System.out.println(usuario.getNombre());
+        //System.out.println(usuario.getApellido());
+        if (nombre != null && !nombre.trim().equals("")) {
+            usuario.setNombre(nombre.trim());
         }
+
+        if (apellido != null && !apellido.trim().equals("")) {
+            usuario.setApellido(apellido.trim());
+        }
+           
+         this.usuarioServicio.actualizar(usuario);
          
-        return this.pasarJson(nombre,apellido).toString();
+        return this.pasarJson(usuario.getNombre(),usuario.getApellido()).toString();
     }
 
     

@@ -44,5 +44,6 @@ public class Rol implements Serializable {
     public boolean equals(Object o) {
         return ((Rol)o).getId().equals(id) || ((Rol)o).getNombre().equals(nombre);
     }
+  
 
 }

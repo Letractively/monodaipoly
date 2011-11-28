@@ -42,9 +42,8 @@
                     $.post($("#modi").attr("action"),{
 
                         nombre: $("#campoNombre").attr("value"),
-                        nombreAntiguo: $("#campoNombre").attr("name"),
-                        apellido : $("#campoApellido").attr("value"),
-                        apellidoAntoguo: $("#campoApellido").attr("name")
+                        apellido : $("#campoApellido").attr("value")
+                        
 
                         } , function(json){
                             var db = $.parseJSON(json);
