@@ -23,6 +23,7 @@ import monodaipoly.dao.JugadorDAOImpl;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.users.User;
 import java.io.Serializable;
+import javax.persistence.FetchType;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
@@ -36,9 +37,9 @@ public class Usuario implements Serializable {
     private int partidasGanadas;
     @Basic
     private int partidasJugadas;
-    @Basic
+    @Basic(fetch=FetchType.EAGER)
     private String nombre;
-    @Basic
+    @Basic(fetch=FetchType.EAGER)
     private String apellido;
     @Basic
     private String fechaNacimiento;
