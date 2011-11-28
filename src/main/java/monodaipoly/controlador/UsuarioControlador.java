@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import monodaipoly.persistencia.Rol;
 import monodaipoly.persistencia.Usuario;
 import monodaipoly.servicio.UsuarioServicio;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -165,11 +166,25 @@ public class UsuarioControlador {
     }
 
     @RequestMapping(method=RequestMethod.POST, value="/mod")
-    public @ResponseBody String modi(HttpSession sesion,@RequestParam("nombre") String nombre,
-            @RequestParam("apellido") String apellido){
+    public @ResponseBody String modi(HttpSession sesion,
+            @RequestParam("nombre") String nombre,
+            @RequestParam("apellido") String apellido,
+            @RequestParam("fechaDia") String dia,
+            @RequestParam("fechaMes") String mes,
+            @RequestParam("fechaAño") String año){
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
         //System.out.println(usuario.getNombre());
         //System.out.println(usuario.getApellido());
+        try{
+            Integer.parseInt(dia);
+            Integer.parseInt(año);
+             if(dia!=null && mes!=null && año!=null && !dia.trim().equals("")
+                && !mes.equals("") && !año.trim().equals("")){
+            usuario.setFechaNacimiento(dia, mes, año);
+        }
+        }catch(NumberFormatException nfe){
+        }
+
         if (nombre != null && !nombre.trim().equals("")) {
             usuario.setNombre(nombre.trim());
         }
@@ -177,19 +192,20 @@ public class UsuarioControlador {
         if (apellido != null && !apellido.trim().equals("")) {
             usuario.setApellido(apellido.trim());
         }
-           
+       
          this.usuarioServicio.actualizar(usuario);
          
-        return this.pasarJson(usuario.getNombre(),usuario.getApellido()).toString();
+        return this.pasarJson(usuario.getNombre(),usuario.getApellido(),usuario.getFechaNacimiento()).toString();
     }
 
     
 
-    private JSONObject pasarJson(String nombre,String apellido){
+    private JSONObject pasarJson(String nombre,String apellido, String fecha){
         JSONObject json=new JSONObject();
         try{
             json.put("nombre", nombre);
             json.put("apellido", apellido);
+            json.put("fecha", fecha);
         }catch (JSONException ex){
 
         }
