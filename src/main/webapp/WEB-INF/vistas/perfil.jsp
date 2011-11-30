@@ -42,7 +42,7 @@
                 $("#modif").click(
 
                 function(){
-                    alert($("#Mes").attr("value"))
+                   
                     $.post($("#modi").attr("action"),{
 
                         nombre: $("#campoNombre").attr("value"),
@@ -70,7 +70,7 @@
         <title>Perfil</title>
     </head>
     <body>
-
+        <div id="fondo">
         <div id="contenedor">
             <div id="cabecera">
 
@@ -86,9 +86,15 @@
 
                     <table BORDER="0">
 
+                      
+                        <form id="modi" action="/mod" method="post">
                         <tr>
                             <td>
                                 <strong>Nombre: <e id="nom">${usuario.nombre}</e></strong><br/>
+                                <div class="modificar" style="visibility:hidden">
+                                     <input id="campoNombre" type="text" value=""/>
+                                     <br></br>
+                                </div>
 
                                 <br/>
                             </td>
@@ -96,17 +102,49 @@
                         <tr>
                             <td>
                                 <strong>Apellido:<e id="ape">${usuario.apellido}</e></strong><br/>
+                                <div class="modificar" style="visibility:hidden">
+                                     <input id="campoApellido" type="text" value=""/>
+                                     <br></br>
+                                </div>
 
                                 <br/>
                             </td>
+                                <td>
+                                    <div class="modificar" style="visibility:hidden">
+                                    <input id="modif" type="button" value="Guardar Cambios"></input>
+                                    </div>
+
+                                </td>
 
                         </tr>
                         <tr>
                             <td>
                                 <strong>Fecha de Nacimiento: <e id="fecha">${usuario.fechaNacimiento}</e></strong><br/>
+                                <div class="modificar" style="visibility:hidden">
+                                  <input type="number" size="3" maxlength="2" id="fechaDia" value="" />
+ 				 de
+                                    <select name="fechaMes" id="Mes">
+                                        <option value="1">Enero</option>
+                                        <option value="2">Febrero</option>
+                                        <option value="3">Marzo</option>
+                                        <option value="4">Abril</option>
+                                        <option value="5">Mayo</option>
+                                        <option value="6">Junio</option>
+                                        <option value="7">Julio</option>
+                                        <option value="8">Agosto</option>
+                                        <option value="9">Septiembre</option>
+                                        <option value="10">Octubre</option>
+                                        <option value="11">Noviembre</option>
+                                        <option value="12">Diciembre</option>
+                                        <option selected="0"></option>
+                                    </select>
+ 				 de
+                                    <input type="number" size="5" maxlength="4" id="fechaAño" value="" />
 
                                 <br/>
+                                </div>
                             </td>
+                                
                             <td>
 
 
@@ -127,6 +165,8 @@
                                 <br/>
                             </td>
                         </tr>
+                        </form>
+                
                     </table>
                 </div>
 
@@ -148,52 +188,15 @@
 
                     -->
                     <input id="mod" type="button" value="Modificar">
-                        <form id="modi" action="/mod" method="post">
-                            <div class="modificar" style="visibility:hidden">
-                                <div>
-                                    Nombre:
-                                    <input id="campoNombre" type="text" value=""/>
-                                    <br>
-                                        Apellido:
-                                        <input id="campoApellido" type="text" value=""/>
-                                    </br>
-                                    <br/>
-                                    <label for="fecha_dia">Fecha de nacimiento</label> <br/>
-                                    <input type="number" size="3" maxlength="2" id="fechaDia" value="" />
- 				 de
-                                    <select name="fechaMes" id="Mes">
-                                        <option value="1">Enero</option>
-                                        <option value="2">Febrero</option>
-                                        <option value="3">Marzo</option>
-                                        <option value="4">Abril</option>
-                                        <option value="5">Mayo</option>
-                                        <option value="6">Junio</option>
-                                        <option value="7">Julio</option>
-                                        <option value="8">Agosto</option>
-                                        <option value="9">Septiembre</option>
-                                        <option value="10">Octubre</option>
-                                        <option value="11">Noviembre</option>
-                                        <option value="12">Diciembre</option>
-                                        <option selected="0"></option>
-                                    </select>
- 				 de
-                                    <input type="number" size="5" maxlength="4" id="fechaAño" value="" />
-                                    <input id="modif" type="button" value="Guardar"/>
-                                </div>
-                            </div>
-                        </form>
-                    </input>
+                     </input>
 
                 </td>
             </tr>
-            <tr>
-                <button onclickonclick="window.location.href='tablero2'" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'" ></button>
-            </tr>
-
+           
         </div>
         <p></p>
 
-
+        </div>
     </body>
 
 </html>

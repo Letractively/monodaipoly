@@ -20,6 +20,7 @@ public interface UsuarioServicio extends UserDetailsService{
     public void actualizar(Usuario usuario);
     void preload_usuarios();
     void anadirRol(Usuario usuario, Rol rol);
+    public Rol buscarRol(String nombre);
     Usuario getCurrentUser();
     boolean isAdmin();
 

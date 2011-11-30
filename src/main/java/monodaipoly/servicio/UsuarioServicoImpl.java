@@ -97,15 +97,24 @@ public class UsuarioServicoImpl implements UsuarioServicio{
         u1.setContrasena("123456");
         Rol r1 = new Rol();
         r1.setNombre("ROLE_ADMIN");
+        Rol r2 = new Rol();
+        r2.setNombre("ROLE_USER");
+        rolDAO.insert(r1);
+        rolDAO.insert(r2);
         this.anadirRol(u1, r1);
         this.crear(u1);
     }
 
     @Override
     public void anadirRol(Usuario usuario, Rol rol) {
-        rolDAO.insert(rol);
+        
         System.out.println(rol.getId());
         usuario.getRoles().add(rol.getId());
+    }
+
+    @Override
+    public Rol buscarRol(String nombre){
+        return rolDAO.buscarRol(nombre);
     }
 
     @Override

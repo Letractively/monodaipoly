@@ -76,12 +76,10 @@ public class UsuarioControlador {
             if(nick.length()==0 || contrasena.length()==0){
                 return "/registro";
             }
-            Rol rol=new Rol();
-            rol.setNombre("ROLE_USER");
-            System.out.println(rol.getId());
+            
             if(this.usuarioServicio.buscar(nick)==null){
                 Usuario usuario= new Usuario(nick,contrasena,nombre,apellido,fechaDia,fechaMes,fechaMes);
-                usuarioServicio.anadirRol(usuario, rol);
+                usuarioServicio.anadirRol(usuario,usuarioServicio.buscarRol("ROLE_USER"));
                 this.usuarioServicio.crear(usuario);
                 return "redirect:monodaipoly?registrado";
 
