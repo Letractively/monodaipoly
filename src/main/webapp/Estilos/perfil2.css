@@ -1,0 +1,84 @@
+#fondo{
+    background-image: url("fondoperfil.jpg");
+    background-repeat:  no-repeat;
+    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    top: 0%;
+       
+}
+#menu{
+    
+    position: absolute;
+    width: 100%;
+    height: 3%;
+    left: 0%;
+    top: 10%;
+    border: #ffffff;
+    border-bottom-style: solid;
+    border-top-style: solid;
+    
+}
+#contenido{
+    
+    position: absolute;
+    width: 100%;
+    height: 0%;
+    left: 0%;
+    top: 25%;
+    
+}
+#pie{
+    position: absolute;
+    width: 100%;
+    height: 0%;
+    left: 0%;
+    top: 80%;
+}
+#datospersonales{
+    
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    left: 0%;
+    top: 0%;
+    text-align: center;
+    border: #ffffff;
+    border-right-style: solid;
+}
+#estadisticas{
+    
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    left: 25%;
+    top: 0%;
+   text-align: center;
+    border: #ffffff;
+    border-right-style: solid;
+}
+#mensajes{
+    
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    left: 50%;
+    top: 0%;
+    text-align: center;
+     border: #ffffff;
+    border-right-style: solid;
+  
+}
+#salir{
+    
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    left: 75%;
+    top: 0%;
+    text-align: center;
+    
+}
+
