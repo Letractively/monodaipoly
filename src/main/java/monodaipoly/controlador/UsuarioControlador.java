@@ -64,6 +64,11 @@ public class UsuarioControlador {
     public String doShowRegistro() {
         return "/registro";
     }
+    
+    @RequestMapping(method=RequestMethod.GET, value="/getLoginURL")
+    public String getLoginURL() {
+        return "/datos";
+    }
 
     @RequestMapping(value="/registrando", method =RequestMethod.POST)
     public String doRegistrar(@RequestParam("nombre") String nombre, Model model
@@ -114,7 +119,7 @@ public class UsuarioControlador {
 		return "redirect:monodaipoly?error";
 
 	}
-        return "/perfil";
+        return "/perfil2";
 
 
     }
@@ -153,10 +158,10 @@ public class UsuarioControlador {
 
     @RequestMapping(method=RequestMethod.GET, value="/logout")
     public String logout(HttpSession sesion, SessionStatus sessionStatus, @ModelAttribute("usuario") Usuario usuario) throws java.io.IOException {
-        System.out.println("UsuarioController logout se está desconectando "+usuario.getNick());
+        System.out.println("UsuarioController logout se esta� desconectando "+usuario.getNick());
         SecurityContextHolder.getContext().setAuthentication(null);
         Usuario u = (Usuario) sesion.getAttribute("usuario");
-        System.out.println("UsuarioController logout se está desconectando2 "+usuario.getNick());
+        System.out.println("UsuarioController logout se esta� desconectando2 "+usuario.getNick());
         sessionStatus.setComplete();
         //Otra forma: sesion.invalidate();
 
@@ -169,16 +174,16 @@ public class UsuarioControlador {
             @RequestParam("apellido") String apellido,
             @RequestParam("fechaDia") String dia,
             @RequestParam("fechaMes") String mes,
-            @RequestParam("fechaAño") String año){
+            @RequestParam("fechaAno") String ano){
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
-        //System.out.println(usuario.getNombre());
-        //System.out.println(usuario.getApellido());
+        System.out.println(usuario.getNombre());
+        System.out.println(usuario.getApellido());
         try{
             Integer.parseInt(dia);
-            Integer.parseInt(año);
-             if(dia!=null && mes!=null && año!=null && !dia.trim().equals("")
-                && !mes.equals("") && !año.trim().equals("")){
-            usuario.setFechaNacimiento(dia, mes, año);
+            Integer.parseInt(ano);
+             if(dia!=null && mes!=null && ano!=null && !dia.trim().equals("")
+                && !mes.equals("") && !ano.trim().equals("")){
+            usuario.setFechaNacimiento(dia, mes, ano);
         }
         }catch(NumberFormatException nfe){
         }

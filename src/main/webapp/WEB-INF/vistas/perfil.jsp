@@ -59,7 +59,7 @@
                     $("#campoApellido").attr("value", "")
                     $("#fechaDia").attr("value", "")
                     $("#Mes").attr("value", "")
-                    $("#fechaAño").attr("value", "")
+                    $("#fechaAno").attr("value", "")
                 }
             )
             });
@@ -139,7 +139,7 @@
                                         <option selected="0"></option>
                                     </select>
  				 de
-                                    <input type="number" size="5" maxlength="4" id="fechaAño" value="" />
+                                    <input type="number" size="5" maxlength="4" id="fechano" value="" />
 
                                 <br/>
                                 </div>
