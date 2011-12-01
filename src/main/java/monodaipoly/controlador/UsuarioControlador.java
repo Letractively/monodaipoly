@@ -65,8 +65,8 @@ public class UsuarioControlador {
         return "/registro";
     }
     
-    @RequestMapping(method=RequestMethod.GET, value="/getLoginURL")
-    public String getLoginURL() {
+    @RequestMapping(method=RequestMethod.GET, value="/getDatosURL")
+    public String getDatosURL() {
         return "/datos";
     }
 
@@ -158,17 +158,15 @@ public class UsuarioControlador {
 
     @RequestMapping(method=RequestMethod.GET, value="/logout")
     public String logout(HttpSession sesion, SessionStatus sessionStatus, @ModelAttribute("usuario") Usuario usuario) throws java.io.IOException {
-        System.out.println("UsuarioController logout se esta¡ desconectando "+usuario.getNick());
         SecurityContextHolder.getContext().setAuthentication(null);
         Usuario u = (Usuario) sesion.getAttribute("usuario");
-        System.out.println("UsuarioController logout se esta¡ desconectando2 "+usuario.getNick());
         sessionStatus.setComplete();
         //Otra forma: sesion.invalidate();
 
         return "redirect:index.html";
     }
 
-    @RequestMapping(method=RequestMethod.POST, value="/mod")
+    @RequestMapping(method=RequestMethod.POST, value="/modi")
     public @ResponseBody String modi(HttpSession sesion,
             @RequestParam("nombre") String nombre,
             @RequestParam("apellido") String apellido,
@@ -214,6 +212,36 @@ public class UsuarioControlador {
         }
         return json;
     }
+    @RequestMapping(method=RequestMethod.GET, value="/estadisticas")
+    public String estadisticas(HttpSession sesion,Model model){
+        int i,j,c;
+        Usuario aux;
+        List<Usuario> usuarios=usuarioServicio.conseguirUsuarios();
+        System.out.println(usuarios.get(0).getNombre());
+        List usuariosMejores =new ArrayList();
+        
+        for(i=2;i<=usuarios.size();i++){
+                for(j=0;j<=usuarios.size()-i;j++){
+                    if(usuarios.get(j).getPartidasGanadas()>usuarios.get(j+1).getPartidasGanadas()){
+                        aux=usuarios.get(j);
+                        usuarios.set(j,usuarios.get(j+1));
+                        usuarios.set(j+1,aux);
+                    }
+                }
+            }
+        if(usuarios.size()>10){
+            for(c=0;c<10;c++){
+                usuariosMejores.add(c,usuarios.get(c));
+            }
+            model.addAttribute("usuariosMejores", usuariosMejores);
+        
+        }else{
+            model.addAttribute("usuariosMejores", usuarios);
+        }
+        
+        return "/estadisticas";
+    }
+    
 
 
 }

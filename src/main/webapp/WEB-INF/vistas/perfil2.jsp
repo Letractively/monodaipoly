@@ -17,60 +17,37 @@
         <script type="text/javascript" src="jQuery/js/jquery.min.js"></script>
         <script type="text/javascript" src="jQuery/js/jquery-ui.custom.min.js"></script>
         <script type="text/javascript">
-            function fijarValor(campo){
-                if(campo.nombre!=""){
-                    $("#nom").html(campo.nombre)
-                }
-
-                if(campo.apellido!=""){
-                    $("#ape").html(campo.apellido)
-                }
-                if(campo.fecha!=""){
-                    $("#fecha").html(campo.fecha)
-                }
-            }
+        
             function datosPersonales(){
-                 $.get("/getLoginURL",null,
+                 $.get("/getDatosURL",null,
                     function(html) {
                         $("#contenido").html(html);
                     }
 
                );
-                $("#mod").css("visibility","visible");
-                
-                $("#mod").click(
-                function(){
-
-                    $(".modificar").css("visibility","visible");
-                }
-                )
-                    
-                    
-                $("#modif").click(
-                function(){
-
-                    $.post($("#modi").attr("action"),{
-
-                        nombre: $("#campoNombre").attr("value"),
-                        apellido : $("#campoApellido").attr("value"),
-                        fechaDia: $("#fechaDia").attr("value"),
-                        fechaMes: $("#Mes").attr("value"),
-                        fechaAño: $("#fechaAno").attr("value")
-                    } , function(json){
-                        var db = $.parseJSON(json);
-                        fijarValor(db);
-                    }, "json")
-                    $(".modificar").css("visibility","hidden");
-                    $("#campoNombre").attr("value", "")
-                    $("#campoApellido").attr("value", "")
-                    $("#fechaDia").attr("value", "")
-                    $("#Mes").attr("value", "")
-                    $("#fechaAno").attr("value", "")
-                   
-                 }
-                
-               )
             }
+            
+            function estadisticas(){
+                $.get("/estadisticas",null,
+                    function(html) {
+                        $("#contenido").html(html);
+                    }
+
+               );
+            }
+            
+            
+            
+              
+            
+            function salirPerfil(){
+                
+                $.getScript("/logout",null);
+                
+            }
+            
+          
+         
          
 
         
@@ -78,28 +55,27 @@
 
 
         </script>
-        <title>Perfil</title>
+        <title>Perfil de ${usuario.nick}</title>
 </head>
     <body>
         <div id="fondo">
    
          <h1>Bienvenido,  ${usuario.nick} !</h1>
          <div id="menu">
-             <div id="datospersonales" onclick="javascript:datosPersonales()">DATOS PERSONALES</div>
-             <div id="estadisticas">ESTADISTICAS</div>
-             <div id="mensajes">MENSAJES</div>
-             <div id="salir">SALIR</div>
+             <div id="datospersonales"><a class="botonMenu" onclick="javascript:datosPersonales()">DATOS PERSONALES</a></div>
+             <div id="estadisticas"><a class="botonMenu" onclick="javascript:estadisticas()">ESTADISTICAS</a></div>
+             <div id="mensajes"><a class="botonMenu" href="">MENSAJES</a></div>
+             <div id="salir"><a class="botonMenu" href="/logout">SALIR</a></div>
              
          </div> 
+         
          <div id="contenido"></div>
+         
          <div id="pie">
-             <input id="mod" type="button"  style="visibility:hidden" value="Modificar"></input>
-             <input class="modificar" style="visibility:hidden" id="modif" type="button" value="Guardar Cambios"></input>
+             <input type="button" id="aJugar" value="¡ A JUGAR !" onclick="window.location.href='tablero2'"></input>
          </div>
          
          
-
-                  
         </div>
 
 

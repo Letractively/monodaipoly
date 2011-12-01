@@ -9,6 +9,7 @@ import com.google.appengine.api.datastore.Key;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import monodaipoly.dao.*;
 import monodaipoly.dao.UsuarioDAO;
@@ -92,15 +93,62 @@ public class UsuarioServicoImpl implements UsuarioServicio{
     @Override
     @PostConstruct
     public void preload_usuarios() {
-        Usuario u1=new Usuario();
-        u1.setNick("admin");
-        u1.setContrasena("123456");
+        
         Rol r1 = new Rol();
         r1.setNombre("ROLE_ADMIN");
         Rol r2 = new Rol();
         r2.setNombre("ROLE_USER");
         rolDAO.insert(r1);
         rolDAO.insert(r2);
+        
+        
+        
+        Usuario u1=new Usuario();
+        Usuario u2=new Usuario();
+        Usuario u3=new Usuario();
+        Usuario u4=new Usuario();
+        Usuario u5=new Usuario();
+        Usuario u6=new Usuario();
+        Usuario u7=new Usuario();
+        u2.setNick("user2");
+        u2.setNombre("Pepe");
+        u2.setContrasena("123456");
+        u3.setNick("user3");
+        u3.setNombre("Pepe");
+        u3.setContrasena("123456");
+        u4.setNick("user4");
+        u4.setNombre("Pepe");
+        u4.setContrasena("123456");
+        u5.setNick("user5");
+        u5.setNombre("Pepe");
+        u5.setContrasena("123456");
+        u6.setNick("user6");
+        u6.setNombre("Pepe");
+        u6.setContrasena("123456");
+        u7.setNick("user7");
+        u7.setNombre("Pepe");
+        u7.setContrasena("123456");
+        this.anadirRol(u2, r1);
+        this.anadirRol(u3, r1);
+        this.anadirRol(u4, r1);
+        this.anadirRol(u5, r1);
+        this.anadirRol(u6, r1);
+        this.anadirRol(u7, r1);
+        this.crear(u2);
+        this.crear(u3);
+        this.crear(u4);
+        this.crear(u5);
+        this.crear(u6);
+        this.crear(u7);
+              
+        
+        
+        u1.setNick("admin");
+        u1.setNombre("Pepe");
+        u1.setContrasena("123456");
+       
+        
+       
         this.anadirRol(u1, r1);
         this.crear(u1);
     }
@@ -173,6 +221,11 @@ public class UsuarioServicoImpl implements UsuarioServicio{
             result.add(new GrantedAuthorityImpl(rol.getNombre()));
         }
         return result;
+    }
+  
+    @Override
+    public List conseguirUsuarios(){
+       return usuarioDAO.getAll(Usuario.class);
     }
 
 
