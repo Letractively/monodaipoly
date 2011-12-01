@@ -5,6 +5,7 @@
 
 package monodaipoly.servicio;
 
+import java.util.List;
 import monodaipoly.persistencia.Rol;
 import monodaipoly.persistencia.Usuario;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,5 +24,6 @@ public interface UsuarioServicio extends UserDetailsService{
     public Rol buscarRol(String nombre);
     Usuario getCurrentUser();
     boolean isAdmin();
+    public List conseguirUsuarios();
 
 }
