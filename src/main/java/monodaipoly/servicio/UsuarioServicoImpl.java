@@ -93,7 +93,8 @@ public class UsuarioServicoImpl implements UsuarioServicio{
     @Override
     @PostConstruct
     public void preload_usuarios() {
-        
+
+        rolDAO.removeAll(Rol.class);
         Rol r1 = new Rol();
         r1.setNombre("ROLE_ADMIN");
         Rol r2 = new Rol();

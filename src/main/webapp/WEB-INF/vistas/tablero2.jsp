@@ -197,29 +197,34 @@
 
 /*La posicion del tux en la casilla 0 viene dada desde la hoja de estilo, cuando metamos controlador
  *habria que cambiarlo y tambien un par de cosas mas*/
+var posAnt=0;
 var posicion1=0;
 var posicion2=0;
-var posicion3=0;
-var posicion4=0;
+
+
 function tirarDado(jugador) {    
     var dado=Math.ceil(Math.random()*6);
     alert(dado);
     if(jugador=='jugador1'){
+        posAnt=posicion1;
         posicion1=posicion1+dado;
+        if(posicion1>35){
+            //alert("posAnt"+posAnt);
+            //alert("pos1"+posicion1);
+            //alert(posicion1-posAnt);
+            var dif=0;
+            var dif=36-posAnt;
+            alert("dif"+dif);
+            posicion1=0+dado-dif;
+            alert("pos"+posicion1);
+        }
         posicionReal = $("#casilla"+posicion1).offset();
     }
     if(jugador=='jugador2'){
         posicion2=posicion2+dado;
         posicionReal = $("#casilla"+posicion2).offset();
     }
-    if(jugador=='jugador3'){
-        posicion3=posicion3+dado;
-        posicionReal = $("#casilla"+posicion3).offset();
-    }
-    if(jugador=='jugador4'){
-        posicion4=posicion4+dado;
-        posicionReal = $("#casilla"+posicion4).offset();
-    }
+   
     
     var izq=posicionReal.left;
     var arriba=posicionReal.top;
@@ -254,13 +259,11 @@ function tirarDado(jugador) {
                 
                 <button onClick="tirarDado('jugador1')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado jug 1</button>
                 <button onClick="tirarDado('jugador2')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado jug 2</button>
-                <button onClick="tirarDado('jugador3')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado jug 3</button>
-                <button onClick="tirarDado('jugador4')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado jug 4</button>
+                
             </div>
             <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>
             <div id='jugador2'><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></div>
-            <div id="jugador3"><img src='Estilos/tux/vegeta.png' width='100%' height='100%'/></div>
-            <div id="jugador4"><img src='Estilos/tux/neo.png' width='100%' height='100%'/></div>
+            
             
             
         </div>
