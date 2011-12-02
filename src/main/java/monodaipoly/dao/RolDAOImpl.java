@@ -18,4 +18,9 @@ public class RolDAOImpl extends GenericDAOImpl<Rol, Key> implements RolDAO {
        return (Rol)query.getSingleResult();
 
     }
+    @Override
+    public int removeAll(Class<Rol> typeClass) {
+        String sql = "DELETE FROM " + typeClass.getSimpleName() + " c";
+        return em.createQuery(sql).executeUpdate();
+    }
 }

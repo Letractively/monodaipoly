@@ -65,7 +65,7 @@
              <div id="datospersonales"><a class="botonMenu" onclick="javascript:datosPersonales()">DATOS PERSONALES</a></div>
              <div id="estadisticas"><a class="botonMenu" onclick="javascript:estadisticas()">ESTADISTICAS</a></div>
              <div id="mensajes"><a class="botonMenu" href="">MENSAJES</a></div>
-             <div id="salir"><a class="botonMenu" href="/logout">SALIR</a></div>
+             <div id="salir"><a class="botonMenu" id="botonSalir" href="/logout">SALIR</a></div>
              
          </div> 
          

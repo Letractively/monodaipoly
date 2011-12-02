@@ -7,5 +7,6 @@ import monodaipoly.persistencia.Rol;
 public interface RolDAO extends GenericDAO<Rol, Key>{
 
         public Rol buscarRol(String nombre);
+        public int removeAll(Class<Rol> typeClass);
 
 }

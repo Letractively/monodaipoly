@@ -166,7 +166,7 @@ public class UsuarioControlador {
         return "redirect:index.html";
     }
 
-    @RequestMapping(method=RequestMethod.POST, value="/modi")
+    @RequestMapping(method=RequestMethod.GET, value="/modificarDatosAsincronamente")
     public @ResponseBody String modi(HttpSession sesion,
             @RequestParam("nombre") String nombre,
             @RequestParam("apellido") String apellido,

@@ -110,6 +110,10 @@ h1{
 .botonMenu:hover{
     font-size: x-large;
 }
+#botonSalir:hover{
+    font-size: x-large;
+    color: #e10c0c;
+}
 #aJugar{
      position: absolute;
      left: 75%;

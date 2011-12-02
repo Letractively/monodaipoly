@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <div>
-    <form id="modi" action="/modi" method="post">
+    <form id="modi" action="/modificarDatosAsincronamente" method="post">
         <div style="color: white">Nombre:  <span id="nom">${usuario.nombre}</span></div>
         <div class="modificar" style="visibility:hidden">
             <input id="campoNombre" type="text" value=""/>
@@ -22,7 +22,7 @@
         <div class="modificar" style="visibility:hidden">
              <input type="number" size="3" maxlength="2" id="fechaDia" value="" />
              de
-            <select name="fechaMes" id="Mes">
+            <select name="fechaMes" id="fechaMes">
                 <option value="1">Enero</option>
                 <option value="2">Febrero</option>
                 <option value="3">Marzo</option>
@@ -38,7 +38,7 @@
                 <option selected="0"></option>
            </select>
              de
-            <input type="number" size="5" maxlength="4" id="fechano" value="" />
+            <input type="number" size="5" maxlength="4" id="fechaAno" value="" />
 
        </div>
         <br/>
@@ -80,31 +80,42 @@
                 $("#modif").click(
 
                 function(){
+
                   
-                   
-                $("#modi").post("/modi",
-                {
-                        nombre: $("#campoNombre").attr("value"),
-                        apellido : $("#campoApellido").attr("value"),
-                        fechaDia: $("#fechaDia").attr("value"),
-                        fechaMes: $("#Mes").attr("value"),
-                        fechaAño: $("#fechaAño").attr("value")
-                },
-                function(json){
+
+                     var apellido=$("#campoApellido").val();
+                     var nombre=$("#campoNombre").val();
+                     var fechaDia=$("#fechaDia").val();
+                     var fechaMes=$("#fechaMes").val();
+                     var fechaAno=$("#fechaAno").val();
+
+                    $("#modi").get($("#modi").attr("action"),
+                        {
+                            nombre: nombre,
+                            apellido : apellido,
+                            fechaDia: fechaDia,
+                            fechaMes: fechaMes,
+                            fechaAno: fechaAno
+
+                        },
+                    function(json){
                         var db = $.parseJSON(json);
                         fijarValor(db);
-                 },
-                "json")
-                
-                 $(".modificar").css("visibility","hidden");
-                
-                /*.post("/modi",{
+                    },
+                    "json")
 
-                        nombre: $("#campoNombre").attr("value"),
-                        apellido : $("#campoApellido").attr("value"),
-                        fechaDia: $("#fechaDia").attr("value"),
-                        fechaMes: $("#Mes").attr("value"),
-                        fechaAño: $("#fechaAño").attr("value")
+
+                   $(".modificar").css("visibility","hidden");
+
+           
+                
+                /*$("#modi").post("/modi",{
+
+                        nombre: nombre,
+                        apellido : apellido,
+                        fechaDia: fechaDia,
+                        fechaMes: fechaMes,
+                        fechaAño: fechaAño
                     } , function(json){
                         var db = $.parseJSON(json);
                         fijarValor(db);
@@ -118,6 +129,7 @@
                     $("#Mes").attr("value", "")
                     $("#fechaAno").attr("value", "")
                     */
+                    
                 }
             )
             });
