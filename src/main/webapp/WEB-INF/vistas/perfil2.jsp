@@ -35,6 +35,14 @@
 
                );
             }
+            function mensajes(){
+                  $.get("/mensajes",null,
+                    function(html) {
+                        $("#contenido").html(html);
+                    }
+
+               );
+            }
             
             
             
@@ -64,7 +72,7 @@
          <div id="menu">
              <div id="datospersonales"><a class="botonMenu" onclick="javascript:datosPersonales()">DATOS PERSONALES</a></div>
              <div id="estadisticas"><a class="botonMenu" onclick="javascript:estadisticas()">ESTADISTICAS</a></div>
-             <div id="mensajes"><a class="botonMenu" href="/mensajes">MENSAJES</a></div>
+             <div id="mensajes"><a class="botonMenu" onclick="javascript:mensajes()">MENSAJES</a></div>
              <div id="salir"><a class="botonMenu" id="logout" href="/logout">SALIR</a></div>
 
              

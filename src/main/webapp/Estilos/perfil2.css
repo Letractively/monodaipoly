@@ -42,14 +42,16 @@ h1{
 #contenido{
     
     margin: auto;
-    margin-left: 5%;
+    margin-left: 3%;
     position: absolute;
     width: 95%;
-    height: 0%;
+    height: 60%;
     left: 0%;
     top: 25%;
     font-family:arial;
     font-size: 15pt;
+   
+        
 
 }
 #pie{
@@ -112,6 +114,7 @@ h1{
 .botonMenu:hover{
     font-size: x-large;
     font-weight: bold;
+  
 }
 .botonMenu:active{
     font-size: x-large;
@@ -136,7 +139,7 @@ h1{
 }
 #tablaContenido{
     position: absolute;
-     left: 50%;
+     left: 53%;
      width: 15%;
      color: #FFF;
      border-bottom-style: solid;
@@ -145,11 +148,39 @@ h1{
 }
 #nickUsuariosMejores{
      position: absolute;
-     left: 25%;
+     left: 28%;
      width: 15%;
      color: #FFF;
      border-bottom-style: solid;
      border: #FFF;
+}
+#menuMensajes{
+     position: relative;
+     left: 0%;
+     top:25%;
+     width: 15%;
+     
+     color: #FFF;
+    
+        
+}
+#menuMensajes div{
+    
+    cursor: pointer;
+}
+#menuMensajes div:hover{
+    
+   
+    background-color:darkgreen;
+}
+.mensajes{
+    position: relative;
+    left: 15%;
+    top:-23%;
+    width: 75%;
+    height: 80%;
+    border: #FFF;
+  
 }
 
 
