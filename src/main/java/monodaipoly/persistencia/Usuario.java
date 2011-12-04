@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 
 import com.google.appengine.api.datastore.Key;
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 
 @Entity
@@ -34,11 +35,14 @@ public class Usuario implements Serializable {
     private List<Jugador> jugadores;
     @Basic
     List<Key> roles = new ArrayList<Key>();
+    
+    @OneToMany
+    List<Mensaje>bandejaEntrada =new ArrayList<Mensaje>();
 
 
-    public Usuario() {
+    public Usuario(){
+        
     }
-
     public Usuario(String nick, String contrasena, String nombre, String apellido, String fechaDia, String fechaMes, String fechaAno) {
         this.nick = nick;
         this.contrasena = contrasena;
@@ -141,6 +145,15 @@ public class Usuario implements Serializable {
         s = "Nombre: " + this.nombre + " Apellido: " + this.apellido;
         return s;
     }
+
+    public List<Mensaje> getBandejaEntrada() {
+        return bandejaEntrada;
+    }
+
+    public void setBandejaEntrada(List<Mensaje> bandejaEntrada) {
+        this.bandejaEntrada = bandejaEntrada;
+    }
+    
 
     public int estadisticas() {
         int estadisticas;
