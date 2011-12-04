@@ -49,6 +49,13 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
 		final StringBuilder sql=new StringBuilder("select c from").append(typeClass.getSimpleName()).append(" c");
 		return (List<T>) em.createQuery(sql.toString()).getResultList();
 	}
+        
+        
+    @Override
+    public int removeAll(Class<T> typeClass) {
+        String sql = "DELETE FROM " + typeClass.getSimpleName() + " c";
+        return em.createQuery(sql).executeUpdate();
+    }
 
 	
 
