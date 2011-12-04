@@ -24,6 +24,6 @@ public interface UsuarioServicio extends UserDetailsService{
     public Rol buscarRol(String nombre);
     Usuario getCurrentUser();
     boolean isAdmin();
-    public List conseguirUsuarios();
+    public List<Usuario> conseguirUsuarios();
 
 }

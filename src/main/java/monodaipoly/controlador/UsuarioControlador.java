@@ -14,6 +14,7 @@ import monodaipoly.servicio.UsuarioServicio;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -83,7 +84,7 @@ public class UsuarioControlador {
             }
             
             if(this.usuarioServicio.buscar(nick)==null){
-                Usuario usuario= new Usuario(nick,contrasena,nombre,apellido,fechaDia,fechaMes,fechaMes);
+                Usuario usuario= new Usuario(nick,contrasena,nombre,apellido,fechaDia,fechaMes,fechaAno);
                 usuarioServicio.anadirRol(usuario,usuarioServicio.buscarRol("ROLE_USER"));
                 this.usuarioServicio.crear(usuario);
                 return "redirect:monodaipoly?registrado";
@@ -212,25 +213,18 @@ public class UsuarioControlador {
         }
         return json;
     }
+   
     @RequestMapping(method=RequestMethod.GET, value="/estadisticas")
-    public String estadisticas(HttpSession sesion,Model model){
+    public String doShowEstadisticas(HttpSession sesion,Model model){
         int i,j,c;
         Usuario aux;
         List<Usuario> usuarios=usuarioServicio.conseguirUsuarios();
-        System.out.println(usuarios.get(0).getNombre());
+        System.out.println(usuarios.get(0).getNick());
         List usuariosMejores =new ArrayList();
-        
-        for(i=2;i<=usuarios.size();i++){
-                for(j=0;j<=usuarios.size()-i;j++){
-                    if(usuarios.get(j).getPartidasGanadas()>usuarios.get(j+1).getPartidasGanadas()){
-                        aux=usuarios.get(j);
-                        usuarios.set(j,usuarios.get(j+1));
-                        usuarios.set(j+1,aux);
-                    }
-                }
-            }
+        System.out.println(usuarios.get(0).getNick());
+      
         if(usuarios.size()>10){
-            for(c=0;c<10;c++){
+            for(c=10;c<0;c++){
                 usuariosMejores.add(c,usuarios.get(c));
             }
             model.addAttribute("usuariosMejores", usuariosMejores);
@@ -238,10 +232,10 @@ public class UsuarioControlador {
         }else{
             model.addAttribute("usuariosMejores", usuarios);
         }
+        System.out.println(usuarios.get(0).getNick());
         
         return "/estadisticas";
     }
     
-
 
 }

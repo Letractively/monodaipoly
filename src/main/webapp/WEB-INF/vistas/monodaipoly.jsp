@@ -72,7 +72,7 @@
 		<td><input id="botonEntrar"type="button" value="Entrar" onmouseover="this.style.color='green'" onmouseout="this.style.color='black'"/></td>
 
 		</form>
-                    <td><input class="mkbutton" type=button onclick="window.location.href='registro'" name="registrarse" value="Registrarse"onmouseover="this.style.color='green'" onmouseout="this.style.color='black'"/></td>
+                    <td><input type=button onclick="window.location.href='registro'" name="registrarse" value="Registrarse" onmouseover="this.style.color='green'" onmouseout="this.style.color='black'"/></td>
                 </tr>
                 </table>
                 <table align="center">

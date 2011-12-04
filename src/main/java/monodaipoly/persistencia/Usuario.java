@@ -1,30 +1,17 @@
 package monodaipoly.persistencia;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Date;
-import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import monodaipoly.dao.JugadorDAO;
-import monodaipoly.dao.JugadorDAOImpl;
 
 import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.users.User;
 import java.io.Serializable;
 import javax.persistence.FetchType;
-import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 public class Usuario implements Serializable {
@@ -47,6 +34,7 @@ public class Usuario implements Serializable {
     private List<Jugador> jugadores;
     @Basic
     List<Key> roles = new ArrayList<Key>();
+
 
     public Usuario() {
     }

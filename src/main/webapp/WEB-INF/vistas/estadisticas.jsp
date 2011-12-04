@@ -8,15 +8,26 @@
 
 
 
-<div id="tablaResultados"></div>
-
+<div id="tablaContenido">
+    PUNTACION
+    <br> 
+</div>
+<div id="nickUsuariosMejores">
+    TOP 10 USUARIOS
+        
+</div>
 
 
 
 
 <script>
-    
+  
+
+  
   <c:forEach var="usuariosMejores" items="${usuariosMejores}">
-      $("#tablaResultados").append(${usuariosMejores.partidasGanadas});
+     $("#tablaContenido").append(${usuariosMejores.partidasGanadas});
+     $("#tablaContenido").append("<br>")
   </c:forEach>
+  
+
 </script>

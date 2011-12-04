@@ -11,6 +11,7 @@ public interface GenericDAO <T,PK extends Serializable> extends Serializable{
 	public void remove(Class<T> typeClass,PK clave);
 	public T find(Class<T> typeClass, PK clave);
 	List <T> getAll(Class<T> typeClass);
+        public int removeAll(Class<T> typeClass);
 
 	
 }

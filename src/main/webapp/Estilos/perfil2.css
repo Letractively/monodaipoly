@@ -33,6 +33,8 @@ h1{
     top: 10%;
     color: #FFF;
     font-family:arial;
+    border-bottom: #FFF;
+    border-bottom-style: solid;
     
     
 
@@ -109,6 +111,17 @@ h1{
 }
 .botonMenu:hover{
     font-size: x-large;
+    font-weight: bold;
+}
+.botonMenu:active{
+    font-size: x-large;
+    font-weight: bold;
+    color: red;
+}
+
+#logout:hover{
+    color:red;
+    font-weight: bold;
 }
 #botonSalir:hover{
     font-size: x-large;
@@ -120,6 +133,23 @@ h1{
      width: 15%;
      
      
+}
+#tablaContenido{
+    position: absolute;
+     left: 50%;
+     width: 15%;
+     color: #FFF;
+     border-bottom-style: solid;
+     border: #FFF;
+    
+}
+#nickUsuariosMejores{
+     position: absolute;
+     left: 25%;
+     width: 15%;
+     color: #FFF;
+     border-bottom-style: solid;
+     border: #FFF;
 }
 
 

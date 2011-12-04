@@ -95,6 +95,7 @@ public class UsuarioServicoImpl implements UsuarioServicio{
     public void preload_usuarios() {
 
         rolDAO.removeAll(Rol.class);
+        rolDAO.removeAll(Rol.class);
         Rol r1 = new Rol();
         r1.setNombre("ROLE_ADMIN");
         Rol r2 = new Rol();
@@ -114,18 +115,23 @@ public class UsuarioServicoImpl implements UsuarioServicio{
         u2.setNick("user2");
         u2.setNombre("Pepe");
         u2.setContrasena("123456");
+        u2.setPartidasGanadas(10);
         u3.setNick("user3");
         u3.setNombre("Pepe");
         u3.setContrasena("123456");
+        u3.setPartidasGanadas(8);
         u4.setNick("user4");
         u4.setNombre("Pepe");
         u4.setContrasena("123456");
+        u4.setPartidasGanadas(17); 
         u5.setNick("user5");
         u5.setNombre("Pepe");
         u5.setContrasena("123456");
+        u5.setPartidasGanadas(2);
         u6.setNick("user6");
         u6.setNombre("Pepe");
         u6.setContrasena("123456");
+        u6.setPartidasGanadas(6); 
         u7.setNick("user7");
         u7.setNombre("Pepe");
         u7.setContrasena("123456");
@@ -226,7 +232,7 @@ public class UsuarioServicoImpl implements UsuarioServicio{
   
     @Override
     public List conseguirUsuarios(){
-       return usuarioDAO.getAll(Usuario.class);
+       return usuarioDAO.conseguirUsuarios();
     }
 
 
