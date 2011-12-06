@@ -40,4 +40,9 @@ public class MensajeServicioImpl implements MensajeServicio{
         return mensajeDAO.getAll(Mensaje.class);
     }
     
+    @Override
+    public List conseguirMensajesRecibidos(String nombre){
+        return mensajeDAO.conseguirMensajesRecibidos(nombre);
+    }
+    
 }

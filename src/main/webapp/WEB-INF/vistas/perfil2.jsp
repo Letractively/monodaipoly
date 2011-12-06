@@ -71,7 +71,7 @@
          <h1>Bienvenido,  ${usuario.nick} !</h1>
          <div id="menu">
              <div id="datospersonales"><a class="botonMenu" onclick="javascript:datosPersonales()">DATOS PERSONALES</a></div>
-             <div id="estadisticas"><a class="botonMenu" onclick="javascript:estadisticas()">ESTADISTICAS</a></div>
+             <div id="estadisticas"><a class="botonMenu" onclick="javascript:estadisticas()">RANKING</a></div>
              <div id="mensajes"><a class="botonMenu" onclick="javascript:mensajes()">MENSAJES</a></div>
              <div id="salir"><a class="botonMenu" id="logout" href="/logout">SALIR</a></div>
 
