@@ -1,5 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
-<%@page contentType="text/html" pageEncoding="windows-1252"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <div id="menuMensajes">
     
@@ -10,22 +15,11 @@
      <div id=enviados">ENVIADOS</div>
         
 </div>
-
-
-
-
-
-
+   
     
-    
-    
-    
-    
-    
-    
-    
-<div class="mensajes "id="enviarMensaje">
-        <form action="/enviarMensajes" method="post" id="formMensajes">
+<div class="mensajes ">
+        <div id="enviarMensaje">
+            <form action="/enviarMensajes" method="post" id="formMensajes">
                 Destinatario:
                 <div>
                     <input id="destinatario" type="text" name="destinatario" value="" />
@@ -44,38 +38,37 @@
                 <div align="center">
                     <input id="EnviarMensaje" type="submit" value="Enviar"/>
                     <input id="Limpiarmensaje" type="reset" value="Limpiar"/>
-                </div>               
-              
-                    
-               
-             
-        </form>
+                </div>        
+            </form>
+        </div>
+        
+        <div id="bandejaEntrada">
+            
+        </div>
 </div>
+
 
 
 <script>
       function redactarMensaje(){
-             $(".mensajes").css("visibility","hidden");
+            $("#bandejaEntrada").css("visibility","hidden");
             $("#enviarMensaje").css("visibility","visible");
         }
-       /* function verBandejaEntrada(){
-            $(".mensajes").css("visibility","hidden");
+        function verBandejaEntrada(){
+            $("#enviarMensaje").css("visibility","hidden");
             $("#bandejaEntrada").css("visibility","visible");
-            var array=new Array();
-            array=${usuario.bandejaEntrada};
-            if(array.size==0){
-                $("#bandejaEntrada").html("No tienes mensajes");
-                
-            }else{
-                
-                   $("#bandejaEntrada").html("Tienes mensajes");
-            }
-        }*/
+            <c:forEach  var="mensaje" items="${recibidos}" varStatus="status">
+                    $("#bandejaEntrada").append(${mensaje.idMensaje});
+            </c:forEach>
+          }
+      
+      
     $(document).ready(
     function(){
         
         
         $(".mensajes").css("visibility","hidden");
+        $.post("/recibidos",null);
         
       
       

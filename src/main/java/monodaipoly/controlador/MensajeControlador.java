@@ -4,6 +4,8 @@
  */
 package monodaipoly.controlador;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import monodaipoly.persistencia.Mensaje;
 import monodaipoly.persistencia.Usuario;
@@ -65,6 +67,15 @@ public class MensajeControlador {
         return "/perfil2";
         
         
+    }
+    @RequestMapping(method=RequestMethod.POST, value="/recibidos")
+    public String verRecibidos(HttpSession sesion,Model model){
+        Usuario usuario=(Usuario) sesion.getAttribute("usuario");
+        List<Mensaje> recibidos=new ArrayList<Mensaje>();
+        recibidos=mensajeServicio.conseguirMensajesRecibidos(usuario.getNick());
+        System.out.println(recibidos.get(0).getContenido());
+        model.addAttribute("recibidos",recibidos);
+       return "/perfil2";
     }
      
      

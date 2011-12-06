@@ -59,7 +59,7 @@ h1{
     width: 100%;
     height: 0%;
     left: 0%;
-    top: 80%;
+    top: 85%;
 }
 #datospersonales{
 
@@ -144,6 +144,7 @@ h1{
      color: #FFF;
      border-bottom-style: solid;
      border: #FFF;
+     text-align: center;
     
 }
 #nickUsuariosMejores{
@@ -153,6 +154,7 @@ h1{
      color: #FFF;
      border-bottom-style: solid;
      border: #FFF;
+     text-align: center;
 }
 #menuMensajes{
      position: relative;
@@ -173,14 +175,21 @@ h1{
    
     background-color:darkgreen;
 }
-.mensajes{
-    position: relative;
+
+#enviarMensaje{
+    position: absolute;
     left: 15%;
-    top:-23%;
+    top:0%;
     width: 75%;
     height: 80%;
-    border: #FFF;
-  
+    
 }
-
+#bandejaEntrada{
+    position: absolute;
+    left: 15%;
+    top:0%;
+    width: 75%;
+    height: 80%;
+    
+}
 
