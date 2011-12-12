@@ -19,7 +19,7 @@ public class MensajeDAOImpl extends GenericDAOImpl<Mensaje,Key> implements Mensa
     
     @Override
     public List<Mensaje> conseguirMensajesRecibidos(String nombre){
-
+        System.out.println("MensajeDAO!!");
        Query query=em.createQuery("SELECT m FROM Mensaje m WHERE m.destinatario = :nombre");
        query.setParameter("nombre",nombre);
        return (List<Mensaje>) query.getResultList();

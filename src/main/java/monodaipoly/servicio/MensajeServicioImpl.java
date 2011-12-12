@@ -42,6 +42,7 @@ public class MensajeServicioImpl implements MensajeServicio{
     
     @Override
     public List conseguirMensajesRecibidos(String nombre){
+        System.out.println("MensajeServicio!!");
         return mensajeDAO.conseguirMensajesRecibidos(nombre);
     }
     
