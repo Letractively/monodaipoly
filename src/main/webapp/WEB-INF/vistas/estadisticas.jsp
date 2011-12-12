@@ -15,7 +15,7 @@
 </div>
 <div id="nickUsuariosMejores">
     <strong>TOP 10 USUARIOS</strong>
-    <br/>
+ 
     <br/>
         
 </div>

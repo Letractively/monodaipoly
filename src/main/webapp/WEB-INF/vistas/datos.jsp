@@ -89,7 +89,9 @@
                      var fechaMes=$("#fechaMes").val();
                      var fechaAno=$("#fechaAno").val();
 
-                    $("#modi").get($("#modi").attr("action"),
+
+
+                    $.get($("#modi").attr("action"),
                         {
                             nombre: nombre,
                             apellido : apellido,

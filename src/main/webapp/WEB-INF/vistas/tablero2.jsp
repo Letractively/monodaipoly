@@ -163,43 +163,34 @@
 
 
 
-
-
-                   
-                        
-                }
-
-            );
-
-               
-               /* //Mierdaaaa
-                function Estructura1(c,valorid,numero,color1,color2,identificacion){
-                    alert(identificacion,c,valorid,numero,color1,color2)
-                        if(c==numero||c==numero+1||c==numero+3){
-                            $(identificacion).append("<div id="+valorid+" class="+color1+"> Calle Verde</div>");
-                        }
-                        else if(c==numero+2){
-                            $(identificacion).append("<div class='hidroelectrica'>Hidroelectrica</div>");
-                        }
-                        if(c==numero+4){
-                            $(identificacion).append("<div class='estacion'>Estacion</div>");
-                        }
-                              if(c==numero+5||c==numero+8){
-                                  $(identificacion).append("<div id="+valorid+" class="+color2+">Calle Azul oscuro</div>");
-                              }
-                              if(c==numero+6){
-                                  $(identificacion).append("<div  class='suerte'>¡¡PAGA!!</div>");
-                    }
-
-                }*/
-
-
-
 /*La posicion del tux en la casilla 0 viene dada desde la hoja de estilo, cuando metamos controlador
  *habria que cambiarlo y tambien un par de cosas mas*/
+
 var posAnt=0;
 var posicion1=0;
-var posicion2=0;
+var posicion2=9;
+for (var i=1;i<=4;i++){
+    alert(i);
+    var pos='posicion'+i;
+    alert(pos);
+    /*falla aki*/var posicionReal=$("#casilla"+pos).offset();
+    var izq=posicionReal.left;
+    var arriba=posicionReal.top;
+    alert('top:'+arriba);
+    alert('left:'+izq);
+    $("#jugador"+i).css({
+              "left":izq,
+              "top":arriba
+                         });
+    }
+
+
+               });
+               
+
+
+
+
 
 
 function tirarDado(jugador) {    
@@ -214,9 +205,9 @@ function tirarDado(jugador) {
             //alert(posicion1-posAnt);
             var dif=0;
             var dif=36-posAnt;
-            alert("dif"+dif);
+            //alert("dif"+dif);
             posicion1=0+dado-dif;
-            alert("pos"+posicion1);
+            //alert("pos"+posicion1);
         }
         posicionReal = $("#casilla"+posicion1).offset();
     }
@@ -228,8 +219,8 @@ function tirarDado(jugador) {
     
     var izq=posicionReal.left;
     var arriba=posicionReal.top;
-    /*alert('top:'+arriba);
-    alert('left:'+izq);*/
+    //alert('top:'+arriba);
+    //alert('left:'+izq);
     $("#"+jugador).css({
               "left":izq,
               "top":arriba

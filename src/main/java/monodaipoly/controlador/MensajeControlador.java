@@ -68,13 +68,13 @@ public class MensajeControlador {
         
         
     }
-    @RequestMapping(method=RequestMethod.POST, value="/recibidos")
+    @RequestMapping(method=RequestMethod.GET, value="/recibidos")
     public String verRecibidos(HttpSession sesion,Model model){
         Usuario usuario=(Usuario) sesion.getAttribute("usuario");
+        System.out.println("Mensajes!!!");
         List<Mensaje> recibidos=new ArrayList<Mensaje>();
         recibidos=mensajeServicio.conseguirMensajesRecibidos(usuario.getNick());
         System.out.println(recibidos.get(0).getContenido());
-        model.addAttribute("recibidos",recibidos);
        return "/perfil2";
     }
      
