@@ -10,7 +10,7 @@
     
     <div id="redactar"><a onclick="javascript:redactarMensaje()">REDACTAR</a></div>
         <br/>
-     <div id="recibidos"><p onclick="javascript:verBandejaEntrada()">RECIBIDOS2</p></div>
+     <div id="recibidos"><p onclick="javascript:verBandejaEntrada()">RECIBIDOS</p></div>
         <br/>
      <div id=enviados">ENVIADOS</div>
         
@@ -57,21 +57,26 @@
         function verBandejaEntrada(){
             $("#enviarMensaje").css("visibility","hidden");
             $("#bandejaEntrada").css("visibility","visible");
-            alert("hola2");
+            /*alert("hola");
+            $.get("/recibidos",null,function(str){
+                alert(str);
+
+            })
+            alert("hola otra vez");*/
            
-               
         }
-      
-      
-                $(document).ready(function(){
+        $(document).ready(function(){
+            var array=new Array();
+            <c:forEach var="mensajes" items="${bandejaEntrada}" varStatus="status">
+             array[${status.index}]={idMensaje:${mensajes.idMensaje}}
+            </c:forEach>
+            var jsonArray = array.toSource();
+            $.get("/recibidos",{
+                mensajes:jsonArray
+            },function(db){
+                alert(db);
+            }, "json");
 
-
-                     $.get("/recibidos",null,function (){
-                         
-
-                     })
-
-
-                })
+        })
     
 </script>
