@@ -167,13 +167,14 @@
  *habria que cambiarlo y tambien un par de cosas mas*/
 
 var posAnt=0;
-var posicion1=0;
+//var posicion1=${usuario.jugador.posicion};
 var posicion2=9;
-for (var i=1;i<=4;i++){
+alert(posicion1);
+/*for (var i=1;i<=4;i++){
     alert(i);
     var pos='posicion'+i;
     alert(pos);
-    /*falla aki*/var posicionReal=$("#casilla"+pos).offset();
+falla aki                       var posicionReal=$("#casilla"+pos).offset();
     var izq=posicionReal.left;
     var arriba=posicionReal.top;
     alert('top:'+arriba);
@@ -182,10 +183,22 @@ for (var i=1;i<=4;i++){
               "left":izq,
               "top":arriba
                          });
-    }
+    } */
+
+/*var posicionReal=$("#casilla"+posicion1).offset();
+    var izq=posicionReal.left;
+    var arriba=posicionReal.top;
+    alert('top:'+arriba);
+    alert('left:'+izq);
+    $("#jugador1").css({
+              "left":izq,
+              "top":arriba
+                         });
+
+  */
 
 
-               });
+});
                
 
 

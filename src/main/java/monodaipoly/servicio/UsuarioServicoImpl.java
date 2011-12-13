@@ -91,7 +91,7 @@ public class UsuarioServicoImpl implements UsuarioServicio{
     }
 
     @Override
-    //@PostConstruct
+    @PostConstruct
     public void preload_usuarios() {
 
         rolDAO.removeAll(Rol.class);
@@ -163,7 +163,7 @@ public class UsuarioServicoImpl implements UsuarioServicio{
     @Override
     public void anadirRol(Usuario usuario, Rol rol) {
         
-        System.out.println(rol.getId());
+        //System.out.println(rol.getId());
         usuario.getRoles().add(rol.getId());
     }
 
@@ -207,7 +207,7 @@ public class UsuarioServicoImpl implements UsuarioServicio{
 
     @Override
     public UserDetails loadUserByUsername(String nombreUsuario) throws UsernameNotFoundException, DataAccessException {
-        System.out.println("AQUI UsuarioServiceImpl loadUserByUsername usuarioDao="+usuarioDAO);
+        //System.out.println("AQUI UsuarioServiceImpl loadUserByUsername usuarioDao="+usuarioDAO);
         Usuario usuario = usuarioDAO.find(Usuario.class, nombreUsuario);
         if (usuario == null) {
             throw new UsernameNotFoundException("User not found: " + nombreUsuario);

@@ -8,6 +8,7 @@ package monodaipoly.servicio;
 import com.google.appengine.api.datastore.Key;
 import monodaipoly.dao.JugadorDAO;
 import monodaipoly.persistencia.Jugador;
+import monodaipoly.persistencia.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,8 @@ public class JugadorServicioImpl implements JugadorServicio{
     }
 
     @Override
-    public void buscar(Key claveJugador) {
-        jugadorDAO.find(Jugador.class, claveJugador);
+    public Jugador buscar(Key claveJugador) {
+        return jugadorDAO.find(Jugador.class, claveJugador);
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.transaction.annotation.Transactional;
 
 
 public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T, PK>{
@@ -18,7 +19,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
 		em.persist(object);
 		
 	}
-
+        @Transactional
 	@Override
 	public void update(T object) {
 		em.merge(object);

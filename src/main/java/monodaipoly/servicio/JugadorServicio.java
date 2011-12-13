@@ -7,6 +7,7 @@ package monodaipoly.servicio;
 
 import com.google.appengine.api.datastore.Key;
 import monodaipoly.persistencia.Jugador;
+import monodaipoly.persistencia.Usuario;
 
 /**
  *
@@ -14,7 +15,7 @@ import monodaipoly.persistencia.Jugador;
  */
 public interface JugadorServicio {
     public void crear(Jugador jugador);
-    public void buscar(Key claveJugador );
+    public Jugador buscar(Key claveJugador );
     public void borrar(Jugador jugador);
     public void borrarPorClave(Key claveJugador);
     public void actualizar(Jugador jugador);

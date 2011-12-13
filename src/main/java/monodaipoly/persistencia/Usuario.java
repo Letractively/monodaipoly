@@ -13,6 +13,7 @@ import com.google.appengine.api.datastore.Key;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Usuario implements Serializable {
@@ -31,8 +32,8 @@ public class Usuario implements Serializable {
     private String apellido;
     @Basic
     private String fechaNacimiento;
-    @OneToMany(mappedBy = "usuario")
-    private List<Jugador> jugadores;
+    @Basic
+    private Key jugador;
     @Basic
     List<Key> roles = new ArrayList<Key>();
     
@@ -51,7 +52,7 @@ public class Usuario implements Serializable {
         this.fechaNacimiento = fechaDia + "/" + fechaMes + "/" + fechaAno;
         this.partidasGanadas = 0;
         this.partidasJugadas = 0;
-        this.jugadores = new ArrayList<Jugador>();
+        this.jugador=null;
 
     }
 
@@ -63,16 +64,16 @@ public class Usuario implements Serializable {
         this.fechaNacimiento = "1/1/1";
         this.partidasGanadas = 0;
         this.partidasJugadas = 0;
-        this.jugadores = new ArrayList<Jugador>();
+        this.jugador = null;
 
 
     }
-    public List<Jugador> getJugadores() {
-        return jugadores;
+    public Key getJugador() {
+        return jugador;
     }
 
-    public void setJugadores(List<Jugador> jugadores) {
-        this.jugadores = jugadores;
+    public void setJugador(Key jugador) {
+        this.jugador = jugador;
     }
 
     public String getNombre() {
@@ -177,12 +178,5 @@ public class Usuario implements Serializable {
         }
         return false;
     }
-
-    public Jugador crearJugador() {
-        Jugador jugador = new Jugador(this);
-        this.jugadores.add(jugador);
-        return jugador;
-    }
-
 
 }
