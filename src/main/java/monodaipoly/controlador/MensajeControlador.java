@@ -4,6 +4,11 @@
  */
 package monodaipoly.controlador;
 
+import com.google.appengine.repackaged.org.json.JSONArray;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -74,8 +79,23 @@ public class MensajeControlador {
         System.out.println("Mensajes!!!");
         List<Mensaje> recibidos=new ArrayList<Mensaje>();
         recibidos=mensajeServicio.conseguirMensajesRecibidos(usuario.getNick());
-        System.out.println(recibidos.get(0).getContenido());
-       return "/perfil2";
+        System.out.println(recibidos.get(4).getContenido());
+        return datosMensaje(recibidos).toString();
+    }
+
+    private JSONObject datosMensaje(List recibidos){
+        JSONObject jsonArray=new JSONObject();
+        int i;
+        try{
+            for(i=0;i<=recibidos.size();i++){
+                
+            }
+        }catch(JSONException e){
+
+        }
+        
+        return jsonArray;
+
     }
      
      
