@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 
 @Entity
 public class Jugador implements Serializable {
@@ -17,9 +18,6 @@ public class Jugador implements Serializable {
         
 	@Basic
 	private int posicion;
-     
-	@ManyToOne(fetch =FetchType.LAZY)
-	private Usuario usuario;
         
         
         @OneToMany(mappedBy="dueno")
@@ -31,7 +29,7 @@ public class Jugador implements Serializable {
 	public Jugador(Usuario usuario){
 		this.nick=usuario.getNick();
 		this.posicion=0;
-		this.usuario=usuario;
+                this.casillas=null;
 	}
 	
 	
@@ -53,6 +51,8 @@ public class Jugador implements Serializable {
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}
-	
+	public String getIdString(){
+            return KeyFactory.keyToString(claveJugador);
+        }
 	
 }
