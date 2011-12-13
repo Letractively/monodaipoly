@@ -163,66 +163,48 @@
 
 
 
-/*La posicion del tux en la casilla 0 viene dada desde la hoja de estilo, cuando metamos controlador
- *habria que cambiarlo y tambien un par de cosas mas*/
 
+
+var posicionJugador=new Array();
+posicionJugador[1]=15;
+posicionJugador[2]=3;
 var posAnt=0;
-//var posicion1=${usuario.jugador.posicion};
-var posicion2=9;
-alert(posicion1);
-/*for (var i=1;i<=4;i++){
-    alert(i);
-    var pos='posicion'+i;
-    alert(pos);
-falla aki                       var posicionReal=$("#casilla"+pos).offset();
+
+for (var i=1;i<=4;i++){
+    var posicionReal=$("#casilla"+posicionJugador[i]).offset();
     var izq=posicionReal.left;
     var arriba=posicionReal.top;
-    alert('top:'+arriba);
-    alert('left:'+izq);
+    //alert('top:'+arriba);
+    //alert('left:'+izq);
     $("#jugador"+i).css({
               "left":izq,
               "top":arriba
                          });
-    } */
+    } 
 
-/*var posicionReal=$("#casilla"+posicion1).offset();
-    var izq=posicionReal.left;
-    var arriba=posicionReal.top;
-    alert('top:'+arriba);
-    alert('left:'+izq);
-    $("#jugador1").css({
-              "left":izq,
-              "top":arriba
-                         });
 
-  */
 
 
 });
                
-
-
-
-
-
-
 function tirarDado(jugador) {    
     var dado=Math.ceil(Math.random()*6);
     alert(dado);
     if(jugador=='jugador1'){
-        posAnt=posicion1;
-        posicion1=posicion1+dado;
-        if(posicion1>35){
+        alert(posAnt);
+        posAnt=posicionJugador[1];
+        posicionJugador[1]=posicionJugador[1]+dado;
+        if(posicionJugador[1]>35){
             //alert("posAnt"+posAnt);
             //alert("pos1"+posicion1);
             //alert(posicion1-posAnt);
             var dif=0;
             var dif=36-posAnt;
             //alert("dif"+dif);
-            posicion1=0+dado-dif;
+            posicionJugador[1]=0+dado-dif;
             //alert("pos"+posicion1);
         }
-        posicionReal = $("#casilla"+posicion1).offset();
+        posicionReal = $("#casilla"+posicionJugador[1]).offset();
     }
     if(jugador=='jugador2'){
         posicion2=posicion2+dado;
@@ -262,8 +244,8 @@ function tirarDado(jugador) {
                
                 
                 <button onClick="tirarDado('jugador1')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado jug 1</button>
-                <button onClick="tirarDado('jugador2')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado jug 2</button>
-                
+                <!--<button onClick="tirarDado('jugador2')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado jug 2</button>
+                  -->
             </div>
             <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>
             <div id='jugador2'><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></div>
