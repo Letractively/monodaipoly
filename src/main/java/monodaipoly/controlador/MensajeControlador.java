@@ -68,7 +68,7 @@ public class MensajeControlador {
         mensaje.setAutor(usuario.getNick());
         mensaje.setDestinatario(usuarioServicio.buscar(destinatario).getNick());
         mensajeServicio.crear(mensaje);
-        usuarioServicio.buscar(destinatario).getBandejaEntrada().add(mensaje);       
+        //usuarioServicio.buscar(destinatario).getBandejaEntrada().add(mensaje);
         return "/perfil2";
         
         

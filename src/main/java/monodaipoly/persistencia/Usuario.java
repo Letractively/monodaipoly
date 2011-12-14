@@ -148,7 +148,7 @@ public class Usuario implements Serializable {
         return s;
     }
 
-    public List<Mensaje> getBandejaEntrada() {
+    /*public List<Mensaje> getBandejaEntrada() {
         return bandejaEntrada;
     }
 
@@ -156,7 +156,7 @@ public class Usuario implements Serializable {
         this.bandejaEntrada = bandejaEntrada;
     }
     
-
+*/
     public int estadisticas() {
         int estadisticas;
         estadisticas = this.partidasGanadas / this.partidasJugadas;
