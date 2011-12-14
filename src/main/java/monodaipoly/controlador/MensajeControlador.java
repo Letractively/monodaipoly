@@ -73,7 +73,7 @@ public class MensajeControlador {
         
         
     }
-    /*
+    
     @RequestMapping(method=RequestMethod.GET, value="/recibidos")
     public String verRecibidos(HttpSession sesion,Model model){
         Usuario usuario=(Usuario) sesion.getAttribute("usuario");
@@ -81,14 +81,14 @@ public class MensajeControlador {
         List<Mensaje> recibidos=new ArrayList<Mensaje>();
         recibidos=mensajeServicio.conseguirMensajesRecibidos(usuario.getNick());
         System.out.println(recibidos.get(4).getContenido());
-        return datosMensaje(recibidos).toString();
+        return mensajesJson(recibidos).toString();
     }
 
-    private JSONObject datosMensaje(List recibidos){
+    private JSONObject datosMensaje(Mensaje mensaje){
         JSONObject json=new JSONObject();
         int i;
         try{
-                json.put(null, i);
+                json.put("mensaje", mensaje);
         }catch (JSONException ex){
 
         }
@@ -99,28 +99,23 @@ public class MensajeControlador {
 
 
 
-    /*private String arrayJson(List mensajes){
+    private String mensajesJson(List mensajes){
         String salida = "[";
-        try {
-            JSONArray mensajeJson = new JSONArray(mensajes);
-            System.out.println(mensajeJson.length());
-            for (int i= 0; i < mensajeJson.length(); i++) {
-                JSONObject mensaje = mensajeJson.optJSONObject(i);
-                Long idMensaje = mensaje.getLong("idMensaje");
-                salida += datosMensaje(idMensaje);
-                if (i < entradas.length() -1) {
+        try {    
+            for (int i= 0; i < mensajes.size(); i++) {
+                salida +=this.datosMensaje((Mensaje) mensajes.get(i));
+                if (i < mensajes.size() -1) {
                     salida += ",";
                 }
             }
-
-        } catch (JSONException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(MensajeControlador.class.getName()).log(Level.SEVERE, null, ex);
         }
         salida += "]";
         return salida;
     }
      
-     */
+     
     
     
 }

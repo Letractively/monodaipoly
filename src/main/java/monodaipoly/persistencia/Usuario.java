@@ -36,9 +36,10 @@ public class Usuario implements Serializable {
     private Key jugador;
     @Basic
     List<Key> roles = new ArrayList<Key>();
-    
-    @OneToMany
-    List<Mensaje>bandejaEntrada =new ArrayList<Mensaje>();
+
+    //Tenemos que hacer una relacion sin dueño
+    @Basic
+    List<Key>bandejaEntrada =new ArrayList<Key>();
 
 
     public Usuario(){
