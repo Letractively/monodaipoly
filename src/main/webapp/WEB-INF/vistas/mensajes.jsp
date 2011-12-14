@@ -38,7 +38,8 @@
                 <div align="center">
                     <input id="EnviarMensaje" type="submit" value="Enviar"/>
                     <input id="Limpiarmensaje" type="reset" value="Limpiar"/>
-                </div>        
+                </div>
+                </div>
             </form>
         </div>
         
@@ -50,34 +51,51 @@
 
 
 <script>
-      function redactarMensaje(){
+     function fijarBandejaEntrada(mensaje,i){
+         if(mensaje!="No tienes mensajes"){
+         var contenido =mensaje.contenido;
+         var author = mensaje.author;
+         
+        
+        $("#bandejaEntrada").append("<br/> Enviado por : <br/>"+author);
+        $("#bandejaEntrada").append("<br/> Mensaje "+(i+1)+": <br/>"+contenido+"<br/> ");
+         }else{
+             $("#bandejaEntrada").append("<br/>No tienes mensajes");
+         }
+     }
+
+     function redactarMensaje(){
             $("#bandejaEntrada").css("visibility","hidden");
             $("#enviarMensaje").css("visibility","visible");
+            
+
         }
         function verBandejaEntrada(){
+            
             $("#enviarMensaje").css("visibility","hidden");
             $("#bandejaEntrada").css("visibility","visible");
-            /*alert("hola");
-            $.get("/recibidos",null,function(str){
-                alert(str);
-
-            })
-            alert("hola otra vez");*/
+            
+            $.get("/recibidos",null,function(db){
+                
+                if(db=="No tienes mensajes"){
+                    fijarBandejaEntrada(db,"0");
+                }else{
+                var mensajes = $.parseJSON(db);
+                $(mensajes).each(function(index,value) {                            
+                            fijarBandejaEntrada(value,index);
+                        });
+                }
+            }, "json");
            
         }
         $(document).ready(function(){
             var array=new Array();
-            alert("aaaaaaaa");
+            
             <c:forEach var="mensajes" items="${bandejaEntrada}" varStatus="status">
              array[${status.index}]={idMensaje:${mensajes.idMensaje}}
             </c:forEach>
             var jsonArray = array.toSource();
-            $.get("/recibidos",{
-                mensajes:jsonArray
-            },function(db){
-                var mensajes = $.parseJSON(db);
-                alert(mensajes);
-            }, "json");
+            
 
         })
     

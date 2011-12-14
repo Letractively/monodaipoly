@@ -76,6 +76,19 @@ public class TableroControlador {
 
         return "/tablero";
     }
+        
+        @RequestMapping(value = "/perfil", method = RequestMethod.POST)
+    public String volverPerfil(Model model,HttpSession sesion) {
+            Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+            Jugador jugador=this.jugadorServicio.buscar(usuario.getJugador());
+            this.jugadorServicio.borrar(jugador);
+            usuario.setJugador(null);
+            usuarioServicio.actualizar(usuario);
+            model.addAttribute("usuario", usuarioServicio.getCurrentUser());
+        return "/perfil2";
+    }
+
+
 
         @RequestMapping(method=RequestMethod.GET, value="/moverJugador")
         public @ResponseBody String dado(HttpSession sesion,

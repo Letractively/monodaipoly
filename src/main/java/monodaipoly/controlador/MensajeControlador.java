@@ -36,10 +36,10 @@ import org.springframework.web.bind.support.SessionStatus;
  */
 @Controller
 public class MensajeControlador {
-    
+
      private UsuarioServicio usuarioServicio;
      private MensajeServicio mensajeServicio;
-     
+
     @Autowired
     @Required
     public void setUsuarioServicio(UsuarioServicio usuarioServicio){
@@ -50,49 +50,60 @@ public class MensajeControlador {
     public void setMensajeServicio(MensajeServicio mensajeServicio){
         this.mensajeServicio=mensajeServicio;
     }
-    
+
     @RequestMapping(value = "/mensajes", method = RequestMethod.GET)
     public String doShowMensajes() {
         return "/mensajes";
     }
-    
+
     @RequestMapping(method=RequestMethod.POST, value="/enviarMensajes")
-    public String enviarMensajes(HttpSession sesion, 
+    public String enviarMensajes(HttpSession sesion,
                     @RequestParam("contenidoMensaje") String contenidoMensaje,
                     @RequestParam("destinatario") String destinatario
                    ){
-      
         Mensaje mensaje=new Mensaje();
         Usuario usuario=(Usuario) sesion.getAttribute("usuario");
+        if(usuarioServicio.buscar(destinatario)!=null){
+
         mensaje.setContenido(contenidoMensaje);
         mensaje.setAutor(usuario.getNick());
         mensaje.setDestinatario(usuarioServicio.buscar(destinatario).getNick());
         mensajeServicio.crear(mensaje);
-        //usuarioServicio.buscar(destinatario).getBandejaEntrada().add(mensaje);
+        usuarioServicio.buscar(destinatario).getBandejaEntrada().add(mensaje.getIdMensaje());
+        }
         return "/perfil2";
-        
-        
     }
-    
+
     @RequestMapping(method=RequestMethod.GET, value="/recibidos")
-    public String verRecibidos(HttpSession sesion,Model model){
+    public @ResponseBody String verRecibidos(HttpSession sesion,Model model){
         Usuario usuario=(Usuario) sesion.getAttribute("usuario");
-        System.out.println("Mensajes!!!");
         List<Mensaje> recibidos=new ArrayList<Mensaje>();
         recibidos=mensajeServicio.conseguirMensajesRecibidos(usuario.getNick());
-        System.out.println(recibidos.get(4).getContenido());
-        return mensajesJson(recibidos).toString();
+        System.out.println("MensajeControlador");
+        if(!recibidos.isEmpty()){
+            System.out.println("tiene mensajes Controlador");
+            System.out.println("Mensajes:  "+ recibidos.get(0).getContenido());
+            return mensajesJson(recibidos).toString();
+        }
+        else{
+            String noMensajes="No tienes mensajes";
+            System.out.println("No tiene mensajes Controlador");
+            return noMensajes;
+        }
+        
     }
 
     private JSONObject datosMensaje(Mensaje mensaje){
         JSONObject json=new JSONObject();
         int i;
         try{
-                json.put("mensaje", mensaje);
+                json.put("contenido", mensaje.getContenido());
+                json.put("author", mensaje.getAutor());
+                json.put("destinatario", mensaje.getDestinatario());
         }catch (JSONException ex){
 
         }
-        
+
         return json;
 
     }
@@ -101,7 +112,7 @@ public class MensajeControlador {
 
     private String mensajesJson(List mensajes){
         String salida = "[";
-        try {    
+        try {
             for (int i= 0; i < mensajes.size(); i++) {
                 salida +=this.datosMensaje((Mensaje) mensajes.get(i));
                 if (i < mensajes.size() -1) {
@@ -114,8 +125,8 @@ public class MensajeControlador {
         salida += "]";
         return salida;
     }
-     
-     
-    
-    
+
+
+
+
 }

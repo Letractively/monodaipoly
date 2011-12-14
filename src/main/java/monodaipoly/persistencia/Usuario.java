@@ -148,15 +148,15 @@ public class Usuario implements Serializable {
         return s;
     }
 
-    /*public List<Mensaje> getBandejaEntrada() {
+    public List<Key> getBandejaEntrada() {
         return bandejaEntrada;
     }
 
-    public void setBandejaEntrada(List<Mensaje> bandejaEntrada) {
+    public void setBandejaEntrada(List<Key> bandejaEntrada) {
         this.bandejaEntrada = bandejaEntrada;
     }
     
-*/
+
     public int estadisticas() {
         int estadisticas;
         estadisticas = this.partidasGanadas / this.partidasJugadas;
