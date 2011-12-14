@@ -52,6 +52,7 @@ public class Jugador implements Serializable {
 		this.posicion = posicion;
 	}
 	public String getIdString(){
+            System.out.println("Aqui Jugador getIdString() clave jugador  " + claveJugador);
             return KeyFactory.keyToString(claveJugador);
         }
 	

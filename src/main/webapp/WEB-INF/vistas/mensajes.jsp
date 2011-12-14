@@ -67,6 +67,7 @@
         }
         $(document).ready(function(){
             var array=new Array();
+            alert("aaaaaaaa");
             <c:forEach var="mensajes" items="${bandejaEntrada}" varStatus="status">
              array[${status.index}]={idMensaje:${mensajes.idMensaje}}
             </c:forEach>
@@ -74,7 +75,8 @@
             $.get("/recibidos",{
                 mensajes:jsonArray
             },function(db){
-                alert(db);
+                var mensajes = $.parseJSON(db);
+                alert(mensajes);
             }, "json");
 
         })

@@ -28,7 +28,13 @@
         <link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
         <script language="javascript" type="text/javascript"></script>
         <script type="text/javascript">
-            $(document).ready(
+           
+           var posicionJugador=new Array();
+    posicionJugador[1]=0;
+    posicionJugador[2]=0;
+    var posAnt=0;
+
+           $(document).ready(
              
                function () {
                  
@@ -165,10 +171,7 @@
 
 
 
-var posicionJugador=new Array();
-posicionJugador[1]=15;
-posicionJugador[2]=3;
-var posAnt=0;
+
 
 for (var i=1;i<=4;i++){
     var posicionReal=$("#casilla"+posicionJugador[i]).offset();
@@ -191,7 +194,6 @@ function tirarDado(jugador) {
     var dado=Math.ceil(Math.random()*6);
     alert(dado);
     if(jugador=='jugador1'){
-        alert(posAnt);
         posAnt=posicionJugador[1];
         posicionJugador[1]=posicionJugador[1]+dado;
         if(posicionJugador[1]>35){
