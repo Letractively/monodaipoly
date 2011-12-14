@@ -2,6 +2,8 @@
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.repackaged.org.json.JSONException;
+import com.google.appengine.repackaged.org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -58,10 +62,11 @@ public class TableroControlador {
             Jugador jugador=new Jugador(usuario);
             jugadorServicio.crear(jugador);
             usuario.setJugador(jugador.getClaveJugador());
-         }else{
-             jugadorServicio.buscar(usuario.getJugador());
+            this.usuarioServicio.actualizar(usuario);
          }
-        this.usuarioServicio.actualizar(usuario);
+
+        Jugador jugador1=jugadorServicio.buscar(usuario.getJugador());
+        model.addAttribute("jugador1",jugador1.getPosicion());
         model.addAttribute("casillas",casillas);
 
         return "/tablero2";
@@ -70,6 +75,27 @@ public class TableroControlador {
     public String doShowTablero1(Model model) {
 
         return "/tablero";
+    }
+
+        @RequestMapping(method=RequestMethod.GET, value="/moverJugador")
+        public @ResponseBody String dado(HttpSession sesion,
+            @RequestParam("dado") int dado){
+            Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+            Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
+            jugador.setPosicion(jugador.getPosicion()+dado);
+            jugadorServicio.actualizar(jugador);
+            return this.dadoJson(jugador.getPosicion()).toString();
+    }
+
+        private JSONObject dadoJson(int posicion){
+        JSONObject json=new JSONObject();
+        try{
+            json.put("jugador1",posicion);
+
+        }catch (JSONException ex){
+
+        }
+        return json;
     }
 
 }

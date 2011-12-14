@@ -30,7 +30,7 @@
         <script type="text/javascript">
            
            var posicionJugador=new Array();
-    posicionJugador[1]=0;
+    posicionJugador[1]=${jugador1};
     posicionJugador[2]=0;
     var posAnt=0;
 
@@ -189,8 +189,33 @@ for (var i=1;i<=4;i++){
 
 
 });
-               
-function tirarDado(jugador) {    
+function tirarDado2(jugador){
+    var dado=Math.ceil(Math.random()*6);
+    alert(dado);
+     posAnt=posicionJugador[1];
+     posicionJugador[1]=posicionJugador[1]+dado;
+     if(posicionJugador[1]>35){
+     var dif=0;
+     var dif=36-posAnt;
+     posicionJugador[1]=0+dado-dif;
+     }
+     posicionReal = $("#casilla"+posicionJugador[1]).offset();
+    var izq=posicionReal.left;
+    var arriba=posicionReal.top;
+    $("#"+jugador).css({
+              "left":izq,
+              "top":arriba
+                         });
+   $.get("/moverJugador",{
+        dado:dado
+    },
+    function(json){
+       var db = $.parseJSON(json);
+       //alert(db);
+    }, "json")
+    
+}
+function tirarDado(jugador) {    //antigua funcion, sin json
     var dado=Math.ceil(Math.random()*6);
     alert(dado);
     if(jugador=='jugador1'){
@@ -245,9 +270,8 @@ function tirarDado(jugador) {
             <div  id="centro">
                
                 
-                <button onClick="tirarDado('jugador1')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado jug 1</button>
-                <!--<button onClick="tirarDado('jugador2')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar dado jug 2</button>
-                  -->
+                <button onClick="tirarDado2('jugador1')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
+                
             </div>
             <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>
             <div id='jugador2'><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></div>
