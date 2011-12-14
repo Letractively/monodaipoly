@@ -73,6 +73,7 @@ public class MensajeControlador {
         
         
     }
+    /*
     @RequestMapping(method=RequestMethod.GET, value="/recibidos")
     public String verRecibidos(HttpSession sesion,Model model){
         Usuario usuario=(Usuario) sesion.getAttribute("usuario");
@@ -84,21 +85,42 @@ public class MensajeControlador {
     }
 
     private JSONObject datosMensaje(List recibidos){
-        JSONObject jsonArray=new JSONObject();
+        JSONObject json=new JSONObject();
         int i;
         try{
-            for(i=0;i<=recibidos.size();i++){
-                
-            }
-        }catch(JSONException e){
+                json.put(null, i);
+        }catch (JSONException ex){
 
         }
         
-        return jsonArray;
+        return json;
 
     }
+
+
+
+    /*private String arrayJson(List mensajes){
+        String salida = "[";
+        try {
+            JSONArray mensajeJson = new JSONArray(mensajes);
+            System.out.println(mensajeJson.length());
+            for (int i= 0; i < mensajeJson.length(); i++) {
+                JSONObject mensaje = mensajeJson.optJSONObject(i);
+                Long idMensaje = mensaje.getLong("idMensaje");
+                salida += datosMensaje(idMensaje);
+                if (i < entradas.length() -1) {
+                    salida += ",";
+                }
+            }
+
+        } catch (JSONException ex) {
+            Logger.getLogger(MensajeControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        salida += "]";
+        return salida;
+    }
      
-     
+     */
     
     
 }

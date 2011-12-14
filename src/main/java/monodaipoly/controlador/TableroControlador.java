@@ -1,5 +1,7 @@
-package monodaipoly.controlador;
+ package monodaipoly.controlador;
 
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -52,10 +54,13 @@ public class TableroControlador {
              casilla.setNumeroCasilla(c);
              casillas.add(casilla);
          }
-        Jugador jugador=new Jugador(usuario);        
-        jugadorServicio.crear(jugador);
-        //System.out.println("Aqui clave jugador  " + jugador.getIdString());
-        usuario.setJugador(jugador.getClaveJugador());
+         if(usuario.getJugador()==null){
+            Jugador jugador=new Jugador(usuario);
+            jugadorServicio.crear(jugador);
+            usuario.setJugador(jugador.getClaveJugador());
+         }else{
+             jugadorServicio.buscar(usuario.getJugador());
+         }
         this.usuarioServicio.actualizar(usuario);
         model.addAttribute("casillas",casillas);
 

@@ -13,7 +13,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
 	@PersistenceContext
          EntityManager em;
 
-
+         @Transactional
 	@Override
 	public void insert(T object) {
 		em.persist(object);
@@ -25,13 +25,13 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
 		em.merge(object);
 		
 	}
-
+        @Transactional
 	@Override
 	public void remove(T object) {
 		em.remove(object);
 		
 	}
-
+        @Transactional
 	@Override
 	public void remove(Class<T> typeClass, PK clave) {
 		T object = em.find(typeClass, clave);
@@ -51,7 +51,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
 		return (List<T>) em.createQuery(sql.toString()).getResultList();
 	}
         
-        
+    @Transactional
     @Override
     public int removeAll(Class<T> typeClass) {
         String sql = "DELETE FROM " + typeClass.getSimpleName() + " c";
