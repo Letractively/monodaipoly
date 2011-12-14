@@ -1,3 +1,4 @@
+
 #fondo{
 background-image:url(Logofianl2.jpg);
 background-repeat: no-repeat;
@@ -9,4 +10,15 @@ left: 0%;
 top: 0%;
 right: 0%;
 
+}
+#tren{
+    position: absolute;
+    top: 69%;
+    left: 0%;
+    width: 20%;
+    height: 30%;
+    background-image: url(tren.gif);
+    background-repeat: no-repeat;
+    background-position:center;
+    z-index: 6;
 }

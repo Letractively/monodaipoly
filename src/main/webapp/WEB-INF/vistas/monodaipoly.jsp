@@ -11,6 +11,11 @@
 		<script language="javascript" type="text/javascript">
                     $(document).ready(
                     function(){
+                        $("#tren").animate({"left": "+=1000px"}, "slow");
+                        $("#tren").animate({"top": "-=445px"}, "slow");
+                       $("#tren").animate({"left": "-=800px"}, "slow");
+                       
+
                         <%if(request.getParameter("registrado")!=null){%>
                         $("#usuarioRegistrado").html("<b>Usuario Registrado Correctamente</b>").fadeIn(1000).fadeOut(3000);
 			<%}%>
@@ -83,6 +88,7 @@
                         </td>
                     </tr>
                 </table>
+                <div id="tren"></div>
              </div>
-  </body>
+      </body>
 </html>
