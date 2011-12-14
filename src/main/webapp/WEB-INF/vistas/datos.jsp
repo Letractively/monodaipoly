@@ -35,7 +35,7 @@
                 <option value="10">Octubre</option>
                 <option value="11">Noviembre</option>
                 <option value="12">Diciembre</option>
-                <option selected="0"></option>
+                <option id="mes" selected="0"></option>
            </select>
              de
             <input type="number" size="5" maxlength="4" id="fechaAno" value="" />
@@ -108,6 +108,11 @@
 
 
                    $(".modificar").css("visibility","hidden");
+                   $("#campoNombre").attr("value", "")
+                    $("#campoApellido").attr("value", "")
+                    $("#fechaDia").attr("value", "")
+                    $("#mes").attr("selected", "0")
+                    $("#fechaAno").attr("value", "")
 
            
                 
