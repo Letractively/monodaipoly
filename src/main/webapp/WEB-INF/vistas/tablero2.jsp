@@ -272,10 +272,9 @@
             <div  id="centro">
 
                 <form action="/perfil" method="post">
-                    <input id="botonEntrar" type="submit" value="Terminar Partida" onmouseover="this.style.color='green'" onmouseout="this.style.color='black'"/>
+                    <input id="botonEntrar" type="submit" value="Terminar Partida" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
                 </form>
                 <button onClick="tirarDado2('jugador1')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
-
             </div>
             <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>
             <div id='jugador2'><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></div>
