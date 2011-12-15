@@ -36,7 +36,7 @@
                 </div>              
                 <br/>
                 <div align="center">
-                    <input id="EnviarMensaje" type="submit" value="Enviar"/>
+                    <input id="EnviarMensaje" type="submit" value="Enviar" onclick="alert('Mensaje enviado correctamente')"/>
                     <input id="Limpiarmensaje" type="reset" value="Limpiar"/>
                 </div>
                 </div>
@@ -55,9 +55,11 @@
          if(mensaje!="No tienes mensajes"){
          var contenido =mensaje.contenido;
          var author = mensaje.author;
-         
-        
-        $("#bandejaEntrada").append("<br/> Enviado por : <br/>"+author);
+         if(i==0){
+             $("#bandejaEntrada").html("<br/> Enviado por : <br/>"+author);
+         }else{
+             $("#bandejaEntrada").append("<br/> Enviado por : <br/>"+author);
+         }
         $("#bandejaEntrada").append("<br/> Mensaje "+(i+1)+": <br/>"+contenido+"<br/> ");
          }else{
              $("#bandejaEntrada").append("<br/>No tienes mensajes");

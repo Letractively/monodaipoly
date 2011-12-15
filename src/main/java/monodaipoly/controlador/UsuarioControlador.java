@@ -225,7 +225,7 @@ public class UsuarioControlador {
         System.out.println(usuarios.get(0).getNick());
       
         if(usuarios.size()>10){
-            for(c=10;c<0;c++){
+            for(c=0;c<10;c++){
                 usuariosMejores.add(c,usuarios.get(c));
             }
             model.addAttribute("usuariosMejores", usuariosMejores);
