@@ -95,7 +95,14 @@ public class TableroControlador {
             @RequestParam("dado") int dado){
             Usuario usuario = (Usuario)sesion.getAttribute("usuario");
             Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
-            jugador.setPosicion(jugador.getPosicion()+dado);
+            if(jugador.getPosicion()+dado>35){
+                int posAnt=jugador.getPosicion();
+                int dif=36-posAnt;
+                jugador.setPosicion(0+dado-dif);                    
+            }else{
+                jugador.setPosicion(jugador.getPosicion()+dado);
+            }
+
             jugadorServicio.actualizar(jugador);
             return this.dadoJson(jugador.getPosicion()).toString();
     }

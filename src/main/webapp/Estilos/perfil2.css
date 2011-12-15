@@ -1,6 +1,7 @@
 #fondo{
     background-image: url("fondoperfil.jpg");
     background-repeat:  no-repeat;
+    background-position: center;
 
     position: absolute;
     width: 100%;

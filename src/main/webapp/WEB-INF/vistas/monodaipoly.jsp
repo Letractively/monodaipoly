@@ -11,10 +11,11 @@
 		<script language="javascript" type="text/javascript">
                     $(document).ready(
                     function(){
-                        $("#tren").animate({"left": "+=1000px"}, "slow");
+                        
+                       /* $("#tren").animate({"left": "+=1000px"}, "slow");
                         $("#tren").animate({"top": "-=445px"}, "slow");
                        $("#tren").animate({"left": "-=800px"}, "slow");
-                       
+                       */
 
                         <%if(request.getParameter("registrado")!=null){%>
                         $("#usuarioRegistrado").html("<b>Usuario Registrado Correctamente</b>").fadeIn(1000).fadeOut(3000);
@@ -34,7 +35,7 @@
 
                         }
                         else if(c[0].value==0){
-                            $("#error").html("<b>No has introducido contrasena</b>").fadeIn(1000).fadeOut(3000);
+                            $("#error").html("<b>No has introducido contraseña</b>").fadeIn(1000).fadeOut(3000);
 
                         }else{
 
@@ -84,11 +85,11 @@
                     <tr>
                         <td>
                             <p style="color:red" id="error"> </p>
-                            <p style="color: yellow" id="usuarioRegistrado"> </p>
+                            <p style="color: green" id="usuarioRegistrado"> </p>
                         </td>
                     </tr>
                 </table>
-                <div id="tren"></div>
+               <!-- <div id="tren"></div>-->
              </div>
       </body>
 </html>
