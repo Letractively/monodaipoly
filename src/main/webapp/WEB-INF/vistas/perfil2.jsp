@@ -55,7 +55,18 @@
             }
             
           
-         
+                $.(document).ready(
+                    function (){
+                        if($("#estadoMensaje").attr("value")!=""){
+                            var estado = $("#estadoMensaje").attr("value");
+                            if(estado=="ERROR"){
+                                $("#estadoMensaje").css("visibility","visible");
+                                $("#estadoMensaje").html("<b>Imposible enviar mensaje.</br>Destinatario no existente</b>").fadeIn(1000).fadeOut(10000);
+                            }else if(estado=="CORRECTO"){
+                                $("#estadoMensaje").html("<b>Mensaje enviado correctamente</b>").fadeIn(1000).fadeOut(10000);
+                            }
+                        }
+                });
          
 
         
@@ -78,7 +89,10 @@
              
          </div> 
          
-         <div id="contenido"></div>
+         <div id="contenido">
+             <div id="estadoMensaje" value="${estado}" style="visibility:hidden">
+             </div>
+         </div>
          
          <div id="pie">
              <input type="button" id="aJugar" value="¡ A JUGAR !" onclick="window.location.href='tablero2'"></input>

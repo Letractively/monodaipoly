@@ -35,13 +35,13 @@
                     <textarea id="contenidoMensaje" COLS=100 ROWS=12 type="text" name="contenidoMensaje" value="" ></textarea>
                 </div>              
                 <br/>
-                <div align="center">
-                    <input id="EnviarMensaje" type="submit" value="Enviar" onclick="alert('Mensaje enviado correctamente')"/>
+                <div id="mensaje" align="center">
+                    <input id="EnviarMensaje" type="submit" value="Enviar" />
                     <input id="Limpiarmensaje" type="reset" value="Limpiar"/>
                 </div>
-                </div>
+                
             </form>
-        </div>
+            </div>
         
         <div id="bandejaEntrada" style="visibility:hidden">
             
@@ -62,13 +62,14 @@
          }
         $("#bandejaEntrada").append("<br/> Mensaje "+(i+1)+": <br/>"+contenido+"<br/> ");
          }else{
-             $("#bandejaEntrada").append("<br/>No tienes mensajes");
+             $("#bandejaEntrada").html("<br/>No tienes mensajes");
          }
      }
 
      function redactarMensaje(){
             $("#bandejaEntrada").css("visibility","hidden");
             $("#enviarMensaje").css("visibility","visible");
+
             
 
         }
@@ -90,15 +91,10 @@
             }, "json");
            
         }
-        $(document).ready(function(){
-            var array=new Array();
-            
-            <c:forEach var="mensajes" items="${bandejaEntrada}" varStatus="status">
-             array[${status.index}]={idMensaje:${mensajes.idMensaje}}
-            </c:forEach>
-            var jsonArray = array.toSource();
-            
+       /* $(document).ready(function(){
+           
+           
 
-        })
+        })*/
     
 </script>

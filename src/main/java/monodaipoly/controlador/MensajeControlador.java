@@ -70,8 +70,11 @@ public class MensajeControlador {
         mensaje.setDestinatario(usuarioServicio.buscar(destinatario).getNick());
         mensajeServicio.crear(mensaje);
         usuarioServicio.buscar(destinatario).getBandejaEntrada().add(mensaje.getIdMensaje());
+            return "redirect:estadoMensaje?estado=CORRECTO";
         }
-        return "/perfil2";
+        else{
+            return "redirect:estadoMensaje?estado=ERROR";
+        }
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/recibidos")
@@ -108,6 +111,15 @@ public class MensajeControlador {
 
     }
 
+@RequestMapping(method=RequestMethod.GET, value="/estadoMensaje")
+    public String comprobarEstadoMensaje(@RequestParam(value="estado", required=false,defaultValue="") String estado,
+        Model model,
+        HttpSession sesion){
+        Usuario usuario =(Usuario)sesion.getAttribute("usuario");
+        model.addAttribute("estado",estado );
+        model.addAttribute("usuario", usuario);
+        return "/perfil2";
+    }
 
 
     private String mensajesJson(List mensajes){
