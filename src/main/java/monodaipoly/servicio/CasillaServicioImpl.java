@@ -3,6 +3,7 @@ package monodaipoly.servicio;
 
 import com.google.appengine.api.datastore.Key;
 import javax.annotation.PostConstruct;
+import monodaipoly.dao.CalleDAO;
 import monodaipoly.dao.CasillaDAO;
 import monodaipoly.persistencia.Casilla;
 import monodaipoly.persistencia.Jugador;
@@ -14,11 +15,17 @@ import org.springframework.stereotype.Service;
 public class CasillaServicioImpl implements CasillaServicio{
     
    private CasillaDAO casillaDAO;
+   private CalleDAO calleDAO;
    
     @Autowired
     @Required
     public void setCasillaDAO(CasillaDAO casillaDAO){
         this.casillaDAO=casillaDAO;
+    }
+    @Autowired
+    @Required
+    public void setCalleDAO(CalleDAO calleDAO){
+        this.calleDAO=calleDAO;
     }
     
     
@@ -44,7 +51,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         casilla0.setIdCasilla(0);
         casilla0.setNombre("Salida");
         casilla0.setTipoCasilla(null);
-        casillaDAO.insert(casilla0)
+        casillaDAO.insert(casilla0);
         Casilla casilla1 = new Casilla();
         casilla1.setIdCasilla(0);
         casilla1.setNombre("Salida");
