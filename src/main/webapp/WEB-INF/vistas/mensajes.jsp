@@ -19,7 +19,7 @@
     
 <div class="mensajes ">
         <div id="enviarMensaje" style="visibility:hidden">
-            <form action="/enviarMensajes" method="post" id="formMensajes">
+            <form action="/enviarMensajes" method="get" id="formMensajes">
                 Destinatario:
                 <div>
                     <input id="destinatario" type="text" name="destinatario" value="" />

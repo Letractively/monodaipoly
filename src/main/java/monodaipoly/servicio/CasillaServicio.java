@@ -8,8 +8,7 @@ import monodaipoly.persistencia.Jugador;
 public interface CasillaServicio {
     
     public void crear(Casilla casilla);
-    public void buscar(Key idCasilla );
+    public void buscar(int idCasilla );
     public void borrar(Casilla casilla);
-    public Jugador buscarDueno(Key idCasilla);
-    
+    public void preload_casillas();
 }

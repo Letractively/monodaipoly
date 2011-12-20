@@ -55,15 +55,19 @@
             }
             
           
-                $.(document).ready(
+                $(document).ready(
                     function (){
+                        alert($("#estadoMensaje").attr("value"));
                         if($("#estadoMensaje").attr("value")!=""){
                             var estado = $("#estadoMensaje").attr("value");
                             if(estado=="ERROR"){
                                 $("#estadoMensaje").css("visibility","visible");
                                 $("#estadoMensaje").html("<b>Imposible enviar mensaje.</br>Destinatario no existente</b>").fadeIn(1000).fadeOut(10000);
+                                
                             }else if(estado=="CORRECTO"){
+                                $("#estadoMensaje").css("visibility","visible");
                                 $("#estadoMensaje").html("<b>Mensaje enviado correctamente</b>").fadeIn(1000).fadeOut(10000);
+                                
                             }
                         }
                 });

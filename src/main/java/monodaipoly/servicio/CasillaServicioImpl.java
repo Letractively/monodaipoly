@@ -2,6 +2,7 @@
 package monodaipoly.servicio;
 
 import com.google.appengine.api.datastore.Key;
+import javax.annotation.PostConstruct;
 import monodaipoly.dao.CasillaDAO;
 import monodaipoly.persistencia.Casilla;
 import monodaipoly.persistencia.Jugador;
@@ -26,7 +27,7 @@ public class CasillaServicioImpl implements CasillaServicio{
     }
 
    
-    public void buscar(Key idCasilla) {
+    public void buscar(int idCasilla) {
         casillaDAO.find(Casilla.class, idCasilla);
     }
 
@@ -34,9 +35,26 @@ public class CasillaServicioImpl implements CasillaServicio{
     public void borrar(Casilla casilla) {
         casillaDAO.remove(casilla);
     }
+
     @Override
-    public Jugador buscarDueno(Key idCasilla){
-        return casillaDAO.buscarDueno(idCasilla);
-    }
+    @PostConstruct
+    public void preload_casillas() {
+        casillaDAO.removeAll(Casilla.class);
+        Casilla casilla0 = new Casilla();
+        casilla0.setIdCasilla(0);
+        casilla0.setNombre("Salida");
+        casilla0.setTipoCasilla(null);
+        casillaDAO.insert(casilla0)
+        Casilla casilla1 = new Casilla();
+        casilla1.setIdCasilla(0);
+        casilla1.setNombre("Salida");
+        casilla1.setTipoCasilla(null);
+        Casilla casilla2 = new Casilla();
+        Casilla casilla3 = new Casilla();
+        Casilla casilla4 = new Casilla();
+        Casilla casilla5 = new Casilla();
+
+
+     }
     
 }

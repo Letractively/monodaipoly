@@ -55,7 +55,7 @@ public class TableroControlador {
          ArrayList casillas=new ArrayList();
          for(c=0;c<=37;c++){
              Casilla casilla = new Casilla();
-             casilla.setNumeroCasilla(c);
+             casilla.setIdCasilla(c);
              casillas.add(casilla);
          }
          if(usuario.getJugador()==null){
