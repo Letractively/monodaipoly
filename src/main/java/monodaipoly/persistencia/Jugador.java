@@ -22,6 +22,9 @@ public class Jugador implements Serializable {
         
         @OneToMany(mappedBy="dueno")
         private List<Casilla> casillas;
+
+        @Basic
+        private Key partida;
 	
 	
 	//calles..... 

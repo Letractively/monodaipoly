@@ -3,12 +3,12 @@
  * and open the template in the editor.
  */
 
-package monodaipoly.persistencia;
+package monodaipoly.servicio;
 
 /**
  *
- * @author elena
+ * @author instalador
  */
-public interface Caracteristicas {
+public interface CalleServicio {
 
 }

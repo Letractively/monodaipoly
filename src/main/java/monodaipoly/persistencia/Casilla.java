@@ -23,24 +23,27 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Casilla implements Serializable {
 
+    //La colocacion de la casilla en el tablero
     @Id
     private int idCasilla;
 
     @Basic
-    private String imagen;
-    
-    @Basic
-    private int numeroCasilla;
-
-    @Basic
     private String nombre;
-    
 
+
+    //provisionalmemte solo hay tipo calles
     @Basic
-    @ManyToOne
-    private Jugador dueno;
-    @Basic
-    private int precioCompra;
+    private Key tipoCasilla;
+
+    public Key getTipoCasilla() {
+        return tipoCasilla;
+    }
+
+    public void setTipoCasilla(Key tipoCasilla) {
+        this.tipoCasilla = tipoCasilla;
+    }
+
+    
 
     public int getidCasilla(){
         return this.idCasilla;
@@ -54,12 +57,8 @@ public class Casilla implements Serializable {
     public void setnombre(String nombre){
         this.nombre=nombre;
     }
-    public String getimagen(){
-        return this.imagen;
-    }
-    public void setimagen(String imagen){
-        this.imagen=imagen;
-    }
+
+
 
 
 
@@ -67,40 +66,27 @@ public class Casilla implements Serializable {
         return idCasilla;
     }
 
-    public String getImagen() {
-        return imagen;
-    }
+   
 
     public String getNombre() {
         return nombre;
     }
 
-    public Jugador getDueno() {
-        return dueno;
-    }
+    
     
 
-    public int getNumeroCasilla() {
-        return numeroCasilla;
-    }
-    public int getPrecioCompra() {
-        return precioCompra;
-    }
+    
     public void setIdCasilla(int idCasilla) {
         this.idCasilla = idCasilla;
     }
 
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
+    
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setNumeroCasilla(int numeroCasilla) {
-        this.numeroCasilla = numeroCasilla;
-    }
+    
 
 }
 

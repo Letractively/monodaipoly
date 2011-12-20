@@ -56,7 +56,7 @@ public class MensajeControlador {
         return "/mensajes";
     }
 
-    @RequestMapping(method=RequestMethod.POST, value="/enviarMensajes")
+    @RequestMapping(method=RequestMethod.GET, value="/enviarMensajes")
     public String enviarMensajes(HttpSession sesion,
                     @RequestParam("contenidoMensaje") String contenidoMensaje,
                     @RequestParam("destinatario") String destinatario
