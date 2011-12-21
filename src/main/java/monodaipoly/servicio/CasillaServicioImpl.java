@@ -279,7 +279,7 @@ public class CasillaServicioImpl implements CasillaServicio{
 
         Casilla casilla25=new Casilla();
         casilla25.setNombre("iPad");
-        casilla25.setNumeroCasilla(24);
+        casilla25.setNumeroCasilla(25);
         Calle calle25=new Calle();
         calle25.setColor("Amarillo");
         calle25.setMulta(300);
@@ -290,7 +290,7 @@ public class CasillaServicioImpl implements CasillaServicio{
 
         Casilla casilla26=new Casilla();
         casilla26.setNombre("iPhone");
-        casilla26.setNumeroCasilla(24);
+        casilla26.setNumeroCasilla(26);
         Calle calle26=new Calle();
         calle26.setColor("Amarillo");
         calle26.setMulta(300);
@@ -304,6 +304,80 @@ public class CasillaServicioImpl implements CasillaServicio{
         casilla27.setNombre("Carcel");
         casilla27.setTipoCasilla(null);
         casillaDAO.insert(casilla27);
+
+        Casilla casilla28=new Casilla();
+        casilla28.setNombre("Mac OS X Tiger");
+        casilla28.setNumeroCasilla(28);
+        Calle calle28=new Calle();
+        calle28.setColor("Verde");
+        calle28.setMulta(350);
+        calle28.setPrecio(1050);
+        calleDAO.insert(calle28);
+        casilla28.setTipoCasilla(calle28.getIdCalle());
+        casillaDAO.insert(casilla28);
+
+        Casilla casilla29=new Casilla();
+        casilla29.setNombre("Mac OS X Leopard");
+        casilla29.setNumeroCasilla(29);
+        Calle calle29=new Calle();
+        calle29.setColor("Verde");
+        calle29.setMulta(350);
+        calle29.setPrecio(1050);
+        calleDAO.insert(calle29);
+        casilla29.setTipoCasilla(calle29.getIdCalle());
+        casillaDAO.insert(casilla29);
+
+        Casilla casilla30 = new Casilla();
+        casilla30.setNumeroCasilla(30);
+        casilla30.setNombre("Hidroelectrica");
+        casilla30.setTipoCasilla(null);
+        casillaDAO.insert(casilla30);
+
+        Casilla casilla31=new Casilla();
+        casilla31.setNombre("Mac OS X Lion");
+        casilla31.setNumeroCasilla(31);
+        Calle calle31=new Calle();
+        calle31.setColor("Verde");
+        calle31.setMulta(350);
+        calle31.setPrecio(1050);
+        calleDAO.insert(calle31);
+        casilla31.setTipoCasilla(calle31.getIdCalle());
+        casillaDAO.insert(casilla31);
+
+        Casilla casilla32 = new Casilla();
+        casilla32.setNumeroCasilla(32);
+        casilla32.setNombre("Estacion");
+        casilla32.setTipoCasilla(null);
+        casillaDAO.insert(casilla32);
+
+        Casilla casilla33=new Casilla();
+        casilla33.setNombre("32 bits");
+        casilla33.setNumeroCasilla(33);
+        Calle calle33=new Calle();
+        calle33.setColor("Azul Oscuro");
+        calle33.setMulta(400);
+        calle33.setPrecio(1200);
+        calleDAO.insert(calle33);
+        casilla33.setTipoCasilla(calle33.getIdCalle());
+        casillaDAO.insert(casilla33);
+
+        Casilla casilla34 = new Casilla();
+        casilla34.setNumeroCasilla(34);
+        casilla34.setNombre("PAGA");
+        casilla34.setTipoCasilla(null);
+        casillaDAO.insert(casilla34);
+
+        Casilla casilla35=new Casilla();
+        casilla35.setNombre("64 bits");
+        casilla35.setNumeroCasilla(35);
+        Calle calle35=new Calle();
+        calle35.setColor("Azul Oscuro");
+        calle35.setMulta(400);
+        calle35.setPrecio(1200);
+        calleDAO.insert(calle35);
+        casilla35.setTipoCasilla(calle35.getIdCalle());
+        casillaDAO.insert(casilla35);
+
      }
     
 }
