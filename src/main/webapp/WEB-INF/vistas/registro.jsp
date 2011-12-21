@@ -21,7 +21,7 @@
                         }
                         else if(c[0].value==0){
                             alert('No has introducido una contraseña');
-
+                            return false;
                         }
                         
 

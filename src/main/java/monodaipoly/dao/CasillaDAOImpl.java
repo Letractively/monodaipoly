@@ -6,7 +6,7 @@ import monodaipoly.persistencia.Jugador;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CasillaDAOImpl extends GenericDAOImpl <Casilla,Integer> implements CasillaDAO{
+public class CasillaDAOImpl extends GenericDAOImpl <Casilla,Key> implements CasillaDAO{
         
     
 }
