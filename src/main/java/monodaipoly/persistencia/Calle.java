@@ -11,12 +11,15 @@ import javax.persistence.*;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  *
  * @author instalador
  */
-public class Calle {
+@Entity
+public class Calle implements Serializable{
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

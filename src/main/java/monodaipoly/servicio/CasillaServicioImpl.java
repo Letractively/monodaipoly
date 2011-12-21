@@ -30,16 +30,19 @@ public class CasillaServicioImpl implements CasillaServicio{
     }
     
     
+    @Override
     public void crear(Casilla casilla) {
         casillaDAO.insert(casilla);
     }
 
    
-    public void buscar(int idCasilla) {
+    @Override
+    public void buscar(Key idCasilla) {
         casillaDAO.find(Casilla.class, idCasilla);
     }
 
  
+    @Override
     public void borrar(Casilla casilla) {
         casillaDAO.remove(casilla);
     }
@@ -50,7 +53,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         casillaDAO.removeAll(Casilla.class);
 
         Casilla casilla0 = new Casilla();
-        casilla0.setIdCasilla(0);
+        casilla0.setNumeroCasilla(0);
         casilla0.setNombre("Salida");
         casilla0.setTipoCasilla(null);
         casillaDAO.insert(casilla0);
@@ -61,7 +64,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle1.setMulta(50);
         calle1.setPrecio(150);
         casilla1.setTipoCasilla(calle1.getIdCalle());
-        casilla1.setIdCasilla(1);
+        casilla1.setNumeroCasilla(1);
         casilla1.setNombre("Windows 95");
         calleDAO.insert(calle1);
         casillaDAO.insert(casilla1);
@@ -72,13 +75,13 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle2.setMulta(50);
         calle2.setPrecio(150);
         casilla2.setTipoCasilla(calle2.getIdCalle());
-        casilla2.setIdCasilla(2);
+        casilla2.setNumeroCasilla(2);
         casilla2.setNombre("Windows 98");
         calleDAO.insert(calle2);
         casillaDAO.insert(casilla2);
 
         Casilla casilla3=new Casilla();
-        casilla3.setIdCasilla(3);
+        casilla3.setNumeroCasilla(3);
         casilla3.setNombre("Suerte");
         casilla3.setTipoCasilla(null);
          casillaDAO.insert(casilla3);
@@ -89,13 +92,13 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle4.setMulta(50);
         calle4.setPrecio(150);
         casilla4.setTipoCasilla(calle4.getIdCalle());
-        casilla4.setIdCasilla(4);
+        casilla4.setNumeroCasilla(4);
         casilla4.setNombre("Windows 2000");
         calleDAO.insert(calle4);
         casillaDAO.insert(casilla4);
 
         Casilla casilla5=new Casilla();
-        casilla5.setIdCasilla(5);
+        casilla5.setNumeroCasilla(5);
         casilla5.setNombre("Estacion");
         casilla5.setTipoCasilla(null);
          casillaDAO.insert(casilla5);
@@ -106,7 +109,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle6.setMulta(100);
         calle6.setPrecio(300);
         casilla6.setTipoCasilla(calle6.getIdCalle());
-        casilla6.setIdCasilla(6);
+        casilla6.setNumeroCasilla(6);
         casilla6.setNombre("Windows XP");
         calleDAO.insert(calle6);
         casillaDAO.insert(casilla6);
@@ -117,7 +120,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle7.setMulta(100);
         calle7.setPrecio(300);
         casilla7.setTipoCasilla(calle7.getIdCalle());
-        casilla7.setIdCasilla(7);
+        casilla7.setNumeroCasilla(7);
         casilla7.setNombre("Windows Vista");
         calleDAO.insert(calle7);
         casillaDAO.insert(casilla7);
@@ -128,19 +131,19 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle8.setMulta(100);
         calle8.setPrecio(300);
         casilla8.setTipoCasilla(calle8.getIdCalle());
-        casilla8.setIdCasilla(8);
+        casilla8.setNumeroCasilla(8);
         casilla8.setNombre("Windows Seven");
         calleDAO.insert(calle8);
         casillaDAO.insert(casilla8);
 
         Casilla casilla9=new Casilla();
-        casilla9.setIdCasilla(9);
+        casilla9.setNumeroCasilla(9);
         casilla9.setNombre("Solo visitas");
         casilla9.setTipoCasilla(null);
          casillaDAO.insert(casilla9);
 
           Casilla casilla10 = new Casilla();
-        casilla10.setIdCasilla(10);
+        casilla10.setNumeroCasilla(10);
         casilla10.setNombre("Fluxubuntu");
         Calle calle10=new Calle();
         calle10.setColor("Rosa");
@@ -151,7 +154,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         casillaDAO.insert(casilla10);
 
         Casilla casilla11 = new Casilla();
-        casilla11.setIdCasilla(11);
+        casilla11.setNumeroCasilla(11);
         casilla11.setNombre("Ubuntu");
         Calle calle11=new Calle();
         calle11.setColor("Rosa");
@@ -162,19 +165,19 @@ public class CasillaServicioImpl implements CasillaServicio{
         casillaDAO.insert(casilla11);
 
         Casilla casilla12 = new Casilla();
-        casilla12.setIdCasilla(12);
+        casilla12.setNumeroCasilla(12);
         casilla12.setNombre("Hidroelectrica");
         casilla12.setTipoCasilla(null);
         casillaDAO.insert(casilla12);
 
         Casilla casilla13 = new Casilla();
-        casilla13.setIdCasilla(13);
+        casilla13.setNumeroCasilla(13);
         casilla13.setNombre("Estacion");
         casilla13.setTipoCasilla(null);
         casillaDAO.insert(casilla13);
 
         Casilla casilla14 = new Casilla();
-        casilla14.setIdCasilla(14);
+        casilla14.setNumeroCasilla(14);
         casilla14.setNombre("Suse");
         Calle calle14=new Calle();
         calle14.setColor("Naranja");
@@ -185,7 +188,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         casillaDAO.insert(casilla14);
 
         Casilla casilla15 = new Casilla();
-        casilla15.setIdCasilla(15);
+        casilla15.setNumeroCasilla(15);
         casilla15.setNombre("RedHat");
         Calle calle15=new Calle();
         calle15.setColor("Naranja");
@@ -196,13 +199,13 @@ public class CasillaServicioImpl implements CasillaServicio{
         casillaDAO.insert(casilla15);
 
         Casilla casilla16 = new Casilla();
-        casilla16.setIdCasilla(16);
+        casilla16.setNumeroCasilla(16);
         casilla16.setNombre("Suerte");
         casilla16.setTipoCasilla(null);
         casillaDAO.insert(casilla16);
 
         Casilla casilla17 = new Casilla();
-        casilla17.setIdCasilla(17);
+        casilla17.setNumeroCasilla(17);
         casilla17.setNombre("Debian");
         Calle calle17=new Calle();
         calle17.setColor("Naranja");
@@ -213,10 +216,94 @@ public class CasillaServicioImpl implements CasillaServicio{
         casillaDAO.insert(casilla17);
 
         Casilla casilla18 = new Casilla();
-        casilla18.setIdCasilla(18);
+        casilla18.setNumeroCasilla(18);
         casilla18.setNombre("Free");
         casilla18.setTipoCasilla(null);
         casillaDAO.insert(casilla18);
+
+        Casilla casilla19=new Casilla();
+        casilla19.setNombre("iTunes");
+        casilla19.setNumeroCasilla(19);
+        Calle calle19=new Calle();
+        calle19.setColor("Rojo");
+        calle19.setMulta(250);
+        calle19.setPrecio(750);
+        calleDAO.insert(calle19);
+        casilla19.setTipoCasilla(calle19.getIdCalle());
+        casillaDAO.insert(casilla19);
+
+        Casilla casilla20=new Casilla();
+        casilla20.setNombre("iMac");
+        casilla20.setNumeroCasilla(20);
+        Calle calle20=new Calle();
+        calle20.setColor("Rojo");
+        calle20.setMulta(250);
+        calle20.setPrecio(750);
+        calleDAO.insert(calle20);
+        casilla20.setTipoCasilla(calle20.getIdCalle());
+        casillaDAO.insert(casilla20);
+
+        Casilla casilla21 = new Casilla();
+        casilla21.setNumeroCasilla(21);
+        casilla21.setNombre("Suerte");
+        casilla21.setTipoCasilla(null);
+        casillaDAO.insert(casilla21);
+
+        Casilla casilla22=new Casilla();
+        casilla22.setNombre("Mac Book Pro");
+        casilla22.setNumeroCasilla(22);
+        Calle calle22=new Calle();
+        calle22.setColor("Rojo");
+        calle22.setMulta(250);
+        calle22.setPrecio(750);
+        calleDAO.insert(calle22);
+        casilla22.setTipoCasilla(calle22.getIdCalle());
+        casillaDAO.insert(casilla22);
+
+        Casilla casilla23 = new Casilla();
+        casilla23.setNumeroCasilla(23);
+        casilla23.setNombre("Estacion");
+        casilla23.setTipoCasilla(null);
+        casillaDAO.insert(casilla23);
+
+        Casilla casilla24=new Casilla();
+        casilla24.setNombre("iPod");
+        casilla24.setNumeroCasilla(24);
+        Calle calle24=new Calle();
+        calle24.setColor("Amarillo");
+        calle24.setMulta(300);
+        calle24.setPrecio(900);
+        calleDAO.insert(calle24);
+        casilla24.setTipoCasilla(calle24.getIdCalle());
+        casillaDAO.insert(casilla24);
+
+        Casilla casilla25=new Casilla();
+        casilla25.setNombre("iPad");
+        casilla25.setNumeroCasilla(24);
+        Calle calle25=new Calle();
+        calle25.setColor("Amarillo");
+        calle25.setMulta(300);
+        calle25.setPrecio(900);
+        calleDAO.insert(calle25);
+        casilla25.setTipoCasilla(calle25.getIdCalle());
+        casillaDAO.insert(casilla25);
+
+        Casilla casilla26=new Casilla();
+        casilla26.setNombre("iPhone");
+        casilla26.setNumeroCasilla(24);
+        Calle calle26=new Calle();
+        calle26.setColor("Amarillo");
+        calle26.setMulta(300);
+        calle26.setPrecio(900);
+        calleDAO.insert(calle26);
+        casilla26.setTipoCasilla(calle26.getIdCalle());
+        casillaDAO.insert(casilla26);
+
+        Casilla casilla27 = new Casilla();
+        casilla27.setNumeroCasilla(27);
+        casilla27.setNombre("Carcel");
+        casilla27.setTipoCasilla(null);
+        casillaDAO.insert(casilla27);
      }
     
 }

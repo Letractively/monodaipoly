@@ -14,6 +14,8 @@ import java.util.*;
 import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  *
@@ -25,7 +27,10 @@ public class Casilla implements Serializable {
 
     //La colocacion de la casilla en el tablero
     @Id
-    private int idCasilla;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Key idCasilla;
+    @Basic
+    private int numeroCasilla;
 
     @Basic
     private String nombre;
@@ -35,6 +40,30 @@ public class Casilla implements Serializable {
     @Basic
     private Key tipoCasilla;
 
+    public Key getIdCasilla() {
+        return idCasilla;
+    }
+
+    public void setIdCasilla(Key idCasilla) {
+        this.idCasilla = idCasilla;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getNumeroCasilla() {
+        return numeroCasilla;
+    }
+
+    public void setNumeroCasilla(int numeroCasilla) {
+        this.numeroCasilla = numeroCasilla;
+    }
+
     public Key getTipoCasilla() {
         return tipoCasilla;
     }
@@ -42,50 +71,6 @@ public class Casilla implements Serializable {
     public void setTipoCasilla(Key tipoCasilla) {
         this.tipoCasilla = tipoCasilla;
     }
-
-    
-
-    public int getidCasilla(){
-        return this.idCasilla;
-    }
-    public void setidCasilla(int idCasilla){
-        this.idCasilla=idCasilla;
-    }
-    public String getnombre(){
-        return this.nombre;
-    }
-    public void setnombre(String nombre){
-        this.nombre=nombre;
-    }
-
-
-
-
-
-    public int getIdCasilla() {
-        return idCasilla;
-    }
-
-   
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    
-    
-
-    
-    public void setIdCasilla(int idCasilla) {
-        this.idCasilla = idCasilla;
-    }
-
-    
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     
 
 }

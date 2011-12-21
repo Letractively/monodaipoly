@@ -20,8 +20,9 @@ public class Jugador implements Serializable {
 	private int posicion;
         
         
-        @OneToMany(mappedBy="dueno")
-        private List<Casilla> casillas;
+        @Basic
+        private List<Key> calles;
+
 
         @Basic
         private Key partida;
@@ -32,7 +33,7 @@ public class Jugador implements Serializable {
 	public Jugador(Usuario usuario){
 		this.nick=usuario.getNick();
 		this.posicion=0;
-                this.casillas=null;
+                this.calles=null;
 	}
 	
 	
@@ -58,5 +59,16 @@ public class Jugador implements Serializable {
             System.out.println("Aqui Jugador getIdString() clave jugador  " + claveJugador);
             return KeyFactory.keyToString(claveJugador);
         }
+
+        public List<Key> getCalles() {
+            return calles;
+        }
+
+        public void setCalles(List<Key> calles) {
+            this.calles = calles;
+        }
+
+
+
 	
 }
