@@ -1,6 +1,8 @@
 package monodaipoly.dao;
 
 import com.google.appengine.api.datastore.Key;
+import java.util.List;
+import javax.persistence.Query;
 import monodaipoly.persistencia.Jugador;
 import monodaipoly.persistencia.Usuario;
 import org.springframework.stereotype.Repository;
@@ -11,4 +13,12 @@ public class JugadorDAOImpl extends GenericDAOImpl <Jugador,Key> implements Juga
         public Jugador buscarJugador(Key claveJugador){
                 return this.find(Jugador.class, claveJugador);
         }
+
+    @Override
+    public List<Jugador> buscarJugadoresQuierenJugar() {
+        Query query=em.createQuery("SELECT j FROM Jugador j WHERE j.estoyJugando=false");
+        return (List<Jugador>)query.getResultList();
+    }
+
+
 }

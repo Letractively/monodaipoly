@@ -48,7 +48,7 @@ public class CasillaServicioImpl implements CasillaServicio{
     }
 
     @Override
-    @PostConstruct
+    //@PostConstruct
     public void preload_casillas() {
         casillaDAO.removeAll(Casilla.class);
 

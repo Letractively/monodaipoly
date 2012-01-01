@@ -1,21 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package monodaipoly.servicio;
 
 import com.google.appengine.api.datastore.Key;
+import java.util.List;
 import monodaipoly.dao.CalleDAO;
 import monodaipoly.persistencia.Calle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author instalador
- */
+
 @Service
 public class CalleServicioImpl implements CalleServicio{
 
@@ -45,6 +38,11 @@ public class CalleServicioImpl implements CalleServicio{
     @Override
     public void actualizar(Calle calle) {
         this.calleDAO.update(calle);
+    }
+
+    @Override
+    public List<Calle> buscarPorColor(String color) {
+        return this.calleDAO.buscarPorColor(color);
     }
 
 }

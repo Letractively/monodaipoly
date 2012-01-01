@@ -13,7 +13,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
 	@PersistenceContext
          EntityManager em;
 
-         @Transactional
+        @Transactional
 	@Override
 	public void insert(T object) {
 		em.persist(object);

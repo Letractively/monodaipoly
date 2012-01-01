@@ -37,7 +37,10 @@
             $(document).ready(
              
             function () {
-                 
+
+                 //
+                 alert($("#partida").attr("value"));
+                 //
                 var divTablero = $("#tablero");
             <c:forEach var="casilla" items="${casillas}">
                             divTablero.append("<div id=casilla${casilla.numeroCasilla}></div>")
@@ -274,6 +277,10 @@
                 <form action="/perfil" method="post">
                     <input id="botonEntrar" type="submit" value="Terminar Partida" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
                 </form>
+
+                
+
+
                 <button onClick="tirarDado2('jugador1')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
             </div>
             <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>

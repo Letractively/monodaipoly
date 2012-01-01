@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package monodaipoly.servicio;
 
 import com.google.appengine.api.datastore.Key;
+import java.util.List;
 import monodaipoly.dao.JugadorDAO;
 import monodaipoly.persistencia.Jugador;
 import monodaipoly.persistencia.Usuario;
@@ -15,10 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 
-/**
- *
- * @author adler
- */
+
 @Service
 public class JugadorServicioImpl implements JugadorServicio{
     private JugadorDAO jugadorDAO;
@@ -28,10 +21,12 @@ public class JugadorServicioImpl implements JugadorServicio{
     public void setJugadorDAO(JugadorDAO jugadorDAO){
         this.jugadorDAO=jugadorDAO;
     }
+   
 
     @Override
     public void crear(Jugador jugador) {
         jugadorDAO.insert(jugador);
+
     }
 
     @Override
@@ -52,5 +47,10 @@ public class JugadorServicioImpl implements JugadorServicio{
     @Override
     public void actualizar(Jugador jugador) {
         jugadorDAO.update(jugador);
+    }
+
+    @Override
+    public List<Jugador> jugadoresQuierenJugar() {
+        return this.jugadorDAO.buscarJugadoresQuierenJugar();
     }
 }
