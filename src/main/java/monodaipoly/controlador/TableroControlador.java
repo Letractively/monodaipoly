@@ -9,9 +9,11 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 import monodaipoly.persistencia.Casilla;
 import monodaipoly.persistencia.Jugador;
+import monodaipoly.persistencia.Partida;
 import monodaipoly.persistencia.Usuario;
 import monodaipoly.servicio.CasillaServicio;
 import monodaipoly.servicio.JugadorServicio;
+import monodaipoly.servicio.PartidaServicio;
 import monodaipoly.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
@@ -29,6 +31,7 @@ public class TableroControlador {
     private JugadorServicio jugadorServicio;
     private CasillaServicio casillaServicio;
     private UsuarioServicio usuarioServicio;
+    private PartidaServicio partidaServicio;
 
     @Autowired
     @Required
@@ -48,6 +51,12 @@ public class TableroControlador {
         this.casillaServicio=casillaServicio;
     }
 
+    @Autowired
+    @Required
+    public void setPartidaServicio(PartidaServicio partidaServicio){
+        this.partidaServicio=partidaServicio;
+    }
+
      @RequestMapping(value = "/tablero2", method = RequestMethod.GET)
     public String doShowTablero(Model model,HttpSession sesion) {
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
@@ -61,9 +70,16 @@ public class TableroControlador {
          if(usuario.getJugador()==null){
             Jugador jugador=new Jugador(usuario);
             jugadorServicio.crear(jugador);
+            Partida partida =new Partida();
+            partida.setJugador1(jugador.getClaveJugador());
+            partidaServicio.crear(partida);
+
+            System.out.println("Aqui partida en tablero controlador");
+            System.out.println(partida.getIdpartida());
             usuario.setJugador(jugador.getClaveJugador());
             this.usuarioServicio.actualizar(usuario);
          }
+
 
         Jugador jugador1=jugadorServicio.buscar(usuario.getJugador());
         model.addAttribute("jugador1",jugador1.getPosicion());

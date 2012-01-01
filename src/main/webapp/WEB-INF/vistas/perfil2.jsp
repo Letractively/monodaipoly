@@ -57,7 +57,6 @@
           
                 $(document).ready(
                     function (){
-                        alert($("#estadoMensaje").attr("value"));
                         if($("#estadoMensaje").attr("value")!=""){
                             var estado = $("#estadoMensaje").attr("value");
                             if(estado=="ERROR"){

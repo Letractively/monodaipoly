@@ -1,8 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package monodaipoly.persistencia;
 
 import java.io.Serializable;
@@ -14,10 +9,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-/**
- *
- * @author instalador
- */
+
 @Entity
 public class Calle implements Serializable{
 
