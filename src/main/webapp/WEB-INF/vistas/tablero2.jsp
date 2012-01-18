@@ -273,6 +273,7 @@
 
             </div>
             <div  id="centro">
+                    <div id="partida" value="${partida}"></div>
 
                 <form action="/perfil" method="post">
                     <input id="botonEntrar" type="submit" value="Terminar Partida" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
