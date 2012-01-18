@@ -2,12 +2,15 @@
 package monodaipoly.servicio;
 
 import com.google.appengine.api.datastore.Key;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import monodaipoly.dao.CalleDAO;
 import monodaipoly.dao.CasillaDAO;
+import monodaipoly.dao.UsuarioDAO;
 import monodaipoly.persistencia.Calle;
 import monodaipoly.persistencia.Casilla;
 import monodaipoly.persistencia.Jugador;
+import monodaipoly.persistencia.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
@@ -48,7 +51,7 @@ public class CasillaServicioImpl implements CasillaServicio{
     }
 
     @Override
-    //@PostConstruct
+    @PostConstruct
     public void preload_casillas() {
         casillaDAO.removeAll(Casilla.class);
 
@@ -63,21 +66,21 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle1.setColor("gris");
         calle1.setMulta(50);
         calle1.setPrecio(150);
-        casilla1.setTipoCasilla(calle1.getIdCalle());
         casilla1.setNumeroCasilla(1);
         casilla1.setNombre("Windows 95");
         calleDAO.insert(calle1);
+         casilla1.setTipoCasilla(calle1.getIdCalle());
         casillaDAO.insert(casilla1);
 
         Casilla casilla2 = new Casilla();
         Calle calle2=new Calle();
         calle2.setColor("gris");
         calle2.setMulta(50);
-        calle2.setPrecio(150);
-        casilla2.setTipoCasilla(calle2.getIdCalle());
+        calle2.setPrecio(150);      
         casilla2.setNumeroCasilla(2);
         casilla2.setNombre("Windows 98");
         calleDAO.insert(calle2);
+        casilla2.setTipoCasilla(calle2.getIdCalle());
         casillaDAO.insert(casilla2);
 
         Casilla casilla3=new Casilla();
@@ -91,10 +94,11 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle4.setColor("gris");
         calle4.setMulta(50);
         calle4.setPrecio(150);
-        casilla4.setTipoCasilla(calle4.getIdCalle());
+        
         casilla4.setNumeroCasilla(4);
         casilla4.setNombre("Windows 2000");
         calleDAO.insert(calle4);
+        casilla4.setTipoCasilla(calle4.getIdCalle());
         casillaDAO.insert(casilla4);
 
         Casilla casilla5=new Casilla();
@@ -108,10 +112,10 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle6.setColor("azul");
         calle6.setMulta(100);
         calle6.setPrecio(300);
-        casilla6.setTipoCasilla(calle6.getIdCalle());
         casilla6.setNumeroCasilla(6);
         casilla6.setNombre("Windows XP");
         calleDAO.insert(calle6);
+         casilla6.setTipoCasilla(calle6.getIdCalle());
         casillaDAO.insert(casilla6);
 
         Casilla casilla7 = new Casilla();
@@ -119,10 +123,11 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle7.setColor("azul");
         calle7.setMulta(100);
         calle7.setPrecio(300);
-        casilla7.setTipoCasilla(calle7.getIdCalle());
+        
         casilla7.setNumeroCasilla(7);
         casilla7.setNombre("Windows Vista");
         calleDAO.insert(calle7);
+        casilla7.setTipoCasilla(calle7.getIdCalle());
         casillaDAO.insert(casilla7);
 
         Casilla casilla8 = new Casilla();
@@ -130,10 +135,11 @@ public class CasillaServicioImpl implements CasillaServicio{
         calle8.setColor("azul");
         calle8.setMulta(100);
         calle8.setPrecio(300);
-        casilla8.setTipoCasilla(calle8.getIdCalle());
+       
         casilla8.setNumeroCasilla(8);
         casilla8.setNombre("Windows Seven");
         calleDAO.insert(calle8);
+         casilla8.setTipoCasilla(calle8.getIdCalle());
         casillaDAO.insert(casilla8);
 
         Casilla casilla9=new Casilla();
@@ -379,5 +385,13 @@ public class CasillaServicioImpl implements CasillaServicio{
         casillaDAO.insert(casilla35);
 
      }
+
+    @Override
+    public List<Casilla> getAll() {
+        System.out.println("Aqui get All de servicio");
+        
+        return casillaDAO.getAll(Casilla.class);
+        
+    }
     
 }

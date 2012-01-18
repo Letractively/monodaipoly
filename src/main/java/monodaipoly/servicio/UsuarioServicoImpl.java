@@ -91,11 +91,11 @@ public class UsuarioServicoImpl implements UsuarioServicio{
     }
 
     @Override
-    //@PostConstruct
+    @PostConstruct
     public void preload_usuarios() {
 
         rolDAO.removeAll(Rol.class);
-        rolDAO.removeAll(Rol.class);
+        usuarioDAO.removeAll(Usuario.class);
         Rol r1 = new Rol();
         r1.setNombre("ROLE_ADMIN");
         Rol r2 = new Rol();

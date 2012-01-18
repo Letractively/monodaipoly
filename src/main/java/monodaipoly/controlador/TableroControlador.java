@@ -5,6 +5,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import monodaipoly.persistencia.Casilla;
@@ -60,19 +61,17 @@ public class TableroControlador {
      @RequestMapping(value = "/tablero2", method = RequestMethod.GET)
     public String doShowTablero(Model model,HttpSession sesion) {
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
-        int c;
-         ArrayList casillas=new ArrayList();
-         for(c=0;c<=37;c++){
-             Casilla casilla = new Casilla();
-             casilla.setNumeroCasilla(c);
-             casillas.add(casilla);
-         }
+      
          if(usuario.getJugador()==null){
             Jugador jugador=new Jugador(usuario);
             jugadorServicio.crear(jugador);
             Partida partida =new Partida();
             partida.setJugador1(jugador.getClaveJugador());
             partidaServicio.crear(partida);
+            //model.addAttribute("partida",partida);
+            List <Casilla> casillas=casillaServicio.getAll();
+            model.addAttribute("casillas",casillas);
+           
 
             System.out.println("Aqui partida en tablero controlador");
             System.out.println(partida.getIdpartida());
@@ -83,7 +82,7 @@ public class TableroControlador {
 
         Jugador jugador1=jugadorServicio.buscar(usuario.getJugador());
         model.addAttribute("jugador1",jugador1.getPosicion());
-        model.addAttribute("casillas",casillas);
+
 
         return "/tablero2";
     }
