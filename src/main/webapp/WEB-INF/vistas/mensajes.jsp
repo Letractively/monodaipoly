@@ -18,7 +18,7 @@
    
     
 <div class="mensajes ">
-        <div id="enviarMensaje" style="visibility:hidden">
+        <div id="enviarMensaje" >
             <form action="/enviarMensajes" method="get" id="formMensajes">
                 Destinatario:
                 <div>
@@ -49,8 +49,8 @@
 </div>
 
 
-
 <script>
+    
      function fijarBandejaEntrada(mensaje,i){
          if(mensaje!="No tienes mensajes"){
          var contenido =mensaje.contenido;

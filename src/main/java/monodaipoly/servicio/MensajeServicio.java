@@ -9,5 +9,5 @@ public interface MensajeServicio {
      public void borrar(Mensaje mensaje);
      public List conseguirMensajes();
      public List conseguirMensajesRecibidos(String nombre);
-    
+     public List conseguirMensajesEnviados(String nombre);
 }

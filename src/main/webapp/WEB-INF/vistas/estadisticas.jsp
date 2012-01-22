@@ -7,15 +7,16 @@
 
 
 
-
+<div align="center" style="color:#AF1515">TOP 10</div>
+<br/>
 <div id="tablaContenido">
-    <strong>PUNTACION</strong>
+    <strong style="color:#AF1515">PUNTACION</strong>
      <br/>
      <br/>
 </div>
 <div id="nickUsuariosMejores">
-    <strong>TOP 10 USUARIOS</strong>
- 
+    <strong style="color:#AF1515"> USUARIOS</strong>
+    <br/>
     <br/>
         
 </div>

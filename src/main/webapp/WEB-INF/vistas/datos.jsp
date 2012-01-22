@@ -5,7 +5,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+
+    <legend>Datos Personales</legend>
+    <br/>
 <div>
+    
     <form id="modi" action="/modificarDatosAsincronamente" method="post">
         <div style="color: white">Nombre:  <span id="nom">${usuario.nombre}</span></div>
         <div class="modificar" style="visibility:hidden">
@@ -54,6 +58,9 @@
         
     
 </div>
+      
+        <head>  
+     
         <script>
             function fijarValor(campo){
                 if(campo.nombre!=""){
@@ -72,7 +79,7 @@
             function(){
                 $("#mod").click(
                 function(){
-                    
+                    $("#mod").css("visibility","hidden");
                     $(".modificar").css("visibility","visible");
                 }
             )
@@ -106,7 +113,7 @@
                     },
                     "json")
 
-
+                    $("#mod").css("visibility","visible");
                    $(".modificar").css("visibility","hidden");
                    $("#campoNombre").attr("value", "")
                     $("#campoApellido").attr("value", "")
@@ -142,3 +149,4 @@
             });
         </script>
                             
+</head>

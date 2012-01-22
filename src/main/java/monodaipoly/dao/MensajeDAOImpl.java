@@ -21,4 +21,10 @@ public class MensajeDAOImpl extends GenericDAOImpl<Mensaje,Key> implements Mensa
        return (List<Mensaje>) query.getResultList();
 
     }
+    @Override
+    public List<Mensaje> conseguirMensajesEnviados(String nombre){
+       Query query=em.createQuery("SELECT m FROM Mensaje m WHERE m.autor = :nombre");
+       query.setParameter("nombre",nombre);
+       return (List<Mensaje>) query.getResultList();
+    }
 }

@@ -40,6 +40,8 @@ public class Usuario implements Serializable {
     //Tenemos que hacer una relacion sin dueño
     @Basic
     List<Key>bandejaEntrada =new ArrayList<Key>();
+    @Basic
+    List<Key>bandejaSalida =new ArrayList<Key>();
 
 
     public Usuario(){
@@ -178,6 +180,14 @@ public class Usuario implements Serializable {
             return true;
         }
         return false;
+    }
+
+     public List<Key> getBandejaSalida() {
+        return bandejaSalida;
+    }
+
+    public void setBandejaSalida(List<Key> bandejaSalida) {
+        this.bandejaSalida = bandejaSalida;
     }
 
 }
