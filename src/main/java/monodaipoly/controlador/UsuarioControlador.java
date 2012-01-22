@@ -121,7 +121,7 @@ public class UsuarioControlador {
 		return "redirect:monodaipoly?error";
 
 	}
-        return "/perfil2";
+        return "/perfilPrueba";
 
 
     }

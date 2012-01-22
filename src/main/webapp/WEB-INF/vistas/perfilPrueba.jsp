@@ -5,17 +5,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
-
-
-<html>
-    <head>
-
-        <link type="text/css" rel="stylesheet" href="/Estilos/perfil2.css" />
-
-        <!-- Librerías de JQuery -->
-        <script type="text/javascript" src="jQuery/js/jquery.min.js"></script>
+<head>
+	<title>Perfil de ${usuario.nick}</title>
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="/Estilos/layout1.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="/Estilos/perfil2.css" />
+        <link rel="stylesheet" type="text/css" media="screen" href="/Estilos/dock-example1.css" />
+	<noscript>
+		<style type="text/css">
+			#dock { top: -32px; }
+			a.dock-item { position: relative; float: left; margin-right: 100px; }
+			.dock-item span { display: block; }
+		</style>
+	</noscript>
+	<script type="text/javascript" src="jQuery/js/jquery.min.js"></script>
+	<script type="text/javascript" src="jQuery/js/fisheye-iutil.min.js"></script>
+	<script type="text/javascript" src="jQuery/js/dock-example1.js"></script>
         <script type="text/javascript" src="jQuery/js/jquery-ui.custom.min.js"></script>
+  
+        
         <script type="text/javascript">
         
             function datosPersonales(){
@@ -53,10 +61,23 @@
                 $.getScript("/logout",null);
                 
             }
-            
-          
-                $(document).ready(
+             $(document).ready(
                     function (){
+                       
+                            var c=0;
+                            if(c==0){
+                                $.get("/getDatosURL",null,
+                                      function(html) {
+                                            $("#contenido").html(html);
+                                        }
+
+                                 );
+                                     c++;
+                            }
+                                
+                              
+                           
+                        
                         if($("#estadoMensaje").attr("value")!=""){
                             var estado = $("#estadoMensaje").attr("value");
                             if(estado=="ERROR"){
@@ -69,41 +90,27 @@
                                 
                             }
                         }
-                });
-         
-
-        
-
-
-
-        </script>
-        <title>Perfil de ${usuario.nick}</title>
+                    });
+                    
+      </script>
 </head>
-    <body>
-        <div id="fondo">
-   
-         <h1>Bienvenido,  ${usuario.nick} !</h1>
-         <div id="menu">
-             <div id="datospersonales"><a class="botonMenu" onclick="javascript:datosPersonales()">DATOS PERSONALES</a></div>
-             <div id="estadisticas"><a class="botonMenu" onclick="javascript:estadisticas()">RANKING</a></div>
-             <div id="mensajes"><a class="botonMenu" onclick="javascript:mensajes()">MENSAJES</a></div>
-             <div id="salir"><a class="botonMenu" id="logout" href="/logout">SALIR</a></div>
+<body>
+    <h1>Bienvenido,  ${usuario.nick} !</h1>
+         <div id="dock">
+			<div class="dock-container">
+				<a class="dock-item" onclick="javascript:datosPersonales()"><span>Datos&nbsp;Personales</span><img src="/Estilos/tux/tux6.png" alt="home" /></a> 
+				<a class="dock-item" onclick="javascript:mensajes()"><span>Mensajes&nbsp;</span><img src="/Estilos/dock/email.png" alt="contact" /></a> 
+				<a class="dock-item"  onclick="javascript:estadisticas()"><span>Ranking&nbsp;</span><img src="/Estilos/podio.png" alt="portfolio" /></a>
+				<a class="dock-item" href="/logout"><span>Desconectarse&nbsp;</span><img src="/Estilos/logout2.png" alt="music" /></a> 
+				
+				
+			</div><!-- end div .dock-container -->
+        </div><!-- end div .dock #dock -->
+		<!-- END DOCK 1 ============================================================ -->
+                
+                
+        <div id="contenido">
 
-             
-         </div> 
-         
-         <div id="contenido">
-             <div id="estadoMensaje" value="${estado}" style="visibility:hidden">
-             </div>
-         </div>
-         
-         <div id="pie">
-             <input type="button" id="aJugar" value="¡ A JUGAR !" onclick="window.location.href='tablero2'"></input>
-         </div>
-         
-         
-        </div>
-
-
-    </body>
-</html>
+        </div>       
+</body>
+            

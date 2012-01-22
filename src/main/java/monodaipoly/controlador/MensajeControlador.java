@@ -70,11 +70,14 @@ public class MensajeControlador {
         mensaje.setDestinatario(usuarioServicio.buscar(destinatario).getNick());
         mensajeServicio.crear(mensaje);
         usuarioServicio.buscar(destinatario).getBandejaEntrada().add(mensaje.getIdMensaje());
+        usuarioServicio.buscar(usuario.getNick()).getBandejaSalida().add(mensaje.getIdMensaje());
             return "redirect:estadoMensaje?estado=CORRECTO";
         }
+
         else{
             return "redirect:estadoMensaje?estado=ERROR";
         }
+
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/recibidos")
@@ -95,6 +98,25 @@ public class MensajeControlador {
         }
         
     }
+    @RequestMapping(method=RequestMethod.GET, value="/enviados")
+    public @ResponseBody String verEnviados(HttpSession sesion,Model model){
+        Usuario usuario=(Usuario) sesion.getAttribute("usuario");
+        List<Mensaje> enviados=new ArrayList<Mensaje>();
+        enviados=mensajeServicio.conseguirMensajesEnviados(usuario.getNick());
+        System.out.println("MensajeControlador");
+        if(!enviados.isEmpty()){
+            System.out.println("tiene mensajes Controlador");
+            System.out.println("Mensajes:  "+ enviados.get(0).getContenido());
+            return mensajesJson(enviados).toString();
+        }
+        else{
+            String noMensajes="No tienes mensajes";
+            System.out.println("No tiene mensajes Controlador");
+            return noMensajes;
+        }
+        
+    }
+
 
     private JSONObject datosMensaje(Mensaje mensaje){
         JSONObject json=new JSONObject();
@@ -118,7 +140,7 @@ public class MensajeControlador {
         Usuario usuario =(Usuario)sesion.getAttribute("usuario");
         model.addAttribute("estado",estado );
         model.addAttribute("usuario", usuario);
-        return "/perfil2";
+        return "/perfilPrueba";
     }
 
 
