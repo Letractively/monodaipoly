@@ -65,26 +65,27 @@ public class TableroControlador {
          if(usuario.getJugador()==null){
             Jugador jugador=new Jugador(usuario);
             jugadorServicio.crear(jugador);
-            Partida partida =new Partida();
-            partida.setJugador1(jugador.getClaveJugador());
-            partidaServicio.crear(partida);
-            //model.addAttribute("partida",partida);
+            usuario.setJugador(jugador.getClaveJugador());
+            this.usuarioServicio.actualizar(usuario);
+            Partida partida= partidaServicio.empezarPartida();
+            if(partida!=null){
+            model.addAttribute("partida",partida);
             List <Casilla> casillas=casillaServicio.getAll();
             model.addAttribute("casillas",casillas);
            
 
             System.out.println("Aqui partida en tablero controlador");
             System.out.println(partida.getIdpartida());
-            usuario.setJugador(jugador.getClaveJugador());
-            this.usuarioServicio.actualizar(usuario);
+            
          }
-
-
+    
         Jugador jugador1=jugadorServicio.buscar(usuario.getJugador());
         model.addAttribute("jugador1",jugador1.getPosicion());
 
 
-        return "/tablero2";
+            return "/tablero2";
+         }
+        return "/perfil2";
     }
         @RequestMapping(value = "/tablero", method = RequestMethod.GET)
     public String doShowTablero1(Model model) {
