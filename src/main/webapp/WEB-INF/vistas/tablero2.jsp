@@ -39,7 +39,7 @@
             function () {
 
                  //
-                 alert($("#partida").attr("value"));
+                 //alert($("#partida").attr("value"));
                  //
                 var divTablero = $("#tablero");
             <c:forEach var="casilla" items="${casillas}">
@@ -218,39 +218,7 @@
                             }, "json")
     
                         }
-                        function tirarDado(jugador) {    //antigua funcion, sin json
-                            var dado=Math.ceil(Math.random()*6);
-                            alert(dado);
-                            if(jugador=='jugador1'){
-                                posAnt=posicionJugador[1];
-                                posicionJugador[1]=posicionJugador[1]+dado;
-                                if(posicionJugador[1]>35){
-                                    //alert("posAnt"+posAnt);
-                                    //alert("pos1"+posicion1);
-                                    //alert(posicion1-posAnt);
-                                    var dif=0;
-                                    var dif=36-posAnt;
-                                    //alert("dif"+dif);
-                                    posicionJugador[1]=0+dado-dif;
-                                    //alert("pos"+posicion1);
-                                }
-                                posicionReal = $("#casilla"+posicionJugador[1]).offset();
-                            }
-                            if(jugador=='jugador2'){
-                                posicion2=posicion2+dado;
-                                posicionReal = $("#casilla"+posicion2).offset();
-                            }
-   
-    
-                            var izq=posicionReal.left;
-                            var arriba=posicionReal.top;
-                            //alert('top:'+arriba);
-                            //alert('left:'+izq);
-                            $("#"+jugador).css({
-                                "left":izq,
-                                "top":arriba
-                            });
-                        }
+                        
         </script>
 
         <title>Partida-MonoDaiPoly</title>

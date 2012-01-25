@@ -52,7 +52,7 @@ public class PartidaServicioImpl implements PartidaServicio{
      * 
      */
     @Override
-    public void empezarPartida() {
+    public Partida empezarPartida() {
         Partida partida=new Partida();
         this.crear(partida);
         List<Jugador> jugadores=this.jugadorDAO.buscarJugadoresQuierenJugar();
@@ -89,10 +89,13 @@ public class PartidaServicioImpl implements PartidaServicio{
                     partida.setJugador4(jugador.getClaveJugador());
                 }
                 }
+                
             }
         }else {
             System.out.println("No hay jugadores suficientes para jugar");
+            return null;
         }
+        return partida;
 
     }
 }
