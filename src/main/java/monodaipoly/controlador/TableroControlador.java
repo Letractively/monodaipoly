@@ -138,8 +138,10 @@ public class TableroControlador {
         int posicion;
         if(usuario.getJugador()!=null){//cambiar a esta jugando
             if(jugadorServicio.comprobarJugadorConPartida(usuario.getJugador())!=null){
-                //llamar al metodo empezar partida...
                 System.out.println("tiene partida este jugador");
+                //if esta jugando...
+                //return ... el metodo que falta que carga el modelo
+                //else return perfil y mostrar cola
             }
         }else{
             Jugador jugador=new Jugador();
@@ -161,7 +163,25 @@ public class TableroControlador {
                     partida.setJugador3(jugador.getClaveJugador());
                 }else if(posicion==4){
                     partida.setJugador4(jugador.getClaveJugador());
-
+                    //aqui voy a poner a los 4 jugadores de esta partida el atributo estoy jugando
+                    //a true xq ya hay 4 jugadores y puede empezar el juego
+                    Key keyPlayer=partida.getJugador1();
+                    Jugador player=jugadorServicio.buscar(keyPlayer);
+                    player.setEstoyJugando(true);
+                    jugadorServicio.actualizar(player);
+                    keyPlayer=partida.getJugador2();
+                    player=jugadorServicio.buscar(keyPlayer);
+                    player.setEstoyJugando(true);
+                    jugadorServicio.actualizar(player);
+                    keyPlayer=partida.getJugador3();
+                    player=jugadorServicio.buscar(keyPlayer);
+                    player.setEstoyJugando(true);
+                    jugadorServicio.actualizar(player);
+                    keyPlayer=partida.getJugador4();
+                    player=jugadorServicio.buscar(keyPlayer);
+                    player.setEstoyJugando(true);
+                    jugadorServicio.actualizar(player);
+                    //return ... el metodo que falta que carga el modelo
                 }
                 partidaServicio.actualizar(partida);
             }else{
@@ -170,13 +190,14 @@ public class TableroControlador {
                 jugador.setPartida(partidaNueva.getIdpartida());
                 jugadorServicio.actualizar(jugador);
                 partidaServicio.actualizar(partidaNueva);
-
+                //return perfil y mostrar cola
 
             }
 
 
 
         }
+        //este ai que kitarlo..
         return "/tablero2";
 
     }
