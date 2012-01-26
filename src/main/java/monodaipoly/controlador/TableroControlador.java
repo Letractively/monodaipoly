@@ -58,11 +58,11 @@ public class TableroControlador {
         this.partidaServicio=partidaServicio;
     }
 
-     @RequestMapping(value = "/tablero2", method = RequestMethod.GET)
+    /* @RequestMapping(value = "/tablero2", method = RequestMethod.GET)
     public String doShowTablero(Model model,HttpSession sesion) {
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
       
-         if(usuario.getJugador()==null){
+       if(usuario.getJugador()==null){
             Jugador jugador=new Jugador(usuario);
             jugadorServicio.crear(jugador);
             usuario.setJugador(jugador.getClaveJugador());
@@ -78,20 +78,18 @@ public class TableroControlador {
             System.out.println(partida.getIdpartida());
             
          }
-    
+       
         Jugador jugador1=jugadorServicio.buscar(usuario.getJugador());
         model.addAttribute("jugador1",jugador1.getPosicion());
 
 
             return "/tablero2";
-         }
-        return "/perfil2";
-    }
-        @RequestMapping(value = "/tablero", method = RequestMethod.GET)
-    public String doShowTablero1(Model model) {
+        }
+        return "/perfilPrueba";
+        
 
-        return "/tablero";
-    }
+    }*/
+       
         
         @RequestMapping(value = "/perfil", method = RequestMethod.POST)
     public String volverPerfil(Model model,HttpSession sesion) {
@@ -101,7 +99,7 @@ public class TableroControlador {
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
             model.addAttribute("usuario", usuarioServicio.getCurrentUser());
-        return "/perfil2";
+        return "/perfilPrueba";
     }
 
 
@@ -134,4 +132,49 @@ public class TableroControlador {
         return json;
     }
 
+    @RequestMapping(value = "/prepararPartida", method = RequestMethod.GET)
+    public String prepararPartida(Model model,HttpSession sesion) {
+        Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+        int posicion;
+        if(usuario.getJugador()!=null){//cambiar a esta jugando
+            if(jugadorServicio.comprobarJugadorConPartida(usuario.getJugador())!=null){
+                //llamar al metodo empezar partida...
+            }
+        }else{
+            Jugador jugador=new Jugador();
+            jugadorServicio.crear(jugador);
+            usuario.setJugador(jugador.getClaveJugador());
+            usuarioServicio.actualizar(usuario);
+            Partida partida=partidaServicio.comprobarPartidaLibre();
+            if(partida!=null){
+                posicion=partidaServicio.comprobarHueco(partida.getIdpartida());
+                jugador.setPartida(partida.getIdpartida());
+                jugadorServicio.actualizar(jugador);
+                if(posicion==1){
+                    partida.setJugador1(jugador.getClaveJugador());
+                }else if(posicion ==2){
+                    partida.setJugador2(jugador.getClaveJugador());
+                }else if(posicion==3){
+                    partida.setJugador3(jugador.getClaveJugador());
+                }else if(posicion==4){
+                    partida.setJugador4(jugador.getClaveJugador());
+
+                }
+                partidaServicio.actualizar(partida);
+            }else{
+                Partida partidaNueva=partidaServicio.empezarPartida2();
+                partidaNueva.setJugador1(jugador.getClaveJugador());
+                jugador.setPartida(partidaNueva.getIdpartida());
+                jugadorServicio.actualizar(jugador);
+                partidaServicio.actualizar(partidaNueva);
+
+
+            }
+
+
+
+        }
+        return "/tablero2";
+
+    }
 }

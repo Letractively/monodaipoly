@@ -53,4 +53,8 @@ public class JugadorServicioImpl implements JugadorServicio{
     public List<Jugador> jugadoresQuierenJugar() {
         return this.jugadorDAO.buscarJugadoresQuierenJugar();
     }
+    @Override
+    public Key comprobarJugadorConPartida(Key jugador){
+        return this.buscar(jugador).getPartida();
+    }
 }

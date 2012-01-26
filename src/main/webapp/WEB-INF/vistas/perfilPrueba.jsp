@@ -113,7 +113,7 @@
 
         </div>
                  <div id="pie">
-             <input type="button" id="aJugar" value="¡ A JUGAR !" onclick="window.location.href='tablero2'"></input>
+             <input type="button" id="aJugar" value="¡ A JUGAR !" onclick="window.location.href='prepararPartida'"></input>
          </div>
 </body>
             
