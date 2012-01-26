@@ -13,4 +13,5 @@ public interface JugadorServicio {
     public void borrarPorClave(Key claveJugador);
     public void actualizar(Jugador jugador);
     public List<Jugador> jugadoresQuierenJugar();
+    public Key comprobarJugadorConPartida(Key jugador);
 }

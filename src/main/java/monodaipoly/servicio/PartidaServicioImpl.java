@@ -3,8 +3,10 @@ package monodaipoly.servicio;
 import com.google.appengine.api.datastore.Key;
 import java.util.ArrayList;
 import java.util.List;
+import monodaipoly.dao.CasillaDAO;
 import monodaipoly.dao.JugadorDAO;
 import monodaipoly.dao.PartidaDAO;
+import monodaipoly.persistencia.Casilla;
 import monodaipoly.persistencia.Jugador;
 import monodaipoly.persistencia.Partida;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 public class PartidaServicioImpl implements PartidaServicio{
     private JugadorDAO jugadorDAO;
     private PartidaDAO partidaDAO;
+    private CasillaDAO casillaDAO;
 
     @Autowired
     @Required
@@ -28,9 +31,19 @@ public class PartidaServicioImpl implements PartidaServicio{
         this.partidaDAO=partidaDAO;
     }
 
+    @Autowired
+    @Required
+    public void setCasillaDAO(CasillaDAO casillaDAO){
+        this.casillaDAO=casillaDAO;
+    }
+
     @Override
     public void crear(final Partida partida) {
         this.partidaDAO.insert(partida);
+    }
+    @Override
+    public void actualizar(final Partida partida){
+        this.partidaDAO.update(partida);
     }
 
     @Override
@@ -68,26 +81,26 @@ public class PartidaServicioImpl implements PartidaServicio{
                 jugadoresVanAJugar.add(jugador);
                 jugador.setEstoyJugando(true);
                 jugador.setPartida(partida.getIdpartida());
-                if(jugadoresVanAJugar.size()==0){
-                    partida.setJugador1(jugador.getClaveJugador());
-                    //
-                    System.out.println("jugador1 asociado a partida");
-                }
-                if(jugadoresVanAJugar.size()==1){
-                    //
-                    System.out.println("jugador2 asociado a partida");
-                    partida.setJugador2(jugador.getClaveJugador());
-                }
-                if(jugadoresVanAJugar.size()==2){
-                    //
-                    System.out.println("jugador3 asociado a partida");
-                    partida.setJugador3(jugador.getClaveJugador());
-                }
-                if(jugadoresVanAJugar.size()==3){
-                    //
-                    System.out.println("jugador4 asociado a partida");
-                    partida.setJugador4(jugador.getClaveJugador());
-                }
+                    if(jugadoresVanAJugar.size()==0){
+                        partida.setJugador1(jugador.getClaveJugador());
+                         //
+                         System.out.println("jugador1 asociado a partida");
+                     }
+                    if(jugadoresVanAJugar.size()==1){
+                        //
+                         System.out.println("jugador2 asociado a partida");
+                         partida.setJugador2(jugador.getClaveJugador());
+                    }
+                    if(jugadoresVanAJugar.size()==2){
+                        //
+                        System.out.println("jugador3 asociado a partida");
+                         partida.setJugador3(jugador.getClaveJugador());
+                    }
+                    if(jugadoresVanAJugar.size()==3){
+                        //
+                        System.out.println("jugador4 asociado a partida");
+                        partida.setJugador4(jugador.getClaveJugador());
+                    }
                 }
                 
             }
@@ -97,5 +110,43 @@ public class PartidaServicioImpl implements PartidaServicio{
         }
         return partida;
 
+    }
+    @Override
+    public Partida empezarPartida2(){
+        List<Key> casillas1=new ArrayList<Key>();
+        Partida partida=new Partida();
+        List<Casilla>casillas=casillaDAO.getAll(Casilla.class);
+        for(Casilla casilla:casillas){
+            casillas1.add(casilla.getIdCasilla());
+        }
+        partida.setCasillas(casillas1);
+        this.crear(partida);
+        return partida;
+    }
+    @Override
+    public Partida comprobarPartidaLibre(){
+        List<Partida>partidas=partidaDAO.getAll(Partida.class);
+        for(Partida partida:partidas){
+            if(this.comprobarHueco(partida.getIdpartida())!=0)
+            {
+                return partida;
+            }
+        }
+        return null;
+
+    }
+    @Override
+    public int comprobarHueco(Key clavePartida){
+        if(this.buscar(clavePartida).getJugador1()==null){
+            return 1;
+        }else if(this.buscar(clavePartida).getJugador2()==null){
+            return 2;
+        }else if(this.buscar(clavePartida).getJugador3()==null){
+            return 3;
+        }else if(this.buscar(clavePartida).getJugador4()==null){
+            return 4;
+        }else{
+            return 0;
+        }
     }
 }

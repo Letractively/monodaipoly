@@ -38,13 +38,15 @@
              
             function () {
 
-                 //
-                 //alert($("#partida").attr("value"));
-                 //
-                var divTablero = $("#tablero");
-            <c:forEach var="casilla" items="${casillas}">
-                            divTablero.append("<div id=casilla${casilla.numeroCasilla}></div>")
+             var nombresCasillas=new Array();
+             var divTablero = $("#tablero");
+            <c:forEach var="casilla" items="${casillas}"  varStatus="status">
+                            divTablero.append("<div id=casilla${casilla.numeroCasilla}></div>");
+                            nombresCasillas[${casilla.numeroCasilla}]={nombreCalle:"${casilla.nombre}"};
             </c:forEach>
+            
+
+                
                             $("#casilla9").html("<img src='Estilos/carcel.jpg' width='100%' height='100%'/>");
                             $("#casilla0").html("<img src='Estilos/CasillaSalida.jpg' width='100%' height='100%'/>");
                             $("#casilla18").html("<img src='Estilos/free.jpg' width='100%' height='100%'/>");
@@ -68,16 +70,16 @@
                                 parametroizq=(parametroizq-resta);
                                 parametrodech=(parametrodech+resta);
                                 if(c==1||c==2||c==4){
-                                    $(identificacion).append("<div id='abajopeke' class='colorgris'> Calle Gris</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='abajopeke' class='colorgris'></div>");
                                 }
                                 if(c==3){
-                                    $(identificacion).append("<div class='suerte'> Suerte</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='suerte'> Suerte</div>");
                                 }
                                 if(c==5){
-                                    $(identificacion).append("<div class='estacion'>Estacion</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'>Estacion</div>");
                                 }
                                 if(c==6||c==7||c==8){
-                                    $(identificacion).append("<div id='abajopeke' class='colorazul'>Calle Azul</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='abajopeke' class='colorazul'>Calle Azul</div>");
                                 }
 
                             }
@@ -92,21 +94,21 @@
                                 $(identificacion).addClass("casillasizq").css("top",top+"%");
                                 top=top+resta;
                                 if(c==10||c==11){
-                                    $(identificacion).append("<div id='izquierdapeke' class='colorrosa'> Calle rosa</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='izquierdapeke' class='colorrosa'> Calle rosa</div>");
                                 }
                                 if(c==12){
-                                    $(identificacion).append("<div class='hidroelectrica'>Hidroelectrica</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='hidroelectrica'>Hidroelectrica</div>");
                                 }
 
                                 if(c==13){
-                                    $(identificacion).append("<div class='estacion'>Estacion</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'>Estacion</div>");
 
                                 }
                                 if(c==14||c==15||c==17){
-                                    $(identificacion).append("<div id='izquierdapeke' class='colornaranja'>Calle Naranja</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='izquierdapeke' class='colornaranja'>Calle Naranja</div>");
                                 }
                                 if(c==16){
-                                    $(identificacion).append("<div  class='suerte'>Suerte</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "'  class='suerte'>Suerte</div>");
                                 }
 
 
@@ -126,16 +128,16 @@
 
 
                                 if(c==19||c==20||c==22){
-                                    $(identificacion).append("<div id='arribapeke' class='colorrojo'> Calle Roja</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "'  id='arribapeke' class='colorrojo'>${casillas[c].nombre}</div>");
                                 }
                                 if(c==21){
-                                    $(identificacion).append("<div class='suerte'> Suerte</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='suerte'> Suerte</div>");
                                 }
                                 if(c==23){
-                                    $(identificacion).append("<div class='estacion'>Estacion</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'>Estacion</div>");
                                 }
                                 if(c==24||c==25||c==26){
-                                    $(identificacion).append("<div id='arribapeke' class='coloramarillo'>Calle Amarilla</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='arribapeke' class='coloramarillo'>Calle Amarilla</div>");
                                 }
                             }
                             var top=0;
@@ -149,27 +151,35 @@
                                 //Estructura1(c,"derechapeke","28","colorverde","colorazuloscuro",identificacion);
                               
                                 if(c==28||c==29||c==31){
-                                    $(identificacion).append("<div id='derechapeke' class='colorverde'> Calle Verde</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='derechapeke' class='colorverde'> Calle Verde</div>");
                                 }
                                 if(c==30){
-                                    $(identificacion).append("<div class='hidroelectrica'>Hidroelectrica</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='hidroelectrica'>Hidroelectrica</div>");
                                 }
 
                                 if(c==32){
-                                    $(identificacion).append("<div class='estacion'>Estacion</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'>Estacion</div>");
 
                                 }
                                 if(c==33||c==35){
-                                    $(identificacion).append("<div id='derechapeke' class='colorazuloscuro'>Calle Azul oscuro</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='derechapeke' class='colorazuloscuro'>Calle Azul oscuro</div>");
                                 }
                                 if(c==34){
-                                    $(identificacion).append("<div  class='suerte'>¡¡PAGA!!</div>");
+                                    $(identificacion).append("<div  esPequeno='si' indice='" + c + "' class='suerte'>¡¡PAGA!!</div>");
                                 }
                             
 
 
                             }
+       
+        $("[esPequeno='si']").each(
+            function() {
+                var indice = $(this).attr("indice");
+                //alert(nombresCasillas[indice].nombreCalle);
+                $(this).html(nombresCasillas[indice].nombreCalle);
 
+            }
+        );
 
 
 

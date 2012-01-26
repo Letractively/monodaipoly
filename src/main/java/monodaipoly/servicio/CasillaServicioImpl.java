@@ -150,7 +150,7 @@ public class CasillaServicioImpl implements CasillaServicio{
 
           Casilla casilla10 = new Casilla();
         casilla10.setNumeroCasilla(10);
-        casilla10.setNombre("Fluxubuntu");
+        casilla10.setNombre("Xubuntu");
         Calle calle10=new Calle();
         calle10.setColor("Rosa");
         calle10.setPrecio(450);
