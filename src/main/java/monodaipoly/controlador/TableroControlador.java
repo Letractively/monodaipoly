@@ -139,10 +139,13 @@ public class TableroControlador {
         if(usuario.getJugador()!=null){//cambiar a esta jugando
             if(jugadorServicio.comprobarJugadorConPartida(usuario.getJugador())!=null){
                 //llamar al metodo empezar partida...
+                System.out.println("tiene partida este jugador");
             }
         }else{
             Jugador jugador=new Jugador();
             jugadorServicio.crear(jugador);
+            jugador.setNick(usuario.getNick());
+            jugadorServicio.actualizar(jugador);
             usuario.setJugador(jugador.getClaveJugador());
             usuarioServicio.actualizar(usuario);
             Partida partida=partidaServicio.comprobarPartidaLibre();
