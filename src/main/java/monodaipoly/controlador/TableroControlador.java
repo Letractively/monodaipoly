@@ -24,8 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-
+@SessionAttributes({"jugador"})
 @Controller
 public class TableroControlador {
 
@@ -93,12 +94,12 @@ public class TableroControlador {
         
         @RequestMapping(value = "/perfil", method = RequestMethod.POST)
     public String volverPerfil(Model model,HttpSession sesion) {
-            Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+            /*Usuario usuario = (Usuario)sesion.getAttribute("usuario");
             Jugador jugador=this.jugadorServicio.buscar(usuario.getJugador());
             this.jugadorServicio.borrar(jugador);
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
-            model.addAttribute("usuario", usuarioServicio.getCurrentUser());
+            model.addAttribute("usuario", usuarioServicio.getCurrentUser());*/
         return "/perfilPrueba";
     }
 
@@ -136,12 +137,16 @@ public class TableroControlador {
     public String prepararPartida(Model model,HttpSession sesion) {
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
         int posicion;
-        if(usuario.getJugador()!=null){//cambiar a esta jugando
+        if(usuario.getJugador()!=null){
             if(jugadorServicio.comprobarJugadorConPartida(usuario.getJugador())!=null){
                 System.out.println("tiene partida este jugador");
-                //if esta jugando...
-                //return ... el metodo que falta que carga el modelo
-                //else return perfil y mostrar cola
+                if(jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando()==true){//if esta jugando...
+                    return "redirect:comenzarPartida";//return ... el metodo que falta que carga el modelo
+                }else{
+                    return "/perfilPrueba";//else return perfil y mostrar cola
+                }
+            
+                
             }
         }else{
             Jugador jugador=new Jugador();
@@ -157,10 +162,13 @@ public class TableroControlador {
                 jugadorServicio.actualizar(jugador);
                 if(posicion==1){
                     partida.setJugador1(jugador.getClaveJugador());
+                    partidaServicio.actualizar(partida);
                 }else if(posicion ==2){
                     partida.setJugador2(jugador.getClaveJugador());
+                    partidaServicio.actualizar(partida);
                 }else if(posicion==3){
                     partida.setJugador3(jugador.getClaveJugador());
+                    partidaServicio.actualizar(partida);
                 }else if(posicion==4){
                     partida.setJugador4(jugador.getClaveJugador());
                     //aqui voy a poner a los 4 jugadores de esta partida el atributo estoy jugando
@@ -181,9 +189,13 @@ public class TableroControlador {
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
                     jugadorServicio.actualizar(player);
+                    partidaServicio.actualizar(partida);
+                    model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
                     //return ... el metodo que falta que carga el modelo
+                    return "redirect:comenzarPartida";
+
                 }
-                partidaServicio.actualizar(partida);
+                
             }else{
                 Partida partidaNueva=partidaServicio.empezarPartida2();
                 partidaNueva.setJugador1(jugador.getClaveJugador());
@@ -197,8 +209,23 @@ public class TableroControlador {
 
 
         }
-        //este ai que kitarlo..
-        return "/tablero2";
+            return "/perfilPrueba";
 
+    }
+    @RequestMapping(value = "/comenzarPartida", method = RequestMethod.GET)
+    public String comenzarPartida(Model model,HttpSession sesion) {
+       Jugador jugador  = (Jugador)sesion.getAttribute("jugador");
+       Partida partida=partidaServicio.buscar(jugador.getPartida());
+       List<Casilla>casillas=casillaServicio.getAll();
+       model.addAttribute("casillas",casillas);
+       Jugador jugador1=jugadorServicio.buscar(partida.getJugador1());
+       model.addAttribute("jugador1",jugador1.getPosicion());
+       Jugador jugador2=jugadorServicio.buscar(partida.getJugador2());
+       model.addAttribute("jugador2",jugador2.getPosicion());
+       Jugador jugador3=jugadorServicio.buscar(partida.getJugador3());
+       model.addAttribute("jugador3",jugador3.getPosicion());
+       Jugador jugador4=jugadorServicio.buscar(partida.getJugador4());
+       model.addAttribute("jugador4",jugador4.getPosicion());
+       return "/tablero2";
     }
 }
