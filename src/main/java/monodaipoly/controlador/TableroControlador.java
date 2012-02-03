@@ -141,6 +141,7 @@ public class TableroControlador {
             if(jugadorServicio.comprobarJugadorConPartida(usuario.getJugador())!=null){
                 System.out.println("tiene partida este jugador");
                 if(jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando()==true){//if esta jugando...
+                    model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
                     return "redirect:comenzarPartida";//return ... el metodo que falta que carga el modelo
                 }else{
                     return "/perfilPrueba";//else return perfil y mostrar cola
