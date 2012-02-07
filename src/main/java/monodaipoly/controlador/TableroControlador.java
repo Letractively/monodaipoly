@@ -106,9 +106,23 @@ public class TableroControlador {
 
 
         @RequestMapping(method=RequestMethod.GET, value="/moverJugador")
-        public @ResponseBody String dado(HttpSession sesion){
-            Usuario usuario = (Usuario)sesion.getAttribute("usuario");
-            Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
+        public @ResponseBody String dado(HttpSession sesion,@RequestParam("jugQueTira") String jugQueTira){
+            //Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+            //Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
+            Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            Partida partida =partidaServicio.buscar(jugador.getPartida());
+          
+            int numJugador=0;
+            if(jugadorServicio.buscar(partida.getJugador1()).getNick().compareTo(jugQueTira)==0){
+                numJugador=1;
+            }else if(jugadorServicio.buscar(partida.getJugador2()).getNick().compareTo(jugQueTira)==0){
+                numJugador=2;
+            }else if(jugadorServicio.buscar(partida.getJugador3()).getNick().compareTo(jugQueTira)==0){
+                numJugador=3;
+            }else if(jugadorServicio.buscar(partida.getJugador4()).getNick().compareTo(jugQueTira)==0){
+                numJugador=4;
+            }
+
             int dado = (int)(6.0 * Math.random()) + 1;
             //int dado=((int)Math.random()*6);
             if(jugador.getPosicion()+dado>35){
@@ -120,14 +134,16 @@ public class TableroControlador {
             }
 
             jugadorServicio.actualizar(jugador);
-            return this.dadoJson(jugador.getPosicion(),dado).toString();
+            return this.dadoJson(jugador.getPosicion(),dado,numJugador).toString();
     }
 
-        private JSONObject dadoJson(int posicion,int dado){
+        private JSONObject dadoJson(int posicion,int dado,int numJugador){
         JSONObject json=new JSONObject();
         try{
-            json.put("jugador1",posicion);
+         
+            json.put("nuevaPosicion",posicion);
             json.put("dado", dado);
+            json.put("numJugador",numJugador);
 
         }catch (JSONException ex){
 
