@@ -31,8 +31,10 @@
            
             var posicionJugador=new Array();
             posicionJugador[1]=${jugador1};
-            posicionJugador[2]=0;
-            var posAnt=0;
+            posicionJugador[2]=${jugador2};
+            posicionJugador[3]=${jugador3};
+            posicionJugador[4]=${jugador4};
+    
 
             $(document).ready(
              
@@ -202,7 +204,7 @@
 
 
                         });
-                        function tirarDado2(jugador){
+                        function tirarDado2(jugQueTira){
                             /*var dado=Math.ceil(Math.random()*6);
                             alert(dado);
                             posAnt=posicionJugador[1];
@@ -214,17 +216,19 @@
                             }
                             */
                             $.get("/moverJugador",{
+                                jugQueTira:jugQueTira
                             },
                             function(json){
                                 var db = $.parseJSON(json);
                                 alert(db.dado);
-                                posicionJugador[1]=db.jugador1;
-                                alert(db.jugador1);
-                                posicionReal = $("#casilla"+posicionJugador[1]).offset();
-                                alert("posicionreal:  "+posicionReal);
+                                //alert(db.nuevaPosicion);
+                                //alert(db.numJugador);
+                                posicionJugador[db.numJugador]=db.nuevaPosicion;
+                                posicionReal = $("#casilla"+posicionJugador[db.numJugador]).offset();
+                                //alert("posicionreal:  "+posicionReal);
                                 var izq=posicionReal.left;
                                 var arriba=posicionReal.top;
-                                $("#"+jugador).css({
+                                $("#jugador"+db.numJugador).css({
                                 "left":izq,
                                 "top":arriba
                                 });
@@ -263,11 +267,12 @@
                 
 
 
-                <button onClick="tirarDado2('jugador1')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
+                <button onClick="tirarDado2('${jugador.nick}')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
             </div>
             <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>
             <div id='jugador2'><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></div>
-
+            <div id='jugador3'><img src='Estilos/tux/croft.png' width='100%' height='100%'/></div>
+            <div id='jugador4'><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></div>
 
 
         </div>
