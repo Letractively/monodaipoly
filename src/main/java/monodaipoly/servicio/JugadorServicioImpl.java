@@ -3,6 +3,7 @@ package monodaipoly.servicio;
 import com.google.appengine.api.datastore.Key;
 import java.util.List;
 import monodaipoly.dao.JugadorDAO;
+import monodaipoly.dao.PartidaDAO;
 import monodaipoly.persistencia.Jugador;
 import monodaipoly.persistencia.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class JugadorServicioImpl implements JugadorServicio{
     private JugadorDAO jugadorDAO;
+    private PartidaDAO partidaDAO;
 
     @Autowired
     @Required
@@ -57,4 +59,5 @@ public class JugadorServicioImpl implements JugadorServicio{
     public Key comprobarJugadorConPartida(Key jugador){
         return this.buscar(jugador).getPartida();
     }
+    
 }

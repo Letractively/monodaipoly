@@ -106,10 +106,11 @@ public class TableroControlador {
 
 
         @RequestMapping(method=RequestMethod.GET, value="/moverJugador")
-        public @ResponseBody String dado(HttpSession sesion,
-            @RequestParam("dado") int dado){
+        public @ResponseBody String dado(HttpSession sesion){
             Usuario usuario = (Usuario)sesion.getAttribute("usuario");
             Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
+            int dado = (int)(6.0 * Math.random()) + 1;
+            //int dado=((int)Math.random()*6);
             if(jugador.getPosicion()+dado>35){
                 int posAnt=jugador.getPosicion();
                 int dif=36-posAnt;
@@ -119,13 +120,14 @@ public class TableroControlador {
             }
 
             jugadorServicio.actualizar(jugador);
-            return this.dadoJson(jugador.getPosicion()).toString();
+            return this.dadoJson(jugador.getPosicion(),dado).toString();
     }
 
-        private JSONObject dadoJson(int posicion){
+        private JSONObject dadoJson(int posicion,int dado){
         JSONObject json=new JSONObject();
         try{
             json.put("jugador1",posicion);
+            json.put("dado", dado);
 
         }catch (JSONException ex){
 

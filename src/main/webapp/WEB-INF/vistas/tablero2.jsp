@@ -203,7 +203,7 @@
 
                         });
                         function tirarDado2(jugador){
-                            var dado=Math.ceil(Math.random()*6);
+                            /*var dado=Math.ceil(Math.random()*6);
                             alert(dado);
                             posAnt=posicionJugador[1];
                             posicionJugador[1]=posicionJugador[1]+dado;
@@ -212,19 +212,22 @@
                                 var dif=36-posAnt;
                                 posicionJugador[1]=0+dado-dif;
                             }
-                            posicionReal = $("#casilla"+posicionJugador[1]).offset();
-                            var izq=posicionReal.left;
-                            var arriba=posicionReal.top;
-                            $("#"+jugador).css({
-                                "left":izq,
-                                "top":arriba
-                            });
+                            */
                             $.get("/moverJugador",{
-                                dado:dado
                             },
                             function(json){
                                 var db = $.parseJSON(json);
-                                //alert(db);
+                                alert(db.dado);
+                                posicionJugador[1]=db.jugador1;
+                                alert(db.jugador1);
+                                posicionReal = $("#casilla"+posicionJugador[1]).offset();
+                                alert("posicionreal:  "+posicionReal);
+                                var izq=posicionReal.left;
+                                var arriba=posicionReal.top;
+                                $("#"+jugador).css({
+                                "left":izq,
+                                "top":arriba
+                                });
                             }, "json")
     
                         }
