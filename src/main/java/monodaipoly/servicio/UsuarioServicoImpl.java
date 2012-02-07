@@ -13,6 +13,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import monodaipoly.dao.*;
 import monodaipoly.dao.UsuarioDAO;
+import monodaipoly.persistencia.Jugador;
+import monodaipoly.persistencia.Partida;
 import monodaipoly.persistencia.Rol;
 import monodaipoly.persistencia.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,8 @@ import org.springframework.stereotype.Service;
 public class UsuarioServicoImpl implements UsuarioServicio{
     private UsuarioDAO usuarioDAO;
     private RolDAO rolDAO;
+    private JugadorDAO jugadorDAO;
+    private PartidaDAO partidaDAO;
 
     @Autowired
     @Required
@@ -50,6 +54,19 @@ public class UsuarioServicoImpl implements UsuarioServicio{
     public void setRolDAO(RolDAO rolDAO){
         this.rolDAO=rolDAO;
     }
+
+    @Autowired
+    @Required
+    public void setJugadorDAO(JugadorDAO jugadorDAO){
+        this.jugadorDAO=jugadorDAO;
+    }
+
+    @Autowired
+    @Required
+    public void setPartidaDAO(PartidaDAO partidaDAO){
+        this.partidaDAO=partidaDAO;
+    }
+
 
     public Usuario getUsuario(String idUsuario) {
         return usuarioDAO.find(Usuario.class, idUsuario);
@@ -112,6 +129,12 @@ public class UsuarioServicoImpl implements UsuarioServicio{
         Usuario u5=new Usuario();
         Usuario u6=new Usuario();
         Usuario u7=new Usuario();
+        Jugador j1=new Jugador();
+        Jugador j2=new Jugador();
+        Jugador j3=new Jugador();
+        Partida p=new Partida();
+
+
         u2.setNick("user2");
         u2.setNombre("Pepe");
         u2.setContrasena("123456");
@@ -135,6 +158,13 @@ public class UsuarioServicoImpl implements UsuarioServicio{
         u7.setNick("user7");
         u7.setNombre("Pepe");
         u7.setContrasena("123456");
+
+        j1.setNick(u2.getNick());
+        j2.setNick(u3.getNick());
+        j3.setNick(u4.getNick());
+
+
+
         this.anadirRol(u2, r1);
         this.anadirRol(u3, r1);
         this.anadirRol(u4, r1);
@@ -147,6 +177,19 @@ public class UsuarioServicoImpl implements UsuarioServicio{
         this.crear(u5);
         this.crear(u6);
         this.crear(u7);
+        
+        this.partidaDAO.insert(p);
+        j1.setPartida(p.getIdpartida());
+        j2.setPartida(p.getIdpartida());
+        j3.setPartida(p.getIdpartida());
+        this.jugadorDAO.insert(j1);
+        this.jugadorDAO.insert(j2);
+        this.jugadorDAO.insert(j3);
+        p.setJugador1(j1.getClaveJugador());
+        p.setJugador2(j2.getClaveJugador());
+        p.setJugador3(j3.getClaveJugador());
+
+        partidaDAO.update(p);
               
         
         
