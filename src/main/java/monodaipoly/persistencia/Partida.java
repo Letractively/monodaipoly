@@ -30,7 +30,8 @@ public class Partida implements Serializable{
 
     @Basic
     private List<Key> casillas;
-
+    @Basic
+    private Key turno;
 
    public Partida(){
        this.jugador1=null;
@@ -87,6 +88,15 @@ public class Partida implements Serializable{
     public void setIdpartida(Key idpartida) {
         this.idpartida = idpartida;
     }
+
+    public Key getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Key turno) {
+        this.turno = turno;
+    }
+    
 
     public String getIdString(){
             System.out.println("Aqui Jugador getIdString() clave partida  " + idpartida);
