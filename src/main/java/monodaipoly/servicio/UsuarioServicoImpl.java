@@ -190,7 +190,13 @@ public class UsuarioServicoImpl implements UsuarioServicio{
         p.setJugador3(j3.getClaveJugador());
 
         partidaDAO.update(p);
-              
+
+        u2.setJugador(j1.getClaveJugador());
+        usuarioDAO.update(u2);
+        u3.setJugador(j2.getClaveJugador());
+        usuarioDAO.update(u3);
+        u4.setJugador(j3.getClaveJugador());
+        usuarioDAO.update(u4);
         
         
         u1.setNick("admin");
