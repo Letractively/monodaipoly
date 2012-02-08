@@ -218,6 +218,7 @@ public class TableroControlador {
             }else{
                 Partida partidaNueva=partidaServicio.empezarPartida2();
                 partidaNueva.setJugador1(jugador.getClaveJugador());
+                partidaNueva.setTurno(jugador.getClaveJugador());
                 jugador.setPartida(partidaNueva.getIdpartida());
                 jugadorServicio.actualizar(jugador);
                 partidaServicio.actualizar(partidaNueva);
