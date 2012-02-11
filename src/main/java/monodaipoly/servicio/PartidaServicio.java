@@ -1,6 +1,7 @@
 package monodaipoly.servicio;
 
 import com.google.appengine.api.datastore.Key;
+import java.util.List;
 import monodaipoly.persistencia.Partida;
 
 
@@ -13,4 +14,5 @@ public interface PartidaServicio {
     public Partida empezarPartida2();
     public Partida comprobarPartidaLibre();
     public int comprobarHueco(Key clavePartida);
+    public List<Partida> partidaCompleta();
 }

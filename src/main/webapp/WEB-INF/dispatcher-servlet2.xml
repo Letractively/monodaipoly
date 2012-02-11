@@ -70,4 +70,7 @@
     <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
         <property name="supportedMediaTypes" value="application/json" />
     </bean>
+     
+  
 </beans>
+
