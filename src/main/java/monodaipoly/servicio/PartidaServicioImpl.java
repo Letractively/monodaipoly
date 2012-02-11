@@ -149,4 +149,9 @@ public class PartidaServicioImpl implements PartidaServicio{
             return 0;
         }
     }
+    
+    @Override
+    public List<Partida> partidaCompleta(){
+        return partidaDAO.partidasCompletas();
+    }
 }

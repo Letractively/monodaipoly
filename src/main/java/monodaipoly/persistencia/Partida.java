@@ -32,6 +32,8 @@ public class Partida implements Serializable{
     private List<Key> casillas;
     @Basic
     private Key turno;
+    @Basic
+    private long fechaTurno;
 
    public Partida(){
        this.jugador1=null;
@@ -95,6 +97,14 @@ public class Partida implements Serializable{
 
     public void setTurno(Key turno) {
         this.turno = turno;
+    }
+
+    public long getFechaTurno() {
+        return fechaTurno;
+    }
+
+    public void setFechaTurno(long fechaTurno) {
+        this.fechaTurno = fechaTurno;
     }
     
 

@@ -12,6 +12,7 @@ import monodaipoly.persistencia.Rol;
 import monodaipoly.persistencia.Usuario;
 import monodaipoly.servicio.UsuarioServicio;
 import java.util.*;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,6 +20,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -218,12 +220,10 @@ public class UsuarioControlador {
     @RequestMapping(method=RequestMethod.GET, value="/estadisticas")
     public String doShowEstadisticas(HttpSession sesion,Model model){
         int i,j,c;
-        Usuario aux;
         List<Usuario> usuarios=usuarioServicio.conseguirUsuarios();
         System.out.println(usuarios.get(0).getNick());
         List usuariosMejores =new ArrayList();
         System.out.println(usuarios.get(0).getNick());
-      
         if(usuarios.size()>10){
             for(c=0;c<10;c++){
                 usuariosMejores.add(c,usuarios.get(c));

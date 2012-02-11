@@ -207,6 +207,9 @@ public class TableroControlador {
                     keyPlayer=partida.getJugador4();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
+                    
+                    
+                    partida.setFechaTurno(System.currentTimeMillis()+300000);
                     jugadorServicio.actualizar(player);
                     partidaServicio.actualizar(partida);
                     model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
