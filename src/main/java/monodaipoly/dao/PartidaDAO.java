@@ -5,7 +5,8 @@ import java.util.List;
 import monodaipoly.persistencia.Partida;
 import org.springframework.stereotype.Repository;
 
-@Repository
+
 public interface PartidaDAO extends GenericDAO<Partida,Key>{
     public List<Partida>partidasCompletas();
+    List<Partida> damePartidas();
 }

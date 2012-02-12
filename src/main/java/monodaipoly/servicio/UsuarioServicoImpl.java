@@ -113,6 +113,8 @@ public class UsuarioServicoImpl implements UsuarioServicio{
 
         rolDAO.removeAll(Rol.class);
         usuarioDAO.removeAll(Usuario.class);
+        jugadorDAO.removeAll(Jugador.class);
+        partidaDAO.removeAll(Partida.class);
         Rol r1 = new Rol();
         r1.setNombre("ROLE_ADMIN");
         Rol r2 = new Rol();
