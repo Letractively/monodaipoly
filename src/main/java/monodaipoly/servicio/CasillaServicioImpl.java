@@ -54,6 +54,7 @@ public class CasillaServicioImpl implements CasillaServicio{
     @PostConstruct
     public void preload_casillas() {
         casillaDAO.removeAll(Casilla.class);
+        calleDAO.removeAll(Calle.class);
 
         Casilla casilla0 = new Casilla();
         casilla0.setNumeroCasilla(0);

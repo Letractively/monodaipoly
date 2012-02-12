@@ -2,7 +2,7 @@ package monodaipoly.dao;
 
 import java.io.Serializable;
 import java.util.List;
-
+import monodaipoly.persistencia.Partida;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,11 +45,15 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
 		return em.find(typeClass, clave);
 	}
 
+        @Transactional(readOnly = true)
+        @SuppressWarnings("unchecked")
 	@Override
 	public List<T> getAll(Class<T> typeClass) {
-            System.out.println("Aqui get All de servicio");
-		final StringBuilder sql=new StringBuilder("select c from ").append(typeClass.getSimpleName()).append(" c");
-		return (List<T>) em.createQuery(sql.toString()).getResultList();
+            final StringBuilder sql = new StringBuilder("select c from ").append(
+                typeClass.getSimpleName()).append(" c");
+            System.out.println("getAll2");
+            System.out.println("getAll  3   "+ em.createQuery(sql.toString()).getResultList().isEmpty());
+        return (List<T>) em.createQuery(sql.toString()).getResultList();
 	}
         
     @Transactional

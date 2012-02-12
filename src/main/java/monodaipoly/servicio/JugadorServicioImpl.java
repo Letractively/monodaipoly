@@ -2,6 +2,7 @@ package monodaipoly.servicio;
 
 import com.google.appengine.api.datastore.Key;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import monodaipoly.dao.JugadorDAO;
 import monodaipoly.dao.PartidaDAO;
 import monodaipoly.persistencia.Jugador;
@@ -59,5 +60,17 @@ public class JugadorServicioImpl implements JugadorServicio{
     public Key comprobarJugadorConPartida(Key jugador){
         return this.buscar(jugador).getPartida();
     }
-    
+
+    @PostConstruct
+    @Override
+    public void comprobarJugadorConPartida(){
+        System.out.println("jugadorDAO.getAll(Jugador.class):  "+ jugadorDAO.getAll(Jugador.class).size());
+        for(Jugador j:jugadorDAO.getAll(Jugador.class)){
+             System.out.println("aqui bucle forrr:  ");
+        }
+    }
+
+
+
+
 }

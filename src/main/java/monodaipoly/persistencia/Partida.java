@@ -1,12 +1,18 @@
 package monodaipoly.persistencia;
 
-import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
 
-import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import java.util.ArrayList;
+
+import com.google.appengine.api.datastore.Key;
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 
 
 @Entity
@@ -40,7 +46,9 @@ public class Partida implements Serializable{
        this.jugador2=null;
        this.jugador3=null;
        this.jugador4=null;
-       this.casillas=null;
+       this.casillas= new ArrayList<Key>();
+       this.fechaTurno=0;
+       this.turno=null;
    }
 
     public List<Key> getCasillas() {

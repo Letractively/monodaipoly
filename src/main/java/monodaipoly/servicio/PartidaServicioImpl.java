@@ -12,37 +12,40 @@ import monodaipoly.persistencia.Partida;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PartidaServicioImpl implements PartidaServicio{
+public class PartidaServicioImpl implements PartidaServicio {
+
     private JugadorDAO jugadorDAO;
     private PartidaDAO partidaDAO;
     private CasillaDAO casillaDAO;
 
     @Autowired
     @Required
-    public void setJugadorDAO(JugadorDAO jugadorDAO){
-        this.jugadorDAO=jugadorDAO;
+    public void setJugadorDAO(JugadorDAO jugadorDAO) {
+        this.jugadorDAO = jugadorDAO;
     }
 
     @Autowired
     @Required
-    public void setPartidaDAO(PartidaDAO partidaDAO){
-        this.partidaDAO=partidaDAO;
+    public void setPartidaDAO(PartidaDAO partidaDAO) {
+        this.partidaDAO = partidaDAO;
     }
 
     @Autowired
     @Required
-    public void setCasillaDAO(CasillaDAO casillaDAO){
-        this.casillaDAO=casillaDAO;
+    public void setCasillaDAO(CasillaDAO casillaDAO) {
+        this.casillaDAO = casillaDAO;
     }
 
     @Override
     public void crear(final Partida partida) {
         this.partidaDAO.insert(partida);
     }
+
     @Override
-    public void actualizar(final Partida partida){
+    public void actualizar(final Partida partida) {
         this.partidaDAO.update(partida);
     }
 
@@ -64,94 +67,123 @@ public class PartidaServicioImpl implements PartidaServicio{
      * les cambiamos el estoyJugando a true
      * 
      */
+
     @Override
     public Partida empezarPartida() {
-        Partida partida=new Partida();
+        Partida partida = new Partida();
         this.crear(partida);
-        List<Jugador> jugadores=this.jugadorDAO.buscarJugadoresQuierenJugar();
-        List<Jugador> jugadoresVanAJugar=new ArrayList(4);
+        List<Jugador> jugadores = this.jugadorDAO.buscarJugadoresQuierenJugar();
+        List<Jugador> jugadoresVanAJugar = new ArrayList(4);
         System.out.println("Estamos en empezar partdia");
-        if(jugadores.size()>3){
-            for(Jugador jugador:jugadores){
+        if (jugadores.size() > 3) {
+            for (Jugador jugador : jugadores) {
                 //
                 System.out.println("jugador");
                 System.out.println(jugador.getClaveJugador());
                 //
-                if(jugadoresVanAJugar.size()<5){
-                jugadoresVanAJugar.add(jugador);
-                jugador.setEstoyJugando(true);
-                jugador.setPartida(partida.getIdpartida());
-                    if(jugadoresVanAJugar.size()==0){
+                if (jugadoresVanAJugar.size() < 5) {
+                    jugadoresVanAJugar.add(jugador);
+                    jugador.setEstoyJugando(true);
+                    jugador.setPartida(partida.getIdpartida());
+                    if (jugadoresVanAJugar.size() == 0) {
                         partida.setJugador1(jugador.getClaveJugador());
-                         //
-                         System.out.println("jugador1 asociado a partida");
-                     }
-                    if(jugadoresVanAJugar.size()==1){
                         //
-                         System.out.println("jugador2 asociado a partida");
-                         partida.setJugador2(jugador.getClaveJugador());
+                        System.out.println("jugador1 asociado a partida");
                     }
-                    if(jugadoresVanAJugar.size()==2){
+                    if (jugadoresVanAJugar.size() == 1) {
+                        //
+                        System.out.println("jugador2 asociado a partida");
+                        partida.setJugador2(jugador.getClaveJugador());
+                    }
+                    if (jugadoresVanAJugar.size() == 2) {
                         //
                         System.out.println("jugador3 asociado a partida");
-                         partida.setJugador3(jugador.getClaveJugador());
+                        partida.setJugador3(jugador.getClaveJugador());
                     }
-                    if(jugadoresVanAJugar.size()==3){
+                    if (jugadoresVanAJugar.size() == 3) {
                         //
                         System.out.println("jugador4 asociado a partida");
                         partida.setJugador4(jugador.getClaveJugador());
                     }
                 }
-                
+
             }
-        }else {
+        } else {
             System.out.println("No hay jugadores suficientes para jugar");
             return null;
         }
         return partida;
 
     }
+
     @Override
-    public Partida empezarPartida2(){
-        List<Key> casillas1=new ArrayList<Key>();
-        Partida partida=new Partida();
-        List<Casilla>casillas=casillaDAO.getAll(Casilla.class);
-        for(Casilla casilla:casillas){
+    public Partida empezarPartida2() {
+        List<Key> casillas1 = new ArrayList<Key>();
+        Partida partida = new Partida();
+        List<Casilla> casillas = casillaDAO.getAll(Casilla.class);
+        for (Casilla casilla : casillas) {
             casillas1.add(casilla.getIdCasilla());
         }
         partida.setCasillas(casillas1);
         this.crear(partida);
         return partida;
     }
+
     @Override
-    public Partida comprobarPartidaLibre(){
-        List<Partida>partidas=partidaDAO.getAll(Partida.class);
-        for(Partida partida:partidas){
-            if(this.comprobarHueco(partida.getIdpartida())!=0)
-            {
+    public Partida comprobarPartidaLibre() {
+        List<Partida> partidas = partidaDAO.getAll(Partida.class);
+        for (Partida partida : partidas) {
+            if (this.comprobarHueco(partida.getIdpartida()) != 0) {
                 return partida;
             }
         }
         return null;
 
     }
+
     @Override
-    public int comprobarHueco(Key clavePartida){
-        if(this.buscar(clavePartida).getJugador1()==null){
+    public int comprobarHueco(Key clavePartida) {
+        if (this.buscar(clavePartida).getJugador1() == null) {
             return 1;
-        }else if(this.buscar(clavePartida).getJugador2()==null){
+        } else if (this.buscar(clavePartida).getJugador2() == null) {
             return 2;
-        }else if(this.buscar(clavePartida).getJugador3()==null){
+        } else if (this.buscar(clavePartida).getJugador3() == null) {
             return 3;
-        }else if(this.buscar(clavePartida).getJugador4()==null){
+        } else if (this.buscar(clavePartida).getJugador4() == null) {
             return 4;
-        }else{
+        } else {
             return 0;
         }
     }
-    
+
     @Override
-    public List<Partida> partidaCompleta(){
-        return partidaDAO.partidasCompletas();
+    public List<Partida> partidaCompleta() {
+        List<Partida> todasPartidas = new ArrayList<Partida>();
+        try {
+            System.out.println("DESDE PARTIDASERVICIOOOO  jugadorDAO.getAll(Jugador.class):  "+ jugadorDAO.getAll(Jugador.class).size());
+            //List<Partida> partidas = partidaDAO.getAll(Partida.class);
+            
+            for (Partida partida : partidaDAO.getAll(Partida.class)) {
+                //if (partida.getJugador1() != null && partida.getJugador2() != null && partida.getJugador3() != null && partida.getJugador4() != null) {
+                  //  todasPartidas.add(partida);
+                //}
+                System.out.println("**************************");
+            }
+
+            /* for(int i=0;partidas.size()-1>i;i++){
+            if(partidas.get(i).getJugador1()!=null && partidas.get(i).getJugador2()!=null && partidas.get(i).getJugador3()!=null && partidas.get(i).getJugador4()!=null){
+            todasPartidas.add(partidas.get(i));
+            }
+            } */
+        } catch (Exception e) {
+            System.out.println("Aqui error en en partidaCompleta servicio");
+        }
+        return todasPartidas;
+    }
+
+    @Override
+    public List<Partida> todasPartidas() {
+        System.out.println("partidaDAO.getAll(Partida.class).size()= " + partidaDAO.getAll(Partida.class).size());
+        return partidaDAO.getAll(Partida.class);
     }
 }

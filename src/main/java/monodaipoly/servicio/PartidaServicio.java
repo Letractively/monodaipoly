@@ -15,4 +15,5 @@ public interface PartidaServicio {
     public Partida comprobarPartidaLibre();
     public int comprobarHueco(Key clavePartida);
     public List<Partida> partidaCompleta();
+    public List<Partida> todasPartidas();
 }

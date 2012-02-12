@@ -1,5 +1,6 @@
  package monodaipoly.controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -26,7 +27,7 @@ public class JuegoControlador {
     private CasillaServicio casillaServicio;
     private UsuarioServicio usuarioServicio;
     private PartidaServicio partidaServicio;
-  
+
     @Autowired
     @Required
     public void setUsuarioServicio(UsuarioServicio usuarioServicio){
@@ -95,14 +96,19 @@ public class JuegoControlador {
    
     @Scheduled(fixedRate=10000)
     public void tareaProgramada(){
-        
+       this.turno();
+       
+    }
+
+    private void turno(){
         List<Partida> partidasCompletas=partidaServicio.partidaCompleta();
-        System.out.println(partidasCompletas.size());
-        if(!partidasCompletas.isEmpty()){
-            Partida partida=new Partida();
+        System.out.println("juegoControlador :"+partidasCompletas.size());
+        if(partidasCompletas.size()>0){
+             Partida partida=new Partida();
+
         int i;
-        for(i=0;i<=partidasCompletas.size();i++){
-            partida=(Partida) partidasCompletas.get(i);
+        for(i=0;i<=partidasCompletas.size()-1;i++){
+            partida=partidasCompletas.get(i);
             System.out.println(partida.getTurno());
             if(System.currentTimeMillis()>=partida.getFechaTurno()){
                 cambiarTurno(partida);
@@ -112,6 +118,7 @@ public class JuegoControlador {
         }else{
             System.out.println("No ai partidas llenas");
         }
-        
     }
+
+       
 }
