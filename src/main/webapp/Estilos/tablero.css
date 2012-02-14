@@ -194,12 +194,15 @@ body {
 }
 
 #centro{
+    border: black;
+    border-style: solid;
+    background-color: lime;
     position: absolute;
-    width: 25%;
-    height: 25%;
+    width: 50%;
+    height: 34%;
     left:25.2%;
-    top: 50.2%;
-    z-index: 2;
+    top: 30%;
+    z-index: 4;
 }
 
 

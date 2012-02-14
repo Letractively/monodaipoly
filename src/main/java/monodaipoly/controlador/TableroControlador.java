@@ -191,22 +191,26 @@ public class TableroControlador {
                 }else if(posicion==4){
                     partida.setJugador4(jugador.getClaveJugador());
                     //aqui voy a poner a los 4 jugadores de esta partida el atributo estoy jugando
-                    //a true xq ya hay 4 jugadores y puede empezar el juego
+                    //a true y el dinero  xq ya hay 4 jugadores y puede empezar el juego
                     Key keyPlayer=partida.getJugador1();
                     Jugador player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
+                    player.setDinero(2000);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador2();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
+                    player.setDinero(2000);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador3();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
+                    player.setDinero(2000);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador4();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
+                    player.setDinero(2000);
                     
                     
                     partida.setFechaTurno(System.currentTimeMillis()+300000);
@@ -239,8 +243,10 @@ public class TableroControlador {
     public String comenzarPartida(Model model,HttpSession sesion) {
        Jugador jugador  = (Jugador)sesion.getAttribute("jugador");
        Partida partida=partidaServicio.buscar(jugador.getPartida());
+       //cargar en modelo casillas
        List<Casilla>casillas=casillaServicio.getAll();
        model.addAttribute("casillas",casillas);
+       //cargar en modelo posiciones
        Jugador jugador1=jugadorServicio.buscar(partida.getJugador1());
        model.addAttribute("jugador1",jugador1.getPosicion());
        Jugador jugador2=jugadorServicio.buscar(partida.getJugador2());
@@ -249,6 +255,16 @@ public class TableroControlador {
        model.addAttribute("jugador3",jugador3.getPosicion());
        Jugador jugador4=jugadorServicio.buscar(partida.getJugador4());
        model.addAttribute("jugador4",jugador4.getPosicion());
+       //cargar en modelo nombres
+       model.addAttribute("nombre1",jugador1.getNick());
+       model.addAttribute("nombre2",jugador2.getNick());
+       model.addAttribute("nombre3",jugador3.getNick());
+       model.addAttribute("nombre4",jugador4.getNick());
+       //cargar en modelo dinero
+       model.addAttribute("dinero1",jugador1.getDinero());
+       model.addAttribute("dinero2",jugador2.getDinero());
+       model.addAttribute("dinero3",jugador3.getDinero());
+       model.addAttribute("dinero4",jugador4.getDinero());
        return "/tablero2";
     }
 }

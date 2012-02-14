@@ -29,7 +29,9 @@ public class Jugador implements Serializable {
 
         @Basic
         private Boolean estoyJugando;
-	
+
+        @Basic
+        private int dinero;
 	
 	//calles..... 
 	public Jugador(){}
@@ -59,6 +61,14 @@ public class Jugador implements Serializable {
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}
+
+        public int getDinero() {
+		return dinero;
+	}
+	public void setDinero(int dinero) {
+		this.dinero = dinero;
+	}
+
 	public String getIdString(){
             System.out.println("Aqui Jugador getIdString() clave jugador  " + claveJugador);
             return KeyFactory.keyToString(claveJugador);
