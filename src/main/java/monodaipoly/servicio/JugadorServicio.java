@@ -14,5 +14,4 @@ public interface JugadorServicio {
     public void actualizar(Jugador jugador);
     public List<Jugador> jugadoresQuierenJugar();
     public Key comprobarJugadorConPartida(Key jugador);
-     public void comprobarJugadorConPartida();
 }

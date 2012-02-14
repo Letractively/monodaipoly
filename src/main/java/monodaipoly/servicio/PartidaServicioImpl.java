@@ -160,30 +160,22 @@ public class PartidaServicioImpl implements PartidaServicio {
     public List<Partida> partidaCompleta() {
         List<Partida> todasPartidas = new ArrayList<Partida>();
         try {
-            System.out.println("DESDE PARTIDASERVICIOOOO  jugadorDAO.getAll(Jugador.class):  "+ jugadorDAO.getAll(Jugador.class).size());
-            //List<Partida> partidas = partidaDAO.getAll(Partida.class);
-            
             for (Partida partida : partidaDAO.getAll(Partida.class)) {
-                //if (partida.getJugador1() != null && partida.getJugador2() != null && partida.getJugador3() != null && partida.getJugador4() != null) {
-                  //  todasPartidas.add(partida);
-                //}
-                System.out.println("**************************");
+                if (partida.getJugador1() != null && partida.getJugador2() != null && partida.getJugador3() != null && partida.getJugador4() != null) {
+                    todasPartidas.add(partida);
+                }
             }
 
-            /* for(int i=0;partidas.size()-1>i;i++){
-            if(partidas.get(i).getJugador1()!=null && partidas.get(i).getJugador2()!=null && partidas.get(i).getJugador3()!=null && partidas.get(i).getJugador4()!=null){
-            todasPartidas.add(partidas.get(i));
-            }
-            } */
-        } catch (Exception e) {
+        }catch (Exception e) {
             System.out.println("Aqui error en en partidaCompleta servicio");
+            e.printStackTrace();
         }
         return todasPartidas;
     }
 
     @Override
     public List<Partida> todasPartidas() {
-        System.out.println("partidaDAO.getAll(Partida.class).size()= " + partidaDAO.getAll(Partida.class).size());
+        //System.out.println("partidaDAO.getAll(Partida.class).size()= " + partidaDAO.getAll(Partida.class).size());
         return partidaDAO.getAll(Partida.class);
     }
 }

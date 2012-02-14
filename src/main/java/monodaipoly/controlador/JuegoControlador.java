@@ -89,35 +89,29 @@ public class JuegoControlador {
                  }
             }
         }
-        System.out.println("hola");
         partida.setFechaTurno(System.currentTimeMillis()+300000);
         partidaServicio.actualizar(partida);
     }
-   
-    @Scheduled(fixedRate=10000)
-    public void tareaProgramada(){
-       this.turno();
-       
-    }
 
-    private void turno(){
+
+    @RequestMapping(value = "/cambiarTurnoTimer", method = RequestMethod.GET)
+    private String turno(){
         List<Partida> partidasCompletas=partidaServicio.partidaCompleta();
-        System.out.println("juegoControlador :"+partidasCompletas.size());
         if(partidasCompletas.size()>0){
-             Partida partida=new Partida();
-
-        int i;
-        for(i=0;i<=partidasCompletas.size()-1;i++){
-            partida=partidasCompletas.get(i);
-            System.out.println(partida.getTurno());
-            if(System.currentTimeMillis()>=partida.getFechaTurno()){
-                cambiarTurno(partida);
+            Partida partida=new Partida();
+            int i;
+            for(i=0;i<=partidasCompletas.size()-1;i++){
+                partida=partidasCompletas.get(i);
+                System.out.println(partida.getTurno());
+                if(System.currentTimeMillis()>=partida.getFechaTurno()){
+                    cambiarTurno(partida);
+                }
+                System.out.println(partida.getTurno());
             }
-            System.out.println(partida.getTurno());
-        }
         }else{
             System.out.println("No ai partidas llenas");
         }
+        return "/index";
     }
 
        
