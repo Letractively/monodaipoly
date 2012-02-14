@@ -389,10 +389,7 @@ public class CasillaServicioImpl implements CasillaServicio{
 
     @Override
     public List<Casilla> getAll() {
-        System.out.println("Aqui get All de servicio");
-        
         return casillaDAO.getAll(Casilla.class);
-        
     }
     
 }

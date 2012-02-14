@@ -161,12 +161,7 @@ public class UsuarioServicoImpl implements UsuarioServicio{
         u7.setNombre("Pepe");
         u7.setContrasena("123456");
 
-        j1.setNick(u2.getNick());
-        j2.setNick(u3.getNick());
-        j3.setNick(u4.getNick());
-
-
-
+  
         this.anadirRol(u2, r1);
         this.anadirRol(u3, r1);
         this.anadirRol(u4, r1);
@@ -179,27 +174,6 @@ public class UsuarioServicoImpl implements UsuarioServicio{
         this.crear(u5);
         this.crear(u6);
         this.crear(u7);
-        
-        this.partidaDAO.insert(p);
-        j1.setPartida(p.getIdpartida());
-        j2.setPartida(p.getIdpartida());
-        j3.setPartida(p.getIdpartida());
-        this.jugadorDAO.insert(j1);
-        this.jugadorDAO.insert(j2);
-        this.jugadorDAO.insert(j3);
-        p.setJugador1(j1.getClaveJugador());
-        p.setJugador2(j2.getClaveJugador());
-        p.setJugador3(j3.getClaveJugador());
-
-        partidaDAO.update(p);
-
-        u2.setJugador(j1.getClaveJugador());
-        usuarioDAO.update(u2);
-        u3.setJugador(j2.getClaveJugador());
-        usuarioDAO.update(u3);
-        u4.setJugador(j3.getClaveJugador());
-        usuarioDAO.update(u4);
-        
         
         u1.setNick("admin");
         u1.setNombre("Pepe");

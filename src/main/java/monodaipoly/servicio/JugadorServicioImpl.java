@@ -61,16 +61,4 @@ public class JugadorServicioImpl implements JugadorServicio{
         return this.buscar(jugador).getPartida();
     }
 
-    @PostConstruct
-    @Override
-    public void comprobarJugadorConPartida(){
-        System.out.println("jugadorDAO.getAll(Jugador.class):  "+ jugadorDAO.getAll(Jugador.class).size());
-        for(Jugador j:jugadorDAO.getAll(Jugador.class)){
-             System.out.println("aqui bucle forrr:  ");
-        }
-    }
-
-
-
-
 }
