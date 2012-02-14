@@ -12,20 +12,13 @@
 <html>
     <head>
         <link type="text/css" rel="stylesheet" href="/Estilos/tablero.css" />
+        
         <!-- Librerías de JQuery -->
         <script type="text/javascript" src="jQuery/js/jquery.min.js"></script>
         <script type="text/javascript" src="jQuery/js/jquery-ui.custom.min.js"></script>
 
-
-        <!-- Librerías del plugin de rating para JQuery-->
-        <script type="text/javascript" src="jQuery/js/jquery.ui.stars.js"></script>
-        <link rel="stylesheet" type="text/css" href="jQuery/css/crystal-stars.css" />
-
-        <!--Librerías de FancyBox-->
-        <script type="text/javascript" src="fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-        <script type="text/javascript" src="fancybox/jquery.easing-1.3.pack.js"></script>
-        <script type="text/javascript" src="fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-        <link rel="stylesheet" href="fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
+        
+        
         <script language="javascript" type="text/javascript"></script>
         <script type="text/javascript">
            
@@ -258,17 +251,42 @@
 
             </div>
             <div  id="centro">
-                    <div id="partida" value="${partida}"></div>
+                <table border="1">
+                    <tr>
+                        <td><center>${nombre1}</center></td>
+                        <td><center>${nombre2}</center></td>
+                        <td><center>${nombre3}</center></td>
+                        <td><center>${nombre4}</center></td>
+                    </tr>
+                    <tr>
+                        <td><img src='Estilos/tux/batman.png' width='100%' height='100%'/></td>
+                        <td><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></td>
+                        <td><img src='Estilos/tux/croft.png' width='100%' height='100%'/></td>
+                        <td><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></td>
+                    </tr>
+                    <tr>
+                        <td><center>${dinero1}$</center></td>
+                        <td><center>${dinero2}$</center></td>
+                        <td><center>${dinero3}$</center></td>
+                        <td><center>${dinero4}$</center></td>
+                    </tr>
+                </table>
+
+
+	
+
+
+                <div id="partida" value="${partida}"></div>
 
                 <form action="/perfil" method="post">
                     <input id="botonEntrar" type="submit" value="Terminar Partida" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
                 </form>
 
-                
-
-
                 <button onClick="tirarDado2('${jugador.nick}')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
             </div>
+
+
+
             <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>
             <div id='jugador2'><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></div>
             <div id='jugador3'><img src='Estilos/tux/croft.png' width='100%' height='100%'/></div>
