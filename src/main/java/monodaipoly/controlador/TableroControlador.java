@@ -122,19 +122,25 @@ public class TableroControlador {
             }else if(jugadorServicio.buscar(partida.getJugador4()).getNick().compareTo(jugQueTira)==0){
                 numJugador=4;
             }
+            if(comprobarQueEsTurno(numJugador,partida)){
 
-            int dado = (int)(6.0 * Math.random()) + 1;
-            //int dado=((int)Math.random()*6);
-            if(jugador.getPosicion()+dado>35){
-                int posAnt=jugador.getPosicion();
-                int dif=36-posAnt;
-                jugador.setPosicion(0+dado-dif);                    
+
+
+                int dado = (int)(6.0 * Math.random()) + 1;
+                //int dado=((int)Math.random()*6);
+                if(jugador.getPosicion()+dado>35){
+                    int posAnt=jugador.getPosicion();
+                    int dif=36-posAnt;
+                    jugador.setPosicion(0+dado-dif);
+                }else{
+                    jugador.setPosicion(jugador.getPosicion()+dado);
+                }
+
+                jugadorServicio.actualizar(jugador);
+                return this.dadoJson(jugador.getPosicion(),dado,numJugador).toString();
             }else{
-                jugador.setPosicion(jugador.getPosicion()+dado);
+                return "no";
             }
-
-            jugadorServicio.actualizar(jugador);
-            return this.dadoJson(jugador.getPosicion(),dado,numJugador).toString();
     }
 
         private JSONObject dadoJson(int posicion,int dado,int numJugador){
@@ -213,7 +219,7 @@ public class TableroControlador {
                     player.setDinero(2000);
                     
                     
-                    partida.setFechaTurno(System.currentTimeMillis()+300000);
+                    partida.setFechaTurno(System.currentTimeMillis()+10000);
                     jugadorServicio.actualizar(player);
                     partidaServicio.actualizar(partida);
                     model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
@@ -267,4 +273,28 @@ public class TableroControlador {
        model.addAttribute("dinero4",jugador4.getDinero());
        return "/tablero2";
     }
+
+
+    private boolean comprobarQueEsTurno(int numJugador, Partida partida){
+        if(numJugador==1){
+          if(partida.getTurno().equals(partida.getJugador1())){
+              return true;
+            }
+        }else if(numJugador==2){
+            if(partida.getTurno().equals(partida.getJugador2())){
+              return true;
+            }
+        }else if(numJugador==3){
+            if(partida.getTurno().equals(partida.getJugador3())){
+              return true;
+            }
+        }else if(numJugador==4){
+            if(partida.getTurno().equals(partida.getJugador4())){
+              return true;
+            }
+        }
+        return false;
+    }
+
+
 }

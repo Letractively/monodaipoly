@@ -212,6 +212,9 @@
                                 jugQueTira:jugQueTira
                             },
                             function(json){
+                                if(json=="no"){
+                                    alert("No es tu turno,No puedes tirar");
+                                }else{
                                 var db = $.parseJSON(json);
                                 alert(db.dado);
                                 //alert(db.nuevaPosicion);
@@ -225,6 +228,7 @@
                                 "left":izq,
                                 "top":arriba
                                 });
+                                }
                             }, "json")
     
                         }

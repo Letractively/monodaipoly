@@ -159,13 +159,15 @@ public class PartidaServicioImpl implements PartidaServicio {
     @Override
     public List<Partida> partidaCompleta() {
         List<Partida> todasPartidas = new ArrayList<Partida>();
+        
         try {
             for (Partida partida : partidaDAO.getAll(Partida.class)) {
                 if (partida.getJugador1() != null && partida.getJugador2() != null && partida.getJugador3() != null && partida.getJugador4() != null) {
                     todasPartidas.add(partida);
+                    System.out.println("recoge partidas");
                 }
             }
-
+            System.out.println(todasPartidas.get(0).getIdString());
         }catch (Exception e) {
             System.out.println("Aqui error en en partidaCompleta servicio");
             e.printStackTrace();
