@@ -75,21 +75,30 @@ public class JuegoControlador {
     
     }
     public void cambiarTurno(Partida partida) {
-        
-        if(partida.getTurno()==partida.getJugador1()){            
+        String cambiadoTurno="no";
+        //System.out.println("Llega a cambiar turno");
+        if(partida.getTurno().equals(partida.getJugador1())){
+           //System.out.println("Entra");
+            cambiadoTurno="si";
            partida.setTurno(partida.getJugador2());             
         }else{
-            if(partida.getTurno()==partida.getJugador2()){
+            if(partida.getTurno().equals(partida.getJugador2())){
                 partida.setTurno(partida.getJugador3());
+                cambiadoTurno="si";
             }else{
-                 if(partida.getTurno()==partida.getJugador3()){
-                       partida.setTurno(partida.getJugador4());                      
+                 if(partida.getTurno().equals(partida.getJugador3())){
+                       partida.setTurno(partida.getJugador4());
+                       cambiadoTurno="si";
                 }else{
-                     partida.setTurno(partida.getJugador1());                    
+                     partida.setTurno(partida.getJugador1());
+                     cambiadoTurno="si";
                  }
             }
         }
-        partida.setFechaTurno(System.currentTimeMillis()+300000);
+
+        //debemos hacer un metodo que envie algo a tablero para indicir que se a cambiado el turno y de quien es
+
+        partida.setFechaTurno(System.currentTimeMillis()+10000);
         partidaServicio.actualizar(partida);
     }
 
@@ -102,11 +111,11 @@ public class JuegoControlador {
             int i;
             for(i=0;i<=partidasCompletas.size()-1;i++){
                 partida=partidasCompletas.get(i);
-                System.out.println(partida.getTurno());
+                //System.out.println(partida.getTurno());
                 if(System.currentTimeMillis()>=partida.getFechaTurno()){
                     cambiarTurno(partida);
                 }
-                System.out.println(partida.getTurno());
+                //System.out.println(partida.getTurno());
             }
         }else{
             System.out.println("No ai partidas llenas");
@@ -116,3 +125,4 @@ public class JuegoControlador {
 
        
 }
+

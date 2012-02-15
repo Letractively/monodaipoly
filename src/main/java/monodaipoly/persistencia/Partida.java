@@ -117,7 +117,6 @@ public class Partida implements Serializable{
     
 
     public String getIdString(){
-            System.out.println("Aqui Jugador getIdString() clave partida  " + idpartida);
             return KeyFactory.keyToString(idpartida);
         }
 
