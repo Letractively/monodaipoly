@@ -167,44 +167,56 @@ public class JuegoControlador {
              if(!jugador.getCalles().contains(casilla.getIdCasilla())){
                  int multa=0;
                  int numJug=this.numDelJugador(jugador, partida);
+                 int jugadorPagas=0;
 
                  if(jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()) && numJug!=1){
                      //paga la multa y se lo sumamos al jugador 1
-                     jugador.setDinero(jugador.getDinero()-calle.getMulta());
-                     jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+calle.getMulta());
-                     //ahora enviaremos un mensaje que diga que a pagado una multa
                      multa=calle.getMulta();
+                     jugador.setDinero(jugador.getDinero()-calle.getMulta());
+                     jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+multa);
+                     jugadorServicio.actualizar(jugadorServicio.buscar(partida.getJugador1()));
+                     jugadorPagas=1;
+                     //ahora enviaremos un mensaje que diga que a pagado una multa
+                     
 
 
                  }
                  if(jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla()) && numJug!=2){
                      //paga la multa y se lo sumamos al jugador 2
                      jugador.setDinero(jugador.getDinero()-calle.getMulta());
-                     jugadorServicio.buscar(partida.getJugador2()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+calle.getMulta());
+                     jugadorServicio.buscar(partida.getJugador2()).setDinero(jugadorServicio.buscar(partida.getJugador2()).getDinero()+calle.getMulta());
+                     jugadorServicio.actualizar(jugadorServicio.buscar(partida.getJugador2()));
                      //ahora enviaremos un mensaje que diga que a pagado una multa
                      multa=calle.getMulta();
+                     jugadorPagas=2;
 
 
                  }if(jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()) && numJug!=3){
                      //paga la multa y se lo sumamos al jugador 3
                      jugador.setDinero(jugador.getDinero()-calle.getMulta());
-                     jugadorServicio.buscar(partida.getJugador3()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+calle.getMulta());
+                     jugadorServicio.buscar(partida.getJugador3()).setDinero(jugadorServicio.buscar(partida.getJugador3()).getDinero()+calle.getMulta());
+                     jugadorServicio.actualizar(jugadorServicio.buscar(partida.getJugador3()));
                      //ahora enviaremos un mensaje que diga que a pagado una multa
                      multa=calle.getMulta();
+                     jugadorPagas=3;
 
 
                  }
                  if(jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla()) && numJug!=4){
                      //paga la multa y se lo sumamos al jugador 4
                      jugador.setDinero(jugador.getDinero()-calle.getMulta());
-                     jugadorServicio.buscar(partida.getJugador4()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+calle.getMulta());
+                     jugadorServicio.buscar(partida.getJugador4()).setDinero(jugadorServicio.buscar(partida.getJugador4()).getDinero()+calle.getMulta());
+                     jugadorServicio.actualizar(jugadorServicio.buscar(partida.getJugador4()));
                      //ahora enviaremos un mensaje que diga que a pagado una multa
                      multa=calle.getMulta();
+                     jugadorPagas=4;
 
                  }
 
+                 jugadorServicio.actualizar(jugador);
 
-                 return casillaJson(multa,numJug,"multa").toString();
+
+                 return multaJson(multa,jugadorPagas,"multa").toString();
              }
              //la calle es tuya...no hacemos nada...
              return "tuya";
@@ -222,7 +234,7 @@ public class JuegoControlador {
 
 
 
-    private JSONObject casillaJson(int multa,int numJugador,String tipo){
+    private JSONObject multaJson(int multa,int numJugador,String tipo){
         JSONObject json=new JSONObject();
         try{
 
@@ -268,6 +280,27 @@ public class JuegoControlador {
                     return 4;
                 }
             }
+
+
+
+        @RequestMapping(value = "/comprarCalle", method = RequestMethod.GET)
+        private @ResponseBody String comprarCalle(HttpSession sesion,@RequestParam("jugQueTira") String jugQueTira){
+
+            Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            Partida partida =partidaServicio.buscar(jugador.getPartida());
+
+            Casilla casilla=casillaServicio.buscarPorNumero(jugador.getPosicion());
+            Calle calle=calleServicio.buscar(casilla.getTipoCasilla());
+
+
+            if(jugador.getDinero()>=calle.getPrecio()){
+                jugador.setDinero(jugador.getDinero()-calle.getPrecio());
+                jugador.getCalles().add(casilla.getIdCasilla());
+                jugadorServicio.actualizar(jugador);
+                return "calle comprada";
+            }
+            return "insuficiente_dinero";
+        }
 
 
        
