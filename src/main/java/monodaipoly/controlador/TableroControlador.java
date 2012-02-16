@@ -166,14 +166,21 @@ public class TableroControlador {
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
         int posicion;
         if(usuario.getJugador()!=null){
+            //System.out.println("1 tiene jugador");
             if(jugadorServicio.comprobarJugadorConPartida(usuario.getJugador())!=null){
-                System.out.println("tiene partida este jugador");
-                if(jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando()==true){//if esta jugando...
+                //System.out.println(" 2 tiene partida este jugador");
+                //System.out.println(" estoy jugando:"+jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando() );
+                if(jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando()==null){
+                    //System.out.println("4 return");
+                    return "/perfilPrueba";//else return perfil y mostrar cola
+                }else if(jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando()==true){//if esta jugando...
+                    //System.out.println("3 cargar en modelo el jugador");
                     model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
                     return "redirect:comenzarPartida";//return ... el metodo que falta que carga el modelo
-                }else{
-                    return "/perfilPrueba";//else return perfil y mostrar cola
                 }
+                    //System.out.println("5 return");
+                    return "/perfilPrueba";//else return perfil y mostrar cola
+                
             
                 
             }
