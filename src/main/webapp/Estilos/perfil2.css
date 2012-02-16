@@ -11,8 +11,8 @@
     color:#e10c0c;
     font-size: 10pt;
 }
-h1{
-     color: #FFF;
+#titulo{
+     color:#FFF;
 }
 #menu{
 
@@ -151,10 +151,7 @@ h1{
      left: 0%;
      top:25%;
      width: 15%;
-     
      color: #FFF;
-    
-        
 }
 #menuMensajes div{
     

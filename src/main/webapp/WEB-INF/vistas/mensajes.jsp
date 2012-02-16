@@ -8,7 +8,7 @@
 
 <div id="menuMensajes">
     
-    <div id="redactar"><a onclick="javascript:redactarMensaje()">REDACTAR</a></div>
+    <div id="redactar"><p onclick="javascript:redactarMensaje()">REDACTAR</a></div>
         <br/>
      <div id="recibidos"><p onclick="javascript:verBandejaEntrada()">RECIBIDOS</p></div>
         <br/>

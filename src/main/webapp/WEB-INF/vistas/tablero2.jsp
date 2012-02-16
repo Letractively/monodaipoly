@@ -288,40 +288,51 @@
                 <img src='Estilos/Logo.jpg' width='100%' height='100%'/>
 
             </div>
-            <div  id="centro">
-                <table border="1">
-                    <tr>
-                        <td><center>${nombre1}</center></td>
-                        <td><center>${nombre2}</center></td>
-                        <td><center>${nombre3}</center></td>
-                        <td><center>${nombre4}</center></td>
-                    </tr>
-                    <tr>
-                        <td><img src='Estilos/tux/batman.png' width='100%' height='100%'/></td>
-                        <td><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></td>
-                        <td><img src='Estilos/tux/croft.png' width='100%' height='100%'/></td>
-                        <td><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></td>
-                    </tr>
-                    <tr>
-                        <td><center>${dinero1}$</center></td>
-                        <td><center>${dinero2}$</center></td>
-                        <td><center>${dinero3}$</center></td>
-                        <td><center>${dinero4}$</center></td>
-                    </tr>
-                </table>
+           <div  id="centro">
+
+
+                    
+                        <span class="jugadores" id="jugador1info"><center>${nombre1}</center></span>
+                        <span class="jugadores" id="jugador2info"><center>${nombre2}</center></span>
+                        <span class="jugadores" id="jugador3info"><center>${nombre3}</center></span>
+                        <span class="jugadores" id="jugador4info"><center>${nombre4}</center></span>
+                    
+                    
+                        <span class="imagenesJugador" id="imagenJugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></span>
+                        <span class="imagenesJugador" id="imagenJugador2"><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></span>
+                        <span class="imagenesJugador" id="imagenJugador3"><img src='Estilos/tux/croft.png' width='100%' height='100%'/></span>
+                        <span class="imagenesJugador" id="imagenJugador4"><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></span>
+                    
+                    
+                        <span class="dineroJugador" id="dineroJugador1"><center>${dinero1}$</center></span>
+                        <span class="dineroJugador" id="dineroJugador2"><center>${dinero2}$</center></span>
+                        <span class="dineroJugador" id="dineroJugador3"><center>${dinero3}$</center></span>
+                        <span class="dineroJugador" id="dineroJugador4"><center>${dinero4}$</center></span>
+
+
+                        <button class="boton" id="botonTirar"onClick="tirarDado2('${jugador.nick}')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
+                        <!--provisional-->
+                        <button class="boton" id="botonVender" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Vender Propiedades</button>
+
+
+
+                        <form action="/perfil" method="post">
+                    <input class="boton" id="botonSalida" type="submit" value="Volver Perfil" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
+                </form>
+
+                        <!--provisional-->
+                        <button class="boton" id="botonAbandonar" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Abandonar</button>
+                
+           </div>
 
 
 	
 
 
-                <div id="partida" value="${partida}"></div>
+                
 
-                <form action="/perfil" method="post">
-                    <input id="botonEntrar" type="submit" value="Terminar Partida" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
-                </form>
-
-                <button onClick="tirarDado2('${jugador.nick}')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
-            </div>
+                
+            
 
 
 
@@ -330,8 +341,6 @@
             <div id='jugador3'><img src='Estilos/tux/croft.png' width='100%' height='100%'/></div>
             <div id='jugador4'><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></div>
 
-
-        </div>
 
 
     </body>
