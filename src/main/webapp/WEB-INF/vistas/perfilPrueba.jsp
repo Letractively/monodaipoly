@@ -95,7 +95,7 @@
       </script>
 </head>
 <body>
-    <h1>Bienvenido,  ${usuario.nick} !</h1>
+    <h1 id="titulo">Bienvenido,  ${usuario.nick} !</h1>
          <div id="dock">
 			<div class="dock-container">
 				<a class="dock-item" onclick="javascript:datosPersonales()"><span>Datos&nbsp;Personales</span><img src="/Estilos/tux/tux6.png" alt="home" /></a> 

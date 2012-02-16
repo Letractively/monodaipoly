@@ -1,5 +1,5 @@
 body {
-    background-color:  cornsilk;
+    background-color:limegreen;
 }
 #jugador1{
     position: absolute;
@@ -196,13 +196,13 @@ body {
 #centro{
     border: black;
     border-style: solid;
-    background-color: lime;
     position: absolute;
     width: 50%;
     height: 34%;
     left:25.2%;
     top: 30%;
     z-index: 4;
+      background-color: lawngreen;
 }
 
 
@@ -234,3 +234,98 @@ body {
 }
 
 
+.jugadores{
+    position: absolute;
+    left: 0%;
+    padding: 3%;
+  
+
+}
+#jugador1info{
+    left: 5%;
+}
+#jugador2info{
+    left: 30%;
+}
+#jugador3info{
+    left: 55%;
+}
+#jugador4info{
+    left:80%;
+}
+
+.imagenesJugador{
+    position: absolute;
+    top:20%;
+    border: #444;
+    border-style: solid;
+    width: 24%;
+    height: 55%;
+    background-color: limegreen;
+}
+
+#imagenJugador1{
+    position: absolute;
+    left: 0%;
+}
+#imagenJugador2{
+    position: absolute;
+    left: 25%;
+}
+#imagenJugador3{
+    position: absolute;
+    left: 50%;
+}
+#imagenJugador4{
+    position: absolute;
+    left: 75%;
+}
+
+
+.dineroJugador{
+     position: absolute;
+    left: 0%;
+    top:75%;
+    padding:3%;
+}
+
+#dineroJugador1{
+   
+    left: 5%;
+}
+#dineroJugador2{
+    
+    left: 30%;
+}
+#dineroJugador3{
+    
+    left: 55%;
+}
+#dineroJugador4{
+    
+    left: 80%;
+}
+
+.boton{
+
+    position: absolute;
+    background-color:lemonchiffon;
+    top:90%;
+    
+}
+
+#botonTirar{
+    left:5%;
+}
+
+#botonVender{
+    left:25%;
+}
+
+#botonSalida{
+    left:54%;
+}
+
+#botonAbandonar{
+    left:79%;
+}
