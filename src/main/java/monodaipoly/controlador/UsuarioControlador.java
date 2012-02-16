@@ -72,6 +72,11 @@ public class UsuarioControlador {
     public String getDatosURL() {
         return "/datos";
     }
+    
+    @RequestMapping(method=RequestMethod.GET, value="/getUnirsePartidaJSP")
+    public String getUnirseJSP() {
+        return "/Unirse";
+    }
 
     @RequestMapping(value="/registrando", method =RequestMethod.POST)
     public String doRegistrar(@RequestParam("nombre") String nombre, Model model

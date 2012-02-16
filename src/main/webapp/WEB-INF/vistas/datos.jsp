@@ -6,10 +6,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-    <legend>Datos Personales</legend>
-    <br/>
-<div>
+  
     
+<div id="datospersonales">
+      <legend>Datos Personales</legend>
+    <br/>
     <form id="modi" action="/modificarDatosAsincronamente" method="post">
         <div style="color: white">Nombre:  <span id="nom">${usuario.nombre}</span></div>
         <div class="modificar" style="visibility:hidden">

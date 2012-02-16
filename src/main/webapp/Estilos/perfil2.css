@@ -13,63 +13,55 @@
 }
 #titulo{
      color:#FFF;
+     
 }
-#menu{
 
-    position: absolute;
-    width: 100%;
-    height: 3%;
-    left: 0%;
-    top: 10%;
-    color: #FFF;
-    font-family:arial;
-    border-bottom: #FFF;
-    border-bottom-style: solid;
-    
-    
-
-}
 #contenido{
     
-    margin: auto;
-    margin-left: 3%;
+    
+    margin-left: 0%;
     position: absolute;
-    width: 95%;
+    width: 100%;
     height: 60%;
     left: 0%;
-    top: 30%;
+    top: 25%;
     font-family:arial;
     font-size: 10pt;
-   
-        
-
+    border-top: darkgreen;
+    border-top-style:double;
+    
+    background-image: -webkit-gradient(linear, center top, center bottom, from(limegreen), to(#A2EF95));
 }
 #pie{
     position: absolute;
     width: 100%;
-    height: 0%;
+    height: 15%;
     left: 0%;
     top: 85%;
+    background-color:#A2EF95;
 }
 #datospersonales{
-
+    
+   
     position: absolute;
-    width: 25%;
+    width: 50%;
     height: 100%;
-    left: 0%;
-    top: 0%;
-    text-align: center;
+    left: 10%;
+    top: 15%;
+    
 
 
 }
 #estadisticas{
-
+    
+    
     position: absolute;
-    width: 25%;
+    width: 100%;
     height: 100%;
-    left: 25%;
-    top: 0%;
+    left: 0%;
+    top: 5%;
     text-align: center;
+  
 
 
 }
@@ -79,7 +71,7 @@
     width: 25%;
     height: 100%;
     left: 50%;
-    top: 0%;
+    top: 15%;
     text-align: center;
 
 
@@ -112,14 +104,6 @@
     color: red;
 }
 
-#logout:hover{
-    color:red;
-    font-weight: bold;
-}
-#botonSalir:hover{
-    font-size: x-large;
-    color: #e10c0c;
-}
 #aJugar{
      position: absolute;
      left: 75%;
@@ -135,6 +119,7 @@
      border-bottom-style: solid;
      border: #FFF;
      text-align: center;
+     
     
 }
 #nickUsuariosMejores{
@@ -145,12 +130,13 @@
      border-bottom-style: solid;
      border: #FFF;
      text-align: center;
+    
 }
 #menuMensajes{
      position: relative;
-     left: 0%;
-     top:25%;
-     width: 15%;
+     left: 5%;
+     top:35%;
+     width: 10%;
      color: #FFF;
 }
 #menuMensajes div{
@@ -166,7 +152,7 @@
 #enviarMensaje{
     position: absolute;
     left: 15%;
-    top:0%;
+    top: 10%;
     width: 75%;
     height: 80%;
     
@@ -174,7 +160,7 @@
 #bandejaEntrada{
     position: absolute;
     left: 15%;
-    top:0%;
+   top: 15%;
     width: 75%;
     height: 80%;
     
@@ -183,4 +169,34 @@
     color:#FFF;
 }
 
+#contenedorUnirse{
+    position: absolute;
+    left:42.5%;
+    top: 15%;
+    width: 15%;
+    height: 20%;
+    text-align: center;
+    color: #FFF;
+   
+}
 
+#money1{
+    position: absolute;
+    left: 23%;
+    top:30%;
+}
+
+#money2{
+    position: absolute;
+    left: 58%;
+    top:30%;
+}
+
+#aJugarPartida{
+    position: absolute;
+    left:42.5%;
+    top:50%;
+    width: 15%;
+    height: 15%;
+    color:darkgreen;
+}
