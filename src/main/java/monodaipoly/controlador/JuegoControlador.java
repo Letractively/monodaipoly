@@ -1,5 +1,6 @@
  package monodaipoly.controlador;
 
+import com.google.appengine.api.datastore.Key;
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
 import java.util.List;
@@ -110,7 +111,7 @@ public class JuegoControlador {
 
         //debemos hacer un metodo que envie algo a tablero para indicir que se a cambiado el turno y de quien es
 
-        partida.setFechaTurno(System.currentTimeMillis()+100000);
+        partida.setFechaTurno(System.currentTimeMillis()+60000);
         partida.setHaTirado(false);
         partidaServicio.actualizar(partida);
     }
@@ -150,6 +151,8 @@ public class JuegoControlador {
          Jugador jugador = (Jugador)sesion.getAttribute("jugador");
          Partida partida =partidaServicio.buscar(jugador.getPartida());
 
+         //casillas especiales como salida...free...carcel o solo visitas de carcel
+         if(jugador.getPosicion()!=0 && jugador.getPosicion()!=9 && jugador.getPosicion()!=18 && jugador.getPosicion()!=27){
          Casilla casilla=casillaServicio.buscarPorNumero(jugador.getPosicion());
          //comprobamos que no es nulo el tipo casilla
          //porque las q son de tipo nulo no se pueden comprar...
@@ -158,25 +161,32 @@ public class JuegoControlador {
          if(casilla.getTipoCasilla()!=null){
              //busco la calle en la q ha caido para saber la multa o el precio
          Calle calle=calleServicio.buscar(casilla.getTipoCasilla());
+         System.out.println("calle: "+ calle.getIdCalle());
 
                  
 
-         if (jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla()) ){
 
+         if (jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla()) ){
+                System.out.println("Alguien tiene la calle en la que has caido");
              //si no es tuya la calle....comprobaremos de quien es
              if(!jugador.getCalles().contains(casilla.getIdCasilla())){
-                 int multa=0;
+                 int multa=-1;
                  int numJug=this.numDelJugador(jugador, partida);
-                 int jugadorPagas=0;
+                 int jugadorPagas=-1;
 
                  if(jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()) && numJug!=1){
                      //paga la multa y se lo sumamos al jugador 1
                      multa=calle.getMulta();
+                     System.out.println("la multa que tienes que pagar es de: "+ multa);
+                     
+                     //restamos el dinero de la multa al jugador
                      jugador.setDinero(jugador.getDinero()-calle.getMulta());
+                     //se la sumamos al jugador1
                      jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+multa);
                      jugadorServicio.actualizar(jugadorServicio.buscar(partida.getJugador1()));
                      jugadorPagas=1;
-                     //ahora enviaremos un mensaje que diga que a pagado una multa
+                     System.out.println("hay que pagarsela al jugador nº "+jugadorPagas);
+                     
                      
 
 
@@ -188,7 +198,10 @@ public class JuegoControlador {
                      jugadorServicio.actualizar(jugadorServicio.buscar(partida.getJugador2()));
                      //ahora enviaremos un mensaje que diga que a pagado una multa
                      multa=calle.getMulta();
+                     System.out.println("la multa que tienes que pagar es de: "+ multa);
+                     
                      jugadorPagas=2;
+                     System.out.println("hay que pagarsela al jugador nº "+jugadorPagas);
 
 
                  }if(jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()) && numJug!=3){
@@ -198,7 +211,10 @@ public class JuegoControlador {
                      jugadorServicio.actualizar(jugadorServicio.buscar(partida.getJugador3()));
                      //ahora enviaremos un mensaje que diga que a pagado una multa
                      multa=calle.getMulta();
+                     System.out.println("la multa que tienes que pagar es de: "+ multa);
+                     
                      jugadorPagas=3;
+                     System.out.println("hay que pagarsela al jugador nº "+jugadorPagas);
 
 
                  }
@@ -209,7 +225,9 @@ public class JuegoControlador {
                      jugadorServicio.actualizar(jugadorServicio.buscar(partida.getJugador4()));
                      //ahora enviaremos un mensaje que diga que a pagado una multa
                      multa=calle.getMulta();
+                     System.out.println("la multa que tienes que pagar es de: "+ multa);
                      jugadorPagas=4;
+                     System.out.println("hay que pagarsela al jugador nº "+jugadorPagas);
 
                  }
 
@@ -223,8 +241,31 @@ public class JuegoControlador {
 
          }
 
+         System.out.println("Nadie tiene esa casilla...Te damos la opcion a compra");
+         
+         System.out.println("id de la casilla= "+casilla.getIdCasilla());
+         
+         System.out.println("Calles del jug1= "+ jugadorServicio.buscar(partida.getJugador1()).getCalles().toString());
+         System.out.println("jug1= "+ jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()));
+         
+         System.out.println("Calles del jug2= "+ jugadorServicio.buscar(partida.getJugador2()).getCalles().toString());        
+         System.out.println("jug2= "+ jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla()));
+
+         System.out.println("Calles del jug3= "+ jugadorServicio.buscar(partida.getJugador3()).getCalles().toString());
+         System.out.println("jug3= "+ jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()));
+         
+         System.out.println("Calles del jug4= "+ jugadorServicio.buscar(partida.getJugador4()).getCalles().toString());
+         System.out.println("jug4= "+ jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla()));
+         
+         
+         
+
          //vamos a darle la opcion de comprar la calle en la q ha caido...ya q no es de nadie
          return opcionCompraJson(calle.getPrecio(),casilla.getNombre(),"noMulta").toString();
+
+        }
+            //no se puede dar la opcion de compra pq es salida o free o carcel o carcel de visita!!
+        return null;
 
         }
          //no se puede dar la opcion de compra pq es una estacion...
@@ -265,21 +306,19 @@ public class JuegoControlador {
     }
 
 
-
-
-            private int numDelJugador(Jugador jugador,Partida partida){
-                if(partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
+        private int numDelJugador(Jugador jugador,Partida partida){
+              if(partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
                     return 1;
                 }
                 if(partida.getJugador2().compareTo(jugador.getClaveJugador())==0){
-                    return 1;
+                    return 2;
                 }
                 if(partida.getJugador3().compareTo(jugador.getClaveJugador())==0){
-                    return 1;
+                    return 3;
                 }else{
                     return 4;
                 }
-            }
+        }
 
 
 
@@ -295,7 +334,9 @@ public class JuegoControlador {
 
             if(jugador.getDinero()>=calle.getPrecio()){
                 jugador.setDinero(jugador.getDinero()-calle.getPrecio());
-                jugador.getCalles().add(casilla.getIdCasilla());
+                List<Key> casillasDelJugador= jugador.getCalles();
+                casillasDelJugador.add(casilla.getIdCasilla());
+                jugador.setCalles(casillasDelJugador);
                 jugadorServicio.actualizar(jugador);
                 return "calle comprada";
             }

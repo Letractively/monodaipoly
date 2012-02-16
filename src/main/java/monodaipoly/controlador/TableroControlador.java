@@ -132,6 +132,7 @@ public class TableroControlador {
                     int posAnt=jugador.getPosicion();
                     int dif=36-posAnt;
                     jugador.setPosicion(0+dado-dif);
+                    jugador.setDinero(jugador.getDinero()+200);
                 }else{
                     jugador.setPosicion(jugador.getPosicion()+dado);
                 }
@@ -222,7 +223,7 @@ public class TableroControlador {
                     player.setDinero(2000);
                     
                     
-                    partida.setFechaTurno(System.currentTimeMillis()+100000);
+                    partida.setFechaTurno(System.currentTimeMillis()+60000);
                     jugadorServicio.actualizar(player);
                     partidaServicio.actualizar(partida);
                     model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
@@ -298,6 +299,8 @@ public class TableroControlador {
         }
         return false;
     }
+
+
 
 
 }
