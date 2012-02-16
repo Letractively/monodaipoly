@@ -252,7 +252,22 @@
                                         alert("Has pagado una multa de: "+db.multa+" a el jugador numero "+db.numJugador);
                                     }else{
                                         //te tendria q aparecer la opcion de compra
-                                        alert("Quieres comprar la calle " + db.nombre + " que cuesta: "+db.precio);
+                                        comprarCalle=confirm("Quieres comprar la calle " + db.nombre + " que cuesta: "+db.precio);
+                                        if(comprarCalle){
+
+                                            $.get("/comprarCalle", {
+                                                jugQueTira:jugQueTira
+                                            }, function(json){
+                                                if(json=="calle comprada"){
+                                                    alert("Has comprado la calle: "+db.nombre);
+                                                }else{
+                                                    alert("No tienes dinero suficiente para comprar la calle...");
+                                                }
+
+                                            }, "json")
+
+                                        }
+                                        //terminamos turno
                                     }
                                 }
 
