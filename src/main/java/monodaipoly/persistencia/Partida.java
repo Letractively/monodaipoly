@@ -40,6 +40,8 @@ public class Partida implements Serializable{
     private Key turno;
     @Basic
     private long fechaTurno;
+    @Basic
+    private boolean haTirado;
 
    public Partida(){
        this.jugador1=null;
@@ -98,6 +100,15 @@ public class Partida implements Serializable{
     public void setIdpartida(Key idpartida) {
         this.idpartida = idpartida;
     }
+
+    public boolean getHaTirado() {
+        return haTirado;
+    }
+
+    public void setHaTirado(boolean haTirado) {
+        this.haTirado = haTirado;
+    }
+    
 
     public Key getTurno() {
         return turno;

@@ -391,5 +391,10 @@ public class CasillaServicioImpl implements CasillaServicio{
     public List<Casilla> getAll() {
         return casillaDAO.getAll(Casilla.class);
     }
+
+    @Override
+    public Casilla buscarPorNumero(int posicion){
+        return casillaDAO.buscarPorNumero(posicion);
+    }
     
 }

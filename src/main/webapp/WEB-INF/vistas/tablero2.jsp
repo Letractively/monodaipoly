@@ -228,8 +228,42 @@
                                 "left":izq,
                                 "top":arriba
                                 });
+
+
+
+                                 //si a podido tirar le vamos a decir lo de la calle
+
+                                $.get("/comprobarCalle",{
+                                jugQueTira:jugQueTira
+                            },
+                            function(json){
+                                if(json==null || json=="tuya"){
+                                    if(json=="tuya"){
+                                        //la casilla en la q has caido es tuya
+                                        alert("la casilla es tuya");
+                                    }else{
+                                        alert("has caido en una casilla que no se puede comprar");
+                                    }
+
+                                }else{
+                                    var db = $.parseJSON(json);
+                                    if(db.tipo=="multa"){
+                                        //cuando has pagado multa
+                                        alert("Has pagado una multa de: "+db.multa+" a el jugador numero "+db.numJugador);
+                                    }else{
+                                        //te tendria q aparecer la opcion de compra
+                                        alert("Quieres comprar la calle " + db.nombre + " que cuesta: "+db.precio);
+                                    }
                                 }
-                            }, "json")
+
+                            },"json");
+
+
+
+
+
+                                }
+                            }, "json")                            
     
                         }
                         
