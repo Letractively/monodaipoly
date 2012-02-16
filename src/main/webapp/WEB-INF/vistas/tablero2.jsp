@@ -270,15 +270,11 @@
                                         //terminamos turno
                                     }
                                 }
+                             
 
                             },"json");
-
-
-
-
-
                                 }
-                            }, "json")                            
+                            }, "json");
     
                         }
                         
@@ -339,6 +335,7 @@
                         <button class="boton" id="botonAbandonar" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Abandonar</button>
                 
            </div>
+        </div>
 
 
 	
