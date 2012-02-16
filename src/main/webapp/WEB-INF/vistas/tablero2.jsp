@@ -213,7 +213,7 @@
                             },
                             function(json){
                                 if(json=="no"){
-                                    alert("No es tu turno,No puedes tirar");
+                                    alert("No es tu turno, No puedes tirar");
                                 }else{
                                 var db = $.parseJSON(json);
                                 alert(db.dado);
@@ -240,9 +240,9 @@
                                 if(json==null || json=="tuya"){
                                     if(json=="tuya"){
                                         //la casilla en la q has caido es tuya
-                                        alert("la casilla es tuya");
+                                        alert("La casilla es tuya");
                                     }else{
-                                        alert("has caido en una casilla que no se puede comprar");
+                                        alert("Has caido en una casilla que no se puede comprar");
                                     }
 
                                 }else{
@@ -268,6 +268,7 @@
 
                                         }
                                         //terminamos turno
+                                        
                                     }
                                 }
                              
