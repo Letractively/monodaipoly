@@ -51,6 +51,14 @@
 
                );
             }
+            function unirsePartida(){
+                 $.get("/getUnirsePartidaJSP",null,
+                    function(html) {
+                        $("#contenido").html(html);
+                    }
+
+               );
+            }
             
             
             
@@ -95,25 +103,26 @@
       </script>
 </head>
 <body>
-    <h1 id="titulo">Bienvenido,  ${usuario.nick} !</h1>
+
+
          <div id="dock">
 			<div class="dock-container">
-				<a class="dock-item" onclick="javascript:datosPersonales()"><span>Datos&nbsp;Personales</span><img src="/Estilos/tux/tux6.png" alt="home" /></a> 
-				<a class="dock-item" onclick="javascript:mensajes()"><span>Mensajes&nbsp;</span><img src="/Estilos/dock/email.png" alt="contact" /></a> 
-				<a class="dock-item"  onclick="javascript:estadisticas()"><span>Ranking&nbsp;</span><img src="/Estilos/podio.png" alt="portfolio" /></a>
+				<a class="dock-item" onclick="javascript:datosPersonales()"><span>Datos&nbsp;Personales</span><img src="/Estilos/tux/tux6.png" /></a> 
+				<a class="dock-item" onclick="javascript:mensajes()"><span>Mensajes&nbsp;</span><img src="/Estilos/dock/email.png"  /></a> 
+				<a class="dock-item"  onclick="javascript:estadisticas()"><span>Ranking&nbsp;</span><img src="/Estilos/podio.png"/></a>
+                                <a class="dock-item"  onclick="javascript:unirsePartida()"><span>Jugar&nbsp;</span><img src="/Estilos/dock/dados1.png"/></a>
 				<a class="dock-item" href="/logout"><span>Desconectarse&nbsp;</span><img src="/Estilos/logout2.png" alt="music" /></a> 
 				
 				
-			</div><!-- end div .dock-container -->
-        </div><!-- end div .dock #dock -->
-		<!-- END DOCK 1 ============================================================ -->
+			</div>
+        </div>
                 
                 
         <div id="contenido">
 
         </div>
-                 <div id="pie">
-             <input type="button" id="aJugar" value="¡ A JUGAR !" onclick="window.location.href='prepararPartida'"></input>
+         <div id="pie">
+           
          </div>
 </body>
             

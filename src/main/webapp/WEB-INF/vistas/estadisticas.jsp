@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-
+<div id="estadisticas">
 <div align="center" style="color:#AF1515">TOP 10</div>
 <br/>
 <div id="tablaContenido">
@@ -18,7 +18,8 @@
     <strong style="color:#AF1515"> USUARIOS</strong>
     <br/>
     <br/>
-        
+</div>
+
 </div>
 
 

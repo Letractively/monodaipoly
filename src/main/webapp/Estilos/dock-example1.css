@@ -1,26 +1,27 @@
 .dock-container { 
     position: relative; 
-    top: 60px; 
-    height: 50px; 
-  
+    top: 0px; 
+    height: 125px; 
     padding-left: 20px; 
+    
 }
 a.dock-item {
-   display: block;
+    
+    display: block;
     width: 50px;
     margin-right: 100px;
-    position: absolute; 
+    position: absolute;
     bottom: 0;
     text-align: center; 
     text-decoration: none; 
-    color:#e10c0c; 
+    color:darkgreen;
 }
 .dock-item span { 
     display: none;
     padding-left: 20px; 
 }
 .dock-item img { 
-    border: 0; 
+    border:0; 
     margin: 5px 10px 0px; 
     width: 100%;
 }
