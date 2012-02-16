@@ -13,4 +13,5 @@ public interface CasillaServicio {
     public void borrar(Casilla casilla);
     public void preload_casillas();
     public List<Casilla> getAll();
+    Casilla buscarPorNumero(int posicion);
 }

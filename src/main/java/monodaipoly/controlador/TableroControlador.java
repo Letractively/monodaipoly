@@ -122,7 +122,7 @@ public class TableroControlador {
             }else if(jugadorServicio.buscar(partida.getJugador4()).getNick().compareTo(jugQueTira)==0){
                 numJugador=4;
             }
-            if(comprobarQueEsTurno(numJugador,partida)){
+            if(comprobarQueEsTurno(numJugador,partida)&&partida.getHaTirado()==false){
 
 
 
@@ -137,10 +137,13 @@ public class TableroControlador {
                 }
 
                 jugadorServicio.actualizar(jugador);
+                partida.setHaTirado(true);
+                partidaServicio.actualizar(partida);
                 return this.dadoJson(jugador.getPosicion(),dado,numJugador).toString();
             }else{
                 return "no";
             }
+
     }
 
         private JSONObject dadoJson(int posicion,int dado,int numJugador){
@@ -219,7 +222,7 @@ public class TableroControlador {
                     player.setDinero(2000);
                     
                     
-                    partida.setFechaTurno(System.currentTimeMillis()+10000);
+                    partida.setFechaTurno(System.currentTimeMillis()+100000);
                     jugadorServicio.actualizar(player);
                     partidaServicio.actualizar(partida);
                     model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
