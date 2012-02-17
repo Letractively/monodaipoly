@@ -240,6 +240,7 @@ public class TableroControlador {
                     partidaServicio.actualizar(partida);
                     model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
                     //return ... el metodo que falta que carga el modelo
+                    
                     return "redirect:comenzarPartida";
 
                 }
