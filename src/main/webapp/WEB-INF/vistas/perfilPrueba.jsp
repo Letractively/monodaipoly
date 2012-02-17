@@ -98,6 +98,9 @@
                                 
                             }
                         }
+                        $("#notificaciones").html("${enCola}");
+
+
                     });
                     
       </script>
@@ -122,7 +125,7 @@
 
         </div>
          <div id="pie">
-           
+             <div id="notificaciones"></div>
          </div>
 </body>
             

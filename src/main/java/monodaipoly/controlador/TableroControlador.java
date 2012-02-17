@@ -165,6 +165,7 @@ public class TableroControlador {
     public String prepararPartida(Model model,HttpSession sesion) {
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
         int posicion;
+        String enCola="en cola";
         if(usuario.getJugador()!=null){
             //System.out.println("1 tiene jugador");
             if(jugadorServicio.comprobarJugadorConPartida(usuario.getJugador())!=null){
@@ -172,6 +173,7 @@ public class TableroControlador {
                 //System.out.println(" estoy jugando:"+jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando() );
                 if(jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando()==null){
                     //System.out.println("4 return");
+                    model.addAttribute("enCola",enCola );
                     return "/perfilPrueba";//else return perfil y mostrar cola
                 }else if(jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando()==true){//if esta jugando...
                     //System.out.println("3 cargar en modelo el jugador");
@@ -179,6 +181,9 @@ public class TableroControlador {
                     return "redirect:comenzarPartida";//return ... el metodo que falta que carga el modelo
                 }
                     //System.out.println("5 return");
+                
+                model.addAttribute("enCola",enCola );
+
                     return "/perfilPrueba";//else return perfil y mostrar cola
                 
             
@@ -253,6 +258,7 @@ public class TableroControlador {
 
 
         }
+            model.addAttribute("enCola",enCola );
             return "/perfilPrueba";
 
     }
