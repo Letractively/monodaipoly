@@ -1,9 +1,12 @@
  package monodaipoly.controlador;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.repackaged.com.google.common.base.Log2;
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
 import java.util.List;
+import java.util.logging.Logger;
+import javax.persistence.Lob;
 
 import javax.servlet.http.HttpSession;
 import monodaipoly.persistencia.Calle;
@@ -15,6 +18,7 @@ import monodaipoly.servicio.CasillaServicio;
 import monodaipoly.servicio.JugadorServicio;
 import monodaipoly.servicio.PartidaServicio;
 import monodaipoly.servicio.UsuarioServicio;
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
@@ -34,6 +38,14 @@ public class JuegoControlador {
     private UsuarioServicio usuarioServicio;
     private PartidaServicio partidaServicio;
     private CalleServicio calleServicio;
+    //private Logger logger;
+
+
+    /*@Autowired
+    @Required
+    public void setLogger(Logger logger){
+        this.logger = logger;
+    }*/
 
     @Autowired
     @Required
@@ -162,6 +174,11 @@ public class JuegoControlador {
              //busco la calle en la q ha caido para saber la multa o el precio
          Calle calle=calleServicio.buscar(casilla.getTipoCasilla());
          System.out.println("calle: "+ calle.getIdCalle());
+
+         Logger.getAnonymousLogger().info("calle: "+ calle.getIdCalle());
+         Logger.getLogger(JuegoControlador.class.getName()).info("calle: "+ calle.getIdCalle());
+         
+
 
                  
 
