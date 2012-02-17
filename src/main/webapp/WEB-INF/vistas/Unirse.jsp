@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <div id="contenedorUnirse">
-    <div id="textoExplicacion">Haz click en Unirse a Partida y espera a que otros jugadores quieran jugar</div>
+    <div>Haz click en Unirse a Partida y espera a que otros jugadores quieran jugar</div>
     
 </div>
 

@@ -29,7 +29,8 @@
     font-size: 10pt;
     border-top: darkgreen;
     border-top-style:double;
-    
+    border-top-width: thick;
+    background-image: -moz-linear-gradient(limegreen,#A2EF95);
     background-image: -webkit-gradient(linear, center top, center bottom, from(limegreen), to(#A2EF95));
 }
 #pie{
@@ -199,4 +200,16 @@
     width: 15%;
     height: 15%;
     color:darkgreen;
+}
+#notificaciones{
+    position: absolute;
+    color:darkgreen;
+    border:#FFF;
+    border-style: solid;
+    left: 40%;
+    top:10%;
+    width: 20%;
+    height: 30%;
+    text-align: center;
+    text-transform: capitalize;
 }
