@@ -123,7 +123,7 @@ public class JuegoControlador {
 
         //debemos hacer un metodo que envie algo a tablero para indicir que se a cambiado el turno y de quien es
 
-        partida.setFechaTurno(System.currentTimeMillis()+6000);
+        partida.setFechaTurno(System.currentTimeMillis()+60000);
         partida.setHaTirado(false);
         partidaServicio.actualizar(partida);
     }
