@@ -208,10 +208,12 @@
                                 posicionJugador[1]=0+dado-dif;
                             }
                             */
+                           //ahora jugQueTira es la key del jugador que va a tirar...esto lo hago para poder reutilizar el codigo...
                             $.get("/moverJugador",{
                                 jugQueTira:jugQueTira
                             },
                             function(json){
+                                alert("apretado boton de tirar")
                                 if(json=="no"){
                                     alert("No es tu turno, No puedes tirar");
                                 }else{
