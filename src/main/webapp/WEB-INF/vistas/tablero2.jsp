@@ -213,7 +213,6 @@
                                 jugQueTira:jugQueTira
                             },
                             function(json){
-                                alert("apretado boton de tirar")
                                 if(json=="no"){
                                     alert("No es tu turno, No puedes tirar");
                                 }else{
@@ -276,6 +275,15 @@
                              
 
                             },"json");
+
+                            $.get("/cambiarTurnoManual", {
+                                jugQueTira:jugQueTira
+                            }, function(informacion){
+                                alert('cambiado turno');
+                                alert(informacion);
+                            }, "json");
+
+
                                 }
                             }, "json");
     

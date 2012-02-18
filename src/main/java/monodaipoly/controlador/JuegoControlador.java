@@ -99,6 +99,28 @@ public class JuegoControlador {
         return "/tablero2";
     
     }
+    
+    
+     @RequestMapping(value = "/cambiarTurnoManual", method = RequestMethod.GET)
+    private @ResponseBody String cambiarTurnoManualmente(HttpSession sesion,
+            @RequestParam("jugQueTira") String  jugQueTira){
+         
+         Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+         if(jugador.getPartida()!=null && jugador.getEstoyJugando()==true){
+            Partida partida=partidaServicio.buscar(jugador.getPartida());
+            if(partida!=null){
+             this.cambiarTurno(partida);
+             return "turno de "+ partida.getTurno();
+            }
+         }
+         
+         
+         return "";
+         
+     }
+
+
+
     public void cambiarTurno(Partida partida) {
         String cambiadoTurno="no";
         //System.out.println("Llega a cambiar turno");
