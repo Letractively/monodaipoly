@@ -166,7 +166,7 @@ public class TableroControlador {
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
         int posicion;
         String enCola="en cola";
-        if(usuario.getJugador()!=null){
+        if(usuarioServicio.getCurrentUser().getJugador()!=null){
             //System.out.println("1 tiene jugador");
             if(jugadorServicio.comprobarJugadorConPartida(usuario.getJugador())!=null){
                 //System.out.println(" 2 tiene partida este jugador");
@@ -189,7 +189,7 @@ public class TableroControlador {
             
                 
             }
-        }else{
+        }else if(usuarioServicio.getCurrentUser().getJugador()==null){
             Jugador jugador=new Jugador();
             jugadorServicio.crear(jugador);
             jugador.setNick(usuario.getNick());
@@ -259,9 +259,8 @@ public class TableroControlador {
 
 
         }
-            model.addAttribute("enCola",enCola );
+        model.addAttribute("enCola",enCola );
             return "/perfilPrueba";
-
     }
     @RequestMapping(value = "/comenzarPartida", method = RequestMethod.GET)
     public String comenzarPartida(Model model,HttpSession sesion) {
