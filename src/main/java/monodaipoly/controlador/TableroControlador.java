@@ -331,6 +331,7 @@ public class TableroControlador {
 
 
                     partida.setFechaTurno(System.currentTimeMillis()+60000);
+                    partida.setCompleta(true);
                     jugadorServicio.actualizar(player);
                     partidaServicio.actualizar(partida);
                     model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));

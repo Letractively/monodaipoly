@@ -251,6 +251,7 @@
                                     if(db.tipo=="multa"){
                                         //cuando has pagado multa
                                         alert("Has pagado una multa de: "+db.multa+" a el jugador numero "+db.numJugador);
+                                        
                                     }else{
                                         //te tendria q aparecer la opcion de compra
                                         comprarCalle=confirm("Quieres comprar la calle " + db.nombre + " que cuesta: "+db.precio);

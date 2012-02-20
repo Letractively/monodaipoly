@@ -162,7 +162,8 @@ public class PartidaServicioImpl implements PartidaServicio {
         
         try {
             for (Partida partida : partidaDAO.getAll(Partida.class)) {
-                if (partida.getJugador1() != null && partida.getJugador2() != null && partida.getJugador3() != null && partida.getJugador4() != null) {
+                //if (partida.getJugador1() != null && partida.getJugador2() != null && partida.getJugador3() != null && partida.getJugador4() != null) {
+                if(partida.isCompleta()){
                     todasPartidas.add(partida);
                     System.out.println("recoge partidas");
                 }

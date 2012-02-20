@@ -37,6 +37,8 @@ public class Partida implements Serializable{
     @Basic
     private List<Key> casillas;
     @Basic
+    private boolean completa;
+    @Basic
     private Key turno;
     @Basic
     private long fechaTurno;
@@ -51,6 +53,7 @@ public class Partida implements Serializable{
        this.casillas= new ArrayList<Key>();
        this.fechaTurno=0;
        this.turno=null;
+       this.completa=false;
    }
 
     public List<Key> getCasillas() {
@@ -130,6 +133,16 @@ public class Partida implements Serializable{
     public String getIdString(){
             return KeyFactory.keyToString(idpartida);
         }
+
+    public boolean isCompleta() {
+        return completa;
+    }
+
+    public void setCompleta(boolean completa) {
+        this.completa = completa;
+    }
+
+
 
     
 
