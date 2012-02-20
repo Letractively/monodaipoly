@@ -15,6 +15,15 @@ public class PartidaDAOImpl extends GenericDAOImpl<Partida,Key>  implements Part
        return (List<Partida>) query.getResultList();
 
     }
+
+    @Override
+    public List<Partida> partidasIncompletas(){
+       System.out.println("aki dao de partida");
+       Query query=em.createQuery("SELECT p FROM Partida p WHERE p.completa=false");
+       return (List<Partida>) query.getResultList();
+
+    }
+
     @Override
     public List<Partida> damePartidas(){
         Query query=em.createQuery("SELECT p FROM Partida p");
