@@ -13,4 +13,4 @@
 <img id="money1" src="/Estilos/money.png"/>
 <img id="money2" src="/Estilos/money2.png"/>
 
-<input type="button" id="aJugarPartida" value="¡ UNIRSE A PARTIDA !" onclick="window.location.href='prepararPartida'">
+<input type="button" id="aJugarPartida" value="¡ UNIRSE A PARTIDA !" onclick="window.location.href='prepararPartida2'">
