@@ -280,8 +280,7 @@
                             $.get("/cambiarTurnoManual", {
                                 jugQueTira:jugQueTira
                             }, function(informacion){
-                                alert('cambiado turno');
-                                alert(informacion);
+                                
                             }, "json");
 
 
