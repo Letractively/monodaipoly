@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface PartidaDAO extends GenericDAO<Partida,Key>{
     public List<Partida>partidasCompletas();
     List<Partida> damePartidas();
+    List<Partida> partidasIncompletas();
 }

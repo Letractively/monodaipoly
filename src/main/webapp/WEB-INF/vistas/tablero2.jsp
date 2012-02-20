@@ -175,13 +175,31 @@
 
             }
         );
+            var jug1=1;
+            var jug2=2;
+            var jug3=3;
+            var jug4=4;
 
+            if(${dinero1}!=-1){
+                $("#jugador1info").css("visibility","visible");
+                $("#dineroJugador1").css("visibility","visible");
+                jug1=-1;
+            }if(${dinero2}!=-1){
+                $("#jugador2info").css("visibility","visible");
+                $("#dineroJugador2").css("visibility","visible");
+                jug2=-1;
+            }if(${dinero3}!=-1){
+                $("#jugador3info").css("visibility","visible");
+                $("#dineroJugador3").css("visibility","visible");
+                jug3=-1;
+            }if(${dinero4}!=-1){
+                $("#jugador4info").css("visibility","visible");
+                $("#dineroJugador4").css("visibility","visible");
+                jug4=-1;
+            }
 
-
-
-
-
-                            for (var i=1;i<=4;i++){
+                                for (var i=1;i<=4;i++){
+                                if((jug1!=i) || (jug2!=i) || (jug3!=i) || (jug4!=i) || posicionJugador[i]!=-1){
                                 var posicionReal=$("#casilla"+posicionJugador[i]).offset();
                                 var izq=posicionReal.left;
                                 var arriba=posicionReal.top;
@@ -191,6 +209,7 @@
                                     "left":izq,
                                     "top":arriba
                                 });
+                                }
                             }
 
 
@@ -198,6 +217,7 @@
 
                         });
                         function tirarDado2(jugQueTira){
+                        
                             /*var dado=Math.ceil(Math.random()*6);
                             alert(dado);
                             posAnt=posicionJugador[1];
@@ -213,6 +233,7 @@
                                 jugQueTira:jugQueTira
                             },
                             function(json){
+                                alert("hola");
                                 if(json=="no"){
                                     alert("No es tu turno, No puedes tirar");
                                 }else{
@@ -280,6 +301,11 @@
                             $.get("/cambiarTurnoManual", {
                                 jugQueTira:jugQueTira
                             }, function(informacion){
+                                if(informacion=="Fin"){
+                                    alert(informacion);
+                                    //deberiamos mandarte al perfilPrueba
+                                    //$("#botonSalida").submit();
+                                }
                                 
                             }, "json");
 
@@ -314,10 +340,10 @@
 
 
                     
-                        <span class="jugadores" id="jugador1info"><center>${nombre1}</center></span>
-                        <span class="jugadores" id="jugador2info"><center>${nombre2}</center></span>
-                        <span class="jugadores" id="jugador3info"><center>${nombre3}</center></span>
-                        <span class="jugadores" id="jugador4info"><center>${nombre4}</center></span>
+                        <span class="jugadores" id="jugador1info" style="visibility:hidden"><center>${nombre1}</center></span>
+                        <span class="jugadores" id="jugador2info" style="visibility:hidden"><center>${nombre2}</center></span>
+                        <span class="jugadores" id="jugador3info" style="visibility:hidden"><center>${nombre3}</center></span>
+                        <span class="jugadores" id="jugador4info" style="visibility:hidden"><center>${nombre4}</center></span>
                     
                     
                         <span class="imagenesJugador" id="imagenJugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></span>
@@ -326,10 +352,10 @@
                         <span class="imagenesJugador" id="imagenJugador4"><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></span>
                     
                     
-                        <span class="dineroJugador" id="dineroJugador1"><center>${dinero1}$</center></span>
-                        <span class="dineroJugador" id="dineroJugador2"><center>${dinero2}$</center></span>
-                        <span class="dineroJugador" id="dineroJugador3"><center>${dinero3}$</center></span>
-                        <span class="dineroJugador" id="dineroJugador4"><center>${dinero4}$</center></span>
+                        <span class="dineroJugador" id="dineroJugador1" style="visibility:hidden"><center>${dinero1}$</center></span>
+                        <span class="dineroJugador" id="dineroJugador2" style="visibility:hidden"><center>${dinero2}$</center></span>
+                        <span class="dineroJugador" id="dineroJugador3" style="visibility:hidden"><center>${dinero3}$</center></span>
+                        <span class="dineroJugador" id="dineroJugador4" style="visibility:hidden"><center>${dinero4}$</center></span>
 
 
                         <button class="boton" id="botonTirar"onClick="tirarDado2('${jugador.nick}')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>

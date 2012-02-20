@@ -113,19 +113,8 @@ public class TableroControlador {
             Jugador jugador = (Jugador)sesion.getAttribute("jugador");
             Partida partida =partidaServicio.buscar(jugador.getPartida());
           
-            int numJugador=0;
-            if(jugadorServicio.buscar(partida.getJugador1()).getNick().compareTo(jugQueTira)==0){
-                numJugador=1;
-            }else if(jugadorServicio.buscar(partida.getJugador2()).getNick().compareTo(jugQueTira)==0){
-                numJugador=2;
-            }else if(jugadorServicio.buscar(partida.getJugador3()).getNick().compareTo(jugQueTira)==0){
-                numJugador=3;
-            }else if(jugadorServicio.buscar(partida.getJugador4()).getNick().compareTo(jugQueTira)==0){
-                numJugador=4;
-            }
+            int numJugador=this.numDelJugador(jugador, partida);
             if(comprobarQueEsTurno(numJugador,partida)&&partida.getHaTirado()==false){
-
-
 
                 int dado = (int)(6.0 * Math.random()) + 1;
                 //int dado=((int)Math.random()*6);
@@ -145,8 +134,29 @@ public class TableroControlador {
             }else{
                 return "no";
             }
+            
 
     }
+
+        private int numDelJugador(Jugador jugador,Partida partida){
+              int n=0;
+                if(partida.getJugador1()!= null && partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
+                    n= 1;
+                }
+                if(partida.getJugador2()!= null && partida.getJugador2().compareTo(jugador.getClaveJugador())==0){
+                    n= 2;
+                }
+                if(partida.getJugador3()!= null && partida.getJugador3().compareTo(jugador.getClaveJugador())==0){
+                    n=3;
+                }if(partida.getJugador4()!= null && partida.getJugador4().compareTo(jugador.getClaveJugador())==0){
+                    n=4;
+                }
+              return n;
+        }
+
+
+
+
 
         private JSONObject dadoJson(int posicion,int dado,int numJugador){
         JSONObject json=new JSONObject();
@@ -387,55 +397,6 @@ public class TableroControlador {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @RequestMapping(value = "/comenzarPartida", method = RequestMethod.GET)
     public String comenzarPartida(Model model,HttpSession sesion) {
        Jugador jugador  = (Jugador)sesion.getAttribute("jugador");
@@ -444,24 +405,60 @@ public class TableroControlador {
        List<Casilla>casillas=casillaServicio.getAll();
        model.addAttribute("casillas",casillas);
        //cargar en modelo posiciones
-       Jugador jugador1=jugadorServicio.buscar(partida.getJugador1());
-       model.addAttribute("jugador1",jugador1.getPosicion());
-       Jugador jugador2=jugadorServicio.buscar(partida.getJugador2());
-       model.addAttribute("jugador2",jugador2.getPosicion());
-       Jugador jugador3=jugadorServicio.buscar(partida.getJugador3());
-       model.addAttribute("jugador3",jugador3.getPosicion());
-       Jugador jugador4=jugadorServicio.buscar(partida.getJugador4());
-       model.addAttribute("jugador4",jugador4.getPosicion());
+       int pos1=0;
+       int pos2=0;
+       int pos3=0;
+       int pos4=0;
+       String nick1="";
+       String nick2="";
+       String nick3="";
+       String nick4="";
+       int dinero1=-1;
+       int dinero2=-1;
+       int dinero3=-1;
+       int dinero4=-1;
+        System.out.println("jugador1 "+ partida.getJugador1());
+        System.out.println("jugador2 "+ partida.getJugador2());
+        System.out.println("jugador3 "+ partida.getJugador3());
+        System.out.println("jugador4 "+ partida.getJugador4());
+
+       if(partida.getJugador1()!=null){
+            Jugador jugador1=jugadorServicio.buscar(partida.getJugador1());
+            pos1=jugador1.getPosicion();
+            nick1=jugador1.getNick();
+            dinero1=jugador1.getDinero();
+       }if(partida.getJugador2()!=null){
+            Jugador jugador2=jugadorServicio.buscar(partida.getJugador2());
+            pos2=jugador2.getPosicion();
+            nick2=jugador2.getNick();
+            dinero2=jugador2.getDinero();
+        }if(partida.getJugador3()!=null){
+            Jugador jugador3=jugadorServicio.buscar(partida.getJugador3());
+            pos3=jugador3.getPosicion();
+            nick3=jugador3.getNick();
+            dinero3=jugador3.getDinero();
+        }if(partida.getJugador4()!=null){
+            Jugador jugador4=jugadorServicio.buscar(partida.getJugador4());
+            pos4=jugador4.getPosicion();
+            nick4=jugador4.getNick();
+            dinero4=jugador4.getDinero();
+        }
+       
+       //cargar en el modelo las posiciones
+       model.addAttribute("jugador1",pos1);
+       model.addAttribute("jugador2",pos2);
+       model.addAttribute("jugador3",pos3);
+       model.addAttribute("jugador4",pos4);
        //cargar en modelo nombres
-       model.addAttribute("nombre1",jugador1.getNick());
-       model.addAttribute("nombre2",jugador2.getNick());
-       model.addAttribute("nombre3",jugador3.getNick());
-       model.addAttribute("nombre4",jugador4.getNick());
+       model.addAttribute("nombre1",nick1);
+       model.addAttribute("nombre2",nick2);
+       model.addAttribute("nombre3",nick3);
+       model.addAttribute("nombre4",nick4);
        //cargar en modelo dinero
-       model.addAttribute("dinero1",jugador1.getDinero());
-       model.addAttribute("dinero2",jugador2.getDinero());
-       model.addAttribute("dinero3",jugador3.getDinero());
-       model.addAttribute("dinero4",jugador4.getDinero());
+       model.addAttribute("dinero1",dinero1);
+       model.addAttribute("dinero2",dinero2);
+       model.addAttribute("dinero3",dinero3);
+       model.addAttribute("dinero4",dinero4);
        return "/tablero2";
     }
 
