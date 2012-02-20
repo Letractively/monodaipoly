@@ -166,18 +166,18 @@ public class JuegoControlador {
                         Jugador jugador=new Jugador();
                         //primero sacamos el jugador al que le tocaria tirar
                         //tirar el dado por el que es su turno...y no dejarle comprar
-                        if(partida.getTurno().equals(partida.getJugador1())){
+                        if(partida.getJugador1()!=null && partida.getTurno().equals(partida.getJugador1())){
                             jugador=jugadorServicio.buscar(partida.getJugador1());
                             System.out.println("Se le va a saltar el turno al jug 1: "+jugador.getNick());
                         }
-                        if(partida.getTurno().equals(partida.getJugador2())){
+                        if(partida.getJugador2()!=null && partida.getTurno().equals(partida.getJugador2())){
                             jugador=jugadorServicio.buscar(partida.getJugador2());
                             System.out.println("Se le va a saltar el turno al jug 2: "+jugador.getNick());
                         }
-                        if(partida.getTurno().equals(partida.getJugador3())){
+                        if(partida.getJugador3()!=null && partida.getTurno().equals(partida.getJugador3())){
                             jugador=jugadorServicio.buscar(partida.getJugador3());
                             System.out.println("Se le va a saltar el turno al jug 3: "+jugador.getNick());
-                        }if(partida.getTurno().equals(partida.getJugador4())){
+                        }if(partida.getJugador4()!=null && partida.getTurno().equals(partida.getJugador4())){
                             jugador=jugadorServicio.buscar(partida.getJugador4());
                             System.out.println("Se le va a saltar el turno al jug 4: "+jugador.getNick());
                         }
@@ -196,10 +196,16 @@ public class JuegoControlador {
                     jugadorServicio.actualizar(jugador);
                     //this.comprobarCalle(jugador.getClaveJugador());
                     this.comprobarCasillaQueHasCaido(jugador);
-                    //System.out.println("this.comprobarCasillaQueHasCaido(jugador):  "+ this.comprobarCasillaQueHasCaido(jugador));
-
+                    //System.out.println("this.comprobarCasillaQueHasCaido(jugador):  "+ this.comprobarCasillaQueHasCaido(jugador))
                     }
-                    cambiarTurno(partida);
+                    if(this.jugadorQueQuedan(partida)<4){
+                            this.cambiarTurnoMenosDe4(partida);
+                    }else{
+                        
+                        cambiarTurno(partida);
+                    }
+
+                    
                 }
                 //System.out.println(partida.getTurno());
             }
@@ -320,10 +326,16 @@ public class JuegoControlador {
                 jugadorPagas= jugadorServicio.buscar(partida.getJugador4());
             }
             //restamos el dinero de la multa al jugador
+            if(jugador.getDinero()>=calle.getMulta()){
             jugador.setDinero(jugador.getDinero()-calle.getMulta());
             //se la sumamos al jugador a Quien hay que pagarselo
             //jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+multa);
             jugadorPagas.setDinero(jugadorPagas.getDinero()+calle.getMulta());
+            }else{
+                jugadorPagas.setDinero(jugadorPagas.getDinero()+jugador.getDinero());
+                this.eliminarJugador(jugador);
+
+            }
             jugadorServicio.actualizar(jugadorPagas);
             jugadorServicio.actualizar(jugador);
             System.out.println("hay que pagarsela al jugador nº "+jugAQuienPagas);
@@ -366,7 +378,8 @@ public class JuegoControlador {
                               //ahora llamamos al metodo que estaba haciendo...
                               this.pagarMulta(jugador, jugDueñoCasilla , partida, calle, casilla,numeroDeJug );
                               return this.multaJson(calle.getMulta(), jugDueñoCasilla, "multa").toString();
-                          }if(jugDueñoCasilla!=numeroDeJug){
+
+                          }if(jugDueñoCasilla==numeroDeJug){
                               return "tuya";
                           }
                           
@@ -409,6 +422,128 @@ public class JuegoControlador {
             return 4;
         }
 
+
+         
+         private  String eliminarJugador(Jugador jugador){
+
+            int numJugador;
+            //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            Partida partida =partidaServicio.buscar(jugador.getPartida());
+
+            numJugador=this.numDelJugador(jugador, partida);
+            if(numJugador==1){
+                partida.setJugador1(null);
+            }
+            if(numJugador==2){
+                partida.setJugador2(null);
+            }
+            if(numJugador==3){
+                partida.setJugador3(null);
+            }
+            if(numJugador==4){
+                partida.setJugador4(null);
+            }
+
+            jugadorServicio.borrar(jugador);
+            partidaServicio.actualizar(partida);
+            usuarioServicio.buscar(jugador.getNick()).setJugador(null);
+            usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
+            System.out.println("Se ha eliminado el jugador"+numJugador);
+            return "eliminado "+numJugador;
+
+         }
+
+         private int jugadorQueQuedan(Partida partida){
+             int numJugadoreQueQuedan=0;
+             if(partida.getJugador1()!=null){
+                 numJugadoreQueQuedan++;
+             }
+             if(partida.getJugador2()!=null){
+                 numJugadoreQueQuedan++;
+             }
+             if(partida.getJugador3()!=null){
+                 numJugadoreQueQuedan++;
+             }
+             if(partida.getJugador4()!=null){
+                 numJugadoreQueQuedan++;
+             }
+             return numJugadoreQueQuedan;
+         }
+
+
+
+         //deberia recibir el numero de jugadores que quedan en la partida y si fuese 1 terminaria la partida
+         private void cambiarTurnoMenosDe4(Partida partida){
+             Jugador jugador=new Jugador();
+             jugador=jugadorServicio.buscar(partida.getTurno());
+             int numJugador=this.numDelJugador(jugador, partida);
+             if(numJugador==1){
+                 if(partida.getJugador2()==null){
+                     if(partida.getJugador3()==null){
+                         if(partida.getJugador4()==null){
+
+                         }else{
+                             partida.setTurno(partida.getJugador4());
+                         }
+                     }else{
+                         partida.setTurno(partida.getJugador3());
+                     }
+                 }else{
+                     partida.setTurno(partida.getJugador2());
+                 }
+             }
+
+             if(numJugador==2){
+                 if(partida.getJugador3()==null){
+                     if(partida.getJugador4()==null){
+                         if(partida.getJugador1()==null){
+
+                         }else{
+                             partida.setTurno(partida.getJugador1());
+                         }
+                     }else{
+                         partida.setTurno(partida.getJugador4());
+                     }
+                 }else{
+                     partida.setTurno(partida.getJugador3());
+                 }
+             }
+
+             if(numJugador==3){
+                 if(partida.getJugador4()==null){
+                     if(partida.getJugador1()==null){
+                         if(partida.getJugador2()==null){
+
+                         }else{
+                             partida.setTurno(partida.getJugador2());
+                         }
+                     }else{
+                         partida.setTurno(partida.getJugador1());
+                     }
+                 }else{
+                     partida.setTurno(partida.getJugador4());
+                 }
+             }
+
+             if(numJugador==4){
+                 if(partida.getJugador1()==null){
+                     if(partida.getJugador2()==null){
+                         if(partida.getJugador3()==null){
+
+                         }else{
+                             partida.setTurno(partida.getJugador3());
+                         }
+                     }else{
+                         partida.setTurno(partida.getJugador2());
+                     }
+                 }else{
+                     partida.setTurno(partida.getJugador1());
+                 }
+             }
+
+
+             partidaServicio.actualizar(partida);
+         }
 
        
 }
