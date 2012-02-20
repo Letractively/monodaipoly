@@ -313,21 +313,29 @@ public class TableroControlador {
                     Jugador player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
                     player.setDinero(2000);
-                    jugadorServicio.actualizar(player);
+//meter todas las calles al jugador 
+                    for(Casilla c:casillaServicio.getAll()){
+                        List<Key> calles =player.getCalles();
+                        calles.add(c.getIdCasilla());
+                        player.setCalles(calles);
+                        jugadorServicio.actualizar(player);
+                    }
+
+
                     keyPlayer=partida.getJugador2();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(2000);
+                    player.setDinero(20);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador3();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(2000);
+                    player.setDinero(20);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador4();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(2000);
+                    player.setDinero(20);
 
 
                     partida.setFechaTurno(System.currentTimeMillis()+60000);

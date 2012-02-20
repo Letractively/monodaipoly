@@ -331,13 +331,13 @@ public class JuegoControlador {
             //se la sumamos al jugador a Quien hay que pagarselo
             //jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+multa);
             jugadorPagas.setDinero(jugadorPagas.getDinero()+calle.getMulta());
+            jugadorServicio.actualizar(jugador);
             }else{
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+jugador.getDinero());
-                this.eliminarJugador(jugador);
-
+                System.out.println("Llegamos a ponerle el dinero al jug al que pagas");
+                String a=this.eliminarJugador(jugador);
             }
             jugadorServicio.actualizar(jugadorPagas);
-            jugadorServicio.actualizar(jugador);
             System.out.println("hay que pagarsela al jugador nº "+jugAQuienPagas);
             System.out.println("multa es de : "+calle.getMulta());
 
@@ -429,25 +429,41 @@ public class JuegoControlador {
             int numJugador;
             //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
             Partida partida =partidaServicio.buscar(jugador.getPartida());
+            System.out.println("llegamos a sacar la partida");
 
             numJugador=this.numDelJugador(jugador, partida);
             if(numJugador==1){
+
+                System.out.println("Eliminando Jugador1");
                 partida.setJugador1(null);
+                
             }
             if(numJugador==2){
+
+                System.out.println("Eliminando Jugador2");
                 partida.setJugador2(null);
+                System.out.println("Eliminando Jugador2 Depues");
+                
             }
             if(numJugador==3){
+
+                System.out.println("Eliminando Jugador3");
                 partida.setJugador3(null);
+                System.out.println("Eliminando Jugador3 Depues");
+                
             }
             if(numJugador==4){
+
+                System.out.println("Eliminando Jugador4");
                 partida.setJugador4(null);
+                System.out.println("Eliminando Jugador4 Depues");
             }
 
-            jugadorServicio.borrar(jugador);
+            
             partidaServicio.actualizar(partida);
-            usuarioServicio.buscar(jugador.getNick()).setJugador(null);
-            usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
+            //usuarioServicio.buscar(jugador.getNick()).setJugador(null);
+            //usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
+            //jugadorServicio.borrar(jugador);
             System.out.println("Se ha eliminado el jugador"+numJugador);
             return "eliminado "+numJugador;
 
