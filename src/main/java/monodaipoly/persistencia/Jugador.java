@@ -34,7 +34,9 @@ public class Jugador implements Serializable {
         private int dinero;
 	
 	//calles..... 
-	public Jugador(){}
+	public Jugador(){
+        this.estoyJugando=false;
+        }
 	public Jugador(Usuario usuario){
 		this.nick=usuario.getNick();
 		this.posicion=0;
