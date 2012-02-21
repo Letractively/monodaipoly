@@ -276,8 +276,8 @@
                                             //esta eliminado
                                             alert("ARRUINADOOO!");
 
-                                            /*
-                                            $.get("/cambiarTurnoManual", {
+                                            
+                                            /*$.get("/cambiarTurnoManual", {
                                                 jugQueTira:jugQueTira
                                              }, function(informacion){
                                                 if(informacion=="Fin"){
@@ -287,8 +287,9 @@
                                             }
 
                                             }, "json");*/
+                    
                                             //volver al perfil y eliminar jugador
-                                            //$("#botonSalida").submit();
+                                            $("#botonAbandonar").submit();
                                         }
                                         
                                     }else{
@@ -382,13 +383,15 @@
 
 
 
-                        <form action="/perfil" method="post">
-                    <input class="boton" id="botonSalida" type="submit" value="Volver Perfil" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
-                </form>
-
-                        <!--provisional-->
-                        <button class="boton" id="botonAbandonar" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Abandonar</button>
-                
+                        <form   action="/perfil" method="post">
+                            <input class="boton"  id="botonSalida" type="submit" value="Volver Perfil" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
+                        </form>
+                        
+                         
+                        <form   action="/terminarJugadorPartida" id="botonAbandonar" method="get">
+                            <input class="boton"   id="botonAbandonar1" type="submit" value="Abandonar" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
+                        </form>
+                       
            </div>
         </div>
 
