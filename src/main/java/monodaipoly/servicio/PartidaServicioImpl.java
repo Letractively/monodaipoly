@@ -131,7 +131,7 @@ public class PartidaServicioImpl implements PartidaServicio {
 
     @Override
     public Partida comprobarPartidaLibre() {
-        List<Partida> partidas = partidaDAO.getAll(Partida.class);
+        List<Partida> partidas = this.partidaCompleta();
         for (Partida partida : partidas) {
             if (this.comprobarHueco(partida.getIdpartida()) != 0) {
                 return partida;
@@ -161,17 +161,9 @@ public class PartidaServicioImpl implements PartidaServicio {
         List<Partida> todasPartidas = new ArrayList<Partida>();
         
         try {
-            todasPartidas=partidaDAO.partidasCompletas();
+            todasPartidas=partidaDAO.partidasIncompletas();
             return todasPartidas;
-            /*
-            for (Partida partida : partidaDAO.getAll(Partida.class)) {
-                //if (partida.getJugador1() != null && partida.getJugador2() != null && partida.getJugador3() != null && partida.getJugador4() != null) {
-                if(partida.isCompleta()){
-                    todasPartidas.add(partida);
-                    System.out.println("recoge partidas");
-                }
-            }
-            System.out.println(todasPartidas.get(0).getIdString());*/
+            
         }catch (Exception e) {
             System.out.println("Aqui error en en partidaCompleta servicio");
             e.printStackTrace();
