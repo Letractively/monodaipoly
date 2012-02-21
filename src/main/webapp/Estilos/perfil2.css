@@ -15,6 +15,13 @@
      color:#FFF;
      
 }
+#cabezera{
+    position: absolute;
+    top:5%;
+    left: 6%;
+    font-size: 140%;
+    color: white;
+}
 
 #contenido{
     
@@ -204,13 +211,11 @@
 #notificaciones{
     position: absolute;
     color:darkgreen;
-    border:#FFF;
-    border-style: solid;
     left: 40%;
     top:10%;
     width: 20%;
     height: 30%;
     text-align: center;
     text-transform: capitalize;
-    font-size: 20%;
+    font-size: 150%;
 }

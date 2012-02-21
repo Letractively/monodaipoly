@@ -106,8 +106,7 @@
       </script>
 </head>
 <body>
-
-
+         <div id="cabezera"> Bienvenido,  ${usuario.nick} !</div>
          <div id="dock">
 			<div class="dock-container">
 				<a class="dock-item" onclick="javascript:datosPersonales()"><span>Datos&nbsp;Personales</span><img src="/Estilos/tux/tux6.png" /></a> 

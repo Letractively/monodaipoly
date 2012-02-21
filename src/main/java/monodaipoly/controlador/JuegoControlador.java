@@ -396,7 +396,7 @@ public class JuegoControlador {
          */
         private String comprobarCasillaQueHasCaido(Jugador jugador){
             int numeroDeJug=0;
-            int jugDueÃ±oCasilla=0;
+            int jugDueñoCasilla=0;
             Partida partida =partidaServicio.buscar(jugador.getPartida());
             numeroDeJug=this.numDelJugador(jugador, partida);
             //comprobamos que la casilla no sea una de las esquinas...
@@ -411,14 +411,14 @@ public class JuegoControlador {
                         Logger.getLogger(JuegoControlador.class.getName()).info("calle: "+ calle.getIdCalle());
 
                       if (jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla()) ){
-                          jugDueÃ±oCasilla=this.jugadorDueÃ±oDeLaCasilla(casilla, partida);
-                          if(jugDueÃ±oCasilla!=numeroDeJug){
+                          jugDueñoCasilla=this.jugadorDueñoDeLaCasilla(casilla, partida);
+                          if(jugDueñoCasilla!=numeroDeJug){
                               
                               //ahora llamamos al metodo que estaba haciendo...
-                              boolean eliminado=this.pagarMulta(jugador, jugDueÃ±oCasilla , partida, calle, casilla,numeroDeJug );
-                              return this.multaJson(calle.getMulta(), jugDueÃ±oCasilla, "multa",eliminado).toString();
+                              boolean eliminado=this.pagarMulta(jugador, jugDueñoCasilla , partida, calle, casilla,numeroDeJug );
+                              return this.multaJson(calle.getMulta(), jugDueñoCasilla, "multa",eliminado).toString();
 
-                          }if(jugDueÃ±oCasilla==numeroDeJug){
+                          }if(jugDueñoCasilla==numeroDeJug){
                               return "tuya";
                           }
                           
@@ -450,7 +450,7 @@ public class JuegoControlador {
         }
         
         
-        private int jugadorDueÃ±oDeLaCasilla(Casilla casilla,Partida partida){
+        private int jugadorDueñoDeLaCasilla(Casilla casilla,Partida partida){
             if(jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla())){
                 return 1;
             }if(jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla())){
@@ -606,12 +606,13 @@ public class JuegoControlador {
          }
 
         @RequestMapping(value = "/terminarJugadorPartida", method = RequestMethod.GET)
-        private @ResponseBody String terminarJugadorPartida(@RequestParam("jugQueTira") String jugQueTira){
-
-            Usuario usuario=usuarioServicio.buscar(jugQueTira);
+        private String terminarJugadorPartida(HttpSession sesion){
+            
+            Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            Usuario usuario=usuarioServicio.buscar(jugador.getNick());
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
-            return "redirect:perfilPrueba";
+            return "/perfilPrueba";
     
         }
 

@@ -282,7 +282,7 @@ public class TableroControlador {
     @RequestMapping(value = "/prepararPartida2", method = RequestMethod.GET)
     public String prepararPartida2(Model model,HttpSession sesion) {
         int posicion;
-        String enCola="en cola";
+        String enCola="Esperando a otros jugadores...";
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
         if(usuarioServicio.getCurrentUser().getJugador()==null){
             Jugador jugador=new Jugador();

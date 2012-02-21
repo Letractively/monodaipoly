@@ -131,7 +131,7 @@ public class PartidaServicioImpl implements PartidaServicio {
 
     @Override
     public Partida comprobarPartidaLibre() {
-        List<Partida> partidas = this.partidaCompleta();
+        List<Partida> partidas = partidaDAO.partidasIncompletas();
         for (Partida partida : partidas) {
             if (this.comprobarHueco(partida.getIdpartida()) != 0) {
                 return partida;
@@ -161,7 +161,7 @@ public class PartidaServicioImpl implements PartidaServicio {
         List<Partida> todasPartidas = new ArrayList<Partida>();
         
         try {
-            todasPartidas=partidaDAO.partidasIncompletas();
+            todasPartidas=partidaDAO.partidasCompletas();
             return todasPartidas;
             
         }catch (Exception e) {
