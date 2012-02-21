@@ -27,7 +27,43 @@
             posicionJugador[2]=${jugador2};
             posicionJugador[3]=${jugador3};
             posicionJugador[4]=${jugador4};
-    
+
+            function timeMsg(){
+                var t=setTimeout("reposicionadoDeDatos()",5000);
+            }
+            function reposicionadoDeDatos(){
+                //alert("reposicionado");
+                 $.get("/datosDeJuego",{
+
+                 },
+                            function(json){
+                                var db = $.parseJSON(json);
+                                posicionJugador[1]=db.posicion1;
+                                posicionJugador[2]=db.posicion2;
+                                posicionJugador[3]=db.posicion3;
+                                posicionJugador[4]=db.posicion4;
+                                for (var i=1;i<=4;i++){
+                                if((jug1!=i) || (jug2!=i) || (jug3!=i) || (jug4!=i) || posicionJugador[i]!=-1){
+                                var posicionReal=$("#casilla"+posicionJugador[i]).offset();
+                                var izq=posicionReal.left;
+                                var arriba=posicionReal.top;
+                                //alert('top:'+arriba);
+                                //alert('left:'+izq);
+                                $("#jugador"+i).css({
+                                    "left":izq,
+                                    "top":arriba
+                                });
+                                }
+                                }
+                                alert(db.dinero1);
+                                $('#dineroJugador1').html("db.dinero1");
+                                $('#dineroJugador2').html("db.dinero2");
+                                $('#dineroJugador3').html("db.dinero3");
+                                $('#dineroJugador4').html("db.dinero4");
+                                
+                }, "json");
+                timeMsg();
+            }
 
             $(document).ready(
              
@@ -212,7 +248,8 @@
                                 }
                             }
 
-
+                         //llamar a el setTimeOut
+                         timeMsg();
 
 
                         });

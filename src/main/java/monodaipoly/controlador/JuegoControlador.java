@@ -247,6 +247,7 @@ public class JuegoControlador {
             }
         }else{
             System.out.println("No ai partidas llenas");
+            Logger.getLogger(JuegoControlador.class.getName()).info("No ai partidas llenas");
         }
         return "/index";
     }
