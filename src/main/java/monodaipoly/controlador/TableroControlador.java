@@ -485,6 +485,39 @@ public class TableroControlador {
     }
 
 
+    @RequestMapping(method=RequestMethod.GET, value="/datosDeJuego")
+        public @ResponseBody String datosDeJuego(HttpSession sesion){
+            Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
+            Partida partida=partidaServicio.buscar(jugador.getPartida());
+            int posicion1=jugadorServicio.buscar(partida.getJugador1()).getPosicion();
+            int dinero1=jugadorServicio.buscar(partida.getJugador1()).getDinero();
+            int posicion2=jugadorServicio.buscar(partida.getJugador2()).getPosicion();
+            int dinero2=jugadorServicio.buscar(partida.getJugador2()).getDinero();
+            int posicion3=jugadorServicio.buscar(partida.getJugador3()).getPosicion();
+            int dinero3=jugadorServicio.buscar(partida.getJugador3()).getDinero();
+            int posicion4=jugadorServicio.buscar(partida.getJugador4()).getPosicion();
+            int dinero4=jugadorServicio.buscar(partida.getJugador4()).getDinero();
 
+            return this.datosDeJuegoJson(posicion1,posicion2,posicion3,posicion4,dinero1,dinero2,dinero3,dinero4).toString();
+    }
+    private JSONObject datosDeJuegoJson(int posicion1,int posicion2,int posicion3,int posicion4,
+            int dinero1,int dinero2,int dinero3,int dinero4){
+        JSONObject json=new JSONObject();
+        try{
+
+            json.put("posicion1",posicion1);
+            json.put("dinero1", dinero1);
+            json.put("posicion2",posicion2);
+            json.put("dinero2", dinero2);
+            json.put("posicion3",posicion3);
+            json.put("dinero3", dinero3);
+            json.put("posicion4",posicion4);
+            json.put("dinero4", dinero4);
+
+        }catch (JSONException ex){
+
+        }
+        return json;
+    }
 
 }
