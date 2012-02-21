@@ -233,7 +233,7 @@
                                 jugQueTira:jugQueTira
                             },
                             function(json){
-                                alert("hola");
+                                
                                 if(json=="no"){
                                     alert("No es tu turno, No puedes tirar");
                                 }else{
@@ -272,6 +272,24 @@
                                     if(db.tipo=="multa"){
                                         //cuando has pagado multa
                                         alert("Has pagado una multa de: "+db.multa+" a el jugador numero "+db.numJugador);
+                                        if(db.eliminado){
+                                            //esta eliminado
+                                            alert("ARRUINADOOO!");
+
+                                            /*
+                                            $.get("/cambiarTurnoManual", {
+                                                jugQueTira:jugQueTira
+                                             }, function(informacion){
+                                                if(informacion=="Fin"){
+                                                    alert(informacion);
+                                                     //$("#botonSalida").submit();
+
+                                            }
+
+                                            }, "json");*/
+                                            //volver al perfil y eliminar jugador
+                                            //$("#botonSalida").submit();
+                                        }
                                         
                                     }else{
                                         //te tendria q aparecer la opcion de compra
@@ -303,8 +321,8 @@
                             }, function(informacion){
                                 if(informacion=="Fin"){
                                     alert(informacion);
-                                    //deberiamos mandarte al perfilPrueba
                                     //$("#botonSalida").submit();
+                                   
                                 }
                                 
                             }, "json");

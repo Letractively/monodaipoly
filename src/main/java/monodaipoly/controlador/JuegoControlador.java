@@ -13,6 +13,7 @@ import monodaipoly.persistencia.Calle;
 import monodaipoly.persistencia.Casilla;
 import monodaipoly.persistencia.Jugador;
 import monodaipoly.persistencia.Partida;
+import monodaipoly.persistencia.Usuario;
 import monodaipoly.servicio.CalleServicio;
 import monodaipoly.servicio.CasillaServicio;
 import monodaipoly.servicio.JugadorServicio;
@@ -113,6 +114,8 @@ public class JuegoControlador {
                 if(this.jugadorQueQuedan(partida)==1){
                     //habria que redirigir al perfil...
                     //y sumarle los puntos
+
+                    this.cambiarTurnoMenosDe4(partida);
                     usuarioServicio.buscar(jugador.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador.getNick()).getPartidasJugadas()+1);
                     usuarioServicio.buscar(jugador.getNick()).setPartidasGanadas(usuarioServicio.buscar(jugador.getNick()).getPartidasGanadas()+2);
                     usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
@@ -270,13 +273,14 @@ public class JuegoControlador {
 
 
 
-    private JSONObject multaJson(int multa,int numJugador,String tipo){
+    private JSONObject multaJson(int multa,int numJugador,String tipo,boolean eliminado){
         JSONObject json=new JSONObject();
         try{
 
             json.put("multa", multa);
             json.put("numJugador",numJugador);
             json.put("tipo", tipo);
+            json.put("eliminado", eliminado);
 
         }catch (JSONException ex){
 
@@ -344,8 +348,8 @@ public class JuegoControlador {
         //va a ser llamado cuando el jugAQuienPagas !=jugQueJuega y la casilla.getTipoCasilla()!=null
         //jugAQuienPagas es el jugador dueño de la casilla!!!
         //el jugQueJuega es el nº del jug que tiene que pagar la multa
-        private void pagarMulta(Jugador jugador, int jugAQuienPagas,Partida partida,Calle calle,Casilla casilla,int jugQueJuega){
-            
+        private boolean pagarMulta(Jugador jugador, int jugAQuienPagas,Partida partida,Calle calle,Casilla casilla,int jugQueJuega){
+            boolean eliminado=false;
             Jugador jugadorPagas=new Jugador();
             if(jugAQuienPagas==1 && jugQueJuega!=1){
                 //comprobamos si el jugador 1 es qien tiene la casilla en la q has caido
@@ -370,12 +374,12 @@ public class JuegoControlador {
             }else{
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+jugador.getDinero());
                 System.out.println("Llegamos a ponerle el dinero al jug al que pagas");
-                String a=this.eliminarJugador(jugador);
+                eliminado=this.eliminarJugador(jugador);
             }
             jugadorServicio.actualizar(jugadorPagas);
             System.out.println("hay que pagarsela al jugador nº "+jugAQuienPagas);
             System.out.println("multa es de : "+calle.getMulta());
-
+            return eliminado;
         }
 
 
@@ -411,8 +415,8 @@ public class JuegoControlador {
                           if(jugDueñoCasilla!=numeroDeJug){
                               
                               //ahora llamamos al metodo que estaba haciendo...
-                              this.pagarMulta(jugador, jugDueñoCasilla , partida, calle, casilla,numeroDeJug );
-                              return this.multaJson(calle.getMulta(), jugDueñoCasilla, "multa").toString();
+                              boolean eliminado=this.pagarMulta(jugador, jugDueñoCasilla , partida, calle, casilla,numeroDeJug );
+                              return this.multaJson(calle.getMulta(), jugDueñoCasilla, "multa",eliminado).toString();
 
                           }if(jugDueñoCasilla==numeroDeJug){
                               return "tuya";
@@ -459,7 +463,7 @@ public class JuegoControlador {
 
 
          
-         private  String eliminarJugador(Jugador jugador){
+         private  boolean eliminarJugador(Jugador jugador){
 
             int numJugador;
 
@@ -470,10 +474,6 @@ public class JuegoControlador {
 
             numJugador=this.numDelJugador(jugador, partida);
             if(numJugador==1){
-                if(cantidadDeJugadores==2){
-
-
-                }
 
                 System.out.println("Eliminando Jugador1");
                 partida.setJugador1(null);
@@ -502,15 +502,15 @@ public class JuegoControlador {
 
             
             partidaServicio.actualizar(partida);
+
             if(cantidadDeJugadores==2){
-            usuarioServicio.buscar(jugador.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador.getNick()).getPartidasJugadas()+1);
-            usuarioServicio.buscar(jugador.getNick()).setPartidasGanadas(usuarioServicio.buscar(jugador.getNick()).getPartidasGanadas()+1);
-            //usuarioServicio.buscar(jugador.getNick()).setJugador(null);
-            usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
+                usuarioServicio.buscar(jugador.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador.getNick()).getPartidasJugadas()+1);
+                usuarioServicio.buscar(jugador.getNick()).setPartidasGanadas(usuarioServicio.buscar(jugador.getNick()).getPartidasGanadas()+1);
+                usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
              }
             //jugadorServicio.borrar(jugador);
             System.out.println("Se ha eliminado el jugador"+numJugador);
-            return "eliminado "+numJugador;
+            return true;
 
          }
 
@@ -604,6 +604,16 @@ public class JuegoControlador {
              partida.setHaTirado(false);
              partidaServicio.actualizar(partida);
          }
+
+        @RequestMapping(value = "/terminarJugadorPartida", method = RequestMethod.GET)
+        private @ResponseBody String terminarJugadorPartida(@RequestParam("jugQueTira") String jugQueTira){
+
+            Usuario usuario=usuarioServicio.buscar(jugQueTira);
+            usuario.setJugador(null);
+            usuarioServicio.actualizar(usuario);
+            return "redirect:perfilPrueba";
+    
+        }
 
        
 }
