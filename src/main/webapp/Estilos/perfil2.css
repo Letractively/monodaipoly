@@ -45,8 +45,11 @@
     width: 100%;
     height: 15%;
     left: 0%;
-    top: 85%;
+    top: 84.5%;
     background-color:#A2EF95;
+    border-top: darkgreen;
+    border-top-style:double;
+    border-top-width: thick;
 }
 #datospersonales{
     
@@ -56,9 +59,16 @@
     height: 100%;
     left: 10%;
     top: 15%;
-    
-
-
+}
+#DatosdeUsuario{
+    position: absolute;
+    left: 40%;
+    top: 15%;
+}
+#DatosdePartidas{
+    position: absolute; 
+    left: 70%;
+    top: 15%;
 }
 #estadisticas{
     
@@ -160,7 +170,7 @@
 #enviarMensaje{
     position: absolute;
     left: 15%;
-    top: 10%;
+    top: 3%;
     width: 75%;
     height: 80%;
     
@@ -212,10 +222,16 @@
     position: absolute;
     color:darkgreen;
     left: 40%;
-    top:10%;
+    top:8%;
     width: 20%;
     height: 30%;
     text-align: center;
     text-transform: capitalize;
-    font-size: 150%;
+    font-size: 110%;
+}
+#imagenGif{
+    position: absolute;
+    left: 47%;
+    top:20%;
+    
 }
