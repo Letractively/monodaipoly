@@ -508,14 +508,43 @@ public class TableroControlador {
         public @ResponseBody String datosDeJuego(HttpSession sesion){
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
             Partida partida=partidaServicio.buscar(jugador.getPartida());
-            int posicion1=jugadorServicio.buscar(partida.getJugador1()).getPosicion();
-            int dinero1=jugadorServicio.buscar(partida.getJugador1()).getDinero();
-            int posicion2=jugadorServicio.buscar(partida.getJugador2()).getPosicion();
-            int dinero2=jugadorServicio.buscar(partida.getJugador2()).getDinero();
-            int posicion3=jugadorServicio.buscar(partida.getJugador3()).getPosicion();
-            int dinero3=jugadorServicio.buscar(partida.getJugador3()).getDinero();
-            int posicion4=jugadorServicio.buscar(partida.getJugador4()).getPosicion();
-            int dinero4=jugadorServicio.buscar(partida.getJugador4()).getDinero();
+            int posicion1=0;
+            int dinero1=0;
+            int posicion2=0;
+            int dinero2=0;
+            int posicion3=0;
+            int dinero3=0;
+            int posicion4=0;
+            int dinero4=0;
+            if(partida.getJugador1()==null){
+                 posicion1=0;
+                 dinero1=0;
+            }else{
+                 posicion1=jugadorServicio.buscar(partida.getJugador1()).getPosicion();
+                 dinero1=jugadorServicio.buscar(partida.getJugador1()).getDinero();
+            }
+            if(partida.getJugador2()==null){
+                 posicion2=0;
+                 dinero2=0;
+            }else{
+                 posicion2=jugadorServicio.buscar(partida.getJugador2()).getPosicion();
+                 dinero2=jugadorServicio.buscar(partida.getJugador2()).getDinero();
+            }
+            if(partida.getJugador3()==null){
+                 posicion3=0;
+                 dinero3=0;
+            }else{
+                 posicion3=jugadorServicio.buscar(partida.getJugador3()).getPosicion();
+                 dinero3=jugadorServicio.buscar(partida.getJugador3()).getDinero();
+            }
+            if(partida.getJugador4()==null){
+                 posicion4=0;
+                 dinero4=0;
+            }else{
+                 posicion4=jugadorServicio.buscar(partida.getJugador4()).getPosicion();
+                 dinero4=jugadorServicio.buscar(partida.getJugador4()).getDinero();
+            }
+            
 
             return this.datosDeJuegoJson(posicion1,posicion2,posicion3,posicion4,dinero1,dinero2,dinero3,dinero4).toString();
     }

@@ -38,12 +38,13 @@
                  },
                             function(json){
                                 var db = $.parseJSON(json);
+                                //alert(db.posicion1);
                                 posicionJugador[1]=db.posicion1;
                                 posicionJugador[2]=db.posicion2;
                                 posicionJugador[3]=db.posicion3;
                                 posicionJugador[4]=db.posicion4;
                                 for (var i=1;i<=4;i++){
-                                if((jug1!=i) || (jug2!=i) || (jug3!=i) || (jug4!=i) || posicionJugador[i]!=-1){
+                                
                                 var posicionReal=$("#casilla"+posicionJugador[i]).offset();
                                 var izq=posicionReal.left;
                                 var arriba=posicionReal.top;
@@ -54,12 +55,12 @@
                                     "top":arriba
                                 });
                                 }
-                                }
-                                alert(db.dinero1);
-                                $('#dineroJugador1').html("db.dinero1");
-                                $('#dineroJugador2').html("db.dinero2");
-                                $('#dineroJugador3').html("db.dinero3");
-                                $('#dineroJugador4').html("db.dinero4");
+                                
+                                //alert(db.dinero1);
+                                $('#dineroJugador1').html(db.dinero1+"$");
+                                $('#dineroJugador2').html(db.dinero2+"$");
+                                $('#dineroJugador3').html(db.dinero3+"$");
+                                $('#dineroJugador4').html(db.dinero4+"$");
                                 
                 }, "json");
                 timeMsg();
@@ -314,16 +315,20 @@
                                             alert("ARRUINADOOO!");
 
                                             
-                                            /*$.get("/cambiarTurnoManual", {
+                                            $.get("/cambiarTurnoManual", {
                                                 jugQueTira:jugQueTira
-                                             }, function(informacion){
+
+                                            }, function(informacion){
+                                                alert("cambiarTurno ARRUINADO");
                                                 if(informacion=="Fin"){
-                                                    alert(informacion);
-                                                     //$("#botonSalida").submit();
+                                                alert(informacion);
+                                                //$("#botonSalida").submit();
+                                                $("#botonAbandonar").submit();
+                                                }
 
-                                            }
+                                            }, "json");
 
-                                            }, "json");*/
+                                            alert("ARRUINADOOO!   2");
                     
                                             //volver al perfil y eliminar jugador
                                             $("#botonAbandonar").submit();
@@ -356,11 +361,13 @@
 
                             $.get("/cambiarTurnoManual", {
                                 jugQueTira:jugQueTira
+
                             }, function(informacion){
+                            alert("cambiarTurno =D");
                                 if(informacion=="Fin"){
                                     alert(informacion);
                                     //$("#botonSalida").submit();
-                                   
+                                   $("#botonAbandonar").submit();
                                 }
                                 
                             }, "json");

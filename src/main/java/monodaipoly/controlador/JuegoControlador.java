@@ -105,8 +105,9 @@ public class JuegoControlador {
      @RequestMapping(value = "/cambiarTurnoManual", method = RequestMethod.GET)
     private @ResponseBody String cambiarTurnoManualmente(HttpSession sesion,
             @RequestParam("jugQueTira") String  jugQueTira){
-         
-         Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+         //System.out.println("Estamos cambiando el turno manualmente");
+         //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+         Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
          if(jugador.getPartida()!=null && jugador.getEstoyJugando()==true){
             Partida partida=partidaServicio.buscar(jugador.getPartida());
             if(partida!=null){
@@ -122,7 +123,9 @@ public class JuegoControlador {
 
                     return "Fin";
                 }
+                System.out.println("Estamos cambiando el turno manualmente menos de 4!!!");
                 this.cambiarTurnoMenosDe4(partida);
+                System.out.println("Despues  Estamos cambiando el turno manualmente menos de 4!!!");
             }else{
                 cambiarTurno(partida);
             }
@@ -138,23 +141,21 @@ public class JuegoControlador {
 
 
     public void cambiarTurno(Partida partida) {
-        String cambiadoTurno="no";
-        //System.out.println("Llega a cambiar turno");
+        System.out.println("Llega a cambiar turno");
         if(partida.getTurno().equals(partida.getJugador1())){
-           //System.out.println("Entra");
-            cambiadoTurno="si";
+           System.out.println("Entra 1");
            partida.setTurno(partida.getJugador2());             
         }else{
             if(partida.getTurno().equals(partida.getJugador2())){
+                System.out.println("Entra 2");
                 partida.setTurno(partida.getJugador3());
-                cambiadoTurno="si";
             }else{
                  if(partida.getTurno().equals(partida.getJugador3())){
+                     System.out.println("Entra 3");
                        partida.setTurno(partida.getJugador4());
-                       cambiadoTurno="si";
                 }else{
+                     System.out.println("Entra 4");
                      partida.setTurno(partida.getJugador1());
-                     cambiadoTurno="si";
                  }
             }
         }
@@ -397,7 +398,7 @@ public class JuegoControlador {
          */
         private String comprobarCasillaQueHasCaido(Jugador jugador){
             int numeroDeJug=0;
-            int jugDueñoCasilla=0;
+            int jugDuenoCasilla=0;
             Partida partida =partidaServicio.buscar(jugador.getPartida());
             numeroDeJug=this.numDelJugador(jugador, partida);
             //comprobamos que la casilla no sea una de las esquinas...
@@ -412,14 +413,14 @@ public class JuegoControlador {
                         Logger.getLogger(JuegoControlador.class.getName()).info("calle: "+ calle.getIdCalle());
 
                       if (jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla()) ){
-                          jugDueñoCasilla=this.jugadorDueñoDeLaCasilla(casilla, partida);
-                          if(jugDueñoCasilla!=numeroDeJug){
+                          jugDuenoCasilla=this.jugadorDuenoDeLaCasilla(casilla, partida);
+                          if(jugDuenoCasilla!=numeroDeJug){
                               
                               //ahora llamamos al metodo que estaba haciendo...
-                              boolean eliminado=this.pagarMulta(jugador, jugDueñoCasilla , partida, calle, casilla,numeroDeJug );
-                              return this.multaJson(calle.getMulta(), jugDueñoCasilla, "multa",eliminado).toString();
+                              boolean eliminado=this.pagarMulta(jugador, jugDuenoCasilla , partida, calle, casilla,numeroDeJug );
+                              return this.multaJson(calle.getMulta(), jugDuenoCasilla, "multa",eliminado).toString();
 
-                          }if(jugDueñoCasilla==numeroDeJug){
+                          }if(jugDuenoCasilla==numeroDeJug){
                               return "tuya";
                           }
                           
@@ -451,7 +452,7 @@ public class JuegoControlador {
         }
         
         
-        private int jugadorDueñoDeLaCasilla(Casilla casilla,Partida partida){
+        private int jugadorDuenoDeLaCasilla(Casilla casilla,Partida partida){
             if(jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla())){
                 return 1;
             }if(jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla())){
