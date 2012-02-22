@@ -13,6 +13,7 @@ import monodaipoly.persistencia.Usuario;
 import monodaipoly.servicio.UsuarioServicio;
 import java.util.*;
 import javax.annotation.Resource;
+import monodaipoly.servicio.JugadorServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,12 +41,19 @@ import org.springframework.web.bind.support.SessionStatus;
 public class UsuarioControlador {
 
     private UsuarioServicio usuarioServicio;
+    private JugadorServicio jugadorServicio;
     private AuthenticationManager authenticationManager ;
 
     @Autowired
     @Required
     public void setUsuarioServicio(UsuarioServicio usuarioServicio){
         this.usuarioServicio=usuarioServicio;
+    }
+    
+    @Autowired
+    @Required
+    public void setJugadorServicio(JugadorServicio jugadorServicio){
+        this.jugadorServicio=jugadorServicio;
     }
     @Autowired
     @Required
@@ -102,6 +110,10 @@ public class UsuarioControlador {
 
     @RequestMapping(value="/entrar", method =RequestMethod.POST)
     public String doEntrar(@RequestParam("nick") String nick, @RequestParam("contrasena")String contrasena,Model model){
+        
+        String enCola="Esperando a otros jugadores...";
+        String imagenCola="<img id='imagenGif' src='/Estilos/load_verde_2.gif'/>";
+        
         try {
                 //System.out.println("AQUI 1 UserController login ");
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -128,6 +140,12 @@ public class UsuarioControlador {
 		return "redirect:monodaipoly?error";
 
 	}
+       if(usuarioServicio.getCurrentUser().getJugador()!=null){
+           if(jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()).getEstoyEnCola()==true){
+               model.addAttribute("enCola",enCola );
+               model.addAttribute("enColaImagen",imagenCola );
+           }
+        }
         return "/perfilPrueba";
 
 

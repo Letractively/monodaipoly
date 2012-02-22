@@ -281,18 +281,25 @@ public class TableroControlador {
     //metodo refactorizado .... 
     @RequestMapping(value = "/prepararPartida2", method = RequestMethod.GET)
     public String prepararPartida2(Model model,HttpSession sesion) {
+        
         int posicion;
         String enCola="Esperando a otros jugadores...";
+        String imagenCola="<img id='imagenGif' src='/Estilos/load_verde_2.gif'/>";
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+        
         if(usuarioServicio.getCurrentUser().getJugador()==null){
+            
             Jugador jugador=new Jugador();
             jugadorServicio.crear(jugador);
             jugador.setNick(usuario.getNick());
+            jugador.setEstoyEnCola(true);
             jugadorServicio.actualizar(jugador);
             usuario.setJugador(jugador.getClaveJugador());
             usuarioServicio.actualizar(usuario);
             Partida partida=partidaServicio.comprobarPartidaLibre();
+            
             if(partida==null){
+                
                 Partida partidaNueva=partidaServicio.empezarPartida2();
                 partidaNueva.setJugador1(jugador.getClaveJugador());
                 partidaNueva.setTurno(jugador.getClaveJugador());
@@ -301,11 +308,15 @@ public class TableroControlador {
                 partidaServicio.actualizar(partidaNueva);
                 //return perfil y mostrar cola
                 model.addAttribute("enCola",enCola );
+                model.addAttribute("enColaImagen",imagenCola );
                 return "/perfilPrueba";
+                
             }else{
+                
                 posicion=partidaServicio.comprobarHueco(partida.getIdpartida());
                 jugador.setPartida(partida.getIdpartida());
                 jugadorServicio.actualizar(jugador);
+                
                 if(posicion==1){
                     partida.setJugador1(jugador.getClaveJugador());
                     partidaServicio.actualizar(partida);
@@ -316,6 +327,7 @@ public class TableroControlador {
                     partida.setJugador3(jugador.getClaveJugador());
                     partidaServicio.actualizar(partida);
                 }else if(posicion==4){
+                    
                     partida.setJugador4(jugador.getClaveJugador());
                     //aqui voy a poner a los 4 jugadores de esta partida el atributo estoy jugando
                     //a true y el dinero  xq ya hay 4 jugadores y puede empezar el juego
@@ -323,6 +335,7 @@ public class TableroControlador {
                     Jugador player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
                     player.setDinero(2000);
+                    player.setEstoyEnCola(false);
 //meter todas las calles al jugador 
                     for(Casilla c:casillaServicio.getAll()){
                         List<Key> calles =player.getCalles();
@@ -336,16 +349,19 @@ public class TableroControlador {
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
                     player.setDinero(20);
+                    player.setEstoyEnCola(false);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador3();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
                     player.setDinero(20);
+                    player.setEstoyEnCola(false);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador4();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
                     player.setDinero(20);
+                    player.setEstoyEnCola(false);
 
 
                     partida.setFechaTurno(System.currentTimeMillis()+60000);
@@ -368,6 +384,7 @@ public class TableroControlador {
                     //System.out.println("4 return");
                     //Logger.getLogger(JuegoControlador.class.getName()).info("3");
                     model.addAttribute("enCola",enCola );
+                    model.addAttribute("enColaImagen",imagenCola );
                     return "/perfilPrueba";//else return perfil y mostrar cola
                 }else if(jugQueJodiaTodo.getEstoyJugando()==true){//if esta jugando...
                     //System.out.println("3 cargar en modelo el jugador");
@@ -378,6 +395,7 @@ public class TableroControlador {
                    //System.out.println("5 return");
                    //Logger.getLogger(JuegoControlador.class.getName()).info("5");
                    model.addAttribute("enCola",enCola );
+                   model.addAttribute("enColaImagen",imagenCola );
                    return "/perfilPrueba";//else return perfil y mostrar cola
 
 
@@ -390,6 +408,7 @@ public class TableroControlador {
 
 
         model.addAttribute("enCola",enCola );
+        model.addAttribute("enColaImagen",imagenCola );
         return "/perfilPrueba";
     }
 

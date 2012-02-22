@@ -59,6 +59,35 @@
         
     
 </div>
+<div id="DatosdeUsuario">
+    <legend>Datos de Usuario</legend>
+    <br/>
+    
+     <div style="color: white">Nick:  
+            <span id="ape">${usuario.nick}</span>
+     </div>
+    <br/> 
+     <div style="color: white">Contraseña:  
+            <span id="ape">${usuario.contrasena}</span>
+     </div>
+    
+    
+</div>
+     
+<div id="DatosdePartidas">
+    <legend>Datos de Partidas</legend>
+    <br/>
+    
+     <div style="color: white">Partidas Jugadas:  
+            <span id="ape">${usuario.partidasJugadas}</span>
+     </div>
+    <br/> 
+     <div style="color: white">Partidas Ganadas:
+            <span id="ape">${usuario.partidasGanadas}</span>
+     </div>
+    
+    
+</div>
       
         <head>  
      

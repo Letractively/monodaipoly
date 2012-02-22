@@ -98,8 +98,10 @@
                                 
                             }
                         }
+                    
+                 
                         $("#notificaciones").html("${enCola}");
-
+                        $("#pie").append("${enColaImagen}");
 
                     });
                     
@@ -113,7 +115,7 @@
 				<a class="dock-item" onclick="javascript:mensajes()"><span>Mensajes&nbsp;</span><img src="/Estilos/dock/email.png"  /></a> 
 				<a class="dock-item"  onclick="javascript:estadisticas()"><span>Ranking&nbsp;</span><img src="/Estilos/podio.png"/></a>
                                 <a class="dock-item"  onclick="javascript:unirsePartida()"><span>Jugar&nbsp;</span><img src="/Estilos/dock/dados1.png"/></a>
-				<a class="dock-item" href="/logout"><span>Desconectarse&nbsp;</span><img src="/Estilos/logout2.png" alt="music" /></a> 
+				<a class="dock-item" href="/logout"><span>Desconectarse&nbsp;</span><img src="/Estilos/logout2.png" /></a> 
 				
 				
 			</div>
@@ -124,7 +126,9 @@
 
         </div>
          <div id="pie">
-             <div id="notificaciones"></div>
+           
+             <div id="notificaciones" >
+             </div>
          </div>
 </body>
             

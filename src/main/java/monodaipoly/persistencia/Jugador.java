@@ -29,6 +29,9 @@ public class Jugador implements Serializable {
 
         @Basic
         private Boolean estoyJugando;
+        
+        @Basic
+        private Boolean estoyEnCola;
 
         @Basic
         private int dinero;
@@ -42,6 +45,7 @@ public class Jugador implements Serializable {
 		this.posicion=0;
                 this.calles=null;
                 this.estoyJugando=false;
+                this.estoyEnCola=false;
 	}
 	
 	
@@ -51,6 +55,15 @@ public class Jugador implements Serializable {
 	public void setClaveJugador(Key claveJugador) {
 		this.claveJugador = claveJugador;
 	}
+
+        public Boolean getEstoyEnCola() {
+        return estoyEnCola;
+        }
+
+        public void setEstoyEnCola(Boolean estoyEnCola) {
+        this.estoyEnCola = estoyEnCola;
+        }
+        
 	public String getNick() {
 		return nick;
 	}
