@@ -47,7 +47,7 @@
 		<!--
 			Upload to http://0.latest.<appId>.appspot.com by default
 		-->
-        <gae.application.appId>monodaipolyy</gae.application.appId>
+        <gae.application.appId>monodaipoly</gae.application.appId>
         <gae.application.version>2</gae.application.version>
     </properties>
 
