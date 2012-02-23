@@ -297,6 +297,12 @@
                                 jugQueTira:jugQueTira
                             },
                             function(json){
+
+                                if(!$.parseJSON(json).fin){
+                                    //Cuanod no se a temrinado la partida
+
+
+
                                 if(json==null || json=="tuya"){
                                     if(json=="tuya"){
                                         //la casilla en la q has caido es tuya
@@ -363,6 +369,14 @@
                                         
                                     }
                                 }
+                            //si no se a terinado la partida
+                            }else{
+                            //Se a terminado la partida!!!
+                            $("#botonTerminar").submit();
+
+
+
+                            }
                              
 
                             },"json");
@@ -431,6 +445,10 @@
                          
                         <form   action="/terminarJugadorPartida" id="botonAbandonar" method="get">
                             <input class="boton"   id="botonAbandonar1" type="submit" value="Abandonar" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
+                        </form>
+
+                         <form   action="/jugadorGanadorPartida" id="botonTerminar" method="get">
+                            <input class="boton"   id="botonTerminar" type="submit" style="visibility: hidden"/>
                         </form>
                        
            </div>

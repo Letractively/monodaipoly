@@ -20,5 +20,12 @@ public class JugadorDAOImpl extends GenericDAOImpl <Jugador,Key> implements Juga
         return (List<Jugador>)query.getResultList();
     }
 
+    @Override
+    public List<Jugador> todosJugadoresDePartida(Key partida){
+       Query query=em.createQuery("SELECT j FROM Jugador j WHERE j.partida= :partida");
+       query.setParameter("partida",partida);
+       return (List<Jugador>) query.getResultList();
+    }
+
 
 }

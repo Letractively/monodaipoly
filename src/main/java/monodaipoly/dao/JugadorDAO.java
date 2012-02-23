@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface JugadorDAO extends GenericDAO <Jugador, Key>{
     Jugador buscarJugador(Key claveJugador);
     List<Jugador> buscarJugadoresQuierenJugar();
+    public List<Jugador> todosJugadoresDePartida(Key partida);
 }

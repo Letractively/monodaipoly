@@ -61,4 +61,9 @@ public class JugadorServicioImpl implements JugadorServicio{
         return this.buscar(jugador).getPartida();
     }
 
+    @Override
+    public List<Jugador> todosJugadoresDePartida(Key partida){
+        return this.jugadorDAO.todosJugadoresDePartida(partida);
+    }
+
 }

@@ -275,7 +275,7 @@ public class JuegoControlador {
 
 
 
-    private JSONObject multaJson(int multa,int numJugador,String tipo,boolean eliminado){
+    private JSONObject multaJson(int multa,int numJugador,String tipo,boolean eliminado,boolean fin){
         JSONObject json=new JSONObject();
         try{
 
@@ -283,6 +283,7 @@ public class JuegoControlador {
             json.put("numJugador",numJugador);
             json.put("tipo", tipo);
             json.put("eliminado", eliminado);
+            json.put("fin", fin);
 
         }catch (JSONException ex){
 
@@ -410,6 +411,7 @@ public class JuegoControlador {
         private String comprobarCasillaQueHasCaido(Jugador jugador){
             int numeroDeJug=0;
             int jugDuenoCasilla=0;
+            boolean fin=false;
             Partida partida =partidaServicio.buscar(jugador.getPartida());
             numeroDeJug=this.numDelJugador(jugador, partida);
             //comprobamos que la casilla no sea una de las esquinas...
@@ -430,7 +432,10 @@ public class JuegoControlador {
                               
                               //ahora llamamos al metodo que estaba haciendo...
                               boolean eliminado=this.pagarMulta(jugador, jugDuenoCasilla , partida, calle, casilla,numeroDeJug );
-                              return this.multaJson(calle.getMulta(), jugDuenoCasilla, "multa",eliminado).toString();
+                              if(this.jugadorQueQuedan(partida)==2 && eliminado){
+                                  fin=true;
+                              }
+                              return this.multaJson(calle.getMulta(), jugDuenoCasilla, "multa",eliminado,fin).toString();
 
                           }if(jugDuenoCasilla==numeroDeJug){
                               this.cambiarTurnoManualmente(jugador.getNick());
@@ -633,6 +638,28 @@ public class JuegoControlador {
             return "/perfilPrueba";
     
         }
+
+
+        @RequestMapping(value= "/jugadorGanadorPartida", method = RequestMethod.GET)
+        private String jugadorGanadorPartida(){
+            Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
+            Usuario usuario=usuarioServicio.getCurrentUser();
+            usuario.setPartidasJugadas(usuario.getPartidasGanadas()+2);
+            usuario.setJugador(null);
+            usuarioServicio.actualizar(usuario);
+
+            Partida partida=partidaServicio.buscar(jugador.getPartida());
+
+            List<Jugador> todosLosJugadores=jugadorServicio.todosJugadoresDePartida(partida.getIdpartida());
+            for(Jugador j:todosLosJugadores){
+                jugadorServicio.borrar(jugador);
+            }
+            partidaServicio.terminar(partida);
+
+
+            return "/perfilPrueba";
+        }
+
 
        
 }
