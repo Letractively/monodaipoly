@@ -69,7 +69,7 @@
 			<%}%>
 		</tr>
 		<tr>
-			<td><strong>Contrasena</strong></td>
+			<td><strong>Contraseña</strong></td>
 			<td>  <input id="contrasena" type="password" name="contrasena" value="" /></td>
 		</tr>
 

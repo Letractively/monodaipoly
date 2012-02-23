@@ -25,8 +25,35 @@
   
         
         <script type="text/javascript">
-        
-            function datosPersonales(){
+        function timeMsg(){
+                var t=setTimeout("saberSiSiguesEnCola()",5000);
+            }
+            function saberSiSiguesEnCola(){
+                //alert("reposicionado");
+                 $.get("/saberSiYaPuedeJugar",{
+
+                 },
+                            function(json){
+                                var db = $.parseJSON(json);
+                                //alert(db.posicion1);
+                                //alert(db.todoListo);
+                                if(db.todoListo==true){
+                                    $("#notificaciones").html("Ya esta tu partida lista");
+                                    $("#imagenGif").css("visibility","hidden");
+                                    $("#pie").append("<button id='botonNotificacion' onclick='window.location.href='prepararPartida2''>Entrar Partida</button>");
+                                }else{
+                                    timeMsg();
+                                }
+
+
+                }, "json");
+                
+            }
+
+
+
+
+           function datosPersonales(){
                  $.get("/getDatosURL",null,
                     function(html) {
                         $("#contenido").html(html);
@@ -55,9 +82,11 @@
                  $.get("/getUnirsePartidaJSP",null,
                     function(html) {
                         $("#contenido").html(html);
+                        
                     }
 
                );
+
             }
             
             
@@ -102,6 +131,10 @@
                  
                         $("#notificaciones").html("${enCola}");
                         $("#pie").append("${enColaImagen}");
+                        //solo voy a llamar al setTimeOut si esta en cola
+                        if("${enCola}"=="Esperando a otros jugadores..."){
+                            timeMsg();
+                        }
 
                     });
                     

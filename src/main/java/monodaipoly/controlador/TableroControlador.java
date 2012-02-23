@@ -172,110 +172,7 @@ public class TableroControlador {
         return json;
     }
 
-    /*@RequestMapping(value = "/prepararPartida", method = RequestMethod.GET)
-    public String prepararPartida(Model model,HttpSession sesion) {
-        Usuario usuario = (Usuario)sesion.getAttribute("usuario");
-        int posicion;
-        String enCola="en cola";
-        if(usuarioServicio.getCurrentUser().getJugador()!=null){
-            //System.out.println("1 tiene jugador");
-            if(jugadorServicio.comprobarJugadorConPartida(usuario.getJugador())!=null){
-                //System.out.println(" 2 tiene partida este jugador");
-                //System.out.println(" estoy jugando:"+jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando() );
-                if(jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando()==null){
-                    //System.out.println("4 return");
-                    model.addAttribute("enCola",enCola );
-                    return "/perfilPrueba";//else return perfil y mostrar cola
-                }else if(jugadorServicio.buscar(usuario.getJugador()).getEstoyJugando()==true){//if esta jugando...
-                    //System.out.println("3 cargar en modelo el jugador");
-                    model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
-                    return "redirect:comenzarPartida";//return ... el metodo que falta que carga el modelo
-                }
-                    //System.out.println("5 return");
-                
-                model.addAttribute("enCola",enCola );
-
-                    return "/perfilPrueba";//else return perfil y mostrar cola
-                
-            
-                
-            }
-        }else if(usuarioServicio.getCurrentUser().getJugador()==null){
-            Jugador jugador=new Jugador();
-            jugadorServicio.crear(jugador);
-            jugador.setNick(usuario.getNick());
-            jugadorServicio.actualizar(jugador);
-            usuario.setJugador(jugador.getClaveJugador());
-            usuarioServicio.actualizar(usuario);
-            Partida partida=partidaServicio.comprobarPartidaLibre();
-            if(partida!=null){
-                posicion=partidaServicio.comprobarHueco(partida.getIdpartida());
-                jugador.setPartida(partida.getIdpartida());
-                jugadorServicio.actualizar(jugador);
-                if(posicion==1){
-                    partida.setJugador1(jugador.getClaveJugador());
-                    partidaServicio.actualizar(partida);
-                }else if(posicion ==2){
-                    partida.setJugador2(jugador.getClaveJugador());
-                    partidaServicio.actualizar(partida);
-                }else if(posicion==3){
-                    partida.setJugador3(jugador.getClaveJugador());
-                    partidaServicio.actualizar(partida);
-                }else if(posicion==4){
-                    partida.setJugador4(jugador.getClaveJugador());
-                    //aqui voy a poner a los 4 jugadores de esta partida el atributo estoy jugando
-                    //a true y el dinero  xq ya hay 4 jugadores y puede empezar el juego
-                    Key keyPlayer=partida.getJugador1();
-                    Jugador player=jugadorServicio.buscar(keyPlayer);
-                    player.setEstoyJugando(true);
-                    player.setDinero(2000);
-                    jugadorServicio.actualizar(player);
-                    keyPlayer=partida.getJugador2();
-                    player=jugadorServicio.buscar(keyPlayer);
-                    player.setEstoyJugando(true);
-                    player.setDinero(2000);
-                    jugadorServicio.actualizar(player);
-                    keyPlayer=partida.getJugador3();
-                    player=jugadorServicio.buscar(keyPlayer);
-                    player.setEstoyJugando(true);
-                    player.setDinero(2000);
-                    jugadorServicio.actualizar(player);
-                    keyPlayer=partida.getJugador4();
-                    player=jugadorServicio.buscar(keyPlayer);
-                    player.setEstoyJugando(true);
-                    player.setDinero(2000);
-                    
-                    
-                    partida.setFechaTurno(System.currentTimeMillis()+60000);
-                    jugadorServicio.actualizar(player);
-                    partidaServicio.actualizar(partida);
-                    model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
-                    //return ... el metodo que falta que carga el modelo
-                    
-                    return "redirect:comenzarPartida";
-
-                }
-                
-            }else{
-                Partida partidaNueva=partidaServicio.empezarPartida2();
-                partidaNueva.setJugador1(jugador.getClaveJugador());
-                partidaNueva.setTurno(jugador.getClaveJugador());
-                jugador.setPartida(partidaNueva.getIdpartida());
-                jugadorServicio.actualizar(jugador);
-                partidaServicio.actualizar(partidaNueva);
-                //return perfil y mostrar cola
-
-            }
-
-
-
-        }
-        model.addAttribute("enCola",enCola );
-            return "/perfilPrueba";
-    }*/
-
-
-
+   
 
 
     //metodo refactorizado .... 
@@ -561,6 +458,37 @@ public class TableroControlador {
             json.put("dinero3", dinero3);
             json.put("posicion4",posicion4);
             json.put("dinero4", dinero4);
+
+        }catch (JSONException ex){
+
+        }
+        return json;
+    }
+
+
+    @RequestMapping(method=RequestMethod.GET, value="/saberSiYaPuedeJugar")
+        public @ResponseBody String saberSiYaPuedeJugar(HttpSession sesion){
+            if(usuarioServicio.getCurrentUser().getJugador()==null){
+                return "/perfilPrueba";
+            }else{
+            Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
+            if(jugador.getEstoyJugando()==true){
+                //Logger.getLogger(JuegoControlador.class.getName()).info("jugando true");
+                boolean todoListo=true;
+                return this.saberSiYaPuedeJugarJson(todoListo).toString();
+            }
+
+            return "/perfilPrueba";
+        }
+
+           
+    }
+      private JSONObject saberSiYaPuedeJugarJson(boolean todoListo){
+        JSONObject json=new JSONObject();
+        try{
+
+            json.put("todoListo",todoListo);
+
 
         }catch (JSONException ex){
 
