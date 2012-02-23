@@ -336,7 +336,7 @@ public class TableroControlador {
                     player.setEstoyJugando(true);
                     player.setDinero(2000);
                     player.setEstoyEnCola(false);
-//meter todas las calles al jugador 
+                    //meter todas las calles al jugador
                     for(Casilla c:casillaServicio.getAll()){
                         List<Key> calles =player.getCalles();
                         calles.add(c.getIdCasilla());

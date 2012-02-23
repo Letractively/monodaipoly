@@ -315,7 +315,7 @@
                                             alert("ARRUINADOOO!");
 
                                             
-                                            $.get("/cambiarTurnoManual", {
+                                           /* $.get("/cambiarTurnoManual", {
                                                 jugQueTira:jugQueTira
 
                                             }, function(informacion){
@@ -326,9 +326,9 @@
                                                 $("#botonAbandonar").submit();
                                                 }
 
-                                            }, "json");
+                                            }, "json");*/
 
-                                            alert("ARRUINADOOO!   2");
+                                            
                     
                                             //volver al perfil y eliminar jugador
                                             $("#botonAbandonar").submit();
@@ -352,6 +352,14 @@
 
                                         }
                                         //terminamos turno
+
+                                        $.get("/cambiarTurnoManual", {
+                                            jugQueTira:jugQueTira
+
+                                            }, function(informacion){
+                                            alert("cambiarTurno =D");
+
+                                        }, "json");
                                         
                                     }
                                 }
@@ -359,18 +367,7 @@
 
                             },"json");
 
-                            $.get("/cambiarTurnoManual", {
-                                jugQueTira:jugQueTira
-
-                            }, function(informacion){
-                            alert("cambiarTurno =D");
-                                if(informacion=="Fin"){
-                                    alert(informacion);
-                                    //$("#botonSalida").submit();
-                                   $("#botonAbandonar").submit();
-                                }
-                                
-                            }, "json");
+                            
 
 
                                 }
