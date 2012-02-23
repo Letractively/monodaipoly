@@ -10,6 +10,7 @@
     
 <div id="datospersonales">
       <legend>Datos Personales</legend>
+      <br/>
     <br/>
     <form id="modi" action="/modificarDatosAsincronamente" method="post">
         <div style="color: white">Nombre:  <span id="nom">${usuario.nombre}</span></div>
@@ -62,13 +63,14 @@
 <div id="DatosdeUsuario">
     <legend>Datos de Usuario</legend>
     <br/>
+    <br/>
     
      <div style="color: white">Nick:  
             <span id="ape">${usuario.nick}</span>
      </div>
     <br/> 
      <div style="color: white">Contraseña:  
-            <span id="ape">${usuario.contrasena}</span>
+         <span id="ape">${usuario.contrasena}</span>
      </div>
     
     
@@ -76,6 +78,7 @@
      
 <div id="DatosdePartidas">
     <legend>Datos de Partidas</legend>
+    <br/>
     <br/>
     
      <div style="color: white">Partidas Jugadas:  
