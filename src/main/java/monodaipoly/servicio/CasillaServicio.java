@@ -14,4 +14,5 @@ public interface CasillaServicio {
     public void preload_casillas();
     public List<Casilla> getAll();
     Casilla buscarPorNumero(int posicion);
+    public Casilla buscarPorCalle(Key idCalle);
 }

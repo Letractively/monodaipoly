@@ -298,7 +298,7 @@
                             },
                             function(json){
 
-                                if(!$.parseJSON(json).fin){
+                                
                                     //Cuanod no se a temrinado la partida
 
 
@@ -369,15 +369,8 @@
                                         
                                     }
                                 }
-                            //si no se a terinado la partida
-                            }else{
-                            //Se a terminado la partida!!!
-                            $("#botonTerminar").submit();
 
-
-
-                            }
-                             
+                            //si no se a terinado la partida                      
 
                             },"json");
 

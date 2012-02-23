@@ -4,6 +4,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.repackaged.com.google.common.base.Log2;
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.Lob;
@@ -353,28 +354,21 @@ public class JuegoControlador {
         //el jugQueJuega es el nº del jug que tiene que pagar la multa
         private boolean pagarMulta(Jugador jugador, int jugAQuienPagas,Partida partida,Calle calle,Casilla casilla,int jugQueJuega){
             boolean eliminado=false;
-            Jugador jugadorPagas=new Jugador();
-            if(jugAQuienPagas==1 && jugQueJuega!=1){
-                //comprobamos si el jugador 1 es qien tiene la casilla en la q has caido
-                jugadorPagas= jugadorServicio.buscar(partida.getJugador1());
-            }if(jugAQuienPagas==2 && jugQueJuega!=2){
-                //comprobamos si el jugador 2 es qien tiene la casilla en la q has caido
-                jugadorPagas= jugadorServicio.buscar(partida.getJugador2());
-            }if(jugAQuienPagas==3 && jugQueJuega!=3){
-                //comprobamos si el jugador 3 es qien tiene la casilla en la q has caido
-                jugadorPagas= jugadorServicio.buscar(partida.getJugador3());
-            }if(jugAQuienPagas==4 && jugQueJuega!=4){
-                //comprobamos si el jugador 4 es qien tiene la casilla en la q has caido
-                jugadorPagas= jugadorServicio.buscar(partida.getJugador4());
+            int multa=calle.getMulta();
+            Jugador jugadorPagas=this.jugadorPertenecienteAlNumero(jugQueJuega, jugAQuienPagas, partida);
+            //Desde Aqui es para doblar la multa si tiene todas las casillas del mismo color el jugadorPagas
+            System.out.println("multa inicial: "+multa);
+           
+            if(this.casillasMismoColor(jugadorPagas, calle)){
+                multa=multa*2;
             }
-            //restamos el dinero de la multa al jugador
-            if(jugador.getDinero()>=calle.getMulta()){
-            jugador.setDinero(jugador.getDinero()-calle.getMulta());
-            //se la sumamos al jugador a Quien hay que pagarselo
-            //jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+multa);
-            jugadorPagas.setDinero(jugadorPagas.getDinero()+calle.getMulta());
-            jugadorServicio.actualizar(jugador);
-            this.cambiarTurnoManualmente(jugador.getNick());
+            if(jugador.getDinero()>=multa){
+                jugador.setDinero(jugador.getDinero()-multa);
+                //se la sumamos al jugador a Quien hay que pagarselo
+                //jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+multa);
+                jugadorPagas.setDinero(jugadorPagas.getDinero()+multa);
+                jugadorServicio.actualizar(jugador);
+                this.cambiarTurnoManualmente(jugador.getNick());
             }else{
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+jugador.getDinero());
                 //System.out.println("Llegamos a ponerle el dinero al jug al que pagas");
@@ -435,6 +429,11 @@ public class JuegoControlador {
                               if(this.jugadorQueQuedan(partida)==2 && eliminado){
                                   fin=true;
                               }
+                              Jugador j=this.jugadorPertenecienteAlNumero(numeroDeJug, jugDuenoCasilla, partida);
+                              if(this.casillasMismoColor(j, calle)){
+                                  return this.multaJson(calle.getMulta()*2, jugDuenoCasilla, "multa",eliminado,fin).toString();
+                              }
+
                               return this.multaJson(calle.getMulta(), jugDuenoCasilla, "multa",eliminado,fin).toString();
 
                           }if(jugDuenoCasilla==numeroDeJug){
@@ -496,30 +495,16 @@ public class JuegoControlador {
 
             numJugador=this.numDelJugador(jugador, partida);
             if(numJugador==1){
-
-                //System.out.println("Eliminando Jugador1");
                 partida.setJugador1(null);
-                
             }
             if(numJugador==2){
-
-                //System.out.println("Eliminando Jugador2");
-                partida.setJugador2(null);
-                //System.out.println("Eliminando Jugador2 Depues");
-                
+                partida.setJugador2(null);              
             }
             if(numJugador==3){
-
-                //System.out.println("Eliminando Jugador3");
                 partida.setJugador3(null);
-                //System.out.println("Eliminando Jugador3 Depues");
-                
             }
             if(numJugador==4){
-
-                //System.out.println("Eliminando Jugador4");
                 partida.setJugador4(null);
-                //System.out.println("Eliminando Jugador4 Depues");
             }
 
             
@@ -632,6 +617,38 @@ public class JuegoControlador {
         private String terminarJugadorPartida(HttpSession sesion){
             
             Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            Partida partida=partidaServicio.buscar(jugador.getPartida());
+            boolean turnoJugador=false;
+
+            if(partida.getTurno().compareTo(jugador.getClaveJugador())==0){
+                turnoJugador=true;
+            }
+
+            if(partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
+
+                partida.setJugador1(null);
+            }
+
+            if(partida.getJugador2().compareTo(jugador.getClaveJugador())==0){
+
+                partida.setJugador2(null);
+            }
+            if(partida.getJugador3().compareTo(jugador.getClaveJugador())==0 ){
+
+                partida.setJugador3(null);
+            }
+            if(partida.getJugador4().compareTo(jugador.getClaveJugador())==0){
+
+                partida.setJugador4(null);
+
+            }
+            //falta probar esto
+            if(turnoJugador){
+                this.cambiarTurnoMenosDe4(partida);
+            }
+
+
+
             Usuario usuario=usuarioServicio.buscar(jugador.getNick());
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
@@ -639,7 +656,7 @@ public class JuegoControlador {
     
         }
 
-
+//NO VAAAAA
         @RequestMapping(value= "/jugadorGanadorPartida", method = RequestMethod.GET)
         private String jugadorGanadorPartida(){
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
@@ -658,6 +675,42 @@ public class JuegoControlador {
 
 
             return "/perfilPrueba";
+        }
+
+
+        private boolean casillasMismoColor(Jugador jugadorPagas,Calle calle){
+            boolean comprobacionCallesMismoColor=true;
+            List<Calle> callesMismoColor=calleServicio.buscarPorColor(calle.getColor());
+            List<Casilla> casillasMismoColor=new ArrayList();
+            for(Calle c:callesMismoColor){
+                casillasMismoColor.add(casillaServicio.buscarPorCalle(c.getIdCalle()));
+            }
+            for(Casilla c:casillasMismoColor){
+                if(!jugadorPagas.getCalles().contains(c.getIdCasilla())){
+                    comprobacionCallesMismoColor=false;
+                }
+            }
+
+            System.out.println("comprobacionCallesMismoColor:  "+comprobacionCallesMismoColor);
+            return comprobacionCallesMismoColor;
+        }
+
+        private Jugador jugadorPertenecienteAlNumero(int jugQueJuega,int jugAQuienPagas,Partida partida){
+            Jugador jugador=new Jugador();
+            if(jugAQuienPagas==1 && jugQueJuega!=1){
+                //comprobamos si el jugador 1 es qien tiene la casilla en la q has caido
+                jugador= jugadorServicio.buscar(partida.getJugador1());
+            }if(jugAQuienPagas==2 && jugQueJuega!=2){
+                //comprobamos si el jugador 2 es qien tiene la casilla en la q has caido
+                jugador= jugadorServicio.buscar(partida.getJugador2());
+            }if(jugAQuienPagas==3 && jugQueJuega!=3){
+                //comprobamos si el jugador 3 es qien tiene la casilla en la q has caido
+                jugador= jugadorServicio.buscar(partida.getJugador3());
+            }if(jugAQuienPagas==4 && jugQueJuega!=4){
+                //comprobamos si el jugador 4 es qien tiene la casilla en la q has caido
+                jugador= jugadorServicio.buscar(partida.getJugador4());
+            }
+            return jugador;
         }
 
 

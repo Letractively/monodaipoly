@@ -245,19 +245,19 @@ public class TableroControlador {
                     keyPlayer=partida.getJugador2();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(20);
+                    player.setDinero(2000);
                     player.setEstoyEnCola(false);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador3();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(20);
+                    player.setDinero(2000);
                     player.setEstoyEnCola(false);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador4();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(20);
+                    player.setDinero(2000);
                     player.setEstoyEnCola(false);
 
 
@@ -317,6 +317,7 @@ public class TableroControlador {
     public String comenzarPartida(Model model,HttpSession sesion) {
        Jugador jugador  = (Jugador)sesion.getAttribute("jugador");
        Partida partida=partidaServicio.buscar(jugador.getPartida());
+
        //cargar en modelo casillas
        List<Casilla>casillas=casillaServicio.getAll();
        model.addAttribute("casillas",casillas);
