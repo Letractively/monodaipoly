@@ -103,7 +103,7 @@ public class JuegoControlador {
     
     
      @RequestMapping(value = "/cambiarTurnoManual", method = RequestMethod.GET)
-    private @ResponseBody String cambiarTurnoManualmente(HttpSession sesion,
+    private @ResponseBody String cambiarTurnoManualmente(
             @RequestParam("jugQueTira") String  jugQueTira){
          //System.out.println("Estamos cambiando el turno manualmente");
          //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
@@ -112,7 +112,7 @@ public class JuegoControlador {
             Partida partida=partidaServicio.buscar(jugador.getPartida());
             if(partida!=null){
             if(this.jugadorQueQuedan(partida)<4){
-                if(this.jugadorQueQuedan(partida)==1){
+                /*if(this.jugadorQueQuedan(partida)==1){
                     //habria que redirigir al perfil...
                     //y sumarle los puntos
 
@@ -122,10 +122,10 @@ public class JuegoControlador {
                     usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
 
                     return "Fin";
-                }
-                System.out.println("Estamos cambiando el turno manualmente menos de 4!!!");
+                }*/
+                //System.out.println("Estamos cambiando el turno manualmente menos de 4!!!");
                 this.cambiarTurnoMenosDe4(partida);
-                System.out.println("Despues  Estamos cambiando el turno manualmente menos de 4!!!");
+                //System.out.println("Despues  Estamos cambiando el turno manualmente menos de 4!!!");
             }else{
                 cambiarTurno(partida);
             }
@@ -141,20 +141,20 @@ public class JuegoControlador {
 
 
     public void cambiarTurno(Partida partida) {
-        System.out.println("Llega a cambiar turno");
+        //System.out.println("Llega a cambiar turno");
         if(partida.getTurno().equals(partida.getJugador1())){
-           System.out.println("Entra 1");
+           //System.out.println("Entra 1");
            partida.setTurno(partida.getJugador2());             
         }else{
             if(partida.getTurno().equals(partida.getJugador2())){
-                System.out.println("Entra 2");
+                //System.out.println("Entra 2");
                 partida.setTurno(partida.getJugador3());
             }else{
                  if(partida.getTurno().equals(partida.getJugador3())){
-                     System.out.println("Entra 3");
+                     //System.out.println("Entra 3");
                        partida.setTurno(partida.getJugador4());
                 }else{
-                     System.out.println("Entra 4");
+                     //System.out.println("Entra 4");
                      partida.setTurno(partida.getJugador1());
                  }
             }
@@ -373,14 +373,25 @@ public class JuegoControlador {
             //jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+multa);
             jugadorPagas.setDinero(jugadorPagas.getDinero()+calle.getMulta());
             jugadorServicio.actualizar(jugador);
+            this.cambiarTurnoManualmente(jugador.getNick());
             }else{
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+jugador.getDinero());
-                System.out.println("Llegamos a ponerle el dinero al jug al que pagas");
+                //System.out.println("Llegamos a ponerle el dinero al jug al que pagas");
+                this.cambiarTurnoManualmente(jugador.getNick());
+                //System.out.println("Estamos camniando el turno antes de eliminar al jugador!!");
                 eliminado=this.eliminarJugador(jugador);
+                partidaServicio.actualizar(partida);
+                System.out.println("Actualizamos partida despues de Eliminar jug");
+                System.out.println("AQUI  this.jugadorQueQuedan(partida)=  "+this.jugadorQueQuedan(partida));
+                if(this.jugadorQueQuedan(partida)==2 && eliminado){
+                    System.out.println("YOU WIIIN desde pagar multa");
+                    //Aqui se debería eiminar la partida
+                }
+
             }
             jugadorServicio.actualizar(jugadorPagas);
-            System.out.println("hay que pagarsela al jugador nº "+jugAQuienPagas);
-            System.out.println("multa es de : "+calle.getMulta());
+            //System.out.println("hay que pagarsela al jugador nº "+jugAQuienPagas);
+            //System.out.println("multa es de : "+calle.getMulta());
             return eliminado;
         }
 
@@ -405,6 +416,7 @@ public class JuegoControlador {
             if(jugador.getPosicion()!=0 && jugador.getPosicion()!=9 && jugador.getPosicion()!=18 && jugador.getPosicion()!=27){
                 Casilla casilla=casillaServicio.buscarPorNumero(jugador.getPosicion());
                 if(casilla.getTipoCasilla()==null){
+                    this.cambiarTurnoManualmente(jugador.getNick());
                     return null;
                 }   
                 if(casilla.getTipoCasilla()!=null){
@@ -421,6 +433,7 @@ public class JuegoControlador {
                               return this.multaJson(calle.getMulta(), jugDuenoCasilla, "multa",eliminado).toString();
 
                           }if(jugDuenoCasilla==numeroDeJug){
+                              this.cambiarTurnoManualmente(jugador.getNick());
                               return "tuya";
                           }
                           
@@ -442,11 +455,13 @@ public class JuegoControlador {
                       return this.opcionCompraJson(calle.getPrecio(), casilla.getNombre(), "noMulta").toString();
                 }else{
                     //esto es pq has caido en una calle de suerte,hidroelectrica o estacion
+                    this.cambiarTurnoManualmente(jugador.getNick());
                     return null;
                 }
 
             }
             //esto es porque has caido en una calle de las esquinas
+            this.cambiarTurnoManualmente(jugador.getNick());
             return null;
 
         }
@@ -472,41 +487,40 @@ public class JuegoControlador {
             //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
             Partida partida =partidaServicio.buscar(jugador.getPartida());
             int cantidadDeJugadores=this.jugadorQueQuedan(partida);
-            System.out.println("llegamos a sacar la partida");
+            //System.out.println("llegamos a sacar la partida");
 
             numJugador=this.numDelJugador(jugador, partida);
             if(numJugador==1){
 
-                System.out.println("Eliminando Jugador1");
+                //System.out.println("Eliminando Jugador1");
                 partida.setJugador1(null);
                 
             }
             if(numJugador==2){
 
-                System.out.println("Eliminando Jugador2");
+                //System.out.println("Eliminando Jugador2");
                 partida.setJugador2(null);
-                System.out.println("Eliminando Jugador2 Depues");
+                //System.out.println("Eliminando Jugador2 Depues");
                 
             }
             if(numJugador==3){
 
-                System.out.println("Eliminando Jugador3");
+                //System.out.println("Eliminando Jugador3");
                 partida.setJugador3(null);
-                System.out.println("Eliminando Jugador3 Depues");
+                //System.out.println("Eliminando Jugador3 Depues");
                 
             }
             if(numJugador==4){
 
-                System.out.println("Eliminando Jugador4");
+                //System.out.println("Eliminando Jugador4");
                 partida.setJugador4(null);
-                System.out.println("Eliminando Jugador4 Depues");
+                //System.out.println("Eliminando Jugador4 Depues");
             }
 
             
             partidaServicio.actualizar(partida);
 
             if(cantidadDeJugadores==2){
-                usuarioServicio.buscar(jugador.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador.getNick()).getPartidasJugadas()+1);
                 usuarioServicio.buscar(jugador.getNick()).setPartidasGanadas(usuarioServicio.buscar(jugador.getNick()).getPartidasGanadas()+1);
                 usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
              }
@@ -544,6 +558,7 @@ public class JuegoControlador {
                  if(partida.getJugador2()==null){
                      if(partida.getJugador3()==null){
                          if(partida.getJugador4()==null){
+                             System.out.println("Has ganado");
                          }else{
                              partida.setTurno(partida.getJugador4());
                          }
@@ -559,7 +574,7 @@ public class JuegoControlador {
                  if(partida.getJugador3()==null){
                      if(partida.getJugador4()==null){
                          if(partida.getJugador1()==null){
-
+                            System.out.println("Has ganado");
                          }else{
                              partida.setTurno(partida.getJugador1());
                          }
@@ -575,7 +590,7 @@ public class JuegoControlador {
                  if(partida.getJugador4()==null){
                      if(partida.getJugador1()==null){
                          if(partida.getJugador2()==null){
-
+                            System.out.println("Has ganado");
                          }else{
                              partida.setTurno(partida.getJugador2());
                          }
@@ -591,6 +606,7 @@ public class JuegoControlador {
                  if(partida.getJugador1()==null){
                      if(partida.getJugador2()==null){
                          if(partida.getJugador3()==null){
+                             System.out.println("Has ganado");
 
                          }else{
                              partida.setTurno(partida.getJugador3());
