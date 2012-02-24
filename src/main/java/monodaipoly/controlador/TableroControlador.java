@@ -245,19 +245,19 @@ public class TableroControlador {
                     keyPlayer=partida.getJugador2();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(2000);
+                    player.setDinero(20);
                     player.setEstoyEnCola(false);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador3();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(2000);
+                    player.setDinero(20);
                     player.setEstoyEnCola(false);
                     jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador4();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(2000);
+                    player.setDinero(20);
                     player.setEstoyEnCola(false);
 
 
@@ -406,6 +406,9 @@ public class TableroControlador {
         public @ResponseBody String datosDeJuego(HttpSession sesion){
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
             Partida partida=partidaServicio.buscar(jugador.getPartida());
+
+            int cantidadJugadores=0;
+
             int posicion1=0;
             int dinero1=0;
             int posicion2=0;
@@ -418,6 +421,7 @@ public class TableroControlador {
                  posicion1=0;
                  dinero1=0;
             }else{
+                cantidadJugadores++;
                  posicion1=jugadorServicio.buscar(partida.getJugador1()).getPosicion();
                  dinero1=jugadorServicio.buscar(partida.getJugador1()).getDinero();
             }
@@ -425,6 +429,7 @@ public class TableroControlador {
                  posicion2=0;
                  dinero2=0;
             }else{
+                cantidadJugadores++;
                  posicion2=jugadorServicio.buscar(partida.getJugador2()).getPosicion();
                  dinero2=jugadorServicio.buscar(partida.getJugador2()).getDinero();
             }
@@ -432,6 +437,7 @@ public class TableroControlador {
                  posicion3=0;
                  dinero3=0;
             }else{
+                cantidadJugadores++;
                  posicion3=jugadorServicio.buscar(partida.getJugador3()).getPosicion();
                  dinero3=jugadorServicio.buscar(partida.getJugador3()).getDinero();
             }
@@ -439,15 +445,20 @@ public class TableroControlador {
                  posicion4=0;
                  dinero4=0;
             }else{
+                cantidadJugadores++;
                  posicion4=jugadorServicio.buscar(partida.getJugador4()).getPosicion();
                  dinero4=jugadorServicio.buscar(partida.getJugador4()).getDinero();
             }
+            Jugador jugTurno=jugadorServicio.buscar(partida.getTurno());
+            String turno=jugTurno.getNick();
+
+            System.out.println("cantidad de jugadores desde timeOut: " +cantidadJugadores);
             
 
-            return this.datosDeJuegoJson(posicion1,posicion2,posicion3,posicion4,dinero1,dinero2,dinero3,dinero4).toString();
+            return this.datosDeJuegoJson(posicion1,posicion2,posicion3,posicion4,dinero1,dinero2,dinero3,dinero4,turno,cantidadJugadores).toString();
     }
     private JSONObject datosDeJuegoJson(int posicion1,int posicion2,int posicion3,int posicion4,
-            int dinero1,int dinero2,int dinero3,int dinero4){
+            int dinero1,int dinero2,int dinero3,int dinero4,String turno,int cantidadJugadores){
         JSONObject json=new JSONObject();
         try{
 
@@ -459,6 +470,8 @@ public class TableroControlador {
             json.put("dinero3", dinero3);
             json.put("posicion4",posicion4);
             json.put("dinero4", dinero4);
+            json.put("turno",turno);
+            json.put("cantidadJugadores",cantidadJugadores);
 
         }catch (JSONException ex){
 
@@ -469,17 +482,21 @@ public class TableroControlador {
 
     @RequestMapping(method=RequestMethod.GET, value="/saberSiYaPuedeJugar")
         public @ResponseBody String saberSiYaPuedeJugar(HttpSession sesion){
+             //Logger.getLogger(JuegoControlador.class.getName()).info("1");
             if(usuarioServicio.getCurrentUser().getJugador()==null){
+                //Logger.getLogger(JuegoControlador.class.getName()).info("2");
                 return "/perfilPrueba";
             }else{
+                 //Logger.getLogger(JuegoControlador.class.getName()).info("3");
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
             if(jugador.getEstoyJugando()==true){
                 //Logger.getLogger(JuegoControlador.class.getName()).info("jugando true");
                 boolean todoListo=true;
                 return this.saberSiYaPuedeJugarJson(todoListo).toString();
             }
-
-            return "/perfilPrueba";
+            //Logger.getLogger(JuegoControlador.class.getName()).info("4");
+            boolean todoListo=false;
+                return this.saberSiYaPuedeJugarJson(todoListo).toString();
         }
 
            
@@ -487,7 +504,7 @@ public class TableroControlador {
       private JSONObject saberSiYaPuedeJugarJson(boolean todoListo){
         JSONObject json=new JSONObject();
         try{
-
+        //Logger.getLogger(JuegoControlador.class.getName()).info("5");
             json.put("todoListo",todoListo);
 
 

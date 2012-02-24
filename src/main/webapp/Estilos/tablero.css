@@ -329,3 +329,14 @@ body {
 #botonAbandonar1{
     left:79%;
 }
+
+#centroTurno{
+    position: absolute;
+    color: red;
+    top:115%;
+    left:40%;
+    z-index: 4;
+}
+#turno{
+   color:red;
+}

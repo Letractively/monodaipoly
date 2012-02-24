@@ -61,6 +61,14 @@
                                 $('#dineroJugador2').html(db.dinero2+"$");
                                 $('#dineroJugador3').html(db.dinero3+"$");
                                 $('#dineroJugador4').html(db.dinero4+"$");
+                                //alert(db.turno);
+                                $("#turno").html(db.turno);
+
+                                if(db.cantidadJugadores==1){
+                                    alert("you win");
+                                }
+
+
                                 
                 }, "json");
                 timeMsg();
@@ -443,11 +451,15 @@
                          <form   action="/jugadorGanadorPartida" id="botonTerminar" method="get">
                             <input class="boton"   id="botonTerminar" type="submit" style="visibility: hidden"/>
                         </form>
-                       
-           </div>
+                        </div>
         </div>
 
+                        <div id="centroTurno">
+                            <b>
+                            TURNO : <span id="turno"></span>
+                            </b>
 
+                        </div>
 	
 
 
