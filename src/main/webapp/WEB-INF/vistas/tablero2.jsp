@@ -65,7 +65,8 @@
                                 $("#turno").html(db.turno);
 
                                 if(db.cantidadJugadores==1){
-                                    alert("you win");
+                                    $("#finPartida").css("visibility", "visible");
+                                    //alert("you win");
                                 }
 
 
@@ -458,6 +459,7 @@
                             <b>
                             TURNO : <span id="turno"></span>
                             </b>
+                            <input type="button" id="finPartida" value="¡ FINAL DE LA PARTIDA !" style="visibility: hidden" onclick="window.location.href='jugadorGanadorPartida'">
 
                         </div>
 	

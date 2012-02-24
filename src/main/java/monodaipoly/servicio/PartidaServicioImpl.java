@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.logging.Logger;
+
 @Service
 public class PartidaServicioImpl implements PartidaServicio {
 
@@ -51,6 +53,7 @@ public class PartidaServicioImpl implements PartidaServicio {
 
     @Override
     public void terminar(Partida partida) {
+        Logger.getLogger(PartidaServicioImpl.class.getName()).info(""+partida.getIdpartida());
         this.partidaDAO.remove(partida);
     }
 

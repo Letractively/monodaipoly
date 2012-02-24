@@ -28,8 +28,7 @@ public class GenericDAOImpl <T, PK extends Serializable> implements GenericDAO<T
         @Transactional
 	@Override
 	public void remove(T object) {
-		em.remove(object);
-		
+		em.remove(object);	
 	}
         @Transactional
 	@Override
