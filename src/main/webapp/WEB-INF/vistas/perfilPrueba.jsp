@@ -35,13 +35,13 @@
                  },
                             function(json){
                                 var db = $.parseJSON(json);
-                                //alert(db.posicion1);
                                 //alert(db.todoListo);
                                 if(db.todoListo==true){
+                                    //alert("dentro");
                                     $("#notificaciones").html("Ya esta tu partida lista");
                                     $("#imagenGif").css("visibility","hidden");
-                                    $("#pie").append("<button id='botonNotificacion' onclick='window.location.href='prepararPartida2''>Entrar Partida</button>");
-                                }else{
+                                    $("#partidaLista").css("visibility","visible");
+                                }if(db.todoListo==false){
                                     timeMsg();
                                 }
 
@@ -159,6 +159,7 @@
 
         </div>
          <div id="pie">
+             <input type="button" id="partidaLista" value="¡ ENTRA A TU PARTIDA !" style="visibility:hidden" onclick="window.location.href='prepararPartida2'" />
            
              <div id="notificaciones" >
              </div>

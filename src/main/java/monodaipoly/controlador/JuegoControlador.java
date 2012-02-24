@@ -186,18 +186,18 @@ public class JuegoControlador {
                         //tirar el dado por el que es su turno...y no dejarle comprar
                         if(partida.getJugador1()!=null && partida.getTurno().equals(partida.getJugador1())){
                             jugador=jugadorServicio.buscar(partida.getJugador1());
-                            System.out.println("Se le va a saltar el turno al jug 1: "+jugador.getNick());
+                            //System.out.println("Se le va a saltar el turno al jug 1: "+jugador.getNick());
                         }
                         if(partida.getJugador2()!=null && partida.getTurno().equals(partida.getJugador2())){
                             jugador=jugadorServicio.buscar(partida.getJugador2());
-                            System.out.println("Se le va a saltar el turno al jug 2: "+jugador.getNick());
+                            //System.out.println("Se le va a saltar el turno al jug 2: "+jugador.getNick());
                         }
                         if(partida.getJugador3()!=null && partida.getTurno().equals(partida.getJugador3())){
                             jugador=jugadorServicio.buscar(partida.getJugador3());
-                            System.out.println("Se le va a saltar el turno al jug 3: "+jugador.getNick());
+                            //System.out.println("Se le va a saltar el turno al jug 3: "+jugador.getNick());
                         }if(partida.getJugador4()!=null && partida.getTurno().equals(partida.getJugador4())){
                             jugador=jugadorServicio.buscar(partida.getJugador4());
-                            System.out.println("Se le va a saltar el turno al jug 4: "+jugador.getNick());
+                            //System.out.println("Se le va a saltar el turno al jug 4: "+jugador.getNick());
                         }
                         //ahora tiramos por el...
                         int dado = (int)(6.0 * Math.random()) + 1;
@@ -217,7 +217,7 @@ public class JuegoControlador {
                     //System.out.println("this.comprobarCasillaQueHasCaido(jugador):  "+ this.comprobarCasillaQueHasCaido(jugador))
                     }
                     if(this.jugadorQueQuedan(partida)<4){
-                        if(this.jugadorQueQuedan(partida)==1){
+                        /*if(this.jugadorQueQuedan(partida)==1){
                             Jugador jugador=new Jugador();
                             if(partida.getJugador1()!=null){
                                 jugador=jugadorServicio.buscar(partida.getJugador1());
@@ -236,7 +236,7 @@ public class JuegoControlador {
 
                     return "Has Ganado";
 
-                }
+                }*/
                             this.cambiarTurnoMenosDe4(partida);
                     }else{
                         
@@ -357,7 +357,7 @@ public class JuegoControlador {
             int multa=calle.getMulta();
             Jugador jugadorPagas=this.jugadorPertenecienteAlNumero(jugQueJuega, jugAQuienPagas, partida);
             //Desde Aqui es para doblar la multa si tiene todas las casillas del mismo color el jugadorPagas
-            System.out.println("multa inicial: "+multa);
+            //System.out.println("multa inicial: "+multa);
            
             if(this.casillasMismoColor(jugadorPagas, calle)){
                 multa=multa*2;
@@ -376,10 +376,10 @@ public class JuegoControlador {
                 //System.out.println("Estamos camniando el turno antes de eliminar al jugador!!");
                 eliminado=this.eliminarJugador(jugador);
                 partidaServicio.actualizar(partida);
-                System.out.println("Actualizamos partida despues de Eliminar jug");
-                System.out.println("AQUI  this.jugadorQueQuedan(partida)=  "+this.jugadorQueQuedan(partida));
+                //System.out.println("Actualizamos partida despues de Eliminar jug");
+                //System.out.println("AQUI  this.jugadorQueQuedan(partida)=  "+this.jugadorQueQuedan(partida));
                 if(this.jugadorQueQuedan(partida)==2 && eliminado){
-                    System.out.println("YOU WIIIN desde pagar multa");
+                    //System.out.println("YOU WIIIN desde pagar multa");
                     //Aqui se debería eiminar la partida
                 }
 
@@ -515,26 +515,35 @@ public class JuegoControlador {
                 usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
              }
             //jugadorServicio.borrar(jugador);
-            System.out.println("Se ha eliminado el jugador"+numJugador);
+            //System.out.println("Se ha eliminado el jugador"+numJugador);
             return true;
 
          }
 
          private int jugadorQueQuedan(Partida partida){
-             int numJugadoreQueQuedan=0;
-             if(partida.getJugador1()!=null){
-                 numJugadoreQueQuedan++;
+             int numJugadoresQueQuedan=4;
+
+
+             Logger.getLogger(JuegoControlador.class.getName()).info("nmbre j2 "+jugadorServicio.buscar(partida.getJugador2()).getNick());
+             if(partida.getJugador1()==null){
+                 numJugadoresQueQuedan--;
+                Logger.getLogger(JuegoControlador.class.getName()).info("1 "+numJugadoresQueQuedan);
              }
-             if(partida.getJugador2()!=null){
-                 numJugadoreQueQuedan++;
+             if(partida.getJugador2()==null){
+                 numJugadoresQueQuedan--;
+                Logger.getLogger(JuegoControlador.class.getName()).info("2 "+numJugadoresQueQuedan);
              }
-             if(partida.getJugador3()!=null){
-                 numJugadoreQueQuedan++;
+             if(partida.getJugador3()==null){
+                 numJugadoresQueQuedan--;
+                Logger.getLogger(JuegoControlador.class.getName()).info("3 "+numJugadoresQueQuedan);
              }
-             if(partida.getJugador4()!=null){
-                 numJugadoreQueQuedan++;
+             if(partida.getJugador4()==null){
+                 numJugadoresQueQuedan--;
+                Logger.getLogger(JuegoControlador.class.getName()).info("4 "+numJugadoresQueQuedan);
              }
-             return numJugadoreQueQuedan;
+             Logger.getLogger(JuegoControlador.class.getName()).info(" "+numJugadoresQueQuedan);
+             
+             return numJugadoresQueQuedan;
          }
 
 
@@ -614,7 +623,7 @@ public class JuegoControlador {
          }
 
         @RequestMapping(value = "/terminarJugadorPartida", method = RequestMethod.GET)
-        private String terminarJugadorPartida(HttpSession sesion){
+        private String terminarJugadorPartida(HttpSession sesion,boolean voluntario){
             
             Jugador jugador = (Jugador)sesion.getAttribute("jugador");
             Partida partida=partidaServicio.buscar(jugador.getPartida());
@@ -624,20 +633,20 @@ public class JuegoControlador {
                 turnoJugador=true;
             }
 
-            if(partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
+            if(partida.getJugador1()!=null && partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
 
                 partida.setJugador1(null);
             }
 
-            if(partida.getJugador2().compareTo(jugador.getClaveJugador())==0){
+            if(partida.getJugador2()!=null && partida.getJugador2().compareTo(jugador.getClaveJugador())==0){
 
                 partida.setJugador2(null);
             }
-            if(partida.getJugador3().compareTo(jugador.getClaveJugador())==0 ){
+            if(partida.getJugador3()!=null && partida.getJugador3().compareTo(jugador.getClaveJugador())==0 ){
 
                 partida.setJugador3(null);
             }
-            if(partida.getJugador4().compareTo(jugador.getClaveJugador())==0){
+            if(partida.getJugador4()!=null && partida.getJugador4().compareTo(jugador.getClaveJugador())==0){
 
                 partida.setJugador4(null);
 
@@ -691,7 +700,7 @@ public class JuegoControlador {
                 }
             }
 
-            System.out.println("comprobacionCallesMismoColor:  "+comprobacionCallesMismoColor);
+            //System.out.println("comprobacionCallesMismoColor:  "+comprobacionCallesMismoColor);
             return comprobacionCallesMismoColor;
         }
 
