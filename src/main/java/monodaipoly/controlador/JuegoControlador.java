@@ -1,4 +1,4 @@
- package monodaipoly.controlador;
+package monodaipoly.controlador;
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.repackaged.com.google.common.base.Log2;
@@ -524,7 +524,7 @@ public class JuegoControlador {
              int numJugadoresQueQuedan=4;
 
 
-             Logger.getLogger(JuegoControlador.class.getName()).info("nmbre j2 "+jugadorServicio.buscar(partida.getJugador2()).getNick());
+             //Logger.getLogger(JuegoControlador.class.getName()).info("nmbre j2 "+jugadorServicio.buscar(partida.getJugador2()).getNick());
              if(partida.getJugador1()==null){
                  numJugadoresQueQuedan--;
                 Logger.getLogger(JuegoControlador.class.getName()).info("1 "+numJugadoresQueQuedan);
@@ -676,13 +676,25 @@ public class JuegoControlador {
 
             Partida partida=partidaServicio.buscar(jugador.getPartida());
 
+            if(partida.getJugador1()!=null && partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador1(null);
+            }if(partida.getJugador2()!=null && partida.getJugador2().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador2(null);
+            }if(partida.getJugador3()!=null && partida.getJugador3().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador3(null);
+            }if(partida.getJugador4()!=null && partida.getJugador4().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador4(null);
+            }
+            partidaServicio.actualizar(partida);
+
             List<Jugador> todosLosJugadores=jugadorServicio.todosJugadoresDePartida(partida.getIdpartida());
             for(Jugador j:todosLosJugadores){
-                jugadorServicio.borrar(jugador);
+                Logger.getLogger(JuegoControlador.class.getName()).info("Antes de eliminar el objeto jugador:  "+j.getNick());
+                jugadorServicio.borrar(j);
             }
-            partidaServicio.terminar(partida);
-
-
+            //Logger.getLogger(JuegoControlador.class.getName()).info("Antes de eliminar el objeto partida:  "+partida.getIdpartida());
+            //partidaServicio.terminar(partida);
+            //Logger.getLogger(JuegoControlador.class.getName()).info("Despues de eliminar el objeto partida:  "+partida.getIdpartida());
             return "/perfilPrueba";
         }
 
