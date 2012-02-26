@@ -423,7 +423,7 @@
                     
                     
                         <span class="imagenesJugador" id="imagenJugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></span>
-                        <span class="imagenesJugador" id="imagenJugador2"><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></span>
+                        <span class="imagenesJugador" id="imagenJugador2"><img src='Estilos/tux/legolas.png' width='100%' height='100%'/></span>
                         <span class="imagenesJugador" id="imagenJugador3"><img src='Estilos/tux/croft.png' width='100%' height='100%'/></span>
                         <span class="imagenesJugador" id="imagenJugador4"><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></span>
                     
@@ -473,7 +473,7 @@
 
 
             <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>
-            <div id='jugador2'><img src='Estilos/tux/patricio.png' width='100%' height='100%'/></div>
+            <div id='jugador2'><img src='Estilos/tux/legolas.png' width='100%' height='100%'/></div>
             <div id='jugador3'><img src='Estilos/tux/croft.png' width='100%' height='100%'/></div>
             <div id='jugador4'><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></div>
 

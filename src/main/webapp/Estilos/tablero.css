@@ -200,7 +200,7 @@ body {
     width: 50%;
     height: 34%;
     left:25.2%;
-    top: 30%;
+    top: 32%;
     z-index: 4;
       background-color: lawngreen;
 }
@@ -285,7 +285,7 @@ body {
 .dineroJugador{
      position: absolute;
     left: 0%;
-    top:75%;
+    top:70%;
     padding:3%;
 }
 
@@ -333,8 +333,8 @@ body {
 #centroTurno{
     position: absolute;
     color: red;
-    top:115%;
-    left:40%;
+    top:28%;
+    left:45%;
     z-index: 4;
 }
 #turno{

@@ -1,6 +1,7 @@
 package monodaipoly.controlador;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.repackaged.com.google.common.base.Log2;
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
@@ -199,47 +200,31 @@ public class JuegoControlador {
                             jugador=jugadorServicio.buscar(partida.getJugador4());
                             //System.out.println("Se le va a saltar el turno al jug 4: "+jugador.getNick());
                         }
+                        
+                            System.out.println("jugado: "+jugador.getClaveJugador());
                         //ahora tiramos por el...
-                        int dado = (int)(6.0 * Math.random()) + 1;
+                            int dado = (int)(6.0 * Math.random()) + 1;
 
-                        if(jugador.getPosicion()+dado>35){
-                            int posAnt=jugador.getPosicion();
-                            int dif=36-posAnt;
-                            jugador.setPosicion(0+dado-dif);
-                            jugador.setDinero(jugador.getDinero()+200);
-                        }else{
-                            jugador.setPosicion(jugador.getPosicion()+dado);
-                        }
+                            if(jugador.getPosicion()+dado>35){
+                                int posAnt=jugador.getPosicion();
+                                int dif=36-posAnt;
+                                jugador.setPosicion(0+dado-dif);
+                                jugador.setDinero(jugador.getDinero()+200);
+                            }else{
+                                jugador.setPosicion(jugador.getPosicion()+dado);
+                            }
 
-                    jugadorServicio.actualizar(jugador);
-                    //this.comprobarCalle(jugador.getClaveJugador());
-                    this.comprobarCasillaQueHasCaido(jugador);
+                        jugadorServicio.actualizar(jugador);
+                        //this.comprobarCalle(jugador.getClaveJugador());
+                        this.comprobarCasillaQueHasCaido(jugador);
+                    
                     //System.out.println("this.comprobarCasillaQueHasCaido(jugador):  "+ this.comprobarCasillaQueHasCaido(jugador))
                     }
                     if(this.jugadorQueQuedan(partida)<4){
-                        /*if(this.jugadorQueQuedan(partida)==1){
-                            Jugador jugador=new Jugador();
-                            if(partida.getJugador1()!=null){
-                                jugador=jugadorServicio.buscar(partida.getJugador1());
-                            }if(partida.getJugador2()!=null){
-                                jugador=jugadorServicio.buscar(partida.getJugador2());
-                            }if(partida.getJugador3()!=null){
-                                jugador=jugadorServicio.buscar(partida.getJugador3());
-                            }if(partida.getJugador4()!=null){
-                                jugador=jugadorServicio.buscar(partida.getJugador4());
-                            }
-                            //habria que redirigir al perfil...
-                            //y sumarle los puntos
-                            usuarioServicio.buscar(jugador.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador.getNick()).getPartidasJugadas()+1);
-                            usuarioServicio.buscar(jugador.getNick()).setPartidasGanadas(usuarioServicio.buscar(jugador.getNick()).getPartidasGanadas()+2);
-                            usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
-
-                    return "Has Ganado";
-
-                }*/
-                            this.cambiarTurnoMenosDe4(partida);
-                    }else{
-                        
+                        //Logger.getLogger(JuegoControlador.class.getName()).info("Antes de cambiar el turno a: "+partida.getTurno());
+                        this.cambiarTurnoMenosDe4(partida);
+                        //Logger.getLogger(JuegoControlador.class.getName()).info("Despues de cambiar el turno a: "+partida.getTurno());
+                    }else{                        
                         cambiarTurno(partida);
                     }
 
@@ -268,7 +253,10 @@ public class JuegoControlador {
     private @ResponseBody String comprobarCalle(HttpSession sesion,
             @RequestParam("jugQueTira") String  jugQueTira){
 
-         Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+        Usuario usuario=usuarioServicio.getCurrentUser();
+        Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
+
+         //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
          return this.comprobarCasillaQueHasCaido(jugador);
  
     }
@@ -408,6 +396,16 @@ public class JuegoControlador {
             boolean fin=false;
             Partida partida =partidaServicio.buscar(jugador.getPartida());
             numeroDeJug=this.numDelJugador(jugador, partida);
+            if(partida.getJugador1()!=null){
+            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug1= "+ jugadorServicio.buscar(partida.getJugador1()).getCalles().toString());
+            }if(partida.getJugador2()!=null){
+            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug2= "+ jugadorServicio.buscar(partida.getJugador2()).getCalles().toString());
+            }if(partida.getJugador3()!=null){
+            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug3= "+ jugadorServicio.buscar(partida.getJugador3()).getCalles().toString());
+            }if(partida.getJugador4()!=null){
+            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug4= "+ jugadorServicio.buscar(partida.getJugador4()).getCalles().toString());
+            }
+            
             //comprobamos que la casilla no sea una de las esquinas...
             if(jugador.getPosicion()!=0 && jugador.getPosicion()!=9 && jugador.getPosicion()!=18 && jugador.getPosicion()!=27){
                 Casilla casilla=casillaServicio.buscarPorNumero(jugador.getPosicion());
@@ -417,10 +415,22 @@ public class JuegoControlador {
                 }   
                 if(casilla.getTipoCasilla()!=null){
                         Calle calle=calleServicio.buscar(casilla.getTipoCasilla());
-                        Logger.getAnonymousLogger().info("calle: "+ calle.getIdCalle());
+                        //Logger.getAnonymousLogger().info("calle: "+ calle.getIdCalle());
                         Logger.getLogger(JuegoControlador.class.getName()).info("calle: "+ calle.getIdCalle());
-
-                      if (jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()) || jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla()) ){
+                        boolean tieneDuenoLaCasilla=false;
+                      //if ( (jugadorServicio.buscar(partida.getJugador1())!=null && jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()))  || (jugadorServicio.buscar(partida.getJugador2())!=null && jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla()) ) || (jugadorServicio.buscar(partida.getJugador3())!=null && jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()) )|| (jugadorServicio.buscar(partida.getJugador4())!=null && jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla())  )){
+                        if(partida.getJugador1()!=null && jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla())){
+                              tieneDuenoLaCasilla=true;
+                        }else if(partida.getJugador2()!=null && jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla())){
+                            tieneDuenoLaCasilla=true;
+                        }else if(partida.getJugador3()!=null && jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla())){
+                            tieneDuenoLaCasilla=true;
+                        }else if(partida.getJugador4()!=null && jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla())){
+                            tieneDuenoLaCasilla=true;
+                        }
+                        
+                        if(tieneDuenoLaCasilla){
+                          Logger.getLogger(JuegoControlador.class.getName()).info("Alguien tiene esa casilla");
                           jugDuenoCasilla=this.jugadorDuenoDeLaCasilla(casilla, partida);
                           if(jugDuenoCasilla!=numeroDeJug){
                               
@@ -442,20 +452,6 @@ public class JuegoControlador {
                           }
                           
                       }
-
-
-                        System.out.println("Calles del jug1= "+ jugadorServicio.buscar(partida.getJugador1()).getCalles().toString());
-
-
-                        System.out.println("Calles del jug2= "+ jugadorServicio.buscar(partida.getJugador2()).getCalles().toString());
-
-
-                        System.out.println("Calles del jug3= "+ jugadorServicio.buscar(partida.getJugador3()).getCalles().toString());
-
-
-                        System.out.println("Calles del jug4= "+ jugadorServicio.buscar(partida.getJugador4()).getCalles().toString());
-
-
                       return this.opcionCompraJson(calle.getPrecio(), casilla.getNombre(), "noMulta").toString();
                 }else{
                     //esto es pq has caido en una calle de suerte,hidroelectrica o estacion
@@ -527,19 +523,19 @@ public class JuegoControlador {
              //Logger.getLogger(JuegoControlador.class.getName()).info("nmbre j2 "+jugadorServicio.buscar(partida.getJugador2()).getNick());
              if(partida.getJugador1()==null){
                  numJugadoresQueQuedan--;
-                Logger.getLogger(JuegoControlador.class.getName()).info("1 "+numJugadoresQueQuedan);
+                //Logger.getLogger(JuegoControlador.class.getName()).info("1 "+numJugadoresQueQuedan);
              }
              if(partida.getJugador2()==null){
                  numJugadoresQueQuedan--;
-                Logger.getLogger(JuegoControlador.class.getName()).info("2 "+numJugadoresQueQuedan);
+                //Logger.getLogger(JuegoControlador.class.getName()).info("2 "+numJugadoresQueQuedan);
              }
              if(partida.getJugador3()==null){
                  numJugadoresQueQuedan--;
-                Logger.getLogger(JuegoControlador.class.getName()).info("3 "+numJugadoresQueQuedan);
+                //Logger.getLogger(JuegoControlador.class.getName()).info("3 "+numJugadoresQueQuedan);
              }
              if(partida.getJugador4()==null){
                  numJugadoresQueQuedan--;
-                Logger.getLogger(JuegoControlador.class.getName()).info("4 "+numJugadoresQueQuedan);
+                //Logger.getLogger(JuegoControlador.class.getName()).info("4 "+numJugadoresQueQuedan);
              }
              Logger.getLogger(JuegoControlador.class.getName()).info(" "+numJugadoresQueQuedan);
              
@@ -552,7 +548,9 @@ public class JuegoControlador {
          private void cambiarTurnoMenosDe4(Partida partida){
              Jugador jugador=new Jugador();
              jugador=jugadorServicio.buscar(partida.getTurno());
+             partidaServicio.actualizar(partida);
              int numJugador=this.numDelJugador(jugador, partida);
+             Logger.getLogger(JuegoControlador.class.getName()).info("Antes de cambiar el turno al nº "+ numJugador);
              if(numJugador==1){
                  if(partida.getJugador2()==null){
                      if(partida.getJugador3()==null){
@@ -623,42 +621,49 @@ public class JuegoControlador {
          }
 
         @RequestMapping(value = "/terminarJugadorPartida", method = RequestMethod.GET)
-        private String terminarJugadorPartida(HttpSession sesion,boolean voluntario){
+        private String terminarJugadorPartida(HttpSession sesion){
             
-            Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            Usuario usuario=usuarioServicio.getCurrentUser();
+            Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
             Partida partida=partidaServicio.buscar(jugador.getPartida());
             boolean turnoJugador=false;
 
             if(partida.getTurno().compareTo(jugador.getClaveJugador())==0){
                 turnoJugador=true;
+                //Logger.getLogger(JuegoControlador.class.getName()).info(" "+turnoJugador);
+                //Logger.getLogger(JuegoControlador.class.getName()).info("Cambiando el trurno desde terminar partida ");
+                this.cambiarTurnoMenosDe4(partida);
+
             }
 
             if(partida.getJugador1()!=null && partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
-
                 partida.setJugador1(null);
+                //Logger.getLogger(JuegoControlador.class.getName()).info("jug1 "+partida.getJugador1());
             }
-
             if(partida.getJugador2()!=null && partida.getJugador2().compareTo(jugador.getClaveJugador())==0){
-
                 partida.setJugador2(null);
+                //Logger.getLogger(JuegoControlador.class.getName()).info("jug2 "+partida.getJugador2());
             }
             if(partida.getJugador3()!=null && partida.getJugador3().compareTo(jugador.getClaveJugador())==0 ){
-
                 partida.setJugador3(null);
+                //Logger.getLogger(JuegoControlador.class.getName()).info("jug3 "+partida.getJugador3());
             }
             if(partida.getJugador4()!=null && partida.getJugador4().compareTo(jugador.getClaveJugador())==0){
-
                 partida.setJugador4(null);
+                //Logger.getLogger(JuegoControlador.class.getName()).info("jug4 "+partida.getJugador4());
 
             }
-            //falta probar esto
-            if(turnoJugador){
-                this.cambiarTurnoMenosDe4(partida);
-            }
+            partidaServicio.actualizar(partida);
+            Logger.getLogger(JuegoControlador.class.getName()).info("jug1 "+partida.getJugador1());
+            Logger.getLogger(JuegoControlador.class.getName()).info("jug2 "+partida.getJugador2());
+            Logger.getLogger(JuegoControlador.class.getName()).info("jug3 "+partida.getJugador3());
+            Logger.getLogger(JuegoControlador.class.getName()).info("jug4 "+partida.getJugador4());
 
-
-
-            Usuario usuario=usuarioServicio.buscar(jugador.getNick());
+            
+            
+            //partidaServicio.actualizar(partida);
+            
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
             return "/perfilPrueba";
@@ -670,9 +675,12 @@ public class JuegoControlador {
         private String jugadorGanadorPartida(){
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
             Usuario usuario=usuarioServicio.getCurrentUser();
-            usuario.setPartidasJugadas(usuario.getPartidasGanadas()+2);
+            Logger.getLogger(JuegoControlador.class.getName()).info("Antes de sumarle 2 al ganador:  "+usuario.getPartidasGanadas());
+            usuario.setPartidasGanadas(usuario.getPartidasGanadas()+2);
+            Logger.getLogger(JuegoControlador.class.getName()).info("Despues de sumarle 2 al ganador:  "+usuario.getPartidasGanadas());
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
+            Logger.getLogger(JuegoControlador.class.getName()).info("Despues de actualizarlo:  "+usuario.getPartidasGanadas());
 
             Partida partida=partidaServicio.buscar(jugador.getPartida());
 
@@ -689,13 +697,15 @@ public class JuegoControlador {
 
             List<Jugador> todosLosJugadores=jugadorServicio.todosJugadoresDePartida(partida.getIdpartida());
             for(Jugador j:todosLosJugadores){
-                Logger.getLogger(JuegoControlador.class.getName()).info("Antes de eliminar el objeto jugador:  "+j.getNick());
+                //Logger.getLogger(JuegoControlador.class.getName()).info("Antes de eliminar el objeto jugador:  "+j.getNick());
+                j.setCalles(null);
+                j.setPartida(null);
                 jugadorServicio.borrar(j);
             }
             //Logger.getLogger(JuegoControlador.class.getName()).info("Antes de eliminar el objeto partida:  "+partida.getIdpartida());
             //partidaServicio.terminar(partida);
             //Logger.getLogger(JuegoControlador.class.getName()).info("Despues de eliminar el objeto partida:  "+partida.getIdpartida());
-            return "/perfilPrueba";
+            return "redirect:finPartida?idPartida="+partida.getIdString();
         }
 
 
@@ -733,6 +743,18 @@ public class JuegoControlador {
             }
             return jugador;
         }
+
+
+    @RequestMapping(method=RequestMethod.GET, value="/finPartida")
+    public String finPartida(@RequestParam(value="idPartida", required=false,defaultValue="") String idPartida,
+        Model model,
+        HttpSession sesion){
+        Usuario usuario=usuarioServicio.getCurrentUser();
+        Key idKeyPartida=KeyFactory.stringToKey(idPartida);
+        partidaServicio.terminar(partidaServicio.buscar(idKeyPartida));
+        model.addAttribute("usuario", usuario);
+        return "/perfilPrueba";
+    }
 
 
        
