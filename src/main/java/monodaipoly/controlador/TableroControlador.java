@@ -234,30 +234,35 @@ public class TableroControlador {
                     player.setDinero(2000);
                     player.setEstoyEnCola(false);
                     //meter todas las calles al jugador
+                    /*
                     for(Casilla c:casillaServicio.getAll()){
                         List<Key> calles =player.getCalles();
                         calles.add(c.getIdCasilla());
                         player.setCalles(calles);
                         jugadorServicio.actualizar(player);
-                    }
+                    }*/
 
 
                     keyPlayer=partida.getJugador2();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(20);
+                    player.setDinero(2000);
                     player.setEstoyEnCola(false);
                     jugadorServicio.actualizar(player);
+
+
+
                     keyPlayer=partida.getJugador3();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(20);
+                    player.setDinero(2000);
                     player.setEstoyEnCola(false);
                     jugadorServicio.actualizar(player);
+
                     keyPlayer=partida.getJugador4();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
-                    player.setDinero(20);
+                    player.setDinero(2000);
                     player.setEstoyEnCola(false);
 
 
@@ -452,7 +457,7 @@ public class TableroControlador {
             Jugador jugTurno=jugadorServicio.buscar(partida.getTurno());
             String turno=jugTurno.getNick();
 
-            System.out.println("cantidad de jugadores desde timeOut: " +cantidadJugadores);
+            //System.out.println("cantidad de jugadores desde timeOut: " +cantidadJugadores);
             
 
             return this.datosDeJuegoJson(posicion1,posicion2,posicion3,posicion4,dinero1,dinero2,dinero3,dinero4,turno,cantidadJugadores).toString();
