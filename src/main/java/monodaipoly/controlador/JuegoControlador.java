@@ -109,25 +109,14 @@ public class JuegoControlador {
             @RequestParam("jugQueTira") String  jugQueTira){
          //System.out.println("Estamos cambiando el turno manualmente");
          //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
-         Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
+         //AQUI ERROR!!!!!
+         //Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
+         Jugador jugador= jugadorServicio.buscar(usuarioServicio.buscar(jugQueTira).getJugador());
          if(jugador.getPartida()!=null && jugador.getEstoyJugando()==true){
             Partida partida=partidaServicio.buscar(jugador.getPartida());
             if(partida!=null){
             if(this.jugadorQueQuedan(partida)<4){
-                /*if(this.jugadorQueQuedan(partida)==1){
-                    //habria que redirigir al perfil...
-                    //y sumarle los puntos
-
-                    this.cambiarTurnoMenosDe4(partida);
-                    usuarioServicio.buscar(jugador.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador.getNick()).getPartidasJugadas()+1);
-                    usuarioServicio.buscar(jugador.getNick()).setPartidasGanadas(usuarioServicio.buscar(jugador.getNick()).getPartidasGanadas()+2);
-                    usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
-
-                    return "Fin";
-                }*/
-                //System.out.println("Estamos cambiando el turno manualmente menos de 4!!!");
-                this.cambiarTurnoMenosDe4(partida);
-                //System.out.println("Despues  Estamos cambiando el turno manualmente menos de 4!!!");
+                this.cambiarTurnoMenosDe4(partida);                
             }else{
                 cambiarTurno(partida);
             }
@@ -318,7 +307,8 @@ public class JuegoControlador {
         @RequestMapping(value = "/comprarCalle", method = RequestMethod.GET)
         private @ResponseBody String comprarCalle(HttpSession sesion,@RequestParam("jugQueTira") String jugQueTira){
 
-            Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
             Partida partida =partidaServicio.buscar(jugador.getPartida());
 
             Casilla casilla=casillaServicio.buscarPorNumero(jugador.getPosicion());
@@ -328,7 +318,9 @@ public class JuegoControlador {
             if(jugador.getDinero()>=calle.getPrecio()){
                 jugador.setDinero(jugador.getDinero()-calle.getPrecio());
                 List<Key> casillasDelJugador= jugador.getCalles();
+
                 casillasDelJugador.add(casilla.getIdCasilla());
+
                 jugador.setCalles(casillasDelJugador);
                 jugadorServicio.actualizar(jugador);
                 return "calle comprada";
@@ -360,7 +352,7 @@ public class JuegoControlador {
             }else{
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+jugador.getDinero());
                 //System.out.println("Llegamos a ponerle el dinero al jug al que pagas");
-                this.cambiarTurnoManualmente(jugador.getNick());
+                this.cambiarTurnoManualmente(jugadorPagas.getNick());
                 //System.out.println("Estamos camniando el turno antes de eliminar al jugador!!");
                 eliminado=this.eliminarJugador(jugador);
                 partidaServicio.actualizar(partida);
@@ -396,20 +388,14 @@ public class JuegoControlador {
             boolean fin=false;
             Partida partida =partidaServicio.buscar(jugador.getPartida());
             numeroDeJug=this.numDelJugador(jugador, partida);
-            if(partida.getJugador1()!=null){
-            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug1= "+ jugadorServicio.buscar(partida.getJugador1()).getCalles().toString());
-            }if(partida.getJugador2()!=null){
-            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug2= "+ jugadorServicio.buscar(partida.getJugador2()).getCalles().toString());
-            }if(partida.getJugador3()!=null){
-            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug3= "+ jugadorServicio.buscar(partida.getJugador3()).getCalles().toString());
-            }if(partida.getJugador4()!=null){
-            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug4= "+ jugadorServicio.buscar(partida.getJugador4()).getCalles().toString());
-            }
+            
             
             //comprobamos que la casilla no sea una de las esquinas...
             if(jugador.getPosicion()!=0 && jugador.getPosicion()!=9 && jugador.getPosicion()!=18 && jugador.getPosicion()!=27){
                 Casilla casilla=casillaServicio.buscarPorNumero(jugador.getPosicion());
                 if(casilla.getTipoCasilla()==null){
+                    Logger.getLogger(JuegoControlador.class.getName()).info("Casilla.getTipoCasilla()==null");
+                    this.mostrarCallesDeLosJugadores(partida);
                     this.cambiarTurnoManualmente(jugador.getNick());
                     return null;
                 }   
@@ -670,7 +656,7 @@ public class JuegoControlador {
     
         }
 
-//NO VAAAAA
+
         @RequestMapping(value= "/jugadorGanadorPartida", method = RequestMethod.GET)
         private String jugadorGanadorPartida(){
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
@@ -754,6 +740,21 @@ public class JuegoControlador {
         partidaServicio.terminar(partidaServicio.buscar(idKeyPartida));
         model.addAttribute("usuario", usuario);
         return "/perfilPrueba";
+    }
+
+
+    private void mostrarCallesDeLosJugadores(Partida partida){
+
+        if(partida.getJugador1()!=null){
+        Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug1= "+ jugadorServicio.buscar(partida.getJugador1()).getCalles().toString());
+        }if(partida.getJugador2()!=null){
+          Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug2= "+ jugadorServicio.buscar(partida.getJugador2()).getCalles().toString());
+            }if(partida.getJugador3()!=null){
+            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug3= "+ jugadorServicio.buscar(partida.getJugador3()).getCalles().toString());
+            }if(partida.getJugador4()!=null){
+            Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug4= "+ jugadorServicio.buscar(partida.getJugador4()).getCalles().toString());
+            }
+
     }
 
 
