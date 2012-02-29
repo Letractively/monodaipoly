@@ -66,6 +66,7 @@
 
                                 if(db.cantidadJugadores==1){
                                     $("#finPartida").css("visibility", "visible");
+                                    $(".boton").css("visibility", "hidden");
                                     //alert("you win");
                                 }
 
@@ -81,10 +82,18 @@
 
              var nombresCasillas=new Array();
              var divTablero = $("#tablero");
+             var precioCalles=new Array();
             <c:forEach var="casilla" items="${casillas}"  varStatus="status">
                             divTablero.append("<div id=casilla${casilla.numeroCasilla}></div>");
                             nombresCasillas[${casilla.numeroCasilla}]={nombreCalle:"${casilla.nombre}"};
             </c:forEach>
+            var i=0;
+            <c:forEach var="calle" items="${calles}" varStatus="status">
+                precioCalles[i]={precioCalle:"${calle.precio}"};
+                //alert(${calle.precio});
+                i++;
+            </c:forEach>
+           
             
 
                 
@@ -112,6 +121,7 @@
                                 parametrodech=(parametrodech+resta);
                                 if(c==1||c==2||c==4){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='abajopeke' class='colorgris'></div>");
+                                    $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precio' ></div>");
                                 }
                                 if(c==3){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='suerte'> Suerte</div>");
@@ -120,7 +130,8 @@
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'>Estacion</div>");
                                 }
                                 if(c==6||c==7||c==8){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='abajopeke' class='colorazul'>Calle Azul</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='abajopeke' class='colorazul'></div>");
+                                    $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precio' ></div>");
                                 }
 
                             }
@@ -136,6 +147,7 @@
                                 top=top+resta;
                                 if(c==10||c==11){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='izquierdapeke' class='colorrosa'> Calle rosa</div>");
+                                    $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioIzq' ></div>");
                                 }
                                 if(c==12){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='hidroelectrica'>Hidroelectrica</div>");
@@ -147,6 +159,7 @@
                                 }
                                 if(c==14||c==15||c==17){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='izquierdapeke' class='colornaranja'>Calle Naranja</div>");
+                                    $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioIzq' ></div>");
                                 }
                                 if(c==16){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "'  class='suerte'>Suerte</div>");
@@ -170,6 +183,7 @@
 
                                 if(c==19||c==20||c==22){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "'  id='arribapeke' class='colorrojo'>${casillas[c].nombre}</div>");
+                                    $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioArr' ></div>");
                                 }
                                 if(c==21){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='suerte'> Suerte</div>");
@@ -179,6 +193,7 @@
                                 }
                                 if(c==24||c==25||c==26){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='arribapeke' class='coloramarillo'>Calle Amarilla</div>");
+                                    $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioArr' ></div>");
                                 }
                             }
                             var top=0;
@@ -193,6 +208,7 @@
                               
                                 if(c==28||c==29||c==31){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='derechapeke' class='colorverde'> Calle Verde</div>");
+                                    $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioDer' ></div>");
                                 }
                                 if(c==30){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='hidroelectrica'>Hidroelectrica</div>");
@@ -204,6 +220,7 @@
                                 }
                                 if(c==33||c==35){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='derechapeke' class='colorazuloscuro'>Calle Azul oscuro</div>");
+                                    $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioDer' ></div>");
                                 }
                                 if(c==34){
                                     $(identificacion).append("<div  esPequeno='si' indice='" + c + "' class='suerte'>¡¡PAGA!!</div>");
@@ -218,9 +235,23 @@
                 var indice = $(this).attr("indice");
                 //alert(nombresCasillas[indice].nombreCalle);
                 $(this).html(nombresCasillas[indice].nombreCalle);
-
             }
         );
+            $("[esPrecio='si']").each(
+
+                    function() {
+
+                        var indice = $(this).attr("indice");
+                        
+                        $(this).html(precioCalles[indice].precioCalle+"$");
+
+
+                    }
+                );
+        
+         
+
+
             var jug1=1;
             var jug2=2;
             var jug3=3;

@@ -340,3 +340,25 @@ body {
 #turno{
    color:red;
 }
+
+.precio{
+    position: absolute;
+    top:90%;
+    left: 30%;
+}
+.precioDer{
+    position: absolute;
+    top:30%;
+    left: 70%;
+}
+
+.precioIzq{
+    position: absolute;
+    top:30%;
+    left: 5%;
+}
+.precioArr{
+    position: absolute;
+    top:90%;
+    left: 30%;
+}
