@@ -403,6 +403,10 @@ public class TableroControlador {
        model.addAttribute("dinero2",dinero2);
        model.addAttribute("dinero3",dinero3);
        model.addAttribute("dinero4",dinero4);
+       //cargar en modelo el turno
+       Jugador jugTurno=jugadorServicio.buscar(partida.getTurno());
+       String turno=jugTurno.getNick();
+       model.addAttribute("turno", turno);
        return "/tablero2";
     }
 
