@@ -9,10 +9,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
+import monodaipoly.persistencia.Calle;
 import monodaipoly.persistencia.Casilla;
 import monodaipoly.persistencia.Jugador;
 import monodaipoly.persistencia.Partida;
 import monodaipoly.persistencia.Usuario;
+import monodaipoly.servicio.CalleServicio;
 import monodaipoly.servicio.CasillaServicio;
 import monodaipoly.servicio.JugadorServicio;
 import monodaipoly.servicio.PartidaServicio;
@@ -35,11 +37,18 @@ public class TableroControlador {
     private CasillaServicio casillaServicio;
     private UsuarioServicio usuarioServicio;
     private PartidaServicio partidaServicio;
+    private CalleServicio calleServicio;
 
     @Autowired
     @Required
     public void setUsuarioServicio(UsuarioServicio usuarioServicio){
         this.usuarioServicio=usuarioServicio;
+    }
+
+    @Autowired
+    @Required
+    public void setCalleServicio(CalleServicio calleServicio){
+        this.calleServicio=calleServicio;
     }
 
     @Autowired
@@ -322,10 +331,23 @@ public class TableroControlador {
     public String comenzarPartida(Model model,HttpSession sesion) {
        Jugador jugador  = (Jugador)sesion.getAttribute("jugador");
        Partida partida=partidaServicio.buscar(jugador.getPartida());
-
+       int i;
        //cargar en modelo casillas
+       List<Calle>calles=new ArrayList(35);
        List<Casilla>casillas=casillaServicio.getAll();
+       for(i=0;i<=casillas.size()-1;i++){
+
+           if(casillas.get(i).getTipoCasilla()!=null){
+                calles.add(i,calleServicio.buscar(casillas.get(i).getTipoCasilla()));
+           }else{
+               Calle calle=new Calle();
+               calle.setPrecio(0);
+               calles.add(i, calle);
+           }
+       }
+       model.addAttribute("calles",calles);
        model.addAttribute("casillas",casillas);
+
        //cargar en modelo posiciones
        int pos1=0;
        int pos2=0;
