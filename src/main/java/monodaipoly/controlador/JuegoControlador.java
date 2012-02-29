@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-@SessionAttributes({"jugador"})
+
 @Controller
 public class JuegoControlador {
     
@@ -80,29 +80,6 @@ public class JuegoControlador {
         this.partidaServicio=partidaServicio;
     }
 
-    
-    @RequestMapping(value = "/comprobarTurno", method = RequestMethod.GET)
-    public String comprobarTurno(Model model,HttpSession sesion) {
-        int turno=0;
-        Jugador jugador = (Jugador)sesion.getAttribute("jugador");
-        Partida partida=partidaServicio.buscar(jugador.getPartida());
-        if(partida.getTurno()==partida.getJugador1()){
-            turno=1;
-        }
-        if(partida.getTurno()==partida.getJugador2()){
-            turno=2;
-        }
-        if(partida.getTurno()==partida.getJugador3()){
-            turno=3;
-        }
-        if(partida.getTurno()==partida.getJugador4()){
-            turno=4;
-        }
-        model.addAttribute("turno",turno);
-        return "/tablero2";
-    
-    }
-    
     
     @RequestMapping(value = "/cambiarTurnoManual", method = RequestMethod.GET)
     private @ResponseBody String cambiarTurnoManualmente(
@@ -320,7 +297,7 @@ public class JuegoControlador {
         private @ResponseBody String comprarCalle(HttpSession sesion,@RequestParam("jugQueTira") String jugQueTira){
 
             //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
-            Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
+            Jugador jugador=jugadorServicio.buscar(usuarioServicio.buscar(jugQueTira).getJugador());
             Partida partida =partidaServicio.buscar(jugador.getPartida());
 
             Casilla casilla=casillaServicio.buscarPorNumero(jugador.getPosicion());
@@ -329,10 +306,28 @@ public class JuegoControlador {
 
             if(jugador.getDinero()>=calle.getPrecio()){
                 jugador.setDinero(jugador.getDinero()-calle.getPrecio());
-                List<Key> casillasDelJugador= jugador.getCalles();
+                List<Key> casillasDelJugador=jugador.getCalles();
 
+
+
+                Logger.getLogger(JuegoControlador.class.getName()).info("ANTES nº Calles del Jugador:"+jugador.getNick()+" " + casillasDelJugador.size());
+
+                for (Key key: casillasDelJugador)  {
+                    System.out.println("key="+key);
+                }
+
+                System.out.println("comprada="+casilla.getIdCasilla());
+
+                //int i=casillasDelJugador.size();
+
+                //casillasDelJugador.add(i,casilla.getIdCasilla());
                 casillasDelJugador.add(casilla.getIdCasilla());
 
+                Logger.getLogger(JuegoControlador.class.getName()).info("DESPUES nº Calles del Jugador:"+jugador.getNick()+" " + casillasDelJugador.size());
+
+                for (Key key: casillasDelJugador)  {
+                    System.out.println("key="+key);
+                }
                 jugador.setCalles(casillasDelJugador);
                 jugadorServicio.actualizar(jugador);
                 return "calle comprada";
@@ -360,8 +355,9 @@ public class JuegoControlador {
                 //jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+multa);
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+multa);
                 jugadorServicio.actualizar(jugador);
+                jugadorServicio.actualizar(jugadorPagas);
                 this.cambiarTurnoManualmente(jugador.getNick());
-            }else{
+            }if(jugador.getDinero()<multa){
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+jugador.getDinero());
                 //System.out.println("Llegamos a ponerle el dinero al jug al que pagas");
                 this.cambiarTurnoManualmente(jugadorPagas.getNick());
@@ -370,10 +366,6 @@ public class JuegoControlador {
                 partidaServicio.actualizar(partida);
                 //System.out.println("Actualizamos partida despues de Eliminar jug");
                 //System.out.println("AQUI  this.jugadorQueQuedan(partida)=  "+this.jugadorQueQuedan(partida));
-                if(this.jugadorQueQuedan(partida)==2 && eliminado){
-                    //System.out.println("YOU WIIIN desde pagar multa");
-                    //Aqui se debería eiminar la partida
-                }
 
             }
             jugadorServicio.actualizar(jugadorPagas);

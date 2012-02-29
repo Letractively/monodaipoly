@@ -59,7 +59,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla0 = new Casilla();
         casilla0.setNumeroCasilla(0);
         casilla0.setNombre("Salida");
-        casilla0.setTipoCasilla(null);
+        //casilla0.setTipoCasilla(null);
         casillaDAO.insert(casilla0);
 
         Casilla casilla1 = new Casilla();
@@ -86,7 +86,7 @@ public class CasillaServicioImpl implements CasillaServicio{
 
         Casilla casilla3=new Casilla();
         casilla3.setNumeroCasilla(3);
-        casilla3.setNombre("Suerte");
+        //casilla3.setNombre("Suerte");
         casilla3.setTipoCasilla(null);
          casillaDAO.insert(casilla3);
 
@@ -105,7 +105,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla5=new Casilla();
         casilla5.setNumeroCasilla(5);
         casilla5.setNombre("Estacion");
-        casilla5.setTipoCasilla(null);
+        //casilla5.setTipoCasilla(null);
          casillaDAO.insert(casilla5);
 
         Casilla casilla6 = new Casilla();
@@ -174,13 +174,13 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla12 = new Casilla();
         casilla12.setNumeroCasilla(12);
         casilla12.setNombre("Hidroelectrica");
-        casilla12.setTipoCasilla(null);
+        //casilla12.setTipoCasilla(null);
         casillaDAO.insert(casilla12);
 
         Casilla casilla13 = new Casilla();
         casilla13.setNumeroCasilla(13);
         casilla13.setNombre("Estacion");
-        casilla13.setTipoCasilla(null);
+        //casilla13.setTipoCasilla(null);
         casillaDAO.insert(casilla13);
 
         Casilla casilla14 = new Casilla();
@@ -208,7 +208,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla16 = new Casilla();
         casilla16.setNumeroCasilla(16);
         casilla16.setNombre("Suerte");
-        casilla16.setTipoCasilla(null);
+        //casilla16.setTipoCasilla(null);
         casillaDAO.insert(casilla16);
 
         Casilla casilla17 = new Casilla();
@@ -225,7 +225,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla18 = new Casilla();
         casilla18.setNumeroCasilla(18);
         casilla18.setNombre("Free");
-        casilla18.setTipoCasilla(null);
+        //casilla18.setTipoCasilla(null);
         casillaDAO.insert(casilla18);
 
         Casilla casilla19=new Casilla();
@@ -253,7 +253,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla21 = new Casilla();
         casilla21.setNumeroCasilla(21);
         casilla21.setNombre("Suerte");
-        casilla21.setTipoCasilla(null);
+        //casilla21.setTipoCasilla(null);
         casillaDAO.insert(casilla21);
 
         Casilla casilla22=new Casilla();
@@ -270,7 +270,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla23 = new Casilla();
         casilla23.setNumeroCasilla(23);
         casilla23.setNombre("Estacion");
-        casilla23.setTipoCasilla(null);
+        //casilla23.setTipoCasilla(null);
         casillaDAO.insert(casilla23);
 
         Casilla casilla24=new Casilla();
@@ -309,7 +309,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla27 = new Casilla();
         casilla27.setNumeroCasilla(27);
         casilla27.setNombre("Carcel");
-        casilla27.setTipoCasilla(null);
+        //casilla27.setTipoCasilla(null);
         casillaDAO.insert(casilla27);
 
         Casilla casilla28=new Casilla();
@@ -337,7 +337,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla30 = new Casilla();
         casilla30.setNumeroCasilla(30);
         casilla30.setNombre("Hidroelectrica");
-        casilla30.setTipoCasilla(null);
+        //casilla30.setTipoCasilla(null);
         casillaDAO.insert(casilla30);
 
         Casilla casilla31=new Casilla();
@@ -354,7 +354,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla32 = new Casilla();
         casilla32.setNumeroCasilla(32);
         casilla32.setNombre("Estacion");
-        casilla32.setTipoCasilla(null);
+        //casilla32.setTipoCasilla(null);
         casillaDAO.insert(casilla32);
 
         Casilla casilla33=new Casilla();
@@ -371,7 +371,7 @@ public class CasillaServicioImpl implements CasillaServicio{
         Casilla casilla34 = new Casilla();
         casilla34.setNumeroCasilla(34);
         casilla34.setNombre("PAGA");
-        casilla34.setTipoCasilla(null);
+        //casilla34.setTipoCasilla(null);
         casillaDAO.insert(casilla34);
 
         Casilla casilla35=new Casilla();
