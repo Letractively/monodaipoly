@@ -306,7 +306,10 @@ public class JuegoControlador {
 
             if(jugador.getDinero()>=calle.getPrecio()){
                 jugador.setDinero(jugador.getDinero()-calle.getPrecio());
-                List<Key> casillasDelJugador=jugador.getCalles();
+                jugador.getCalles().add(casilla.getIdCasilla());
+
+
+               /* List<Key> casillasDelJugador=jugador.getCalles();
 
 
 
@@ -328,7 +331,7 @@ public class JuegoControlador {
                 for (Key key: casillasDelJugador)  {
                     System.out.println("key="+key);
                 }
-                jugador.setCalles(casillasDelJugador);
+                jugador.setCalles(casillasDelJugador);*/
                 jugadorServicio.actualizar(jugador);
                 return "calle comprada";
             }
