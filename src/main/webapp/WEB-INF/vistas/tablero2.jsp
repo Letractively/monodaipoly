@@ -403,7 +403,7 @@
                                             jugQueTira:jugQueTira
 
                                             }, function(informacion){
-                                            alert("cambiarTurno =D");
+                                            //alert("cambiarTurno =D");
 
                                         }, "json");
                                         
