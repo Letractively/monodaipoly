@@ -288,7 +288,7 @@
                                 });
                                 }
                             }
-
+                         $("#turno").html("${turno}");
                          //llamar a el setTimeOut
                          timeMsg();
 
