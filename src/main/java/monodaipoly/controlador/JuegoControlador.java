@@ -127,7 +127,7 @@ public class JuegoControlador {
 
         //debemos hacer un metodo que envie algo a tablero para indicir que se a cambiado el turno y de quien es
 
-        partida.setFechaTurno(System.currentTimeMillis()+60000);
+        partida.setFechaTurno(System.currentTimeMillis()+6000);
         partida.setHaTirado(false);
         partidaServicio.actualizar(partida);
     }
@@ -390,10 +390,11 @@ public class JuegoControlador {
          * y devuelve "tipo nulo" si la casilla es nula
          */
         private String comprobarCasillaQueHasCaido(Jugador jugador){
+
             int numeroDeJug=0;
             int jugDuenoCasilla=0;
             boolean fin=false;
-            Partida partida =partidaServicio.buscar(jugador.getPartida());
+            Partida partida =partidaServicio.buscar(jugador.getPartida());            
             numeroDeJug=this.numDelJugador(jugador, partida);
             
             
@@ -618,7 +619,7 @@ public class JuegoControlador {
                      partida.setTurno(partida.getJugador1());
                  }
              }
-             partida.setFechaTurno(System.currentTimeMillis()+60000);
+             partida.setFechaTurno(System.currentTimeMillis()+6000);
              partida.setHaTirado(false);
              partidaServicio.actualizar(partida);
          }
@@ -760,7 +761,7 @@ public class JuegoControlador {
     }
 
 
-    private void mostrarCallesDeLosJugadores(Partida partida){
+    public void mostrarCallesDeLosJugadores(Partida partida){
 
         if(partida.getJugador1()!=null){
         Logger.getLogger(JuegoControlador.class.getName()).info("Calles del jug1= "+ jugadorServicio.buscar(partida.getJugador1()).getCalles().toString());
