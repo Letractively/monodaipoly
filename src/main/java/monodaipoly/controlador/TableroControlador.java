@@ -38,6 +38,14 @@ public class TableroControlador {
     private UsuarioServicio usuarioServicio;
     private PartidaServicio partidaServicio;
     private CalleServicio calleServicio;
+    private JuegoControlador juegoControlador;
+
+
+    @Autowired
+    @Required
+    public void setJuegoControlador(JuegoControlador juegoControlador){
+        this.juegoControlador = juegoControlador;
+    }
 
     @Autowired
     @Required
@@ -119,8 +127,11 @@ public class TableroControlador {
         public @ResponseBody String dado(HttpSession sesion,@RequestParam("jugQueTira") String jugQueTira){
             //Usuario usuario = (Usuario)sesion.getAttribute("usuario");
             //Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
-            Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+
+            Jugador jugador = jugadorServicio.buscar(usuarioServicio.buscar(jugQueTira).getJugador());
             Partida partida =partidaServicio.buscar(jugador.getPartida());
+            System.out.println("AQUIIIIIIIIIIIIIIIIII 1");
+            juegoControlador.mostrarCallesDeLosJugadores(partida);
           
             int numJugador=this.numDelJugador(jugador, partida);
             if(comprobarQueEsTurno(numJugador,partida)&&partida.getHaTirado()==false){
@@ -136,8 +147,16 @@ public class TableroControlador {
                     jugador.setPosicion(jugador.getPosicion()+dado);
                 }
 
+                System.out.println("AQUIIIIIIIIIIIIIIIIII 2");
+                juegoControlador.mostrarCallesDeLosJugadores(partida);
+                System.out.println("AQUIIIIIIIIIIIIIIIIII 3");
+                juegoControlador.mostrarCallesDeLosJugadores(partida);
                 jugadorServicio.actualizar(jugador);
+                System.out.println("AQUIIIIIIIIIIIIIIIIII 4");
+                juegoControlador.mostrarCallesDeLosJugadores(partida);
                 partida.setHaTirado(true);
+                System.out.println("AQUIIIIIIIIIIIIIIIIII 5");
+                juegoControlador.mostrarCallesDeLosJugadores(partida);
                 partidaServicio.actualizar(partida);
                 return this.dadoJson(jugador.getPosicion(),dado,numJugador).toString();
             }else{
@@ -275,7 +294,7 @@ public class TableroControlador {
                     player.setEstoyEnCola(false);
 
 
-                    partida.setFechaTurno(System.currentTimeMillis()+60000);
+                    partida.setFechaTurno(System.currentTimeMillis()+6000);
                     partida.setCompleta(true);
                     jugadorServicio.actualizar(player);
                     partidaServicio.actualizar(partida);
