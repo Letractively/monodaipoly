@@ -86,7 +86,7 @@ public class CasillaServicioImpl implements CasillaServicio{
 
         Casilla casilla3=new Casilla();
         casilla3.setNumeroCasilla(3);
-        //casilla3.setNombre("Suerte");
+        casilla3.setNombre("Suerte");
         casilla3.setTipoCasilla(null);
          casillaDAO.insert(casilla3);
 

@@ -100,7 +100,7 @@
                             $("#casilla9").html("<img src='Estilos/carcel.jpg' width='100%' height='100%'/>");
                             $("#casilla0").html("<img src='Estilos/CasillaSalida.jpg' width='100%' height='100%'/>");
                             $("#casilla18").html("<img src='Estilos/free.jpg' width='100%' height='100%'/>");
-                            $("#casilla27").html("<img src='Estilos/carcel.jpg' width='100%' height='100%'/>");
+                            $("#casilla27").html("<img src='Estilos/carcel2.png' width='100%' height='100%'/>");
                             var c;//contador de las casillas
                             var resta=12.5;//tamaño de cada casilla
                             var left=87.5;
@@ -124,10 +124,10 @@
                                     $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precio' ></div>");
                                 }
                                 if(c==3){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='suerte'> Suerte</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "'  class='suerte'></div>");
                                 }
                                 if(c==5){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'>Estacion</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'></div>");
                                 }
                                 if(c==6||c==7||c==8){
                                     $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='abajopeke' class='colorazul'></div>");
@@ -146,19 +146,19 @@
                                 $(identificacion).addClass("casillasizq").css("top",top+"%");
                                 top=top+resta;
                                 if(c==10||c==11){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='izquierdapeke' class='colorrosa'> Calle rosa</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='izquierdapeke' class='colorrosa'></div>");
                                     $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioIzq' ></div>");
                                 }
                                 if(c==12){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='hidroelectrica'>Hidroelectrica</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='hidroelectrica'></div>");
                                 }
 
                                 if(c==13){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'>Estacion</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'></div>");
 
                                 }
                                 if(c==14||c==15||c==17){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='izquierdapeke' class='colornaranja'>Calle Naranja</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='izquierdapeke' class='colornaranja'></div>");
                                     $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioIzq' ></div>");
                                 }
                                 if(c==16){
@@ -182,17 +182,17 @@
 
 
                                 if(c==19||c==20||c==22){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "'  id='arribapeke' class='colorrojo'>${casillas[c].nombre}</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "'  id='arribapeke' class='colorrojo'></div>");
                                     $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioArr' ></div>");
                                 }
                                 if(c==21){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='suerte'> Suerte</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='suerte'></div>");
                                 }
                                 if(c==23){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'>Estacion</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'></div>");
                                 }
                                 if(c==24||c==25||c==26){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='arribapeke' class='coloramarillo'>Calle Amarilla</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='arribapeke' class='coloramarillo'></div>");
                                     $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioArr' ></div>");
                                 }
                             }
@@ -207,23 +207,23 @@
                                 //Estructura1(c,"derechapeke","28","colorverde","colorazuloscuro",identificacion);
                               
                                 if(c==28||c==29||c==31){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='derechapeke' class='colorverde'> Calle Verde</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='derechapeke' class='colorverde'></div>");
                                     $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioDer' ></div>");
                                 }
                                 if(c==30){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='hidroelectrica'>Hidroelectrica</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='hidroelectrica'></div>");
                                 }
 
                                 if(c==32){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'>Estacion</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'></div>");
 
                                 }
                                 if(c==33||c==35){
-                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='derechapeke' class='colorazuloscuro'>Calle Azul oscuro</div>");
+                                    $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='derechapeke' class='colorazuloscuro'></div>");
                                     $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioDer' ></div>");
                                 }
                                 if(c==34){
-                                    $(identificacion).append("<div  esPequeno='si' indice='" + c + "' class='suerte'>¡¡PAGA!!</div>");
+                                    $(identificacion).append("<div  esPequeno='si' indice='" + c + "' class='suerte'></div>");
                                 }
                             
 
@@ -234,7 +234,24 @@
             function() {
                 var indice = $(this).attr("indice");
                 //alert(nombresCasillas[indice].nombreCalle);
-                $(this).html(nombresCasillas[indice].nombreCalle);
+                if(indice>=1 && indice<=8){
+                    
+                    $(this).append("<div id='nombresAbajo'>"+nombresCasillas[indice].nombreCalle+"</div>");
+                }
+                if(indice>=10 && indice<=17){
+                    
+                    $(this).append("<div id='nombresIzquierda'>"+nombresCasillas[indice].nombreCalle+"</div>");
+                }
+                if(indice>=19 && indice<=26){
+                    
+                    $(this).append("<div id='nombresArriba'>"+nombresCasillas[indice].nombreCalle+"</div>");
+                }
+                if(indice>=28 && indice<=35){
+                    
+                    $(this).append("<div id='nombresDerecha'>"+nombresCasillas[indice].nombreCalle+"</div>");
+                }
+                
+               
             }
         );
             $("[esPrecio='si']").each(
