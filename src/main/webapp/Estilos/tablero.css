@@ -80,6 +80,7 @@ body {
     width: 100%;
     height: 40%;
     border-bottom-style: solid;    
+    text-align: center;
 
 }
 
@@ -99,6 +100,7 @@ body {
     height: 100% ;
     right: 0%;
     border-left-style:solid;
+    text-align: center;
  
 }
 .casillasarriba{
@@ -115,6 +117,7 @@ body {
     width: 100%;
     height: 40%;
     border-bottom-style: solid;
+    text-align: center;
 }
 .casillasdech{
     position: absolute;
@@ -130,6 +133,7 @@ body {
     height: 100% ;
     right: 59.3%;
     border-right-style:solid;
+    text-align: center;
 
 }
 
@@ -187,9 +191,11 @@ body {
     position: absolute;
     width: 65.3%;
     height: 102.8%;
-    left:17.2%;
-    top: 27.2%;
+    left:17%;
+    top: 27%;
     z-index: 1;
+    border: black;
+    border-style:solid;
     
 }
 
@@ -336,6 +342,7 @@ body {
     top:28%;
     left:45%;
     z-index: 4;
+    
 }
 #turno{
    color:red;
@@ -361,4 +368,39 @@ body {
     position: absolute;
     top:90%;
     left: 30%;
+}
+
+#nombresAbajo{
+    position: absolute;
+    top:15%;
+    left: 10%;
+    font-family:fantasy;
+    font-size:medium;
+    
+}
+
+#nombresIzquierda{
+    position: absolute;
+    top:40%;
+    left: 20%;
+    font-family:fantasy;
+    font-size:medium;
+    
+}
+
+#nombresArriba{
+    position: absolute;
+    top:15%;
+    left: 10%;
+    font-family:fantasy;
+    font-size:medium;
+    
+}
+#nombresDerecha{
+    position: absolute;
+    top:35%;
+    left: 15%;
+    font-family:fantasy;
+    font-size:medium;
+    
 }
