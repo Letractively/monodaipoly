@@ -42,6 +42,8 @@
                                     $("#imagenGif").css("visibility","hidden");
                                     $("#partidaLista").css("visibility","visible");
                                 }if(db.todoListo==false){
+                                    //alert(db.jugadoresRestantes);
+                                    $("#notificaciones").html("${enCola}"+db.jugadoresRestantes);
                                     timeMsg();
                                 }
 

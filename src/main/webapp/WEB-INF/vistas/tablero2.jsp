@@ -100,7 +100,7 @@
                             $("#casilla9").html("<img src='Estilos/carcel.jpg' width='100%' height='100%'/>");
                             $("#casilla0").html("<img src='Estilos/CasillaSalida.jpg' width='100%' height='100%'/>");
                             $("#casilla18").html("<img src='Estilos/free.jpg' width='100%' height='100%'/>");
-                            $("#casilla27").html("<img src='Estilos/carcel2.png' width='100%' height='100%'/>");
+                            $("#casilla27").html("<img src='Estilos/Carcel2.png' width='100%' height='100%'/>");
                             var c;//contador de las casillas
                             var resta=12.5;//tamaño de cada casilla
                             var left=87.5;

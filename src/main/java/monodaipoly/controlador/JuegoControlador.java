@@ -520,7 +520,7 @@ public class JuegoControlador {
 
          }
 
-         private int jugadorQueQuedan(Partida partida){
+         public int jugadorQueQuedan(Partida partida){
              int numJugadoresQueQuedan=4;
 
 
