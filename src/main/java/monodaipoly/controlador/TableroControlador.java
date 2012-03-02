@@ -554,8 +554,15 @@ public class TableroControlador {
       private JSONObject saberSiYaPuedeJugarJson(boolean todoListo){
         JSONObject json=new JSONObject();
         try{
-        //Logger.getLogger(JuegoControlador.class.getName()).info("5");
+            //Logger.getLogger(JuegoControlador.class.getName()).info("5");
             json.put("todoListo",todoListo);
+            if(todoListo==false){
+                Partida partida=partidaServicio.buscar(jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()).getPartida());
+                int jugadoresQueFaltan=4-juegoControlador.jugadorQueQuedan(partida);
+                //System.out.println("jugadoresQueFaltan"+jugadoresQueFaltan);
+                String jugadoresRestantes=", faltan "+jugadoresQueFaltan+" jugadores";
+                json.put("jugadoresRestantes",jugadoresRestantes);
+            }
 
 
         }catch (JSONException ex){
