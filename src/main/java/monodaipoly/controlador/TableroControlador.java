@@ -207,6 +207,16 @@ public class TableroControlador {
     @RequestMapping(value = "/prepararPartida2", method = RequestMethod.GET)
     public String prepararPartida2(Model model,HttpSession sesion) {
         
+        
+       List<String>arrayTux=new ArrayList(15);
+       int iTux;
+       int aleatorio;
+       String cadena;
+       for(iTux=0;iTux<15;iTux++){
+           cadena="Estilos/tux/tux"+iTux+".png";
+           arrayTux.add(iTux,cadena);
+       }
+        
         int posicion;
         String enCola="Esperando a otros jugadores...";
         String imagenCola="<img id='imagenGif' src='/Estilos/load_verde_2.gif'/>";
@@ -229,6 +239,8 @@ public class TableroControlador {
                 partidaNueva.setJugador1(jugador.getClaveJugador());
                 partidaNueva.setTurno(jugador.getClaveJugador());
                 jugador.setPartida(partidaNueva.getIdpartida());
+                aleatorio=(int) (Math.random()*14);
+                jugador.setTux(arrayTux.get(aleatorio));
                 jugadorServicio.actualizar(jugador);
                 partidaServicio.actualizar(partidaNueva);
                 //return perfil y mostrar cola
@@ -246,12 +258,31 @@ public class TableroControlador {
                     partida.setJugador1(jugador.getClaveJugador());
                     partidaServicio.actualizar(partida);
                 }else if(posicion ==2){
+                     aleatorio=(int) (Math.random()*14);
+                     while(arrayTux.get(aleatorio).equals(jugadorServicio.buscar(partida.getJugador1()).getTux())){
+                         aleatorio=(int) (Math.random()*14);
+                     }
+                    jugador.setTux(arrayTux.get(aleatorio));
+                    jugadorServicio.actualizar(jugador);
                     partida.setJugador2(jugador.getClaveJugador());
                     partidaServicio.actualizar(partida);
                 }else if(posicion==3){
+                     aleatorio=(int) (Math.random()*14);
+                     while(arrayTux.get(aleatorio).equals(jugadorServicio.buscar(partida.getJugador1()).getTux())|| arrayTux.get(aleatorio).equals(jugadorServicio.buscar(partida.getJugador2()).getTux())){
+                         aleatorio=(int) (Math.random()*14);
+                     }
+                    jugador.setTux(arrayTux.get(aleatorio));
+                    jugadorServicio.actualizar(jugador);
                     partida.setJugador3(jugador.getClaveJugador());
                     partidaServicio.actualizar(partida);
                 }else if(posicion==4){
+                    
+                    aleatorio=(int) (Math.random()*14);
+                     while(arrayTux.get(aleatorio).equals(jugadorServicio.buscar(partida.getJugador1()).getTux())|| arrayTux.get(aleatorio).equals(jugadorServicio.buscar(partida.getJugador2()).getTux()) || arrayTux.get(aleatorio).equals(jugadorServicio.buscar(partida.getJugador3()).getTux())){
+                         aleatorio=(int) (Math.random()*14);
+                     }
+                    jugador.setTux(arrayTux.get(aleatorio));
+                    jugadorServicio.actualizar(jugador);
                     
                     partida.setJugador4(jugador.getClaveJugador());
                     //aqui voy a poner a los 4 jugadores de esta partida el atributo estoy jugando
@@ -366,6 +397,9 @@ public class TableroControlador {
        }
        model.addAttribute("calles",calles);
        model.addAttribute("casillas",casillas);
+   
+      
+       
 
        //cargar en modelo posiciones
        int pos1=0;
@@ -380,6 +414,10 @@ public class TableroControlador {
        int dinero2=-1;
        int dinero3=-1;
        int dinero4=-1;
+       String tux1="";
+       String tux2="";
+       String tux3="";
+       String tux4="";
         System.out.println("jugador1 "+ partida.getJugador1());
         System.out.println("jugador2 "+ partida.getJugador2());
         System.out.println("jugador3 "+ partida.getJugador3());
@@ -390,21 +428,25 @@ public class TableroControlador {
             pos1=jugador1.getPosicion();
             nick1=jugador1.getNick();
             dinero1=jugador1.getDinero();
+            tux1=jugador1.getTux();
        }if(partida.getJugador2()!=null){
             Jugador jugador2=jugadorServicio.buscar(partida.getJugador2());
             pos2=jugador2.getPosicion();
             nick2=jugador2.getNick();
             dinero2=jugador2.getDinero();
+            tux2=jugador2.getTux();
         }if(partida.getJugador3()!=null){
             Jugador jugador3=jugadorServicio.buscar(partida.getJugador3());
             pos3=jugador3.getPosicion();
             nick3=jugador3.getNick();
             dinero3=jugador3.getDinero();
+            tux3=jugador3.getTux();
         }if(partida.getJugador4()!=null){
             Jugador jugador4=jugadorServicio.buscar(partida.getJugador4());
             pos4=jugador4.getPosicion();
             nick4=jugador4.getNick();
             dinero4=jugador4.getDinero();
+            tux4=jugador4.getTux();
         }
        
        //cargar en el modelo las posiciones
@@ -422,6 +464,11 @@ public class TableroControlador {
        model.addAttribute("dinero2",dinero2);
        model.addAttribute("dinero3",dinero3);
        model.addAttribute("dinero4",dinero4);
+       
+       model.addAttribute("tux1",tux1);
+       model.addAttribute("tux2",tux2);
+       model.addAttribute("tux3",tux3);
+       model.addAttribute("tux4",tux4);
        //cargar en modelo el turno
        Jugador jugTurno=jugadorServicio.buscar(partida.getTurno());
        String turno=jugTurno.getNick();

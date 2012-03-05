@@ -470,10 +470,10 @@
                         <span class="jugadores" id="jugador4info" style="visibility:hidden"><center>${nombre4}</center></span>
                     
                     
-                        <span class="imagenesJugador" id="imagenJugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></span>
-                        <span class="imagenesJugador" id="imagenJugador2"><img src='Estilos/tux/legolas.png' width='100%' height='100%'/></span>
-                        <span class="imagenesJugador" id="imagenJugador3"><img src='Estilos/tux/croft.png' width='100%' height='100%'/></span>
-                        <span class="imagenesJugador" id="imagenJugador4"><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></span>
+                        <span class="imagenesJugador" id="imagenJugador1"><img src='${tux1}' width='100%' height='100%'/></span>
+                        <span class="imagenesJugador" id="imagenJugador2"><img src='${tux2}' width='100%' height='100%'/></span>
+                        <span class="imagenesJugador" id="imagenJugador3"><img src='${tux3}' width='100%' height='100%'/></span>
+                        <span class="imagenesJugador" id="imagenJugador4"><img src='${tux4}' width='100%' height='100%'/></span>
                     
                     
                         <span class="dineroJugador" id="dineroJugador1" style="visibility:hidden"><center>${dinero1}$</center></span>
@@ -520,10 +520,10 @@
 
 
 
-            <div id="jugador1"><img src='Estilos/tux/batman.png' width='100%' height='100%'/></div>
-            <div id='jugador2'><img src='Estilos/tux/legolas.png' width='100%' height='100%'/></div>
-            <div id='jugador3'><img src='Estilos/tux/croft.png' width='100%' height='100%'/></div>
-            <div id='jugador4'><img src='Estilos/tux/naruto.png' width='100%' height='100%'/></div>
+            <div id="jugador1"><img src='${tux1}' width='100%' height='100%'/></div>
+            <div id='jugador2'><img src='${tux2}' width='100%' height='100%'/></div>
+            <div id='jugador3'><img src='${tux3}' width='100%' height='100%'/></div>
+            <div id='jugador4'><img src='${tux4}' width='100%' height='100%'/></div>
 
 
 
