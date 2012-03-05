@@ -673,6 +673,13 @@ public class JuegoControlador {
             return "/perfilPrueba";
     
         }
+        
+        /*@RequestMapping(value="/volverAtras",method=RequestMethod.GET)
+        public String intermedio(Model model){
+            Usuario usuario=usuarioServicio.getCurrentUser();
+            //this.doEntrar(usuario.getNick(),usuario.getContrasena(), model);
+            return "redirect:entrar?nick="+usuario.getNick()+"&contrasena="+usuario.getContrasena()+"&model="+model;
+    }*/
 
 
         @RequestMapping(value= "/jugadorGanadorPartida", method = RequestMethod.GET)

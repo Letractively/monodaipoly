@@ -36,6 +36,9 @@ public class Jugador implements Serializable {
         @Basic
         private int dinero;
 	
+        @Basic
+        private String tux;
+        
 	//calles..... 
 	public Jugador(){
         this.estoyJugando=false;
@@ -55,6 +58,15 @@ public class Jugador implements Serializable {
 	public void setClaveJugador(Key claveJugador) {
 		this.claveJugador = claveJugador;
 	}
+
+    public String getTux() {
+        return tux;
+    }
+
+    public void setTux(String tux) {
+        this.tux = tux;
+    }
+        
 
         public Boolean getEstoyEnCola() {
         return estoyEnCola;

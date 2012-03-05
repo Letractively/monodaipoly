@@ -112,6 +112,7 @@ public class UsuarioControlador {
     public String doEntrar(@RequestParam("nick") String nick, @RequestParam("contrasena")String contrasena,Model model){
         
         String enCola="Esperando a otros jugadores...";
+        String enPartida="Estas en una partida";
         String imagenCola="<img id='imagenGif' src='/Estilos/load_verde_2.gif'/>";
         
         try {
@@ -144,6 +145,10 @@ public class UsuarioControlador {
            if(jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()).getEstoyEnCola()==true){
                model.addAttribute("enCola",enCola );
                model.addAttribute("enColaImagen",imagenCola );
+           }
+           if(jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()).getEstoyJugando()==true){
+               model.addAttribute("enPartida",enPartida );
+              
            }
         }
         return "/perfilPrueba";
@@ -260,6 +265,8 @@ public class UsuarioControlador {
         
         return "/estadisticas";
     }
+    
+   
     
 
 }

@@ -132,6 +132,11 @@
                     
                  
                         $("#notificaciones").html("${enCola}");
+                        if("${enPartida}"=="Estas en una partida"){
+                            $("#notificaciones").html("${enPartida}");
+                            $("#partidaLista").css("visibility","visible")
+                        }
+                        
                         $("#pie").append("${enColaImagen}");
                         //solo voy a llamar al setTimeOut si esta en cola
                         if("${enCola}"=="Esperando a otros jugadores..."){
