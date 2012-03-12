@@ -2,6 +2,7 @@
 
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.repackaged.org.json.JSONArray;
 import com.google.appengine.repackaged.org.json.JSONException;
 import com.google.appengine.repackaged.org.json.JSONObject;
 import java.util.ArrayList;
@@ -617,5 +618,66 @@ public class TableroControlador {
         }
         return json;
     }
+
+
+    @RequestMapping(method=RequestMethod.GET, value="/getVenderPropiedadesURL")
+    public String getIrVenderPropiedadesURL(){
+       
+        return "/venderPropiedades";
+    }
+
+
+     private String casillasVenderJson(List casillas){
+        String salida = "[";
+        try {
+            for (int i= 0; i < casillas.size(); i++) {
+                salida +=this.datosCasilla((Casilla) casillas.get(i));
+                if (i < casillas.size() -1) {
+                    salida += ",";
+                }
+            }
+        } catch (Exception ex) {
+            //Logger.getLogger(MensajeControlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        salida += "]";
+        return salida;
+    }
+
+
+      private JSONObject datosCasilla(Casilla casilla){
+        JSONObject json=new JSONObject();
+        int i;
+        try{
+                json.put("nombre", casilla.getNombre());
+                Calle micalle=calleServicio.buscar(casilla.getTipoCasilla());
+                json.put("precioVenta", micalle.getPrecio()*0.7);
+        }catch (JSONException ex){
+
+        }
+
+        return json;
+
+    }
+
+
+     @RequestMapping(method=RequestMethod.GET, value="/casillasConPosibilidadVenta")
+    public @ResponseBody String casillasConPosibilidadVenta() throws JSONException {
+
+         Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
+        List<Key> casillas=jugador.getCalles();
+        List <Casilla> casillasDelJugador=new ArrayList<Casilla>();
+
+        for(Key c: casillas){
+            Casilla miCasilla=casillaServicio.buscar(c);
+            casillasDelJugador.add(miCasilla);
+        }
+        if(casillasDelJugador.size()>0){
+
+
+        return casillasVenderJson(casillasDelJugador).toString();
+         }
+        return "No tienes casillas";
+    }
+
 
 }

@@ -40,8 +40,8 @@ public class CasillaServicioImpl implements CasillaServicio{
 
    
     @Override
-    public void buscar(Key idCasilla) {
-        casillaDAO.find(Casilla.class, idCasilla);
+    public Casilla buscar(Key idCasilla) {
+        return casillaDAO.find(Casilla.class, idCasilla);
     }
 
  

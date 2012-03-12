@@ -28,6 +28,18 @@
             posicionJugador[3]=${jugador3};
             posicionJugador[4]=${jugador4};
 
+
+            function getVenderPropiedadesURL(){
+                $.get("/getVenderPropiedadesURL",null,
+                    function(html) {
+                        $("#venderPropiedades").html(html);
+                        
+                    }
+
+               );
+
+            }
+
             function timeMsg(){
                 var t=setTimeout("reposicionadoDeDatos()",5000);
             }
@@ -445,7 +457,7 @@
 
     </head>
     <body>
-
+          <div id="venderPropiedades" style="z-index: 9"></div>
 
         <div id="tablero">
             <div id="arriba"></div>
@@ -484,7 +496,7 @@
 
                         <button class="boton" id="botonTirar"onClick="tirarDado2('${jugador.nick}')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
                         <!--provisional-->
-                        <button class="boton" id="botonVender" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Vender Propiedades</button>
+                        <button class="boton" id="botonVender" onClick="getVenderPropiedadesURL()" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Vender Propiedades</button>
 
 
 
@@ -510,6 +522,9 @@
                             <input type="button" id="finPartida" value="¡ FINAL DE LA PARTIDA !" style="visibility: hidden" onclick="window.location.href='jugadorGanadorPartida'">
 
                         </div>
+
+
+                      
 	
 
 
