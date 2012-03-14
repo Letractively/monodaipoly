@@ -6,52 +6,74 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-    <div id="casillasVender">
-    <FORM ACTION="" id="checkCasillasVenta">
-
-       
+<div id="casillasVender">
+    <FORM  id="checkCasillasVenta">
+        <div id="colm1"></div>
+        <div id="colm2"></div>
+        <div id="colm3"></div>
     </FORM>
 
-    </div>
-
+</div>
 
 
 
 
 <script>  
-    function fijarListaDeCasillas(casilla,i){
+    function fijarListaDeCasillas(casilla,i,sw){
         //alert("fijando datos");
-         if(casilla!="No tienes mensajes"){
+        //alert(sw);
+        if(casilla!="No tienes casillas"){
             var nombre =casilla.nombre;
             var precio = casilla.precioVenta;
-            if(i==0){
-              $("#checkCasillasVenta").append("<INPUT TYPE=CHECKBOX NAME="+nombre+">"+nombre+" por "+precio+"$"+"<BR>");
-            }else{
-              //$("#casillasVender").append("<br/> Casilla : "+nombre +"Se vendera a: "+precio);
-              $("#checkCasillasVenta").append("<INPUT TYPE=CHECKBOX NAME="+nombre+">"+nombre+" por "+precio+"$"+"<BR>");
+            var numero =casilla.numero;
+            if(i==0 || sw==0){
+                $("#colm1").append("<INPUT TYPE=CHECKBOX  id="+numero+" NAME='cas'>"+nombre+" por "+precio+"$");
+                $("#colm1").append("<br/>");
+            }else if(sw==1){
+                $("#colm2").append("<INPUT TYPE=CHECKBOX  id="+numero+" NAME='cas'>"+nombre+" por "+precio+"$");
+                $("#colm2").append("<br/>");
+                
             }
-            $("#checkCasillasVenta").append("<br/>");
-            $("#checkCasillasVenta").append("<center><INPUT TYPE=SUBMIT VALUE='Vender'></center>");
-         }else{
-             $("#casillasVender").html("<br/>No tienes casillas");
-         }
-     }
 
-        $(document).ready(function(){
-            //alert("vender Propiedades");
-            $.get("/casillasConPosibilidadVenta", null, function(db){
-                 if(db=="No tienes casillas"){
-                    fijarBandejaEntrada(db,"0");
-                }else{
+           
+        }else{
+            $("#casillasVender").html("<br/>No tienes casillas");
+        }
+    }
+
+    
+
+    $(document).ready(function(){
+
+       
+
+
+        //alert("vender Propiedades");
+        $.get("/casillasConPosibilidadVenta", null, function(db){
+            $("#casillasVender").css("visibility", "visible");
+            if(db=="No tienes casillas"){
+                $("#casillasVender").html("<br/><center>No tienes propiedades</center><br/>");
+                $("#casillasVender").append("<center><img src='Estilos/sinDinero.png' width='60%' height='60%'/></center><br/>");
+                $("#casillasVender").append("<center><button onClick='cerrarDiv()'>Cerrar</button></center>");
+            }else{
                 var casillas = $.parseJSON(db);
+                var sw=0;
                 $(casillas).each(function(index,value) {
-                            fijarListaDeCasillas(value,index);
-                        });
-                }
-            }, "json")
+                    fijarListaDeCasillas(value,index,sw);
+                    if (sw==0){
+                        sw=1;
+                    }else{
+                        sw=0;
+                    }
+                   
+                });
+                $("#colm3").append("<center><button  onClick='venderCasas()'>Vender</button> <button onClick='cerrarDiv()'>Cerrar</button></center>");
+               
+            }
+        }, "json")
 
 
-        })
+    })
 
 </script>
 

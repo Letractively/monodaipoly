@@ -8,6 +8,7 @@ import com.google.appengine.repackaged.org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import monodaipoly.persistencia.Calle;
@@ -326,7 +327,7 @@ public class TableroControlador {
                     player.setEstoyEnCola(false);
 
 
-                    partida.setFechaTurno(System.currentTimeMillis()+6000);
+                    partida.setFechaTurno(System.currentTimeMillis()+60000);
                     partida.setCompleta(true);
                     jugadorServicio.actualizar(player);
                     partidaServicio.actualizar(partida);
@@ -651,6 +652,7 @@ public class TableroControlador {
                 json.put("nombre", casilla.getNombre());
                 Calle micalle=calleServicio.buscar(casilla.getTipoCasilla());
                 json.put("precioVenta", micalle.getPrecio()*0.7);
+                json.put("numero", casilla.getNumeroCasilla());
         }catch (JSONException ex){
 
         }
@@ -677,6 +679,23 @@ public class TableroControlador {
         return casillasVenderJson(casillasDelJugador).toString();
          }
         return "No tienes casillas";
+    }
+
+
+     @RequestMapping(method=RequestMethod.GET, value="/venderCasillas")
+    public @ResponseBody String venderCasillas(@RequestParam("calles") String calles ) throws JSONException {
+        //System.out.println("calles"+calles);
+         Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
+         StringTokenizer tokens= new StringTokenizer(calles, ",");
+         while(tokens.hasMoreTokens()){
+             Casilla casilla=casillaServicio.buscarPorNumero(Integer.valueOf(tokens.nextToken().toString()));
+             Calle calle=calleServicio.buscar(casilla.getTipoCasilla());
+             jugador.getCalles().remove(casilla.getIdCasilla());
+             jugador.setDinero((int)(jugador.getDinero()+calle.getPrecio()*0.7));
+             jugadorServicio.actualizar(jugador);
+         }
+
+        return "Vendidas";
     }
 
 
