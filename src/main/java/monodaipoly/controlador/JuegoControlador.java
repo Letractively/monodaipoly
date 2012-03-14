@@ -670,7 +670,7 @@ public class JuegoControlador {
             
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
-            return "/perfilPrueba";
+            return "/perfil";
     
         }
         
@@ -764,7 +764,7 @@ public class JuegoControlador {
         Key idKeyPartida=KeyFactory.stringToKey(idPartida);
         partidaServicio.terminar(partidaServicio.buscar(idKeyPartida));
         model.addAttribute("usuario", usuario);
-        return "/perfilPrueba";
+        return "/perfil";
     }
 
 
