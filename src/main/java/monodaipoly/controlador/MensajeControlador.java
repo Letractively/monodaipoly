@@ -161,6 +161,25 @@ public class MensajeControlador {
     }
 
 
+    @RequestMapping(method=RequestMethod.GET, value="/verMensajesRecibidosURL")
+    public String verMensajesRecibidos(HttpSession sesion,Model model){
+        Usuario usuario=(Usuario) sesion.getAttribute("usuario");
+        List<Mensaje> recibidos=new ArrayList<Mensaje>();
+        recibidos=mensajeServicio.conseguirMensajesRecibidos(usuario.getNick());
+        System.out.println("MensajeControlador");
+        if(!recibidos.isEmpty()){
+           String noMensajes="No tienes Mensajes";
+           model.addAttribute("noMensajes", noMensajes);
+           return "/verBandejaEntrada";
+        }
+        else{
+            model.addAttribute("mensajes", recibidos);
+            return "/verBandejaEntrada";
+        }
+
+    }
+
+
 
 
 }

@@ -7,13 +7,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <div id="menuMensajes">
-    
+        <br/>
     <div id="redactar"><p onclick="javascript:redactarMensaje()">REDACTAR</a></div>
         <br/>
      <div id="recibidos"><p onclick="javascript:verBandejaEntrada()">RECIBIDOS</p></div>
         <br/>
-     <div id=enviados">ENVIADOS</div>
-     <br/>
+   
         
 </div>
    
