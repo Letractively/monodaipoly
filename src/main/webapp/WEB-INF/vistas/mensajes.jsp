@@ -23,16 +23,11 @@
                 Destinatario:
                 <div>
                     <input id="destinatario" type="text" name="destinatario" value="" />
-                </div>            
-                <br/>
-                Asunto:
-                <div>
-                    <input id="asunto" type="text" name="asunto" value="" />
-                </div>            
+                </div>    
                 <br/>
                 Contenido:
                 <div>
-                    <textarea id="contenidoMensaje" COLS=100 ROWS=12 type="text" name="contenidoMensaje" value="" ></textarea>
+                    <textarea id="contenidoMensaje" COLS=100 ROWS=10 type="text" name="contenidoMensaje" value="" ></textarea>
                 </div>              
                 <br/>
                 <div id="mensaje" align="center">
