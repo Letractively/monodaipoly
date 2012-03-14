@@ -127,7 +127,7 @@ public class JuegoControlador {
 
         //debemos hacer un metodo que envie algo a tablero para indicir que se a cambiado el turno y de quien es
 
-        partida.setFechaTurno(System.currentTimeMillis()+6000);
+        partida.setFechaTurno(System.currentTimeMillis()+60000);
         partida.setHaTirado(false);
         partidaServicio.actualizar(partida);
     }
@@ -364,7 +364,7 @@ public class JuegoControlador {
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+jugador.getDinero());
                 //System.out.println("Llegamos a ponerle el dinero al jug al que pagas");
                 this.cambiarTurnoManualmente(jugadorPagas.getNick());
-                //System.out.println("Estamos camniando el turno antes de eliminar al jugador!!");
+                //System.out.println("Estamos cambiando el turno antes de eliminar al jugador!!");
                 eliminado=this.eliminarJugador(jugador);
                 partidaServicio.actualizar(partida);
                 //System.out.println("Actualizamos partida despues de Eliminar jug");
@@ -619,7 +619,7 @@ public class JuegoControlador {
                      partida.setTurno(partida.getJugador1());
                  }
              }
-             partida.setFechaTurno(System.currentTimeMillis()+6000);
+             partida.setFechaTurno(System.currentTimeMillis()+60000);
              partida.setHaTirado(false);
              partidaServicio.actualizar(partida);
          }

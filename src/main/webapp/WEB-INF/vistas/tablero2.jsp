@@ -28,6 +28,33 @@
             posicionJugador[3]=${jugador3};
             posicionJugador[4]=${jugador4};
 
+            function cerrarDiv(){
+                $("#casillasVender").css("visibility", "hidden");
+            }
+
+            function venderCasas(){
+             
+             var casas = "";
+                    $("input[name='cas']").each(
+                    function(i, e) {
+                        if (e.checked) {
+                            if (casas != "") {
+                                casas += ",";
+                            } 
+                            casas+=e.id;   
+                        }
+                })
+                $.get("/venderCasillas",{
+                    "calles":casas
+                 },
+                   function(json){
+                
+
+                }, "json");
+            }
+
+
+
 
             function getVenderPropiedadesURL(){
                 $.get("/getVenderPropiedadesURL",null,
