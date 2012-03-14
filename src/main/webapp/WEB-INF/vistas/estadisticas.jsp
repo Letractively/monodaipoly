@@ -7,8 +7,10 @@
 
 
 <div id="estadisticas">
-    <div align="center" style="color:#111"><strong>TOP 10 USUARIOS</strong></div>
+    <div  style="color:#111;left: 42%;position: absolute"  ><strong>TOP 10  USUARIOS</strong></div>
 <br/>
+<br/>
+
 <div id="tablaContenido">
     <strong style="color:#111">PUNTACION</strong>
      <br/>

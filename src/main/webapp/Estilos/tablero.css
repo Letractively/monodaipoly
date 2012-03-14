@@ -424,6 +424,14 @@ body {
    border-style: solid;
    background-color: yellow;
 }
+
+.X{
+    position: absolute;
+    top:0%;
+    left:0%;
+
+}
+
 #colm1{
     
     position: absolute;

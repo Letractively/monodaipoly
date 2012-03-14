@@ -70,6 +70,10 @@ public class UsuarioControlador {
     public String doShowPagInicio() {
         return "/monodaipoly";
     }
+     @RequestMapping(value = "/enviarMensajesURL", method = RequestMethod.GET)
+    public String doShowEnviarMensajes() {
+        return "/enviarMensaje";
+    }
 
     @RequestMapping(value = "/registro", method = RequestMethod.GET)
     public String doShowRegistro() {
@@ -113,7 +117,7 @@ public class UsuarioControlador {
         
         String enCola="Esperando a otros jugadores...";
         String enPartida="Estas en una partida";
-        String imagenCola="<img id='imagenGif' src='/Estilos/load_verde_2.gif'/>";
+        String imagenCola="<img id='imagenGif' src='/Estilos/ProgressBar.gif'/>";
         
         try {
                 //System.out.println("AQUI 1 UserController login ");

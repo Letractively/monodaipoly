@@ -103,6 +103,36 @@
                                 //alert(db.turno);
                                 $("#turno").html(db.turno);
 
+                               
+                                if(db.dinero1==0 && db.posicion1==0){
+                                    $("#X1").css("visibility", "visible");
+                                    $("#tux1").css("visibility", "hidden");
+                                    $("#jugador1").css("visibility", "hidden");
+                                    $("#jugador1info").css("visibility", "hidden");
+                                    $("#dineroJugador1").css("visibility", "hidden");
+                                }
+                                if(db.dinero2==0 && db.posicion2==0){
+                                    $("#X2").css("visibility", "visible");
+                                    $("#tux2").css("visibility", "hidden")
+                                    $("#jugador2").css("visibility", "hidden");
+                                    $("#jugador2info").css("visibility", "hidden");
+                                    $("#dineroJugador2").css("visibility", "hidden");
+                                }
+                                if(db.dinero3==0 && db.posicion3==0){
+                                    $("#X3").css("visibility", "visible");
+                                    $("#tux3").css("visibility", "hidden")
+                                    $("#jugador3").css("visibility", "hidden");
+                                    $("#jugador3info").css("visibility", "hidden");
+                                    $("#dineroJugador3").css("visibility", "hidden");
+                                }
+                                if(db.dinero4==0 && db.posicion4==0){
+                                    $("#X4").css("visibility", "visible");
+                                    $("#tux4").css("visibility", "hidden")
+                                    $("#jugador4").css("visibility", "hidden");
+                                    $("#jugador4info").css("visibility", "hidden");
+                                    $("#dineroJugador4").css("visibility", "hidden");
+                                }
+
                                 if(db.cantidadJugadores==1){
                                     $("#finPartida").css("visibility", "visible");
                                     $(".boton").css("visibility", "hidden");
@@ -316,6 +346,7 @@
             if(${dinero1}!=-1){
                 $("#jugador1info").css("visibility","visible");
                 $("#dineroJugador1").css("visibility","visible");
+
                 jug1=-1;
             }if(${dinero2}!=-1){
                 $("#jugador2info").css("visibility","visible");
@@ -346,6 +377,7 @@
                             }
                          $("#turno").html("${turno}");
                          //llamar a el setTimeOut
+                         reposicionadoDeDatos();
                          timeMsg();
 
 
@@ -509,10 +541,10 @@
                         <span class="jugadores" id="jugador4info" style="visibility:hidden"><center>${nombre4}</center></span>
                     
                     
-                        <span class="imagenesJugador" id="imagenJugador1"><img src='${tux1}' width='100%' height='100%'/></span>
-                        <span class="imagenesJugador" id="imagenJugador2"><img src='${tux2}' width='100%' height='100%'/></span>
-                        <span class="imagenesJugador" id="imagenJugador3"><img src='${tux3}' width='100%' height='100%'/></span>
-                        <span class="imagenesJugador" id="imagenJugador4"><img src='${tux4}' width='100%' height='100%'/></span>
+                        <span class="imagenesJugador" id="imagenJugador1"><img id="tux1" src='${tux1}' width='100%' height='100%'/><img class="X"id="X1"src='/Estilos/Equis_roja.png' width='100%' height='100%' style="visibility: hidden"/></span>
+                        <span class="imagenesJugador" id="imagenJugador2"><img id="tux2" src='${tux2}' width='100%' height='100%'/><img class="X"id="X2"src='/Estilos/Equis_roja.png' width='100%' height='100%' style="visibility: hidden"/></span>
+                        <span class="imagenesJugador" id="imagenJugador3"><img id="tux3" src='${tux3}' width='100%' height='100%'/><img class="X"id="X3"src='/Estilos/Equis_roja.png' width='100%' height='100%' style="visibility: hidden"/></span>
+                        <span class="imagenesJugador" id="imagenJugador4"><img id="tux4" src='${tux4}' width='100%' height='100%'/><img class="X"id="X4"src='/Estilos/Equis_roja.png' width='100%' height='100%' style="visibility: hidden;z-index: 9"/></span>
                     
                     
                         <span class="dineroJugador" id="dineroJugador1" style="visibility:hidden"><center>${dinero1}$</center></span>

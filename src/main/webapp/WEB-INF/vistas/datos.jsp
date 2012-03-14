@@ -69,9 +69,7 @@
             <span id="ape"style="color:white">${usuario.nick}</span>
      </div>
     <br/> 
-     <div style="color: black"><strong>Contraseña:</strong>  
-         <span id="ape"style="color:white">${usuario.contrasena}</span>
-     </div>
+     
     
     
 </div>

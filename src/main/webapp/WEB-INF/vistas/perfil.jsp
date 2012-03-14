@@ -74,6 +74,14 @@
 
                );
             }
+            function EnviarMensajes(){
+                  $.get("/enviarMensajesURL",null,
+                    function(html) {
+                        $("#contenido").html(html);
+                    }
+
+               );
+            }
             function unirsePartida(){
                  $.get("/getUnirsePartidaJSP",null,
                     function(html) {
@@ -165,14 +173,14 @@
 </head>
 <body>
     
-    <div id="header"><img src="/Estilos/header2.png"></div>
+    <div id="header"><img src="/Estilos/header2.png" width="100%" height="100%"></div>
     
         <ul class="topnav">  
         <li><a onclick="javascript:datosPersonales()">Inicio</a></li>  
         <li>  
             <a onclick="javascript:mensajes()">Mensajes</a> 
             <ul class="subnav">  
-            <li><a href="#">Enviar</a></li>  
+            <li><a onclick="javascript:EnviarMensajes()">Enviar</a></li>
             <li><a href="#">Recibidos</a></li>  
         </ul>  
             

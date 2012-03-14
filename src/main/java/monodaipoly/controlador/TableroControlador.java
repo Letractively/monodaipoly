@@ -120,7 +120,9 @@ public class TableroControlador {
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
             model.addAttribute("usuario", usuarioServicio.getCurrentUser());*/
-        return "/perfilPrueba";
+            String enPartida="Estas en una partida";
+            model.addAttribute("enPartida",enPartida );
+        return "/perfil";
     }
 
 
@@ -221,7 +223,7 @@ public class TableroControlador {
         
         int posicion;
         String enCola="Esperando a otros jugadores...";
-        String imagenCola="<img id='imagenGif' src='/Estilos/load_verde_2.gif'/>";
+        String imagenCola="<img id='imagenGif' src='/Estilos/ProgressBar.gif' />";
         Usuario usuario = (Usuario)sesion.getAttribute("usuario");
         
         if(usuarioServicio.getCurrentUser().getJugador()==null){
@@ -248,7 +250,7 @@ public class TableroControlador {
                 //return perfil y mostrar cola
                 model.addAttribute("enCola",enCola );
                 model.addAttribute("enColaImagen",imagenCola );
-                return "/perfilPrueba";
+                return "/perfil";
                 
             }else{
                 
@@ -348,7 +350,7 @@ public class TableroControlador {
                     //Logger.getLogger(JuegoControlador.class.getName()).info("3");
                     model.addAttribute("enCola",enCola );
                     model.addAttribute("enColaImagen",imagenCola );
-                    return "/perfilPrueba";//else return perfil y mostrar cola
+                    return "/perfil";//else return perfil y mostrar cola
                 }else if(jugQueJodiaTodo.getEstoyJugando()==true){//if esta jugando...
                     //System.out.println("3 cargar en modelo el jugador");
                     //Logger.getLogger(JuegoControlador.class.getName()).info("4");
@@ -359,7 +361,7 @@ public class TableroControlador {
                    //Logger.getLogger(JuegoControlador.class.getName()).info("5");
                    model.addAttribute("enCola",enCola );
                    model.addAttribute("enColaImagen",imagenCola );
-                   return "/perfilPrueba";//else return perfil y mostrar cola
+                   return "/perfil";//else return perfil y mostrar cola
 
 
 
@@ -372,7 +374,7 @@ public class TableroControlador {
 
         model.addAttribute("enCola",enCola );
         model.addAttribute("enColaImagen",imagenCola );
-        return "/perfilPrueba";
+        return "/perfil";
     }
 
 
@@ -400,8 +402,6 @@ public class TableroControlador {
        model.addAttribute("calles",calles);
        model.addAttribute("casillas",casillas);
    
-      
-       
 
        //cargar en modelo posiciones
        int pos1=0;
@@ -584,7 +584,7 @@ public class TableroControlador {
              //Logger.getLogger(JuegoControlador.class.getName()).info("1");
             if(usuarioServicio.getCurrentUser().getJugador()==null){
                 //Logger.getLogger(JuegoControlador.class.getName()).info("2");
-                return "/perfilPrueba";
+                return "/perfil";
             }else{
                  //Logger.getLogger(JuegoControlador.class.getName()).info("3");
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
