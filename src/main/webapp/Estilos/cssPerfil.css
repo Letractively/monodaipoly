@@ -7,7 +7,7 @@
         padding: 0 20px;  
         margin: 0;  
         float: left;
-        width: 96.9%;
+        width: 97.1%;
         font-size: 1.2em;  
         background: url(topnav_bg.gif) repeat-x;  
     }  
@@ -71,6 +71,7 @@
         color: white;
     }
     #header{
+        
         position: absolute;
         top:0%;
         width: 100%;
@@ -253,6 +254,7 @@
 #imagenGif{
     position: absolute;
     width: 4%;
+    height: 60%;
     left: 47%;
     top:25%;
     
@@ -260,9 +262,9 @@
 #partidaLista{
     position: absolute;
     left:42.5%;
-    top:50%;
+    top:48%;
     width: 15%;
-    height: 30%;
+    height: 35%;
     color:black;
 }
 
