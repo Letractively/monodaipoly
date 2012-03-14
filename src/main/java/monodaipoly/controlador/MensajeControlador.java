@@ -62,7 +62,7 @@ public class MensajeControlador {
                     @RequestParam("destinatario") String destinatario
                    ){
         Mensaje mensaje=new Mensaje();
-        Usuario usuario=(Usuario) sesion.getAttribute("usuario");
+        Usuario usuario=usuarioServicio.getCurrentUser();
         if(usuarioServicio.buscar(destinatario)!=null){
 
         mensaje.setContenido(contenidoMensaje);
@@ -70,7 +70,8 @@ public class MensajeControlador {
         mensaje.setDestinatario(usuarioServicio.buscar(destinatario).getNick());
         mensajeServicio.crear(mensaje);
         usuarioServicio.buscar(destinatario).getBandejaEntrada().add(mensaje.getIdMensaje());
-        usuarioServicio.buscar(usuario.getNick()).getBandejaSalida().add(mensaje.getIdMensaje());
+        usuario.getBandejaEntrada().add(mensaje.getIdMensaje());
+        usuarioServicio.actualizar(usuario);
             return "redirect:estadoMensaje?estado=CORRECTO";
         }
 
@@ -162,12 +163,13 @@ public class MensajeControlador {
 
 
     @RequestMapping(method=RequestMethod.GET, value="/verMensajesRecibidosURL")
-    public @ResponseBody String verMensajesRecibidos(HttpSession sesion,Model model){
+    public  String verMensajesRecibidos(HttpSession sesion,Model model){
         Usuario usuario=usuarioServicio.getCurrentUser();
         List<Mensaje> recibidos=new ArrayList<Mensaje>();
         recibidos=mensajeServicio.conseguirMensajesRecibidos(usuario.getNick());
-        System.out.println("MensajeControlador");
-        if(!recibidos.isEmpty()){
+        System.out.println("MensajeControlador ¡¡");
+        
+        if(recibidos.isEmpty()){
            String noMensajes="No tienes Mensajes";
            System.out.println(noMensajes);
            model.addAttribute("noMensajes", noMensajes);
@@ -175,6 +177,7 @@ public class MensajeControlador {
         }
         else{
             System.out.println(recibidos.size());
+            model.addAttribute("mensajesTotal",recibidos.size() );
             model.addAttribute("mensajes", recibidos);
             return "/verBandejaEntrada";
         }

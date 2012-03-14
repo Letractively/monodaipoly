@@ -10,7 +10,7 @@
         <br/>
     <div id="redactar"><p onclick="javascript:redactarMensaje()">REDACTAR</a></div>
         <br/>
-     <div id="recibidos"><p onclick="javascript:verBandejaEntrada()">RECIBIDOS</p></div>
+     <div id="recibidos"><p>RECIBIDOS</p></div>
         <br/>
    
         
@@ -68,7 +68,7 @@
             
 
         }
-        function verBandejaEntrada(){
+       /* function verBandejaEntrada(){
             
             $("#enviarMensaje").css("visibility","hidden");
             $("#bandejaEntrada").css("visibility","visible");
@@ -85,7 +85,7 @@
                 }
             }, "json");
            
-        }
+        }*/
        /* $(document).ready(function(){
            
            
