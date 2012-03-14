@@ -82,6 +82,14 @@
 
                );
             }
+             function verBandejaEntrada(){
+                  $.get("/verMensajesRecibidosURL",null,
+                    function(html) {
+                        $("#contenido").html(html);
+                    }
+
+               );
+            }
             function unirsePartida(){
                  $.get("/getUnirsePartidaJSP",null,
                     function(html) {
@@ -181,7 +189,7 @@
             <a onclick="javascript:mensajes()">Mensajes</a> 
             <ul class="subnav">  
             <li><a onclick="javascript:EnviarMensajes()">Enviar</a></li>
-            <li><a href="#">Recibidos</a></li>  
+            <li><a onclick="javascript:verBandejaEntrada()">Recibidos</a></li>
         </ul>  
             
         </li>  
