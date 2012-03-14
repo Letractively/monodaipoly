@@ -13,18 +13,18 @@
       <br/>
     <br/>
     <form id="modi" action="/modificarDatosAsincronamente" method="post">
-        <div style="color: white">Nombre:  <span id="nom">${usuario.nombre}</span></div>
+        <div style="color:  black"><strong>Nombre:  </strong><span id="nom" style="color:white">${usuario.nombre}</span></div>
         <div class="modificar" style="visibility:hidden">
             <input id="campoNombre" type="text" value=""/>
             
         </div>
-        <div style="color: white">Apellido:  
-            <span id="ape">${usuario.apellido}</span>
+        <div style="color: black"><strong>Apellido:</strong>
+            <span id="ape"style="color:white">${usuario.apellido}</span>
         </div>
         <div class="modificar" style="visibility:hidden">
             <input id="campoApellido" type="text" value=""/>
         </div>
-            <div style="color: white">Fecha de Nacimiento:<span id="fecha">${usuario.fechaNacimiento}</span></div>
+            <div style="color: black"><strong>Fecha de Nacimiento:</strong><span id="fecha"style="color:white">${usuario.fechaNacimiento}</span></div>
         <div class="modificar" style="visibility:hidden">
              <input type="number" size="3" maxlength="2" id="fechaDia" value="" />
              de
@@ -65,12 +65,12 @@
     <br/>
     <br/>
     
-     <div style="color: white">Nick:  
-            <span id="ape">${usuario.nick}</span>
+     <div style="color: black"><strong>Nick:</strong>    
+            <span id="ape"style="color:white">${usuario.nick}</span>
      </div>
     <br/> 
-     <div style="color: white">Contraseña:  
-         <span id="ape">${usuario.contrasena}</span>
+     <div style="color: black"><strong>Contraseña:</strong>  
+         <span id="ape"style="color:white">${usuario.contrasena}</span>
      </div>
     
     
@@ -81,12 +81,12 @@
     <br/>
     <br/>
     
-     <div style="color: white">Partidas Jugadas:  
-            <span id="ape">${usuario.partidasJugadas}</span>
+     <div style="color:black"><strong>Partidas Jugadas:</strong>  
+            <span id="ape"style="color:white">${usuario.partidasJugadas}</span>
      </div>
     <br/> 
-     <div style="color: white">Partidas Ganadas:
-            <span id="ape">${usuario.partidasGanadas}</span>
+    <div style="color: black"><strong>Partidas Ganadas:</strong>
+            <span id="ape"style="color:white">${usuario.partidasGanadas}</span>
      </div>
     
     
