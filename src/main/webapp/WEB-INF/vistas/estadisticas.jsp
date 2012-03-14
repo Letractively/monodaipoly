@@ -7,15 +7,15 @@
 
 
 <div id="estadisticas">
-<div align="center" style="color:#AF1515">TOP 10</div>
+    <div align="center" style="color:#111"><strong>TOP 10 USUARIOS</strong></div>
 <br/>
 <div id="tablaContenido">
-    <strong style="color:#AF1515">PUNTACION</strong>
+    <strong style="color:#111">PUNTACION</strong>
      <br/>
      <br/>
 </div>
 <div id="nickUsuariosMejores">
-    <strong style="color:#AF1515"> USUARIOS</strong>
+    <strong style="color:#111"> NICK</strong>
     <br/>
     <br/>
 </div>

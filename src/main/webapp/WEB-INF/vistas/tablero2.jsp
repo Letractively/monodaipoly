@@ -493,7 +493,7 @@
                         <span class="dineroJugador" id="dineroJugador3" style="visibility:hidden"><center>${dinero3}$</center></span>
                         <span class="dineroJugador" id="dineroJugador4" style="visibility:hidden"><center>${dinero4}$</center></span>
 
-
+                        
                         <button class="boton" id="botonTirar"onClick="tirarDado2('${jugador.nick}')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
                         <!--provisional-->
                         <button class="boton" id="botonVender" onClick="getVenderPropiedadesURL()" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Vender Propiedades</button>

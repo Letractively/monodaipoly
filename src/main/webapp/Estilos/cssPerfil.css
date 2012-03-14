@@ -1,0 +1,263 @@
+    
+.topnav {  
+        position: absolute;
+        top: 21%;
+        left:0%;
+        list-style: none;  
+        padding: 0 20px;  
+        margin: 0;  
+        float: left;
+        width: 97.9%;  
+        font-size: 1.2em;  
+        background: url(topnav_bg.gif) repeat-x;  
+    }  
+    .topnav li {  
+        float: left;  
+        margin: 0;  
+        padding: 0 15px 0 0;  
+        position: relative; /*--Declare X and Y axis base for sub navigation--*/  
+    }  
+    .topnav li a{  
+        padding: 10px 5px; 
+        cursor: pointer;
+        color: #fff;  
+        display: block;  
+        text-decoration: none;  
+        float: left;  
+    }  
+    .topnav li a:hover{  
+        background: url(topnav_hover.gif) no-repeat center top;  
+    }  
+    .topnav li span { /*--Drop down trigger styles--*/  
+        width: 17px;  
+        height: 35px;  
+        float: left;  
+        background: url(subnav_btn.gif) no-repeat center top;  
+    }  
+    .topnav li span.subhover {background-position: center bottombottom; cursor: pointer;} /*--Hover effect for trigger--*/  
+    .topnav li ul.subnav {  
+        list-style: none;  
+        position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/  
+        left: 0; top: 35px;  
+        background: #333;  
+        margin: 0; padding: 0;  
+        display: none;  
+        float: left;  
+        width: 170px;  
+        border: 1px solid #111;  
+        z-index: 9;
+    }  
+    .topnav li ul.subnav li{  
+        margin: 0; padding: 0;  
+        border-top: 1px solid #252525; /*--Create bevel effect--*/  
+        border-bottom: 1px solid #444; /*--Create bevel effect--*/  
+        clear: both;  
+        width: 170px;  
+    }  
+    html .topnav li ul.subnav li a {  
+        float: left;  
+        width: 145px;  
+        background: #333 url(dropdown_linkbg.gif) no-repeat 10px center;  
+        padding-left: 20px;  
+    }  
+    html .topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/  
+        background: #222 url(dropdown_linkbg.gif) no-repeat 10px center;  
+    }
+    
+    #UsuarioConectado{
+        position: absolute;
+        left: 80%;
+        top :10%;
+        color: white;
+    }
+    #header{
+        position: absolute;
+        top:0%;
+        left: 0%;   
+    }
+    
+    #contenido{
+    
+    
+    margin-left: 0%;
+    position: absolute;
+    width: 100%;
+    height: 65%;
+    left: 0%;
+    top: 24.7%;
+    
+    background-image: -moz-linear-gradient(steelblue,black);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(limegreen), to(#A2EF95));
+}
+
+#pie{
+    position: absolute;
+    width: 100%;
+    height: 10.3%;
+    left: 0%;
+    top: 89.7%;
+    background-color:black;
+   
+}
+
+
+#datospersonales{
+    
+   
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    left: 10%;
+    top: 15%;
+}
+#DatosdeUsuario{
+    position: absolute;
+    left: 40%;
+    top: 15%;
+}
+#DatosdePartidas{
+    position: absolute; 
+    left: 70%;
+    top: 15%;
+}
+
+
+#estadisticas{
+    
+    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0%;
+    top: 5%;
+    text-align: center;
+  
+
+
+}
+#mensajes{
+
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    left: 50%;
+    top: 15%;
+    text-align: center;
+
+
+}
+#tablaContenido{
+    position: absolute;
+     left: 53%;
+     width: 15%;
+     color: #FFF;
+     border-bottom-style: solid;
+     border: #FFF;
+     text-align: center;
+     
+    
+}
+#nickUsuariosMejores{
+     position: absolute;
+     left: 28%;
+     width: 15%;
+     color:#FFF;
+     border-bottom-style: solid;
+     border: #FFF;
+     text-align: center;
+    
+}
+#menuMensajes{
+     position: relative;
+     left: 5%;
+     top:34%;
+     width: 10%;
+     color: #FFF;
+}
+#menuMensajes div{  
+    cursor: pointer;
+}
+#menuMensajes div:hover{
+    
+    background-color:black;
+}
+
+#enviarMensaje{
+    position: absolute;
+    left: 15%;
+    top: 10%;
+    width: 75%;
+    height: 80%;
+    
+}
+#bandejaEntrada{
+    position: absolute;
+    left: 15%;
+   top: 15%;
+    width: 75%;
+    height: 80%;
+    
+}
+#bandejaEntrada{
+    color:#FFF;
+}
+
+#contenedorUnirse{
+    position: absolute;
+    left:42.5%;
+    top: 15%;
+    width: 15%;
+    height: 20%;
+    text-align: center;
+    color: #FFF;
+   
+}
+
+#money1{
+    position: absolute;
+    left: 23%;
+    top:30%;
+}
+
+#money2{
+    position: absolute;
+    left: 58%;
+    top:30%;
+}
+
+#aJugarPartida{
+    position: absolute;
+    left:42.5%;
+    top:50%;
+    width: 15%;
+    height: 15%;
+    font-family: fantasy;
+    color:black;
+}
+
+#notificaciones{
+    position: absolute;
+    color:white;
+    left: 35%;
+    top:8%;
+    width: 30%;
+    height: 30%;
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 110%;
+}
+#imagenGif{
+    position: absolute;
+    left: 47%;
+    top:30%;
+    
+}
+#partidaLista{
+    position: absolute;
+    left:42.5%;
+    top:50%;
+    width: 15%;
+    height: 25%;
+    color:black;
+}
+

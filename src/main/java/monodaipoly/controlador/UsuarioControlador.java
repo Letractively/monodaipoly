@@ -151,7 +151,7 @@ public class UsuarioControlador {
               
            }
         }
-        return "/perfilPrueba";
+        return "/perfil";
 
 
     }

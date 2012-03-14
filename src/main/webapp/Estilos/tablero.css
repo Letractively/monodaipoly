@@ -1,5 +1,5 @@
 body {
-    background-color:limegreen;
+    background-color:#333;
 }
 #jugador1{
     position: absolute;
@@ -208,7 +208,9 @@ body {
     left:25.2%;
     top: 32%;
     z-index: 4;
-      background-color: lawngreen;
+    color: white;
+    background-image: -moz-linear-gradient(steelblue,black);
+    background-color: cornflowerblue;
 }
 
 
@@ -267,7 +269,7 @@ body {
     border-style: solid;
     width: 24%;
     height: 55%;
-    background-color: limegreen;
+    background-color:#52A9BA;
 }
 
 #imagenJugador1{

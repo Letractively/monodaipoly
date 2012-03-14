@@ -13,6 +13,7 @@
      <div id="recibidos"><p onclick="javascript:verBandejaEntrada()">RECIBIDOS</p></div>
         <br/>
      <div id=enviados">ENVIADOS</div>
+     <br/>
         
 </div>
    
@@ -36,8 +37,8 @@
                 </div>              
                 <br/>
                 <div id="mensaje" align="center">
-                    <input id="EnviarMensaje" type="submit" value="Enviar" />
-                    <input id="Limpiarmensaje" type="reset" value="Limpiar"/>
+                    <input id="EnviarMensajeboton" type="submit" value="Enviar" />
+                    <input id="Limpiarmensajeboton" type="reset" value="Limpiar"/>
                 </div>
                 
             </form>
