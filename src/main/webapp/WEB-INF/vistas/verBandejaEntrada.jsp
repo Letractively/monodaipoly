@@ -16,7 +16,7 @@
         margin: auto;
         width: 645px;
         position: absolute;
-        top: -10%;
+        top: 5%;
         left: 30%;
     }
     .contents
@@ -107,6 +107,16 @@
     });
 </script>
 
+            
+            <div id="menuMensajes">
+        <br/>
+    <div id="redactar1"><p onclick="javascript:EnviarMensajes()">REDACTAR</a></div>
+        <br/>
+     <div id="recibidos2" ><p onclick="javascript:verBandejaEntrada()">RECIBIDOS</p></div>
+        <br/>
+   
+        
+</div>
 <div id="wrapper">   
 
     <div id="green-contents" class="contents">

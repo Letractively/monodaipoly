@@ -66,14 +66,7 @@
 
                );
             }
-            function mensajes(){
-                  $.get("/mensajes",null,
-                    function(html) {
-                        $("#contenido").html(html);
-                    }
-
-               );
-            }
+         
             function EnviarMensajes(){
                   $.get("/enviarMensajesURL",null,
                     function(html) {
@@ -186,7 +179,7 @@
         <ul class="topnav">  
         <li><a onclick="javascript:datosPersonales()">Inicio</a></li>  
         <li>  
-            <a >Mensajes</a> 
+            <a onclick="javascript:EnviarMensajes()">Mensajes</a> 
             <ul class="subnav">  
             <li><a onclick="javascript:EnviarMensajes()">Enviar</a></li>
             <li><a onclick="javascript:verBandejaEntrada()">Recibidos</a></li>
