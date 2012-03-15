@@ -167,7 +167,7 @@ public class MensajeControlador {
         Usuario usuario=usuarioServicio.getCurrentUser();
         List<Mensaje> recibidos=new ArrayList<Mensaje>();
         recibidos=mensajeServicio.conseguirMensajesRecibidos(usuario.getNick());
-        System.out.println("MensajeControlador ¡¡");
+        System.out.println("MensajeControlador ");
         
         if(recibidos.isEmpty()){
            String noMensajes="No tienes Mensajes";

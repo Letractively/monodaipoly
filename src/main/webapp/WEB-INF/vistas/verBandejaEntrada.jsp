@@ -93,7 +93,7 @@
         $('#green').smartpaginator(
         { 
             totalrecords: ${mensajesTotal}, 
-            recordsperpage: 4, 
+            recordsperpage: 3, 
             datacontainer: 'mt', 
             dataelement: 'tr', 
             initval: 0, 

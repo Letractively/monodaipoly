@@ -43,14 +43,20 @@
                             } 
                             casas+=e.id;   
                         }
-                })
+                });
+                //alert("casas"+casas);
+                
                 $.get("/venderCasillas",{
                     "calles":casas
                  },
                    function(json){
-                
+                       if(json=="Vendidas"){
+                           //alert("Casillas vendidas");
+                       }
+                      
 
-                }, "json");
+                },"json");
+                alert("Casillas vendidas");
             }
 
 

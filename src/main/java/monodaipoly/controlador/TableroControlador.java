@@ -684,7 +684,7 @@ public class TableroControlador {
 
      @RequestMapping(method=RequestMethod.GET, value="/venderCasillas")
     public @ResponseBody String venderCasillas(@RequestParam("calles") String calles ) throws JSONException {
-        //System.out.println("calles"+calles);
+        System.out.println("calles"+calles);
          Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
          StringTokenizer tokens= new StringTokenizer(calles, ",");
          while(tokens.hasMoreTokens()){

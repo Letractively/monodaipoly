@@ -162,12 +162,12 @@ public class UsuarioServicoImpl implements UsuarioServicio{
         u7.setContrasena("123456");
 
   
-        this.anadirRol(u2, r1);
-        this.anadirRol(u3, r1);
-        this.anadirRol(u4, r1);
-        this.anadirRol(u5, r1);
-        this.anadirRol(u6, r1);
-        this.anadirRol(u7, r1);
+        this.anadirRol(u2, r2);
+        this.anadirRol(u3, r2);
+        this.anadirRol(u4, r2);
+        this.anadirRol(u5, r2);
+        this.anadirRol(u6, r2);
+        this.anadirRol(u7, r2);
         this.crear(u2);
         this.crear(u3);
         this.crear(u4);
