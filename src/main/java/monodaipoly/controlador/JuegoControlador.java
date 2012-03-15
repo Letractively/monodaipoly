@@ -82,7 +82,7 @@ public class JuegoControlador {
 
     
     @RequestMapping(value = "/cambiarTurnoManual", method = RequestMethod.GET)
-    private @ResponseBody String cambiarTurnoManualmente(
+    public @ResponseBody String cambiarTurnoManualmente(
         @RequestParam("jugQueTira") String  jugQueTira){
         Jugador jugador= jugadorServicio.buscar(usuarioServicio.buscar(jugQueTira).getJugador());
         if(jugador.getPartida()!=null && jugador.getEstoyJugando()==true){
@@ -107,22 +107,42 @@ public class JuegoControlador {
 
     public void cambiarTurno(Partida partida) {
         System.out.println("Llega a cambiar turno");
+        if(jugadorServicio.buscar(partida.getJugador1()).getEstoyEnCarcel()== true && jugadorServicio.buscar(partida.getJugador2()).getEstoyEnCarcel()== true && jugadorServicio.buscar(partida.getJugador3()).getEstoyEnCarcel()== true && jugadorServicio.buscar(partida.getJugador4()).getEstoyEnCarcel()== true)
+             partida.setTurno(partida.getJugador1());
+        else{
         if(partida.getTurno().compareTo(partida.getJugador1())==0){
            System.out.println("Entra 1");
-           partida.setTurno(partida.getJugador2());             
+           partida.setTurno(partida.getJugador2());
+           if(jugadorServicio.buscar(partida.getJugador2()).getEstoyEnCarcel()== true){
+                cambiarTurno(partida);
+                jugadorServicio.buscar(partida.getJugador2()).setEstoyEnCarcel(false);
+            }
         }else{
             if(partida.getTurno().compareTo(partida.getJugador2())==0){
                 System.out.println("Entra 2");
                 partida.setTurno(partida.getJugador3());
+                if(jugadorServicio.buscar(partida.getJugador3()).getEstoyEnCarcel()== true){
+                    cambiarTurno(partida);
+                    jugadorServicio.buscar(partida.getJugador3()).setEstoyEnCarcel(false);
+                }
             }else{
                  if(partida.getTurno().compareTo(partida.getJugador3())==0){
                      System.out.println("Entra 3");
                        partida.setTurno(partida.getJugador4());
+                       if(jugadorServicio.buscar(partida.getJugador4()).getEstoyEnCarcel()== true){
+                            cambiarTurno(partida);
+                            jugadorServicio.buscar(partida.getJugador4()).setEstoyEnCarcel(false);
+                        }
                 }else{
                      System.out.println("Entra 4");
                      partida.setTurno(partida.getJugador1());
+                     if(jugadorServicio.buscar(partida.getJugador1()).getEstoyEnCarcel()== true){
+                        cambiarTurno(partida);
+                        jugadorServicio.buscar(partida.getJugador1()).setEstoyEnCarcel(false);
+                    }
                  }
             }
+        }
         }
 
         //debemos hacer un metodo que envie algo a tablero para indicir que se a cambiado el turno y de quien es
@@ -550,6 +570,26 @@ public class JuegoControlador {
 
          //deberia recibir el numero de jugadores que quedan en la partida y si fuese 1 terminaria la partida
          private void cambiarTurnoMenosDe4(Partida partida){
+             int jugadoresQuedan=this.jugadorQueQuedan(partida);
+             int cuantosJugadoresHayEnCarcel=0;
+             
+                if(partida.getJugador1()!=null && jugadorServicio.buscar(partida.getJugador1()).getEstoyEnCarcel()== true ){
+                    cuantosJugadoresHayEnCarcel++;
+                    if(partida.getJugador2()!=null && jugadorServicio.buscar(partida.getJugador2()).getEstoyEnCarcel()== true ){
+                        cuantosJugadoresHayEnCarcel++;
+                        if(partida.getJugador3()!=null && jugadorServicio.buscar(partida.getJugador3()).getEstoyEnCarcel()== true ){
+                            cuantosJugadoresHayEnCarcel++;
+                            if(partida.getJugador4()!=null && jugadorServicio.buscar(partida.getJugador4()).getEstoyEnCarcel()== true ){
+                                cuantosJugadoresHayEnCarcel++;
+
+                            }
+                        }
+                    }
+                }
+             if(cuantosJugadoresHayEnCarcel==jugadoresQuedan){
+                partida.setTurno(partida.getJugador1());
+                jugadorServicio.buscar(partida.getJugador1()).setEstoyEnCarcel(false);
+             }else {
              Jugador jugador=new Jugador();
              jugador=jugadorServicio.buscar(partida.getTurno());
              partidaServicio.actualizar(partida);
@@ -560,14 +600,26 @@ public class JuegoControlador {
                      if(partida.getJugador3()==null){
                          if(partida.getJugador4()==null){
                              System.out.println("Has ganado");
-                         }else{
+                         }else {
                              partida.setTurno(partida.getJugador4());
+                             if(jugadorServicio.buscar(partida.getJugador4()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador4()).setEstoyEnCarcel(false);
+                             }
                          }
                      }else{
                          partida.setTurno(partida.getJugador3());
+                         if(jugadorServicio.buscar(partida.getJugador3()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador3()).setEstoyEnCarcel(false);
+                         }
                      }
                  }else{
                      partida.setTurno(partida.getJugador2());
+                    if(jugadorServicio.buscar(partida.getJugador2()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador2()).setEstoyEnCarcel(false);
+                    }
                  }
              }
 
@@ -578,12 +630,24 @@ public class JuegoControlador {
                             System.out.println("Has ganado");
                          }else{
                              partida.setTurno(partida.getJugador1());
+                             if(jugadorServicio.buscar(partida.getJugador1()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador1()).setEstoyEnCarcel(false);
+                             }
                          }
                      }else{
                          partida.setTurno(partida.getJugador4());
+                         if(jugadorServicio.buscar(partida.getJugador4()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador4()).setEstoyEnCarcel(false);
+                         }
                      }
                  }else{
                      partida.setTurno(partida.getJugador3());
+                     if(jugadorServicio.buscar(partida.getJugador3()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador3()).setEstoyEnCarcel(false);
+                     }
                  }
              }
 
@@ -594,12 +658,24 @@ public class JuegoControlador {
                             System.out.println("Has ganado");
                          }else{
                              partida.setTurno(partida.getJugador2());
+                            if(jugadorServicio.buscar(partida.getJugador2()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador2()).setEstoyEnCarcel(false);
+                             }
                          }
                      }else{
                          partida.setTurno(partida.getJugador1());
+                         if(jugadorServicio.buscar(partida.getJugador1()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador1()).setEstoyEnCarcel(false);
+                         }
                      }
                  }else{
                      partida.setTurno(partida.getJugador4());
+                    if(jugadorServicio.buscar(partida.getJugador4()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador4()).setEstoyEnCarcel(false);
+                    }
                  }
              }
 
@@ -611,14 +687,27 @@ public class JuegoControlador {
 
                          }else{
                              partida.setTurno(partida.getJugador3());
+                             if(jugadorServicio.buscar(partida.getJugador3()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador3()).setEstoyEnCarcel(false);
+                             }
                          }
                      }else{
                          partida.setTurno(partida.getJugador2());
+                         if(jugadorServicio.buscar(partida.getJugador2()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador2()).setEstoyEnCarcel(false);
+                         }
                      }
                  }else{
                      partida.setTurno(partida.getJugador1());
+                     if(jugadorServicio.buscar(partida.getJugador1()).getEstoyEnCarcel()== true){
+                                 cambiarTurnoMenosDe4(partida);
+                                 jugadorServicio.buscar(partida.getJugador1()).setEstoyEnCarcel(false);
+                     }
                  }
              }
+            }
              partida.setFechaTurno(System.currentTimeMillis()+60000);
              partida.setHaTirado(false);
              partidaServicio.actualizar(partida);

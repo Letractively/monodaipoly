@@ -37,6 +37,9 @@ public class Jugador implements Serializable {
         private int dinero;
 	
         @Basic
+        private Boolean estoyEnCarcel;
+
+        @Basic
         private String tux;
         
 	//calles..... 
@@ -49,6 +52,7 @@ public class Jugador implements Serializable {
                 this.calles=null;
                 this.estoyJugando=false;
                 this.estoyEnCola=false;
+                this.estoyEnCarcel=false;
 	}
 	
 	
@@ -74,6 +78,14 @@ public class Jugador implements Serializable {
 
         public void setEstoyEnCola(Boolean estoyEnCola) {
         this.estoyEnCola = estoyEnCola;
+        }
+
+        public Boolean getEstoyEnCarcel() {
+            return estoyEnCarcel;
+        }
+
+        public void setEstoyEnCarcel(Boolean estoyEnCarcel) {
+            this.estoyEnCarcel = estoyEnCarcel;
         }
         
 	public String getNick() {

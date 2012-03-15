@@ -423,6 +423,34 @@
                                 "top":arriba
                                 });
 
+                                if(db.nuevaPosicion==27){
+                                    alert("Tienes que tirar otra vez para saber si el FBI te manda a la carcel");
+                                    $.get("/tirarDado",{
+                                    jugQueTira:jugQueTira
+                                    },function(json){
+                                        var db = $.parseJSON(json);
+                                        if(db.dado==6){
+                                        alert("Has sacado: "+db.dado+" te libras de la carcel");
+                                        }else{
+                                            alert("Has sacado: "+db.dado);
+                                            alert("Tenias que haber sido mas precavido...el FBI te envia a la carcel");
+                                            posicionJugador[db.numJugador]=db.nuevaPosicion;
+                                            posicionReal = $("#casilla"+posicionJugador[db.numJugador]).offset();
+                                            //alert("posicionreal:  "+posicionReal);
+                                            var izq=posicionReal.left;
+                                            var arriba=posicionReal.top;
+                                            $("#jugador"+db.numJugador).css({
+                                            "left":izq,
+                                            "top":arriba
+                                            });
+                                            }
+
+                                    },"json");
+
+
+
+                                }else{
+
 
 
                                  //si a podido tirar le vamos a decir lo de la calle
@@ -512,6 +540,7 @@
 
 
                                 }
+                            }
                             }, "json");
     
                         }
