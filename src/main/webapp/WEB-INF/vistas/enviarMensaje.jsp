@@ -7,7 +7,17 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 
-<div class="mensajes ">
+<div id="menuMensajes">
+        <br/>
+    <div id="redactar1"><p onclick="javascript:EnviarMensajes()">REDACTAR</a></div>
+        <br/>
+     <div id="recibidos2" ><p onclick="javascript:verBandejaEntrada()">RECIBIDOS</p></div>
+        <br/>
+   
+        
+</div>
+
+
         <div id="enviarMensaje" >
             <form action="/enviarMensajes" method="get" id="formMensajes">
                 Destinatario:
@@ -17,7 +27,7 @@
                 <br/>
                 Contenido:
                 <div>
-                    <textarea id="contenidoMensaje" cols="80" rows="5" type="text" name="contenidoMensaje" value="" ></textarea>
+                    <textarea id="contenidoMensaje" cols="100" rows="10" type="text" name="contenidoMensaje" value="" ></textarea>
                 </div>
                 <br/>
                 <div id="mensaje" align="center">
@@ -27,6 +37,3 @@
 
             </form>
             </div>
-
-     
-</div>

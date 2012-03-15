@@ -1,17 +1,19 @@
-    
+  
 .topnav {  
         position: absolute;
-        top: 20.25%;
+        top: 20.5%;
         left:0%;
         list-style: none;  
         padding: 0 20px;  
         margin: 0;  
         float: left;
-        width: 97.1%;
+        width: 97.75%;
+        
         font-size: 1.2em;  
         background: url(topnav_bg.gif) repeat-x;  
     }  
     .topnav li {  
+        
         float: left;  
         margin: 0;  
         padding: 0 15px 0 0;  
@@ -38,9 +40,11 @@
     .topnav li ul.subnav {  
         list-style: none;  
         position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/  
-        left: 0; top: 65%;  
+        left: 0%; 
+        top: 65%;  
         background: #333;  
-        margin: 0; padding: 0;  
+        margin: 0; 
+        padding: 0;  
         display: none;  
         float: left;  
         width: 170px;  
@@ -190,7 +194,7 @@
 #enviarMensaje{
     position: absolute;
     left: 15%;
-    top: 10%;
+    top: 15%;
     width: 75%;
     height: 80%;
     
@@ -198,7 +202,7 @@
 #bandejaEntrada{
     position: absolute;
     left: 15%;
-   top: 15%;
+    top: 15%;
     width: 75%;
     height: 80%;
     
