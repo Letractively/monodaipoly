@@ -82,7 +82,7 @@
     }
     
     #contenido{
-    
+   
     
     margin-left: 0%;
     position: absolute;
@@ -268,3 +268,11 @@
     color:black;
 }
 
+
+#green-contents{
+    position: absolute;
+    
+    top: 30%;
+    width: 50%;
+    height: 50%;
+}

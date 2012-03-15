@@ -186,7 +186,7 @@
         <ul class="topnav">  
         <li><a onclick="javascript:datosPersonales()">Inicio</a></li>  
         <li>  
-            <a onclick="javascript:mensajes()">Mensajes</a> 
+            <a >Mensajes</a> 
             <ul class="subnav">  
             <li><a onclick="javascript:EnviarMensajes()">Enviar</a></li>
             <li><a onclick="javascript:verBandejaEntrada()">Recibidos</a></li>
