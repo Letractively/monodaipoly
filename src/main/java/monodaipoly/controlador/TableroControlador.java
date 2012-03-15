@@ -149,6 +149,8 @@ public class TableroControlador {
                     jugador.setDinero(jugador.getDinero()+200);
                 }else{
                     jugador.setPosicion(jugador.getPosicion()+dado);
+                    //jugador.setPosicion(27);
+
                 }
 
                 System.out.println("AQUIIIIIIIIIIIIIIIIII 2");
@@ -185,6 +187,37 @@ public class TableroControlador {
                 }
               return n;
         }
+
+        @RequestMapping(method=RequestMethod.GET, value="/tirarDado")
+        public @ResponseBody String tirarDado(HttpSession sesion,@RequestParam("jugQueTira") String jugQueTira){
+            //Usuario usuario = (Usuario)sesion.getAttribute("usuario");
+            //Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
+
+            Jugador jugador = jugadorServicio.buscar(usuarioServicio.buscar(jugQueTira).getJugador());
+            Partida partida =partidaServicio.buscar(jugador.getPartida());
+
+            int numJugador=this.numDelJugador(jugador, partida);
+            int posicion=0;
+
+                int dado = (int)(6.0 * Math.random()) + 1;
+                //int dado=((int)Math.random()*6);
+                if(dado==6){
+                    posicion=jugador.getPosicion();
+                }else{
+                    jugador.setPosicion(9);
+                    jugador.setEstoyEnCarcel(true);
+                    jugadorServicio.actualizar(jugador);
+                }
+                juegoControlador.cambiarTurnoManualmente(jugQueTira);
+                return dadoJson(posicion, dado, numJugador).toString();
+
+
+    }
+
+
+
+
+
 
 
 
@@ -296,6 +329,7 @@ public class TableroControlador {
                     player.setEstoyJugando(true);
                     player.setDinero(2000);
                     player.setEstoyEnCola(false);
+                    player.setEstoyEnCarcel(false);
                     //meter todas las calles al jugador
                     /*
                     for(Casilla c:casillaServicio.getAll()){
@@ -305,12 +339,13 @@ public class TableroControlador {
                         jugadorServicio.actualizar(player);
                     }*/
 
-
+                    jugadorServicio.actualizar(player);
                     keyPlayer=partida.getJugador2();
                     player=jugadorServicio.buscar(keyPlayer);
                     player.setEstoyJugando(true);
                     player.setDinero(2000);
                     player.setEstoyEnCola(false);
+                    player.setEstoyEnCarcel(false);
                     jugadorServicio.actualizar(player);
 
 
@@ -320,6 +355,7 @@ public class TableroControlador {
                     player.setEstoyJugando(true);
                     player.setDinero(2000);
                     player.setEstoyEnCola(false);
+                    player.setEstoyEnCarcel(false);
                     jugadorServicio.actualizar(player);
 
                     keyPlayer=partida.getJugador4();
@@ -327,6 +363,7 @@ public class TableroControlador {
                     player.setEstoyJugando(true);
                     player.setDinero(2000);
                     player.setEstoyEnCola(false);
+                    player.setEstoyEnCarcel(false);
 
 
                     partida.setFechaTurno(System.currentTimeMillis()+60000);
