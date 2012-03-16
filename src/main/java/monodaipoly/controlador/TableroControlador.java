@@ -372,6 +372,8 @@ public class TableroControlador {
                     partida.setFechaTurno(System.currentTimeMillis()+60000);
                     partida.setCompleta(true);
                     jugadorServicio.actualizar(player);
+                    partida.setBote(0);
+
                     partidaServicio.actualizar(partida);
                     model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
                     //return ... el metodo que falta que carga el modelo
@@ -593,11 +595,10 @@ public class TableroControlador {
 
             //System.out.println("cantidad de jugadores desde timeOut: " +cantidadJugadores);
             
-
-            return this.datosDeJuegoJson(posicion1,posicion2,posicion3,posicion4,dinero1,dinero2,dinero3,dinero4,turno,cantidadJugadores).toString();
+            return this.datosDeJuegoJson(posicion1,posicion2,posicion3,posicion4,dinero1,dinero2,dinero3,dinero4,turno,cantidadJugadores,partida.getBote()).toString();
     }
     private JSONObject datosDeJuegoJson(int posicion1,int posicion2,int posicion3,int posicion4,
-            int dinero1,int dinero2,int dinero3,int dinero4,String turno,int cantidadJugadores){
+            int dinero1,int dinero2,int dinero3,int dinero4,String turno,int cantidadJugadores, int botePartida){
         JSONObject json=new JSONObject();
         try{
 
@@ -611,6 +612,7 @@ public class TableroControlador {
             json.put("dinero4", dinero4);
             json.put("turno",turno);
             json.put("cantidadJugadores",cantidadJugadores);
+            json.put("bote", botePartida);
 
         }catch (JSONException ex){
 

@@ -44,6 +44,8 @@ public class Partida implements Serializable{
     private long fechaTurno;
     @Basic
     private boolean haTirado;
+    @Basic
+    private int bote;
 
    public Partida(){
        this.jugador1=null;
@@ -54,6 +56,7 @@ public class Partida implements Serializable{
        this.fechaTurno=0;
        this.turno=null;
        this.completa=false;
+       bote=0;
    }
 
     public List<Key> getCasillas() {
@@ -62,6 +65,14 @@ public class Partida implements Serializable{
 
     public void setCasillas(List<Key> casillas) {
         this.casillas = casillas;
+    }
+
+    public int getBote() {
+        return bote;
+    }
+
+    public void setBote(int bote) {
+        this.bote = bote;
     }
 
     public Key getJugador1() {

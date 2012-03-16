@@ -144,6 +144,13 @@
                                     $(".boton").css("visibility", "hidden");
                                     //alert("you win");
                                 }
+                                /***
+                                 *
+                                 *
+                                 *
+                                 *
+                                 */
+                                $("#bote").html("bote: <br/>"+ db.bote);
 
 
                                 
@@ -447,9 +454,10 @@
 
                                     },"json");
 
-
-
-                                }else{
+                                }if(db.nuevaPosicion==18){
+                                    alert("¡¡Te has llevado el dinero del bote!!");
+                                }
+                                else{
 
 
 
@@ -477,6 +485,10 @@
                                     var db = $.parseJSON(json);
                                     if(db.tipo=="suerte"){
                                         alert(db.contenido);
+                                        if(db.arruinado==true){
+                                            alert("Que mala suerte...te has arruinado");
+                                            $("#botonAbandonar").submit();
+                                        }
                                     }
                                     else if(db.tipo=="multa"){
                                         //cuando has pagado multa
@@ -617,20 +629,15 @@
                             TURNO : <span id="turno"></span>
                             </b>
                             <input type="button" id="finPartida" value="¡ FINAL DE LA PARTIDA !" style="visibility: hidden" onclick="window.location.href='jugadorGanadorPartida'">
+                            
 
                         </div>
 
-
-                      
-	
-
-
-                
-
-                
-            
-
-
+                        <div id="dineroBote">
+                            <center>
+                            <span id="bote">bote:<br/> 0</span>
+                            </center>
+                        </div>       
 
             <div id="jugador1"><img src='${tux1}' width='100%' height='100%'/></div>
             <div id='jugador2'><img src='${tux2}' width='100%' height='100%'/></div>
