@@ -422,10 +422,32 @@ public class JuegoControlador {
             if(jugador.getPosicion()!=0 && jugador.getPosicion()!=9 && jugador.getPosicion()!=18 && jugador.getPosicion()!=27){
                 Casilla casilla=casillaServicio.buscarPorNumero(jugador.getPosicion());
                 if(casilla.getTipoCasilla()==null){
+
+                     if(jugador.getPosicion()==3 || jugador.getPosicion()==16 || jugador.getPosicion()==21 || jugador.getPosicion()==34){
+                        //Es una calle de suerte
+                        String [] suerte=new String []{"pagas 200$","te pagan 200$","pagas 200$","te pagan 200$"};
+                        int random = (int)(3.0 * Math.random());
+                        if(random%2==0){
+                            if(jugador.getDinero()>=200){
+                                jugador.setDinero(jugador.getDinero()-200);
+                            }else{
+                                this.eliminarJugador(jugador);
+                            }
+                        }else{
+                            jugador.setDinero(jugador.getDinero()+200);
+                        }
+
+                        this.cambiarTurnoManualmente(jugador.getNick());
+                        return this.suerteJson(suerte[random]).toString();
+                    }
+
+
+
                     Logger.getLogger(JuegoControlador.class.getName()).info("Casilla.getTipoCasilla()==null");
                     this.mostrarCallesDeLosJugadores(partida);
                     this.cambiarTurnoManualmente(jugador.getNick());
                     return null;
+
                 }   
                 if(casilla.getTipoCasilla()!=null){
                         Calle calle=calleServicio.buscar(casilla.getTipoCasilla());
@@ -472,14 +494,31 @@ public class JuegoControlador {
                       }
                       return this.opcionCompraJson(calle.getPrecio(), casilla.getNombre(), "noMulta").toString();
                 }else{
-                    //esto es pq has caido en una calle de suerte,hidroelectrica o estacion
+                    if(jugador.getPosicion()==3 || jugador.getPosicion()==16 || jugador.getPosicion()==21 || jugador.getPosicion()==34){
+                        //Es una calle de suerte
+                        String [] suerte=new String []{"pagas 200$","te pagan 200$","pagas 200$","te pagan 200$"};
+                        int random = (int)(3.0 * Math.random());
+                        if(random%2==0){
+                            if(jugador.getDinero()>=200){
+                                jugador.setDinero(jugador.getDinero()-200);
+                            }else{
+                                this.eliminarJugador(jugador);
+                            }
+                        }else{
+                            jugador.setDinero(jugador.getDinero()+200);
+                        }
+                        return this.suerteJson(suerte[random]).toString();
+                    }else{
+                    //esto es pq has caido en una calle de hidroelectrica o estacion
                     Logger.getLogger(JuegoControlador.class.getName()).info("Casilla.getTipoCasilla()==null suerte,hidroelectrica...");
                     this.mostrarCallesDeLosJugadores(partida);
                     this.cambiarTurnoManualmente(jugador.getNick());
                     return null;
+                    }
                 }
 
             }
+        
             //esto es porque has caido en una calle de las esquinas
             Logger.getLogger(JuegoControlador.class.getName()).info("Casilla.getTipoCasilla()==null has caido en una esquina");
             this.mostrarCallesDeLosJugadores(partida);
@@ -871,7 +910,20 @@ public class JuegoControlador {
 
     }
 
+        private JSONObject suerteJson(String suerte){
+        JSONObject json=new JSONObject();
+        try{
+            json.put("tipo", "suerte");
+            json.put("contenido", suerte);
+
+
+
+        }catch (JSONException ex){
+
+        }
+        return json;
+    }
+
 
        
 }
-

@@ -57,13 +57,21 @@ public class MensajeControlador {
     }
 
     @RequestMapping(method=RequestMethod.GET, value="/enviarMensajes")
-    public String enviarMensajes(HttpSession sesion,
+    public String enviarMensajes(
                     @RequestParam("contenidoMensaje") String contenidoMensaje,
-                    @RequestParam("destinatario") String destinatario
-                   ){
+                    @RequestParam("destinatario") String destinatario,
+                   Model model){
+        String estado;
         Mensaje mensaje=new Mensaje();
         Usuario usuario=usuarioServicio.getCurrentUser();
-        if(usuarioServicio.buscar(destinatario)!=null){
+
+        if(destinatario==null){
+            estado="incorrecto";
+            model.addAttribute("estado",estado );
+
+        }else{
+
+         if(usuarioServicio.buscar(destinatario)!=null){
 
         mensaje.setContenido(contenidoMensaje);
         mensaje.setAutor(usuario.getNick());
@@ -72,12 +80,19 @@ public class MensajeControlador {
         usuarioServicio.buscar(destinatario).getBandejaEntrada().add(mensaje.getIdMensaje());
         usuario.getBandejaEntrada().add(mensaje.getIdMensaje());
         usuarioServicio.actualizar(usuario);
-            return "redirect:estadoMensaje?estado=CORRECTO";
+             estado="correcto";
+             model.addAttribute("estado",estado );
+
+        }else{
+             estado="incorrecto";
+             model.addAttribute("estado",estado );
+
         }
 
-        else{
-            return "redirect:estadoMensaje?estado=ERROR";
         }
+
+
+        return "/perfil";
 
     }
 
@@ -185,6 +200,61 @@ public class MensajeControlador {
     }
 
 
+    @RequestMapping(method=RequestMethod.GET, value="/enviarMensaje2")
+        public @ResponseBody String enviarMensaje2(HttpSession sesion,@RequestParam("destinatario") String destinatario,
+        @RequestParam("contenido") String contenido,Model model){
+        
+        String estado;
 
+        Mensaje mensaje=new Mensaje();
+        Usuario usuario=usuarioServicio.getCurrentUser();
+
+        if(destinatario==null){
+  
+            estado="incorrecto";
+            model.addAttribute("estado",estado );
+
+        }else{
+
+         if(usuarioServicio.buscar(destinatario)!=null){
+
+        mensaje.setContenido(contenido);
+        mensaje.setAutor(usuario.getNick());
+        mensaje.setDestinatario(usuarioServicio.buscar(destinatario).getNick());
+        mensajeServicio.crear(mensaje);
+        usuarioServicio.buscar(destinatario).getBandejaEntrada().add(mensaje.getIdMensaje());
+        usuario.getBandejaEntrada().add(mensaje.getIdMensaje());
+        usuarioServicio.actualizar(usuario);
+             estado="Mensaje enviado correctamente";
+             model.addAttribute("estado",estado );
+
+        }else{
+          
+             estado="incorrecto";
+             model.addAttribute("estado",estado );
+
+        }
+
+        }
+
+        
+       return mensajeJson(estado).toString();
+
+
+    }
+
+
+         private JSONObject mensajeJson(String texto){
+        JSONObject json=new JSONObject();
+        try{
+
+            json.put("estado",texto);
+
+
+        }catch (JSONException ex){
+
+        }
+        return json;
+    }
 
 }

@@ -465,7 +465,7 @@
 
 
 
-                                if(json==null || json=="tuya"){
+                                if(json==null || json=="tuya" ){
                                     if(json=="tuya"){
                                         //la casilla en la q has caido es tuya
                                         alert("La casilla es tuya");
@@ -475,7 +475,10 @@
 
                                 }else{
                                     var db = $.parseJSON(json);
-                                    if(db.tipo=="multa"){
+                                    if(db.tipo=="suerte"){
+                                        alert(db.contenido);
+                                    }
+                                    else if(db.tipo=="multa"){
                                         //cuando has pagado multa
                                         alert("Has pagado una multa de: "+db.multa+" a el jugador numero "+db.numJugador);
                                         if(db.eliminado){
@@ -638,3 +641,4 @@
 
     </body>
 </html>
+

@@ -1,4 +1,4 @@
-  
+   
 .topnav {  
         position: absolute;
         top: 20.5%;
@@ -7,7 +7,7 @@
         padding: 0 20px;  
         margin: 0;  
         float: left;
-        width: 97.75%;
+        width: 96.9%;
         
         font-size: 1.2em;  
         background: url(topnav_bg.gif) repeat-x;  
@@ -94,6 +94,8 @@
     height: 65%;
     left: 0%;
     top: 24.7%;
+
+  
     
     background-image: -moz-linear-gradient(steelblue,black);
     background-image: -webkit-gradient(linear, center top, center bottom, from(limegreen), to(#A2EF95));
@@ -105,6 +107,7 @@
     height: 10.3%;
     left: 0%;
     top: 89.7%;
+  
     background-color:black;
    
 }
@@ -254,6 +257,7 @@
     text-align: center;
     text-transform: capitalize;
     font-size: 85%;
+ 
 }
 #imagenGif{
     position: absolute;
