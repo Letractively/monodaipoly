@@ -134,7 +134,7 @@ public class TableroControlador {
 
             Jugador jugador = jugadorServicio.buscar(usuarioServicio.buscar(jugQueTira).getJugador());
             Partida partida =partidaServicio.buscar(jugador.getPartida());
-            System.out.println("AQUIIIIIIIIIIIIIIIIII 1");
+            
             juegoControlador.mostrarCallesDeLosJugadores(partida);
           
             int numJugador=this.numDelJugador(jugador, partida);
@@ -149,9 +149,10 @@ public class TableroControlador {
                     jugador.setDinero(jugador.getDinero()+200);
                 }else{
                     jugador.setPosicion(jugador.getPosicion()+dado);
-                    //jugador.setPosicion(27);
+                    //jugador.setPosicion(3);
 
                 }
+                /*
 
                 System.out.println("AQUIIIIIIIIIIIIIIIIII 2");
                 juegoControlador.mostrarCallesDeLosJugadores(partida);
@@ -160,6 +161,8 @@ public class TableroControlador {
                 jugadorServicio.actualizar(jugador);
                 System.out.println("AQUIIIIIIIIIIIIIIIIII 4");
                 juegoControlador.mostrarCallesDeLosJugadores(partida);
+
+                 */
                 partida.setHaTirado(true);
                 System.out.println("AQUIIIIIIIIIIIIIIIIII 5");
                 juegoControlador.mostrarCallesDeLosJugadores(partida);

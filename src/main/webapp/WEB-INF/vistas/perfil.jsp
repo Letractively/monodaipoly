@@ -142,7 +142,7 @@
                               
                            
                         
-                        if($("#estadoMensaje").attr("value")!=""){
+                      /*  if($("#estadoMensaje").attr("value")!=""){
                             var estado = $("#estadoMensaje").attr("value");
                             if(estado=="ERROR"){
                                 $("#estadoMensaje").css("visibility","visible");
@@ -153,6 +153,11 @@
                                 $("#estadoMensaje").html("<b>Mensaje enviado correctamente</b>").fadeIn(1000).fadeOut(10000);
                                 
                             }
+                        }*/
+                        if("${estado}"=="correcto"){
+                            $("#estadoMensaje").html("Mensaje enviado correctamente").fadeIn(1000).fadeOut(3000);
+                        }else if("${estado}"=="incorrecto"){
+                            $("#estadoMensaje").html("Error al enviar el mensaje").fadeIn(1000).fadeOut(3000);
                         }
                     
                  
@@ -208,6 +213,7 @@
            
              <div id="notificaciones" >
              </div>
+             <div id="estadoMensaje" style="color:white"></div>
     </div>
     
     
