@@ -690,7 +690,7 @@ public class TableroControlador {
       private JSONObject datosCasilla(Casilla casilla){
         JSONObject json=new JSONObject();
         int i;
-        try{
+        try{    
                 json.put("nombre", casilla.getNombre());
                 Calle micalle=calleServicio.buscar(casilla.getTipoCasilla());
                 json.put("precioVenta", micalle.getPrecio()*0.7);
@@ -739,6 +739,46 @@ public class TableroControlador {
 
         return "Vendidas";
     }
+
+     
+     
+     
+     @RequestMapping(method=RequestMethod.GET, value="/verPropiedadesOtrosUser")
+        public @ResponseBody String verPropiedadesOtrosUser(HttpSession sesion,@RequestParam("numJugador") int numJugador){
+         Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());   
+         Partida partida=partidaServicio.buscar(jugador.getPartida());
+         if(numJugador==1){
+             //System.out.println("1");
+             jugador=jugadorServicio.buscar(partida.getJugador1());
+         }else if(numJugador==2){
+             //System.out.println("2");
+             jugador=jugadorServicio.buscar(partida.getJugador2());
+         }else if(numJugador==3){
+             //System.out.println("3");
+             jugador=jugadorServicio.buscar(partida.getJugador3());
+         }else{
+             //System.out.println("4");
+             jugador=jugadorServicio.buscar(partida.getJugador4());
+         }
+         
+        List<Key> casillas=jugador.getCalles();
+        List <Casilla> casillasDelJugador=new ArrayList<Casilla>();
+
+        for(Key c: casillas){
+            Casilla miCasilla=casillaServicio.buscar(c);
+            casillasDelJugador.add(miCasilla);
+        }
+        if(casillasDelJugador.size()>0){
+
+
+        return this.casillasVenderJson(casillasDelJugador).toString();
+         }
+        return "No tiene casillas";
+           
+            
+       
+    }
+    
 
 
 }
