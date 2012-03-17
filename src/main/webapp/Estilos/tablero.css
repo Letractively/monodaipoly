@@ -464,3 +464,12 @@ body {
     background-color: cornflowerblue;
     
 }
+#casillasOtrosJug{
+    position: absolute;
+   border-color: black;
+   height: 70.7%;
+   width: 70.7%;
+   color:white;
+   border-style: solid;
+   background-image: -moz-linear-gradient(steelblue,black);
+}
