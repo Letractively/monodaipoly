@@ -152,17 +152,6 @@ public class TableroControlador {
                     //jugador.setPosicion(3);
 
                 }
-                /*
-
-                System.out.println("AQUIIIIIIIIIIIIIIIIII 2");
-                juegoControlador.mostrarCallesDeLosJugadores(partida);
-                System.out.println("AQUIIIIIIIIIIIIIIIIII 3");
-                juegoControlador.mostrarCallesDeLosJugadores(partida);
-                jugadorServicio.actualizar(jugador);
-                System.out.println("AQUIIIIIIIIIIIIIIIIII 4");
-                juegoControlador.mostrarCallesDeLosJugadores(partida);
-
-                 */
                 partida.setHaTirado(true);
                 System.out.println("AQUIIIIIIIIIIIIIIIIII 5");
                 juegoControlador.mostrarCallesDeLosJugadores(partida);
@@ -193,8 +182,6 @@ public class TableroControlador {
 
         @RequestMapping(method=RequestMethod.GET, value="/tirarDado")
         public @ResponseBody String tirarDado(HttpSession sesion,@RequestParam("jugQueTira") String jugQueTira){
-            //Usuario usuario = (Usuario)sesion.getAttribute("usuario");
-            //Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
 
             Jugador jugador = jugadorServicio.buscar(usuarioServicio.buscar(jugQueTira).getJugador());
             Partida partida =partidaServicio.buscar(jugador.getPartida());
@@ -203,7 +190,6 @@ public class TableroControlador {
             int posicion=0;
 
                 int dado = (int)(6.0 * Math.random()) + 1;
-                //int dado=((int)Math.random()*6);
                 if(dado==6){
                     posicion=jugador.getPosicion();
                 }else{
@@ -383,24 +369,20 @@ public class TableroControlador {
                 }
             }
         }else if(usuarioServicio.getCurrentUser().getJugador()!=null){
-            //System.out.println("1 tiene jugador");
-             //Logger.getLogger(JuegoControlador.class.getName()).info("1.2");
+            
              Jugador jugQueJodiaTodo=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
-             //Logger.getLogger(JuegoControlador.class.getName()).info(jugQueJodiaTodo.getEstoyJugando().toString());
+            
                 if(jugQueJodiaTodo.getEstoyJugando()==false){
-                    //System.out.println("4 return");
-                    //Logger.getLogger(JuegoControlador.class.getName()).info("3");
+                    
                     model.addAttribute("enCola",enCola );
                     model.addAttribute("enColaImagen",imagenCola );
                     return "/perfil";//else return perfil y mostrar cola
                 }else if(jugQueJodiaTodo.getEstoyJugando()==true){//if esta jugando...
-                    //System.out.println("3 cargar en modelo el jugador");
-                    //Logger.getLogger(JuegoControlador.class.getName()).info("4");
+                    
                     model.addAttribute("jugador", jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()));
                     return "redirect:comenzarPartida";//return ... el metodo que falta que carga el modelo
                 }
-                   //System.out.println("5 return");
-                   //Logger.getLogger(JuegoControlador.class.getName()).info("5");
+                   
                    model.addAttribute("enCola",enCola );
                    model.addAttribute("enColaImagen",imagenCola );
                    return "/perfil";//else return perfil y mostrar cola
@@ -462,10 +444,6 @@ public class TableroControlador {
        String tux2="";
        String tux3="";
        String tux4="";
-        System.out.println("jugador1 "+ partida.getJugador1());
-        System.out.println("jugador2 "+ partida.getJugador2());
-        System.out.println("jugador3 "+ partida.getJugador3());
-        System.out.println("jugador4 "+ partida.getJugador4());
 
        if(partida.getJugador1()!=null){
             Jugador jugador1=jugadorServicio.buscar(partida.getJugador1());
@@ -519,7 +497,6 @@ public class TableroControlador {
        model.addAttribute("turno", turno);
        return "/tablero2";
     }
-
 
     private boolean comprobarQueEsTurno(int numJugador, Partida partida){
         if(numJugador==1){
@@ -593,7 +570,6 @@ public class TableroControlador {
             Jugador jugTurno=jugadorServicio.buscar(partida.getTurno());
             String turno=jugTurno.getNick();
 
-            //System.out.println("cantidad de jugadores desde timeOut: " +cantidadJugadores);
             
             return this.datosDeJuegoJson(posicion1,posicion2,posicion3,posicion4,dinero1,dinero2,dinero3,dinero4,turno,cantidadJugadores,partida.getBote()).toString();
     }
@@ -623,19 +599,19 @@ public class TableroControlador {
 
     @RequestMapping(method=RequestMethod.GET, value="/saberSiYaPuedeJugar")
         public @ResponseBody String saberSiYaPuedeJugar(HttpSession sesion){
-             //Logger.getLogger(JuegoControlador.class.getName()).info("1");
+             
             if(usuarioServicio.getCurrentUser().getJugador()==null){
-                //Logger.getLogger(JuegoControlador.class.getName()).info("2");
+                
                 return "/perfil";
             }else{
-                 //Logger.getLogger(JuegoControlador.class.getName()).info("3");
+                 
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
             if(jugador.getEstoyJugando()==true){
-                //Logger.getLogger(JuegoControlador.class.getName()).info("jugando true");
+              
                 boolean todoListo=true;
                 return this.saberSiYaPuedeJugarJson(todoListo).toString();
             }
-            //Logger.getLogger(JuegoControlador.class.getName()).info("4");
+            
             boolean todoListo=false;
                 return this.saberSiYaPuedeJugarJson(todoListo).toString();
         }
@@ -645,12 +621,12 @@ public class TableroControlador {
       private JSONObject saberSiYaPuedeJugarJson(boolean todoListo){
         JSONObject json=new JSONObject();
         try{
-            //Logger.getLogger(JuegoControlador.class.getName()).info("5");
+            
             json.put("todoListo",todoListo);
             if(todoListo==false){
                 Partida partida=partidaServicio.buscar(jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador()).getPartida());
                 int jugadoresQueFaltan=4-juegoControlador.jugadorQueQuedan(partida);
-                //System.out.println("jugadoresQueFaltan"+jugadoresQueFaltan);
+                
                 String jugadoresRestantes=", faltan "+jugadoresQueFaltan+" jugadores";
                 json.put("jugadoresRestantes",jugadoresRestantes);
             }
@@ -680,7 +656,7 @@ public class TableroControlador {
                 }
             }
         } catch (Exception ex) {
-            //Logger.getLogger(MensajeControlador.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         salida += "]";
         return salida;
@@ -747,17 +723,13 @@ public class TableroControlador {
         public @ResponseBody String verPropiedadesOtrosUser(HttpSession sesion,@RequestParam("numJugador") int numJugador){
          Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());   
          Partida partida=partidaServicio.buscar(jugador.getPartida());
-         if(numJugador==1){
-             //System.out.println("1");
+         if(numJugador==1){             
              jugador=jugadorServicio.buscar(partida.getJugador1());
-         }else if(numJugador==2){
-             //System.out.println("2");
+         }else if(numJugador==2){            
              jugador=jugadorServicio.buscar(partida.getJugador2());
-         }else if(numJugador==3){
-             //System.out.println("3");
+         }else if(numJugador==3){             
              jugador=jugadorServicio.buscar(partida.getJugador3());
-         }else{
-             //System.out.println("4");
+         }else{             
              jugador=jugadorServicio.buscar(partida.getJugador4());
          }
          
