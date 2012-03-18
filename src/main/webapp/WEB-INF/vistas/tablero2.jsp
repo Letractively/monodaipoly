@@ -29,7 +29,6 @@
             posicionJugador[4]=${jugador4};
             
             function verPropiedadesOtrosUser(numJugador){
-                //alert(numJugador);
                 $.get("/verPropiedadesOtrosUser",{
                     "numJugador":numJugador
                 },
@@ -44,7 +43,6 @@
                         $("#casillasOtrosJug").append("<div id='colm3'></div>");
                         var sw=0;
                         $(db).each(function(index,value) {
-                            //alert(value.nombre);
                             if (sw==0){
                                 $("#colm1").append("<center><p>"+value.numero+"  "+value.nombre+"</p></center>");
                                 sw=1;
@@ -57,7 +55,6 @@
                         $("#colm3").append("<center><button onClick='cerrarDiv()'>Cerrar</button></center>");
                     }
                 },"json");
-                //alert("sale");
                 
             }
             
@@ -112,13 +109,11 @@
                 var t=setTimeout("reposicionadoDeDatos()",5000);
             }
             function reposicionadoDeDatos(){
-                //alert("reposicionado");
                 $.get("/datosDeJuego",{
 
                 },
                 function(json){
                     var db = $.parseJSON(json);
-                    //alert(db.posicion1);
                     posicionJugador[1]=db.posicion1;
                     posicionJugador[2]=db.posicion2;
                     posicionJugador[3]=db.posicion3;
@@ -128,20 +123,16 @@
                         var posicionReal=$("#casilla"+posicionJugador[i]).offset();
                         var izq=posicionReal.left;
                         var arriba=posicionReal.top;
-                        //alert('top:'+arriba);
-                        //alert('left:'+izq);
                         $("#jugador"+i).css({
                             "left":izq,
                             "top":arriba
                         });
                     }
                                 
-                    //alert(db.dinero1);
                     $('#dineroJugador1').html(db.dinero1+"$");
                     $('#dineroJugador2').html(db.dinero2+"$");
                     $('#dineroJugador3').html(db.dinero3+"$");
                     $('#dineroJugador4').html(db.dinero4+"$");
-                    //alert(db.turno);
                     $("#turno").html(db.turno);
 
                                
@@ -176,15 +167,9 @@
 
                     if(db.cantidadJugadores==1){
                         $("#finPartida").css("visibility", "visible");
-                        $(".boton").css("visibility", "hidden");
-                        //alert("you win");
+                        $(".boton").css("visibility", "hidden");                        
                     }
-                    /***
-                     *
-                     *
-                     *
-                     *
-                     */
+
                     $("#bote").html("bote: <br/>"+ db.bote);
 
 
@@ -414,9 +399,7 @@
                         if((jug1!=i) || (jug2!=i) || (jug3!=i) || (jug4!=i) || posicionJugador[i]!=-1){
                             var posicionReal=$("#casilla"+posicionJugador[i]).offset();
                             var izq=posicionReal.left;
-                            var arriba=posicionReal.top;
-                            //alert('top:'+arriba);
-                            //alert('left:'+izq);
+                            var arriba=posicionReal.top;                           
                             $("#jugador"+i).css({
                                 "left":izq,
                                 "top":arriba
@@ -431,17 +414,6 @@
 
                 });
                 function tirarDado2(jugQueTira){
-                        
-                    /*var dado=Math.ceil(Math.random()*6);
-                            alert(dado);
-                            posAnt=posicionJugador[1];
-                            posicionJugador[1]=posicionJugador[1]+dado;
-                            if(posicionJugador[1]>35){
-                                var dif=0;
-                                var dif=36-posAnt;
-                                posicionJugador[1]=0+dado-dif;
-                            }
-                     */
                     //ahora jugQueTira es la key del jugador que va a tirar...esto lo hago para poder reutilizar el codigo...
                     $.get("/moverJugador",{
                         jugQueTira:jugQueTira
@@ -491,11 +463,14 @@
 
                             }if(db.nuevaPosicion==18){
                                 alert("¡¡Te has llevado el dinero del bote!!");
+
+                                $.get("/cambiarTurnoManual", {
+                                    jugQueTira:jugQueTira
+
+                                    }, function(informacion){
+                                    }, "json");
                             }
                             else{
-
-
-
                                 //si a podido tirar le vamos a decir lo de la calle
 
                                 $.get("/comprobarCalle",{
@@ -532,22 +507,6 @@
                                                 //esta eliminado
                                                 alert("ARRUINADOOO!");
 
-                                            
-                                                /* $.get("/cambiarTurnoManual", {
-                                                jugQueTira:jugQueTira
-
-                                            }, function(informacion){
-                                                alert("cambiarTurno ARRUINADO");
-                                                if(informacion=="Fin"){
-                                                alert(informacion);
-                                                //$("#botonSalida").submit();
-                                                $("#botonAbandonar").submit();
-                                                }
-
-                                            }, "json");*/
-
-                                            
-                    
                                                 //volver al perfil y eliminar jugador
                                                 $("#botonAbandonar").submit();
                                             }

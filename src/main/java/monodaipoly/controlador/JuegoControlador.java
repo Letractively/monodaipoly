@@ -98,12 +98,12 @@ public class JuegoControlador {
 
 
     public void cambiarTurno(Partida partida) {
-        System.out.println("Llega a cambiar turno");
+        
         if(jugadorServicio.buscar(partida.getJugador1()).getEstoyEnCarcel()== true && jugadorServicio.buscar(partida.getJugador2()).getEstoyEnCarcel()== true && jugadorServicio.buscar(partida.getJugador3()).getEstoyEnCarcel()== true && jugadorServicio.buscar(partida.getJugador4()).getEstoyEnCarcel()== true)
              partida.setTurno(partida.getJugador1());
         else{
         if(partida.getTurno().compareTo(partida.getJugador1())==0){
-           System.out.println("Entra 1");
+           
            partida.setTurno(partida.getJugador2());
            if(jugadorServicio.buscar(partida.getJugador2()).getEstoyEnCarcel()== true){
                 cambiarTurno(partida);
@@ -111,7 +111,7 @@ public class JuegoControlador {
             }
         }else{
             if(partida.getTurno().compareTo(partida.getJugador2())==0){
-                System.out.println("Entra 2");
+                
                 partida.setTurno(partida.getJugador3());
                 if(jugadorServicio.buscar(partida.getJugador3()).getEstoyEnCarcel()== true){
                     cambiarTurno(partida);
@@ -119,14 +119,14 @@ public class JuegoControlador {
                 }
             }else{
                  if(partida.getTurno().compareTo(partida.getJugador3())==0){
-                     System.out.println("Entra 3");
+                     
                        partida.setTurno(partida.getJugador4());
                        if(jugadorServicio.buscar(partida.getJugador4()).getEstoyEnCarcel()== true){
                             cambiarTurno(partida);
                             jugadorServicio.buscar(partida.getJugador4()).setEstoyEnCarcel(false);
                         }
                 }else{
-                     System.out.println("Entra 4");
+                     
                      partida.setTurno(partida.getJugador1());
                      if(jugadorServicio.buscar(partida.getJugador1()).getEstoyEnCarcel()== true){
                         cambiarTurno(partida);
@@ -162,18 +162,18 @@ public class JuegoControlador {
                         //tirar el dado por el que es su turno...y no dejarle comprar
                         if(partida.getJugador1()!=null && partida.getTurno().equals(partida.getJugador1())){
                             jugador=jugadorServicio.buscar(partida.getJugador1());
-                            //System.out.println("Se le va a saltar el turno al jug 1: "+jugador.getNick());
+                            
                         }
                         if(partida.getJugador2()!=null && partida.getTurno().equals(partida.getJugador2())){
                             jugador=jugadorServicio.buscar(partida.getJugador2());
-                            //System.out.println("Se le va a saltar el turno al jug 2: "+jugador.getNick());
+                            
                         }
                         if(partida.getJugador3()!=null && partida.getTurno().equals(partida.getJugador3())){
                             jugador=jugadorServicio.buscar(partida.getJugador3());
-                            //System.out.println("Se le va a saltar el turno al jug 3: "+jugador.getNick());
+                           
                         }if(partida.getJugador4()!=null && partida.getTurno().equals(partida.getJugador4())){
                             jugador=jugadorServicio.buscar(partida.getJugador4());
-                            //System.out.println("Se le va a saltar el turno al jug 4: "+jugador.getNick());
+                            
                         }
                         
                             System.out.println("jugado: "+jugador.getClaveJugador());
@@ -184,7 +184,7 @@ public class JuegoControlador {
                                 int posAnt=jugador.getPosicion();
                                 int dif=36-posAnt;
                                 jugador.setPosicion(0+dado-dif);
-                                jugador.setDinero(jugador.getDinero()+200);
+                                //jugador.setDinero(jugador.getDinero()+200);
                             }else{
                                 jugador.setPosicion(jugador.getPosicion()+dado);
                             }
@@ -295,7 +295,7 @@ public class JuegoControlador {
         @RequestMapping(value = "/comprarCalle", method = RequestMethod.GET)
         private @ResponseBody String comprarCalle(HttpSession sesion,@RequestParam("jugQueTira") String jugQueTira){
 
-            //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.buscar(jugQueTira).getJugador());
             Partida partida =partidaServicio.buscar(jugador.getPartida());
 
@@ -381,7 +381,7 @@ public class JuegoControlador {
                      if(jugador.getPosicion()==3 || jugador.getPosicion()==16 || jugador.getPosicion()==21 || jugador.getPosicion()==34){
                         //Es una calle de suerte asique lo tratamos especial
                         String [] suerte=new String []{"Compraste una premiun antes del cierre de Megaupload -200$",
-                            "Chuck Norris te da una palmadita en la espalda y te envía directamente a la Salida. Cobras los 200$",
+                            "Chuck Norris te da una palmadita en la espalda y te envia directamente a la Salida. Cobras los 200$",
                             "Javier hizo rm -r / a tu dinero...solo pudiste salvar 200$",
                             "Tu aplicacion Android da sus resultados +200$",
                             "Te dispararon una fecha a la rodilla jugando a Skyrim, costes medicos -200$",
@@ -401,8 +401,10 @@ public class JuegoControlador {
                                 partidaServicio.actualizar(partida);
                                 jugadorServicio.actualizar(jugador);
                             }
+
                         }else if(random==6){
-                            jugador.setPosicion(27);
+                            jugador.setPosicion(9);
+                            jugador.setEstoyEnCarcel(true);
                             jugadorServicio.actualizar(jugador);
                         }else{
                         if(random%2==0){
@@ -433,8 +435,7 @@ public class JuegoControlador {
                         Calle calle=calleServicio.buscar(casilla.getTipoCasilla());
                         //Logger.getAnonymousLogger().info("calle: "+ calle.getIdCalle());
                         Logger.getLogger(JuegoControlador.class.getName()).info("calle: "+ calle.getIdCalle());
-                        boolean tieneDuenoLaCasilla=false;
-                      //if ( (jugadorServicio.buscar(partida.getJugador1())!=null && jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla()))  || (jugadorServicio.buscar(partida.getJugador2())!=null && jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla()) ) || (jugadorServicio.buscar(partida.getJugador3())!=null && jugadorServicio.buscar(partida.getJugador3()).getCalles().contains(casilla.getIdCasilla()) )|| (jugadorServicio.buscar(partida.getJugador4())!=null && jugadorServicio.buscar(partida.getJugador4()).getCalles().contains(casilla.getIdCasilla())  )){
+                        boolean tieneDuenoLaCasilla=false;                      
                         if(partida.getJugador1()!=null && jugadorServicio.buscar(partida.getJugador1()).getCalles().contains(casilla.getIdCasilla())){
                               tieneDuenoLaCasilla=true;
                         }else if(partida.getJugador2()!=null && jugadorServicio.buscar(partida.getJugador2()).getCalles().contains(casilla.getIdCasilla())){
@@ -460,13 +461,13 @@ public class JuegoControlador {
                                   return this.multaJson(calle.getMulta()*2, jugDuenoCasilla, "multa",eliminado,fin).toString();
                               }
                               Logger.getLogger(JuegoControlador.class.getName()).info("Casilla.getTipoCasilla()!=null pagar multa");
-                                this.mostrarCallesDeLosJugadores(partida);
+                                //this.mostrarCallesDeLosJugadores(partida);
 
                               return this.multaJson(calle.getMulta(), jugDuenoCasilla, "multa",eliminado,fin).toString();
 
                           }if(jugDuenoCasilla==numeroDeJug){
                                 Logger.getLogger(JuegoControlador.class.getName()).info("Casilla.getTipoCasilla()!=null casilla tuya");
-                                this.mostrarCallesDeLosJugadores(partida);
+                                //this.mostrarCallesDeLosJugadores(partida);
                                 this.cambiarTurnoManualmente(jugador.getNick());
                                 return "tuya";
                           }
@@ -536,8 +537,7 @@ public class JuegoControlador {
 
             //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
             Partida partida =partidaServicio.buscar(jugador.getPartida());
-            int cantidadDeJugadores=this.jugadorQueQuedan(partida);
-            //System.out.println("llegamos a sacar la partida");
+            int cantidadDeJugadores=this.jugadorQueQuedan(partida);            
 
             numJugador=this.numDelJugador(jugador, partida);
             if(numJugador==1){
@@ -560,8 +560,6 @@ public class JuegoControlador {
                 usuarioServicio.buscar(jugador.getNick()).setPartidasGanadas(usuarioServicio.buscar(jugador.getNick()).getPartidasGanadas()+1);
                 usuarioServicio.actualizar(usuarioServicio.buscar(jugador.getNick()));
              }
-            //jugadorServicio.borrar(jugador);
-            //System.out.println("Se ha eliminado el jugador"+numJugador);
             return true;
 
          }
@@ -582,8 +580,7 @@ public class JuegoControlador {
              if(partida.getJugador4()==null){
                  numJugadoresQueQuedan--;
 
-             }
-             Logger.getLogger(JuegoControlador.class.getName()).info(" "+numJugadoresQueQuedan);
+             }             
              
              return numJugadoresQueQuedan;
          }
@@ -609,8 +606,24 @@ public class JuegoControlador {
                     }
                 }
              if(cuantosJugadoresHayEnCarcel==jugadoresQuedan){
+                 if(partida.getJugador1()!=null){
                 partida.setTurno(partida.getJugador1());
                 jugadorServicio.buscar(partida.getJugador1()).setEstoyEnCarcel(false);
+                 }else{
+                     if(partida.getJugador2()!=null){
+                        partida.setTurno(partida.getJugador2());
+                        jugadorServicio.buscar(partida.getJugador2()).setEstoyEnCarcel(false);
+                     }else{
+                         if(partida.getJugador3()!=null){
+                            partida.setTurno(partida.getJugador3());
+                            jugadorServicio.buscar(partida.getJugador3()).setEstoyEnCarcel(false);
+                         }else{
+                            partida.setTurno(partida.getJugador4());
+                            jugadorServicio.buscar(partida.getJugador4()).setEstoyEnCarcel(false);
+
+                         }
+                     }
+                 }
              }else {
              Jugador jugador=new Jugador();
              jugador=jugadorServicio.buscar(partida.getTurno());
@@ -644,7 +657,6 @@ public class JuegoControlador {
                     }
                  }
              }
-
              if(numJugador==2){
                  if(partida.getJugador3()==null){
                      if(partida.getJugador4()==null){
@@ -785,35 +797,24 @@ public class JuegoControlador {
 
             }
             partidaServicio.actualizar(partida);
-
-            
-            
-            //partidaServicio.actualizar(partida);
             
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
             return "/perfil";
     
         }
-        
-        /*@RequestMapping(value="/volverAtras",method=RequestMethod.GET)
-        public String intermedio(Model model){
-            Usuario usuario=usuarioServicio.getCurrentUser();
-            //this.doEntrar(usuario.getNick(),usuario.getContrasena(), model);
-            return "redirect:entrar?nick="+usuario.getNick()+"&contrasena="+usuario.getContrasena()+"&model="+model;
-    }*/
 
 
         @RequestMapping(value= "/jugadorGanadorPartida", method = RequestMethod.GET)
         private String jugadorGanadorPartida(){
             Jugador jugador=jugadorServicio.buscar(usuarioServicio.getCurrentUser().getJugador());
             Usuario usuario=usuarioServicio.getCurrentUser();
-            //Logger.getLogger(JuegoControlador.class.getName()).info("Antes de sumarle 2 al ganador:  "+usuario.getPartidasGanadas());
+            
             usuario.setPartidasGanadas(usuario.getPartidasGanadas()+2);
-            //Logger.getLogger(JuegoControlador.class.getName()).info("Despues de sumarle 2 al ganador:  "+usuario.getPartidasGanadas());
+            
             usuario.setJugador(null);
             usuarioServicio.actualizar(usuario);
-            //Logger.getLogger(JuegoControlador.class.getName()).info("Despues de actualizarlo:  "+usuario.getPartidasGanadas());
+          
 
             Partida partida=partidaServicio.buscar(jugador.getPartida());
 
