@@ -380,20 +380,43 @@ public class JuegoControlador {
 
                      if(jugador.getPosicion()==3 || jugador.getPosicion()==16 || jugador.getPosicion()==21 || jugador.getPosicion()==34){
                         //Es una calle de suerte asique lo tratamos especial
-                        String [] suerte=new String []{"pagas 200$","te pagan 200$","pagas 200$","te pagan 200$"};
-                        int random = (int)(3.0 * Math.random());
+                        String [] suerte=new String []{"Compraste una premiun antes del cierre de Megaupload -200$",
+                            "Chuck Norris te da una palmadita en la espalda y te envía directamente a la Salida. Cobras los 200$",
+                            "Javier hizo rm -r / a tu dinero...solo pudiste salvar 200$",
+                            "Tu aplicacion Android da sus resultados +200$",
+                            "Te dispararon una fecha a la rodilla jugando a Skyrim, costes medicos -200$",
+                            "Inviertes en Mariscos Recio +200$",
+                            "Te pillan robando el proyector, a la Carcel !",
+                            "Descubres los Toroides +200$"};
+                        int random = (int)(8.0 * Math.random());
+                       //en este if y else if voy a acer las suertes ways y en el else las de +-200
+                        if(random==1){
+                            jugador.setPosicion(0);
+                            jugador.setDinero(jugador.getDinero()+200);
+                            jugadorServicio.actualizar(jugador);
+                        }else if(random==2){
+                            if(jugador.getDinero()>200){
+                                partida.setBote(partida.getBote()+jugador.getDinero()-200);
+                                jugador.setDinero(200);
+                                partidaServicio.actualizar(partida);
+                                jugadorServicio.actualizar(jugador);
+                            }
+                        }else if(random==6){
+                            jugador.setPosicion(27);
+                            jugadorServicio.actualizar(jugador);
+                        }else{
                         if(random%2==0){
                             if(jugador.getDinero()>=200){
                                 partida.setBote(partida.getBote()+200);
                                 jugador.setDinero(jugador.getDinero()-200);
                             }else{
                                 partida.setBote(partida.getBote()+jugador.getDinero());
-                                this.eliminarJugador(jugador);
+                                return this.suerteJson(suerte[random],true).toString();
                             }
                         }else{
                             jugador.setDinero(jugador.getDinero()+200);
                         }
-
+                        }
                         this.cambiarTurnoManualmente(jugador.getNick());
                         return this.suerteJson(suerte[random],false).toString();
                     }
