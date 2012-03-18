@@ -50,7 +50,7 @@ public class CasillaServicioImpl implements CasillaServicio{
     }
 
     @Override
-    //@PostConstruct
+    @PostConstruct
     public void preload_casillas() {
 
         casillaDAO.removeAll(Casilla.class);
@@ -372,7 +372,7 @@ public class CasillaServicioImpl implements CasillaServicio{
 
         Casilla casilla34 = new Casilla();
         casilla34.setNumeroCasilla(34);
-        casilla34.setNombre("PAGA");
+        casilla34.setNombre("Suerte");
         //casilla34.setTipoCasilla(null);
         casillaDAO.insert(casilla34);
 
