@@ -96,6 +96,19 @@
             
             
             
+            function adminCrearPartida(){
+                 $.get("/getAdminCrearPartidaJSP",null,
+                    function(html) {
+                        $("#contenido").html(html);
+                        
+                    }
+
+               );
+
+            }
+            
+            
+            
               
             
             function salirPerfil(){
@@ -198,6 +211,9 @@
         <li><a onclick="javascript:unirsePartida()">Empezar a Jugar</a></li>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
             <li><a href="http://monodaipoly2.appspot.com/spring/index">Administracion</a></li>  
+        </sec:authorize>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <li><a onclick="javascript:adminCrearPartida()">Crear Partida</a></li>  
         </sec:authorize>
         
         <li><a href="/logout">Desconectarse</a></li>  

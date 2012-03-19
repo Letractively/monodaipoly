@@ -285,3 +285,14 @@
     width: 50%;
     height: 50%;
 }
+
+
+
+
+#crearPartidaAdmin{
+    background-image: -moz-linear-gradient(steelblue,black);
+    background-image: -webkit-gradient(linear, center top, center bottom, from(limegreen), to(#A2EF95));
+    color: #FFF;
+    width: 100%;
+    height: 100%;
+}
