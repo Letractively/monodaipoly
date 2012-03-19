@@ -275,18 +275,22 @@ body {
 #imagenJugador1{
     position: absolute;
     left: 0%;
+    cursor: pointer;
 }
 #imagenJugador2{
     position: absolute;
     left: 25%;
+    cursor: pointer;
 }
 #imagenJugador3{
     position: absolute;
     left: 50%;
+    cursor: pointer;
 }
 #imagenJugador4{
     position: absolute;
     left: 75%;
+    cursor: pointer;
 }
 
 
@@ -419,7 +423,7 @@ body {
 #casillasVender{
    position: absolute;
    border-color: black;
-   height: 70.7%;
+   height: 50%;
    width: 70.7%;
    color:white;
    border-style: solid;
@@ -454,8 +458,8 @@ body {
     border: black;
     border-style: solid;
     position: absolute;
-    width: 6.5%;
-    height: 8%;
+    width: 7%;
+    height: 20%;
     left:17.7%;
     top: 32%;
     z-index: 4;
@@ -464,10 +468,24 @@ body {
     background-color: cornflowerblue;
     
 }
-#casillasOtrosJug{
+#bote{
     position: absolute;
+    top: 70%;
+    left: 10%;
+    width: 50%;
+    height: 50%;
+}
+#boteImg{
+    position: absolute;
+    top: 3%;
+    width: 100%;
+    height: 60%;
+    left: 0%;
+}
+#casillasOtrosJug{
+   position: absolute;
    border-color: black;
-   height: 70.7%;
+   height: 50%;
    width: 70.7%;
    color:white;
    border-style: solid;

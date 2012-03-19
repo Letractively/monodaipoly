@@ -170,7 +170,7 @@
                         $(".boton").css("visibility", "hidden");                        
                     }
 
-                    $("#bote").html("bote: <br/>"+ db.bote);
+                    $("#bote").html("BOTE: <br/>"+ db.bote+"$");
 
 
                                 
@@ -226,10 +226,10 @@
                             $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precio' ></div>");
                         }
                         if(c==3){
-                            $(identificacion).append("<div esPequeno='si' indice='" + c + "'  class='suerte'></div>");
+                            $(identificacion).append("<div esSuerte='si' esPequeno='si' indice='" + c + "'  class='suerte'></div>");
                         }
                         if(c==5){
-                            $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'></div>");
+                            $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'><img src='/Estilos/nintendo_logo.jpg' width='100%' height='100%'/></div>");
                         }
                         if(c==6||c==7||c==8){
                             $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='abajopeke' class='colorazul'></div>");
@@ -256,7 +256,7 @@
                         }
 
                         if(c==13){
-                            $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'></div>");
+                            $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'><img src='/Estilos/sega.jpeg' width='100%' height='100%'/></div>");
 
                         }
                         if(c==14||c==15||c==17){
@@ -264,7 +264,7 @@
                             $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioIzq' ></div>");
                         }
                         if(c==16){
-                            $(identificacion).append("<div esPequeno='si' indice='" + c + "'  class='suerte'></div>");
+                            $(identificacion).append("<div esSuerte='si' esPequeno='si' indice='" + c + "'  class='suerte'></div>");
                         }
 
 
@@ -288,10 +288,10 @@
                             $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioArr' ></div>");
                         }
                         if(c==21){
-                            $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='suerte'></div>");
+                            $(identificacion).append("<div esSuerte='si' esPequeno='si' indice='" + c + "' class='suerte'></div>");
                         }
                         if(c==23){
-                            $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'></div>");
+                            $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'><img src='/Estilos/logoMS.jpg' width='100%' height='100%'/></div>");
                         }
                         if(c==24||c==25||c==26){
                             $(identificacion).append("<div esPequeno='si' indice='" + c + "' id='arribapeke' class='coloramarillo'></div>");
@@ -317,7 +317,7 @@
                         }
 
                         if(c==32){
-                            $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'></div>");
+                            $(identificacion).append("<div esPequeno='si' indice='" + c + "' class='estacion'><img src='/Estilos/sony.jpg' width='100%' height='100%'/></div>");
 
                         }
                         if(c==33||c==35){
@@ -325,7 +325,7 @@
                             $(identificacion).append("<div esPrecio='si'  indice='" + c + "' class='precioDer' ></div>");
                         }
                         if(c==34){
-                            $(identificacion).append("<div  esPequeno='si' indice='" + c + "' class='suerte'></div>");
+                            $(identificacion).append("<div  esSuerte='si' esPequeno='si' indice='" + c + "' class='suerte'></div>");
                         }
                             
 
@@ -363,6 +363,17 @@
                         var indice = $(this).attr("indice");
                         
                         $(this).html(precioCalles[indice].precioCalle+"$");
+
+
+                    }
+                );
+                           $("[esSuerte='si']").each(
+
+                    function() {
+
+                        
+                            
+                            $(this).append("<img src='/Estilos/suerte.png' width='100%' height='100%'/>");
 
 
                     }
@@ -628,8 +639,9 @@
         </div>
 
         <div id="dineroBote">
+            <img id="boteImg" src='/Estilos/monton.png' width='100%' height='100%'/>
             <center>
-                <span id="bote">bote:<br/> 0</span>
+                <span id="bote">BOTE:<br/> 0$</span>
             </center>
         </div>       
 

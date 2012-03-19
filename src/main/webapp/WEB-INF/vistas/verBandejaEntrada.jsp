@@ -88,11 +88,14 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#green-contents').css('display', '');        
+        $('#green-contents').css('display', '');
+        
+       
+        
 
         $('#green').smartpaginator(
         { 
-            totalrecords: ${mensajesTotal}, 
+            totalrecords: ${mensajesTotal},
             recordsperpage: 3, 
             datacontainer: 'mt', 
             dataelement: 'tr', 
@@ -102,7 +105,9 @@
             first: 'First', 
             last: 'Last', 
             theme: 'black' 
-        });       
+        });
+        
+        
 
     });
 </script>
@@ -117,6 +122,10 @@
    
         
 </div>
+            <c:choose>
+                <c:when test="${!empty mensajes}">
+                
+                      
 <div id="wrapper">   
 
     <div id="green-contents" class="contents">
@@ -146,4 +155,11 @@
         
     </div>
     
+    
 </div>
+                    </c:when>
+<c:otherwise>
+    <div id="noMensajes"> No tienes Mensajes</div>
+</c:otherwise>
+                </c:choose>
+
