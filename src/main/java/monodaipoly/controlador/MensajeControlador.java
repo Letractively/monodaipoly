@@ -187,6 +187,7 @@ public class MensajeControlador {
         if(recibidos.isEmpty()){
            String noMensajes="No tienes Mensajes";
            System.out.println(noMensajes);
+           model.addAttribute("mensajesTotal",recibidos.size() );
            model.addAttribute("noMensajes", noMensajes);
            return "/verBandejaEntrada";
         }

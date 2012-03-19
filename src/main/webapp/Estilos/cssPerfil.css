@@ -296,3 +296,17 @@
     width: 100%;
     height: 100%;
 }
+
+
+#noMensajes{
+    position: absolute;
+    left: 40%;
+    top: 40%;
+    color: white;
+}
+#estadoMensaje{
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    color: white;
+}
