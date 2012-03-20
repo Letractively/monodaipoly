@@ -471,6 +471,8 @@ public class TableroControlador {
         model.addAttribute("dinero3", dinero3);
         model.addAttribute("dinero4", dinero4);
 
+        model.addAttribute("jugadorOnline", jugador.getNick());
+
         model.addAttribute("tux1", tux1);
         model.addAttribute("tux2", tux2);
         model.addAttribute("tux3", tux3);

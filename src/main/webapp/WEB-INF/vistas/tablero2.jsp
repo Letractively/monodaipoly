@@ -182,6 +182,28 @@
              
             function () {
 
+
+                if("${jugadorOnline}"=="${nombre1}"){
+                    
+                    $("#imagenJugador1").css("border","white");
+                    $("#imagenJugador1").css("border-style","double");
+
+                }else if("${jugadorOnline}"=="${nombre2}"){
+
+                    $("#imagenJugador2").css("border","white");
+                    $("#imagenJugador2").css("border-style","double");
+                }else if("${jugadorOnline}"=="${nombre3}"){
+
+                    $("#imagenJugador3").css("border","white");
+                    $("#imagenJugador3").css("border-style","double");
+                }else{
+
+                    $("#imagenJugador4").css("border","white");
+                    $("#imagenJugador4").css("border-style","double");
+                }
+
+
+
                 var nombresCasillas=new Array();
                 var divTablero = $("#tablero");
                 var precioCalles=new Array();
