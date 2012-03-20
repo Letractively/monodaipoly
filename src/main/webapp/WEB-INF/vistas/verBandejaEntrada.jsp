@@ -13,14 +13,20 @@
     }
     #wrapper
     {
+        z-index: 9;
+        /*border-color: yellow;
+        border-style: solid;*/
         margin: auto;
-        width: 645px;
+        width: 50%;
+        height: 90%;
         position: absolute;
-        top: 5%;
+        top: 0%;
         left: 30%;
     }
     .contents
     {
+        /*border-color: blueviolet;
+        border-style: solid;*/
         width: 91%; /*height: 150px;*/
         margin: 0;
     }
@@ -30,6 +36,8 @@
     }
     .table
     {
+        position: absolute;
+        top: 3%;
         width: 100%;
     }
     .table th, .table td
@@ -38,7 +46,7 @@
         height: 20px;
         padding: 4px;
         text-align: left;
-    }   
+    }
     .header
     {
         background-color: #4f7305;
@@ -80,6 +88,7 @@
         width: 100%;
         border: solid 1px red;
     }
+
 </style>
 
 <link href="/Estilos/smartpaginator.css" rel="stylesheet" type="text/css" />
@@ -89,77 +98,69 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#green-contents').css('display', '');
-        
-       
-        
 
         $('#green').smartpaginator(
-        { 
+        {
             totalrecords: ${mensajesTotal},
-            recordsperpage: 3, 
-            datacontainer: 'mt', 
-            dataelement: 'tr', 
-            initval: 0, 
-            next: 'Next', 
-            prev: 'Prev', 
-            first: 'First', 
-            last: 'Last', 
-            theme: 'black' 
+            recordsperpage: 3,
+            datacontainer: 'mt',
+            dataelement: 'tr',
+            initval: 0,
+            next: 'Next',
+            prev: 'Prev',
+            first: 'First',
+            last: 'Last',
+            theme: 'black'
         });
-        
-        
 
     });
 </script>
 
-            
+
             <div id="menuMensajes">
         <br/>
     <div id="redactar1"><p onclick="javascript:EnviarMensajes()">REDACTAR</a></div>
         <br/>
      <div id="recibidos2" ><p onclick="javascript:verBandejaEntrada()">RECIBIDOS</p></div>
         <br/>
-   
-        
+
+
 </div>
             <c:choose>
                 <c:when test="${!empty mensajes}">
-                
-                      
-<div id="wrapper">   
+<div id="wrapper">
 
     <div id="green-contents" class="contents">
 
-        <table id="mt" cellpadding="0" cellspacing="0" border="0" class="table">
+        <table  id="mt" cellpadding="0" cellspacing="0" border="0" class="table">
             <c:forEach var="mensaje" items="${mensajes}" varStatus="status">
                 <tr>
-                    
+
                     <td>
-                        <div >Autor:</div> 
+                        <div >Autor:</div>
                         <div style="color:white">${mensaje.autor}</div>
-                    
-                   
-                        <div >Contenido:</div> 
+
+
+                        <div >Contenido:</div>
                         <div style="color:white">${mensaje.contenido}</div>
                         &minus;
                     </td>
-                    
+
                     <br/>
                 </tr>
-               
+
             </c:forEach>
-        </table> 
-        
-        <div id="green" style="margin: auto; width: 500px">
+
+        </table>
+
+        <div id="green" style="margin: auto; width: 80% ;top: 90%;position: absolute">
         </div>
-        
+
     </div>
-    
-    
+
 </div>
-                    </c:when>
+ </c:when>
 <c:otherwise>
     <div id="noMensajes"> No tienes Mensajes</div>
 </c:otherwise>
                 </c:choose>
-

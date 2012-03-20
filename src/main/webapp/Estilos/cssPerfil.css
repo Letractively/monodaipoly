@@ -1,74 +1,77 @@
-   
-.topnav {  
+body {
+   background-color: black;
+
+}
+.topnav {
         position: absolute;
         /*top: 20.5%;*/
         top:20.1%;
         left:0%;
-        list-style: none;  
-        padding: 0 20px;  
-        margin: 0;  
+        list-style: none;
+        padding: 0 20px;
+        margin: 0;
         float: left;
         width: 96.9%;
-        
-        font-size: 1.2em;  
-        background: url(topnav_bg.gif) repeat-x;  
-    }  
-    .topnav li {  
-        
-        float: left;  
-        margin: 0;  
-        padding: 0 15px 0 0;  
-        position: relative; /*--Declare X and Y axis base for sub navigation--*/  
-    }  
-    .topnav li a{  
-        padding: 10px 5px; 
-        cursor: pointer;
-        color: #fff;  
-        display: block;  
-        text-decoration: none;  
-        float: left;  
-    }  
-    .topnav li a:hover{  
-        background: url(topnav_hover.gif) no-repeat center top;  
-    }  
-    .topnav li span { /*--Drop down trigger styles--*/  
-        width: 17px;  
-        height: 35px;  
-        float: left;  
-        background: url(subnav_btn.gif) no-repeat center top;  
-    }  
-    .topnav li span.subhover {background-position: center bottombottom; cursor: pointer;} /*--Hover effect for trigger--*/  
-    .topnav li ul.subnav {  
-        list-style: none;  
-        position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/  
-        left: 0%; 
-        top: 65%;  
-        background: #333;  
-        margin: 0; 
-        padding: 0;  
-        display: none;  
-        float: left;  
-        width: 170px;  
-        border: 1px solid #111;  
-        z-index: 9;
-    }  
-    .topnav li ul.subnav li{  
-        margin: 0; padding: 0;  
-        border-top: 1px solid #252525; /*--Create bevel effect--*/  
-        border-bottom: 1px solid #444; /*--Create bevel effect--*/  
-        clear: both;  
-        width: 170px;  
-    }  
-    html .topnav li ul.subnav li a {  
-        float: left;  
-        width: 145px;  
-        background: #333 url(dropdown_linkbg.gif) no-repeat 10px center;  
-        padding-left: 20px;  
-    }  
-    html .topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/  
-        background: #222 url(dropdown_linkbg.gif) no-repeat 10px center;  
+
+        font-size: 1.2em;
+        background: url(topnav_bg.gif) repeat-x;
     }
-    
+    .topnav li {
+
+        float: left;
+        margin: 0;
+        padding: 0% 2% 0 0;
+        position: relative; /*--Declare X and Y axis base for sub navigation--*/
+    }
+    .topnav li a{
+        padding: 2% 5px;
+        cursor: pointer;
+        color: #fff;
+        display: block;
+        text-decoration: none;
+        float: left;
+    }
+    .topnav li a:hover{
+        background: url(topnav_hover.gif) no-repeat center top;
+    }
+    .topnav li span { /*--Drop down trigger styles--*/
+        width: 17px;
+        height: 35px;
+        float: left;
+        background: url(subnav_btn.gif) no-repeat center top;
+    }
+    .topnav li span.subhover {background-position: center bottombottom; cursor: pointer;} /*--Hover effect for trigger--*/
+    .topnav li ul.subnav {
+        list-style: none;
+        position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+        left: 0%;
+        top: 65%;
+        background: #333;
+        margin: 0;
+        padding: 0;
+        display: none;
+        float: left;
+        width: 170px;
+        border: 1px solid #111;
+        z-index: 9;
+    }
+    .topnav li ul.subnav li{
+        margin: 0; padding: 0;
+        border-top: 1px solid #252525; /*--Create bevel effect--*/
+        border-bottom: 1px solid #444; /*--Create bevel effect--*/
+        clear: both;
+        width: 170px;
+    }
+    html .topnav li ul.subnav li a {
+        float: left;
+        width: 145px;
+        background: #333 url(dropdown_linkbg.gif) no-repeat 10px center;
+        padding-left: 20px;
+    }
+    html .topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
+        background: #222 url(dropdown_linkbg.gif) no-repeat 10px center;
+    }
+
     #UsuarioConectado{
         position: absolute;
         left: 80%;
@@ -76,28 +79,29 @@
         color: white;
     }
     #header{
-        
+
         position: absolute;
         top:0%;
         width: 100%;
         height: 20.25%;
-       
-        
+
+
         left: 0%;
     }
-    
+
     #contenido{
-   
-    
+
+
     margin-left: 0%;
     position: absolute;
     width: 100%;
     height: 65%;
     left: 0%;
     top: 24.7%;
+    /*border-color: #82cb2f;
+    border-style: solid;*/
 
-  
-    
+
     background-image: -moz-linear-gradient(steelblue,black);
     background-image: -webkit-gradient(linear, center top, center bottom, from(limegreen), to(#A2EF95));
 }
@@ -108,15 +112,15 @@
     height: 10.3%;
     left: 0%;
     top: 89.7%;
-  
+
     background-color:black;
-   
+
 }
 
 
 #datospersonales{
-    
-   
+
+
     position: absolute;
     width: 50%;
     height: 100%;
@@ -129,22 +133,22 @@
     top: 15%;
 }
 #DatosdePartidas{
-    position: absolute; 
+    position: absolute;
     left: 70%;
     top: 15%;
 }
 
 
 #estadisticas{
-    
-    
+
+
     position: absolute;
     width: 100%;
     height: 100%;
     left: 0%;
     top: 5%;
     text-align: center;
-  
+
 
 
 }
@@ -167,8 +171,8 @@
      border-bottom-style: solid;
      border: #FFF;
      text-align: center;
-     
-    
+
+
 }
 #nickUsuariosMejores{
      position: absolute;
@@ -178,7 +182,7 @@
      border-bottom-style: solid;
      border: #FFF;
      text-align: center;
-    
+
 }
 #menuMensajes{
      position: relative;
@@ -187,11 +191,11 @@
      width: 10%;
      color: #FFF;
 }
-#menuMensajes div{  
+#menuMensajes div{
     cursor: pointer;
 }
 #menuMensajes div:hover{
-    
+
     background-color:black;
 }
 
@@ -201,15 +205,16 @@
     top: 15%;
     width: 75%;
     height: 80%;
-    
+
 }
 #bandejaEntrada{
+
     position: absolute;
     left: 15%;
     top: 15%;
     width: 75%;
     height: 80%;
-    
+
 }
 #bandejaEntrada{
     color:#FFF;
@@ -223,7 +228,7 @@
     height: 20%;
     text-align: center;
     color: #FFF;
-   
+
 }
 
 #money1{
@@ -258,7 +263,7 @@
     text-align: center;
     text-transform: capitalize;
     font-size: 85%;
- 
+
 }
 #imagenGif{
     position: absolute;
@@ -266,7 +271,7 @@
     height: 60%;
     left: 47%;
     top:25%;
-    
+
 }
 #partidaLista{
     position: absolute;
@@ -280,14 +285,12 @@
 
 #green-contents{
     position: absolute;
-    
-    top: 30%;
-    width: 50%;
-    height: 50%;
+    /*border-color: #F82723;
+    border-style: solid;*/
+    top: 0%;
+    width: 90%;
+    height: 100%;
 }
-
-
-
 
 #crearPartidaAdmin{
     background-image: -moz-linear-gradient(steelblue,black);
@@ -307,6 +310,8 @@
 #estadoMensaje{
     position: absolute;
     top: 20%;
-    left: 20%;
+    left: 6%;
     color: white;
 }
+
+

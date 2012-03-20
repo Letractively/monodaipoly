@@ -869,6 +869,7 @@ public class TableroControlador {
         jugador.setEstoyEnCola(false);
         jugador.setEstoyJugando(true);
         jugador.setPosicion(pos1);
+        jugador.setEstoyEnCarcel(false);
         jugador.setPartida(partida.getIdpartida());
         partida.setJugador1(jugador.getClaveJugador());
         partida.setTurno(jugador.getClaveJugador());
@@ -887,7 +888,7 @@ public class TableroControlador {
         jugador.setPosicion(pos2);
         jugador.setPartida(partida.getIdpartida());
         partida.setJugador2(jugador.getClaveJugador());
-        partida.setTurno(jugador.getClaveJugador());
+        jugador.setEstoyEnCarcel(false);
         jugadorServicio.actualizar(jugador);
         usuario.setJugador(jugador.getClaveJugador());
         usuarioServicio.actualizar(usuario);
@@ -903,7 +904,7 @@ public class TableroControlador {
         jugador.setPosicion(pos3);
         jugador.setPartida(partida.getIdpartida());
         partida.setJugador3(jugador.getClaveJugador());
-        partida.setTurno(jugador.getClaveJugador());
+        jugador.setEstoyEnCarcel(false);
         jugadorServicio.actualizar(jugador);
         usuario.setJugador(jugador.getClaveJugador());
         usuarioServicio.actualizar(usuario);
@@ -919,7 +920,7 @@ public class TableroControlador {
         jugador.setPosicion(pos4);
         jugador.setPartida(partida.getIdpartida());
         partida.setJugador4(jugador.getClaveJugador());
-        partida.setTurno(jugador.getClaveJugador());
+        jugador.setEstoyEnCarcel(false);
         jugadorServicio.actualizar(jugador);
         usuario.setJugador(jugador.getClaveJugador());
         usuarioServicio.actualizar(usuario);
