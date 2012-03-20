@@ -165,16 +165,16 @@
             <tr>
                 <td><p>DINERO</p></td>
                 <td> 
-                    <input name="dinero1" value="200">
+                    <input name="dinero1" value="2000">
                 </td>
                 <td> 
-                    <input name="dinero2" value="200">
+                    <input name="dinero2" value="2000">
                 </td>
                 <td> 
-                    <input name="dinero3" value="200">
+                    <input name="dinero3" value="2000">
                 </td>
                 <td> 
-                    <input name="dinero4" value="200">
+                    <input name="dinero4" value="2000">
                 </td>
             </tr>
             <tr>
@@ -193,9 +193,8 @@
                 </td>
             </tr>
         </table>
-            <p>BOTE</p>
-            <input name="bote" value="0"/>
-            <br/>
+            <p>BOTE <input name="bote" value="0"/></p>
+            
             <input type="submit" value="Crear" />
         </form>
         </center>
