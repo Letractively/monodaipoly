@@ -83,7 +83,7 @@
             <span id="ape"style="color:white">${usuario.partidasJugadas}</span>
      </div>
     <br/> 
-    <div style="color: black"><strong>Partidas Ganadas:</strong>
+    <div style="color: black"><strong>Puntos:</strong>
             <span id="ape"style="color:white">${usuario.partidasGanadas}</span>
      </div>
     

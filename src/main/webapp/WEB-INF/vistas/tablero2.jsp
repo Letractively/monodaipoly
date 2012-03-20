@@ -494,7 +494,7 @@
 
                                 },"json");
 
-                            }if(db.nuevaPosicion==18){
+                            }else if(db.nuevaPosicion==18){
                                 alert("¡¡Te has llevado el dinero del bote!!");
 
                                 $.get("/cambiarTurnoManual", {
@@ -502,8 +502,7 @@
 
                                     }, function(informacion){
                                     }, "json");
-                            }
-                            else{
+                            }else{
                                 //si a podido tirar le vamos a decir lo de la calle
 
                                 $.get("/comprobarCalle",{
@@ -630,19 +629,19 @@
                 <span class="dineroJugador" id="dineroJugador4" style="visibility:hidden"><center>${dinero4}$</center></span>
 
 
-                <button class="boton" id="botonTirar"onClick="tirarDado2('${jugador.nick}')" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Tirar Dado</button>
+                <button class="boton" id="botonTirar"onClick="tirarDado2('${jugador.nick}')" onmouseover="this.style.color='#82cb2f'" onmouseout="this.style.color='white'">Tirar Dado</button>
                 <!--provisional-->
-                <button class="boton" id="botonVender" onClick="getVenderPropiedadesURL()" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Vender Propiedades</button>
+                <button class="boton" id="botonVender" onClick="getVenderPropiedadesURL()" onmouseover="this.style.color='#82cb2f'" onmouseout="this.style.color='white'">Vender Propiedades</button>
 
 
 
                 <form   action="/perfil" method="post">
-                    <input class="boton"  id="botonSalida" type="submit" value="Volver Perfil" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
+                    <input class="boton"  id="botonSalida" type="submit" value="Volver Perfil" onmouseover="this.style.color='#82cb2f'" onmouseout="this.style.color='white'"/>
                 </form>
 
 
                 <form   action="/terminarJugadorPartida" id="botonAbandonar" method="get">
-                    <input class="boton"   id="botonAbandonar1" type="submit" value="Abandonar" onmouseover="this.style.color='red'" onmouseout="this.style.color='black'"/>
+                    <input class="boton"   id="botonAbandonar1" type="submit" value="Abandonar" onmouseover="this.style.color='#82cb2f'" onmouseout="this.style.color='white'"/>
                 </form>
 
                 <form   action="/jugadorGanadorPartida" id="botonTerminar" method="get">

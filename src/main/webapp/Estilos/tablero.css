@@ -321,8 +321,10 @@ body {
 .boton{
 
     position: absolute;
-    background-color:lemonchiffon;
+    background-color:steelblue;
+    color :white;
     top:90%;
+    cursor:pointer;
     
 }
 
@@ -388,7 +390,7 @@ body {
 #nombresIzquierda{
     position: absolute;
     top:40%;
-    left: 20%;
+    left: 3%;
     font-family:fantasy;
     font-size:medium;
     
@@ -405,7 +407,7 @@ body {
 #nombresDerecha{
     position: absolute;
     top:35%;
-    left: 15%;
+    left: 0%;
     font-family:fantasy;
     font-size:medium;
     
