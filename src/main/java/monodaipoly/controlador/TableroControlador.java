@@ -145,12 +145,12 @@ public class TableroControlador {
                 jugador.setDinero(jugador.getDinero() + 200);
             } else {
                 jugador.setPosicion(jugador.getPosicion() + dado);
-                //jugador.setPosicion(3);
+                //jugador.setPosicion(1);
 
             }
             partida.setHaTirado(true);
-            System.out.println("AQUIIIIIIIIIIIIIIIIII 5");
-            juegoControlador.mostrarCallesDeLosJugadores(partida);
+            //System.out.println("AQUIIIIIIIIIIIIIIIIII 5");
+            //juegoControlador.mostrarCallesDeLosJugadores(partida);
             partidaServicio.actualizar(partida);
             return this.dadoJson(jugador.getPosicion(), dado, numJugador).toString();
         } else {
@@ -179,7 +179,7 @@ public class TableroControlador {
 
     @RequestMapping(method = RequestMethod.GET, value = "/tirarDado")
     public @ResponseBody
-    String tirarDado(HttpSession sesion, @RequestParam("jugQueTira") String jugQueTira) {
+    String tirarDado( @RequestParam("jugQueTira") String jugQueTira) {
 
         Jugador jugador = jugadorServicio.buscar(usuarioServicio.buscar(jugQueTira).getJugador());
         Partida partida = partidaServicio.buscar(jugador.getPartida());
