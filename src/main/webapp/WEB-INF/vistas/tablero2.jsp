@@ -494,15 +494,12 @@
 
                                 },"json");
 
-                            }else if(db.nuevaPosicion==18){
-                                alert("¡¡Te has llevado el dinero del bote!!");
-
-                                $.get("/cambiarTurnoManual", {
-                                    jugQueTira:jugQueTira
-
-                                    }, function(informacion){
-                                    }, "json");
                             }else{
+
+                                if(db.nuevaPosicion==18){
+                                alert("¡¡Te has llevado el dinero del bote!!");
+                                }
+
                                 //si a podido tirar le vamos a decir lo de la calle
 
                                 $.get("/comprobarCalle",{

@@ -41,6 +41,14 @@ public class JuegoControlador {
     private UsuarioServicio usuarioServicio;
     private PartidaServicio partidaServicio;
     private CalleServicio calleServicio;
+    private TableroControlador tableroControlador;
+
+    @Autowired
+    @Required
+    public void setTableroControlador(TableroControlador tableroControlador) {
+        this.tableroControlador = tableroControlador;
+    }
+
 
     @Autowired
     @Required
@@ -176,7 +184,7 @@ public class JuegoControlador {
                             
                         }
                         
-                            System.out.println("jugado: "+jugador.getClaveJugador());
+                            
                         //ahora tiramos por el...
                             int dado = (int)(6.0 * Math.random()) + 1;
 
@@ -187,14 +195,18 @@ public class JuegoControlador {
                                 //jugador.setDinero(jugador.getDinero()+200);
                             }else{
                                 jugador.setPosicion(jugador.getPosicion()+dado);
+                                //jugador.setPosicion(1);
                             }
 
                         jugadorServicio.actualizar(jugador);
+                        if(jugador.getPosicion()==18){
+                            tableroControlador.tirarDado(jugador.getNick());
+                        }else{
 
                         String noMulta=this.comprobarCasillaQueHasCaido(jugador);
 
 
-                        if(noMulta!=null && noMulta.indexOf("noMulta")!=-1){
+                        if(noMulta!=null && noMulta.indexOf("noMulta")!=-1 && noMulta.indexOf("suerte")!=-1){
                             if(this.jugadorQueQuedan(partida)<4){
                                 this.cambiarTurnoMenosDe4(partida);
 
@@ -202,6 +214,14 @@ public class JuegoControlador {
                                 cambiarTurno(partida);
                             }
                         }
+                        System.out.println(noMulta);
+                        if( noMulta.indexOf(":true")!=-1){
+                            System.out.println("El jugador va ha ser arruinado");
+                            //this.eliminarJugador(jugador);
+                            this.terminarJugadorPartidaDesdeTimer(jugador);
+
+                        }
+                    }
                         
                     }
 
@@ -326,16 +346,20 @@ public class JuegoControlador {
            
             if(this.casillasMismoColor(jugadorPagas, calle)){
                 multa=multa*2;
+               
             }
+            
             if(jugador.getDinero()>=multa){
                 jugador.setDinero(jugador.getDinero()-multa);
                 //se la sumamos al jugador a Quien hay que pagarselo
                 //jugadorServicio.buscar(partida.getJugador1()).setDinero(jugadorServicio.buscar(partida.getJugador1()).getDinero()+multa);
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+multa);
                 jugadorServicio.actualizar(jugador);
+                
                 jugadorServicio.actualizar(jugadorPagas);
                 this.cambiarTurnoManualmente(jugador.getNick());
-            }if(jugador.getDinero()<multa){
+            }else{
+                
                 jugadorPagas.setDinero(jugadorPagas.getDinero()+jugador.getDinero());
                 //System.out.println("Llegamos a ponerle el dinero al jug al que pagas");
                 this.cambiarTurnoManualmente(jugadorPagas.getNick());
@@ -389,6 +413,7 @@ public class JuegoControlador {
                             "Te pillan robando el proyector, a la Carcel !",
                             "Descubres los Toroides +200$"};
                         int random = (int)(8.0 * Math.random());
+                        System.out.println(suerte[random]);
                        //en este if y else if voy a acer las suertes ways y en el else las de +-200
                         if(random==1){
                             jugador.setPosicion(0);
@@ -411,12 +436,16 @@ public class JuegoControlador {
                             if(jugador.getDinero()>=200){
                                 partida.setBote(partida.getBote()+200);
                                 jugador.setDinero(jugador.getDinero()-200);
+                                jugadorServicio.actualizar(jugador);
+                                partidaServicio.actualizar(partida);
                             }else{
                                 partida.setBote(partida.getBote()+jugador.getDinero());
+                                partidaServicio.actualizar(partida);
                                 return this.suerteJson(suerte[random],true).toString();
                             }
                         }else{
                             jugador.setDinero(jugador.getDinero()+200);
+                            jugadorServicio.actualizar(jugador);
                         }
                         }
                         this.cambiarTurnoManualmente(jugador.getNick());
@@ -919,6 +948,66 @@ public class JuegoControlador {
         }
         return json;
     }
+
+
+        @RequestMapping(value = "/terminarJugadorPartidaDesdeTimer", method = RequestMethod.GET)
+        private void terminarJugadorPartidaDesdeTimer(Jugador jugador){
+
+            //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
+            //Usuario usuario=usuarioServicio.getCurrentUser();
+            //Jugador jugador=jugadorServicio.buscar(usuario.getJugador());
+            Partida partida=partidaServicio.buscar(jugador.getPartida());
+            Usuario usuario=usuarioServicio.buscar(jugador.getNick());
+            boolean turnoJugador=false;
+
+            if(partida.getTurno().compareTo(jugador.getClaveJugador())==0){
+                turnoJugador=true;
+                this.cambiarTurnoMenosDe4(partida);
+            }
+            if(this.jugadorQueQuedan(partida)==2){
+
+                List<Jugador>jugadores=jugadorServicio.todosJugadoresDePartida(partida.getIdpartida());
+
+                Jugador jugador1=jugadores.get(0);
+                Jugador jugador2=jugadores.get(1);
+                Jugador jugador3=jugadores.get(2);
+                Jugador jugador4=jugadores.get(3);
+
+                usuarioServicio.buscar(jugador1.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador1.getNick()).getPartidasJugadas()+1);
+                usuarioServicio.buscar(jugador2.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador2.getNick()).getPartidasJugadas()+1);
+                usuarioServicio.buscar(jugador3.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador3.getNick()).getPartidasJugadas()+1);
+                usuarioServicio.buscar(jugador4.getNick()).setPartidasJugadas(usuarioServicio.buscar(jugador4.getNick()).getPartidasJugadas()+1);
+
+                usuarioServicio.buscar(jugador.getNick()).setPartidasGanadas(usuarioServicio.buscar(jugador.getNick()).getPartidasGanadas()+1);
+
+                usuarioServicio.actualizar(usuarioServicio.buscar(jugador1.getNick()));
+                usuarioServicio.actualizar(usuarioServicio.buscar(jugador2.getNick()));
+                usuarioServicio.actualizar(usuarioServicio.buscar(jugador3.getNick()));
+                usuarioServicio.actualizar(usuarioServicio.buscar(jugador4.getNick()));
+
+            }
+
+            if(partida.getJugador1()!=null && partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador1(null);
+            }
+            if(partida.getJugador2()!=null && partida.getJugador2().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador2(null);
+            }
+            if(partida.getJugador3()!=null && partida.getJugador3().compareTo(jugador.getClaveJugador())==0 ){
+                partida.setJugador3(null);
+            }
+            if(partida.getJugador4()!=null && partida.getJugador4().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador4(null);
+
+            }
+            partidaServicio.actualizar(partida);
+
+            usuario.setJugador(null);
+            usuarioServicio.actualizar(usuario);
+
+        }
+
+
 
 
        
