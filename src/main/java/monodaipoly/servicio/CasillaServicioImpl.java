@@ -58,6 +58,7 @@ public class CasillaServicioImpl implements CasillaServicio{
 
 
 
+
         Casilla casilla0 = new Casilla();
         casilla0.setNumeroCasilla(0);
         casilla0.setNombre("Salida");
