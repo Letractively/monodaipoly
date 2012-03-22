@@ -206,7 +206,7 @@ public class JuegoControlador {
                         String noMulta=this.comprobarCasillaQueHasCaido(jugador);
 
 
-                        if(noMulta!=null && noMulta.indexOf("noMulta")!=-1 && noMulta.indexOf("suerte")!=-1){
+                        if(noMulta!=null && (noMulta.indexOf("noMulta")!=-1 || noMulta.indexOf("suerte")!=-1)){
                             if(this.jugadorQueQuedan(partida)<4){
                                 this.cambiarTurnoMenosDe4(partida);
 
@@ -214,11 +214,13 @@ public class JuegoControlador {
                                 cambiarTurno(partida);
                             }
                         }
-                        System.out.println(noMulta);
-                        if( noMulta.indexOf(":true")!=-1){
+                        
+                        if(noMulta!=null &&  noMulta.indexOf(":true")!=-1){
                             System.out.println("El jugador va ha ser arruinado");
                             //this.eliminarJugador(jugador);
                             this.terminarJugadorPartidaDesdeTimer(jugador);
+
+
 
                         }
                     }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import monodaipoly.persistencia.Calle;
@@ -404,6 +405,7 @@ public class TableroControlador {
                 calles.add(i, calle);
             }
         }
+
         model.addAttribute("calles", calles);
         model.addAttribute("casillas", casillas);
 
