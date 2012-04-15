@@ -158,9 +158,11 @@ public class JuegoControlador {
         List<Partida> partidasCompletas=partidaServicio.partidaCompleta();
         if(partidasCompletas.size()>0){
             Partida partida=new Partida();
+            
             int i;
             for(i=0;i<=partidasCompletas.size()-1;i++){
                 partida=partidasCompletas.get(i);
+                if(this.jugadorQueQuedan(partida)>1){
                 
                 if(System.currentTimeMillis()>=partida.getFechaTurno()){
                     if(partida.getHaTirado()==false){
@@ -229,8 +231,34 @@ public class JuegoControlador {
 
                     
                 }
+                }else{
+                    if(this.jugadorQueQuedan(partida)==1){
+                    Logger.getLogger(JuegoControlador.class.getName()).info("Solo queda un jugador en la partida");
+                    Jugador jugador=new Jugador();
+                    boolean noError=false;
+                    if(partida.getJugador1()!=null && partida.getJugador1().compareTo(partida.getTurno())==0){
+                        noError=true;
+                    }if(partida.getJugador2()!=null && partida.getJugador2().compareTo(partida.getTurno())==0){
+                        noError=true;
+                    }if(partida.getJugador3()!=null && partida.getJugador3().compareTo(partida.getTurno())==0){
+                        noError=true;
+                    }if(partida.getJugador4()!=null && partida.getJugador4().compareTo(partida.getTurno())==0){
+                        noError=true;
+                    }
 
+                    Logger.getLogger(JuegoControlador.class.getName()).info("todo correcto  " + noError);
+                    if(noError){
+                        jugador=jugadorServicio.buscar(partida.getTurno());
+                        this.jugadorGanadorPartidaTimer(jugador);
+                    }
+                    }else{
+                        Logger.getLogger(JuegoControlador.class.getName()).info("No quedan jugadores en la partida");
+                        partidaServicio.terminar(partida);
+                    }
+
+                    }
             }
+
         }else{
             System.out.println("No ai partidas llenas");
             Logger.getLogger(JuegoControlador.class.getName()).info("No ai partidas llenas");
@@ -952,7 +980,7 @@ public class JuegoControlador {
     }
 
 
-        @RequestMapping(value = "/terminarJugadorPartidaDesdeTimer", method = RequestMethod.GET)
+        
         private void terminarJugadorPartidaDesdeTimer(Jugador jugador){
 
             //Jugador jugador = (Jugador)sesion.getAttribute("jugador");
@@ -1011,6 +1039,36 @@ public class JuegoControlador {
 
 
 
+        
+        private void jugadorGanadorPartidaTimer(Jugador jugador){
+            Usuario usuario=usuarioServicio.buscar(jugador.getNick());
+            usuario.setPartidasGanadas(usuario.getPartidasGanadas()+2);
+            usuario.setJugador(null);
+            usuarioServicio.actualizar(usuario);
 
-       
+
+            Partida partida=partidaServicio.buscar(jugador.getPartida());
+            if(partida.getJugador1()!=null && partida.getJugador1().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador1(null);
+            }if(partida.getJugador2()!=null && partida.getJugador2().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador2(null);
+            }if(partida.getJugador3()!=null && partida.getJugador3().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador3(null);
+            }if(partida.getJugador4()!=null && partida.getJugador4().compareTo(jugador.getClaveJugador())==0){
+                partida.setJugador4(null);
+            }
+            partidaServicio.actualizar(partida);
+
+            List<Jugador> todosLosJugadores=jugadorServicio.todosJugadoresDePartida(partida.getIdpartida());
+            for(Jugador j:todosLosJugadores){
+                //Logger.getLogger(JuegoControlador.class.getName()).info("Antes de eliminar el objeto jugador:  "+j.getNick());
+                j.setCalles(null);
+                j.setPartida(null);
+                jugadorServicio.borrar(j);
+            }
+            //Logger.getLogger(JuegoControlador.class.getName()).info("Antes de eliminar el objeto partida:  "+partida.getIdpartida());
+            //partidaServicio.terminar(partida);
+            //Logger.getLogger(JuegoControlador.class.getName()).info("Despues de eliminar el objeto partida:  "+partida.getIdpartida());
+            
+        }
 }
